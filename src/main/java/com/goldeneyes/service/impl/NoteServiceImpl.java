@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import com.goldeneyes.IDao.NoteMapper;
 import com.goldeneyes.pojo.Note;
+import com.goldeneyes.pojo.NoteComment;
+import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.service.NoteService;
 
 /**
@@ -41,5 +43,103 @@ public class NoteServiceImpl implements NoteService {
 		List<Note> notes = noteMapper.getAllNote();
 		return notes;
 	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getNotesCntByUser(int userId, int spaceType) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<Note> getNoReadNotesByUser(int userId, int spaceType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public boolean getIsLikeNoteByUser(int userId, int spaceType, int noteId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<NoteComment> getNoteCommentsByUser(int noteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<Integer> getIsLikeUsersByNote(int noteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getNoteCommentReplysCntByUser(int userId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<NoteComment> getNoteCommentReplysByUser(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<Note> getNotesByStudent(int studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public Note getNoteById(int noteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public NoteEnc getNoteEncById(int noteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int addNote(int studentId, String noteStr, int teacherId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public void addNoteEnc(int studentId, String noteStr, String encType, String encAddr, String encImg, int teacherId,
+			int encOrder) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }
