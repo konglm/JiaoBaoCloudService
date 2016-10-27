@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.SpaceContentStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.SpaceContentStatus" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="UserId" property="userid" jdbcType="INTEGER" />
+    <result column="SpaceType" property="spacetype" jdbcType="TINYINT" />
+    <result column="SpaceId" property="spaceid" jdbcType="INTEGER" />
+    <result column="IsRead" property="isread" jdbcType="TINYINT" />
+    <result column="ReadDate" property="readdate" jdbcType="TIMESTAMP" />
+    <result column="IsLike" property="islike" jdbcType="TINYINT" />
+    <result column="LikeDate" property="likedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, UserId, SpaceType, SpaceId, IsRead, ReadDate, IsLike, LikeDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SpaceContentStatus
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SpaceContentStatus
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+    insert into SpaceContentStatus (TabId, UserId, SpaceType, 
+      SpaceId, IsRead, ReadDate, 
+      IsLike, LikeDate)
+    values (#{tabid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{spacetype,jdbcType=TINYINT}, 
+      #{spaceid,jdbcType=INTEGER}, #{isread,jdbcType=TINYINT}, #{readdate,jdbcType=TIMESTAMP}, 
+      #{islike,jdbcType=TINYINT}, #{likedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+    insert into SpaceContentStatus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="spacetype != null" >
+        SpaceType,
+      </if>
+      <if test="spaceid != null" >
+        SpaceId,
+      </if>
+      <if test="isread != null" >
+        IsRead,
+      </if>
+      <if test="readdate != null" >
+        ReadDate,
+      </if>
+      <if test="islike != null" >
+        IsLike,
+      </if>
+      <if test="likedate != null" >
+        LikeDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="spacetype != null" >
+        #{spacetype,jdbcType=TINYINT},
+      </if>
+      <if test="spaceid != null" >
+        #{spaceid,jdbcType=INTEGER},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="readdate != null" >
+        #{readdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islike != null" >
+        #{islike,jdbcType=TINYINT},
+      </if>
+      <if test="likedate != null" >
+        #{likedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+    update SpaceContentStatus
+    <set >
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="spacetype != null" >
+        SpaceType = #{spacetype,jdbcType=TINYINT},
+      </if>
+      <if test="spaceid != null" >
+        SpaceId = #{spaceid,jdbcType=INTEGER},
+      </if>
+      <if test="isread != null" >
+        IsRead = #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="readdate != null" >
+        ReadDate = #{readdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islike != null" >
+        IsLike = #{islike,jdbcType=TINYINT},
+      </if>
+      <if test="likedate != null" >
+        LikeDate = #{likedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+    update SpaceContentStatus
+    set UserId = #{userid,jdbcType=INTEGER},
+      SpaceType = #{spacetype,jdbcType=TINYINT},
+      SpaceId = #{spaceid,jdbcType=INTEGER},
+      IsRead = #{isread,jdbcType=TINYINT},
+      ReadDate = #{readdate,jdbcType=TIMESTAMP},
+      IsLike = #{islike,jdbcType=TINYINT},
+      LikeDate = #{likedate,jdbcType=TIMESTAMP}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>

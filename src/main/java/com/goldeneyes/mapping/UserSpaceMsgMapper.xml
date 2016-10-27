@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.UserSpaceMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.UserSpaceMsg" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SpaceId" property="spaceid" jdbcType="INTEGER" />
+    <result column="UserId" property="userid" jdbcType="INTEGER" />
+    <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="ReplyId" property="replyid" jdbcType="INTEGER" />
+    <result column="MsgDate" property="msgdate" jdbcType="TIMESTAMP" />
+    <result column="ReplyStatus" property="replystatus" jdbcType="TINYINT" />
+    <result column="ReplyDate" property="replydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SpaceId, UserId, MsgContent, ReplyId, MsgDate, ReplyStatus, ReplyDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserSpaceMsg
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from UserSpaceMsg
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+    insert into UserSpaceMsg (TabId, SpaceId, UserId, 
+      MsgContent, ReplyId, MsgDate, 
+      ReplyStatus, ReplyDate)
+    values (#{tabid,jdbcType=INTEGER}, #{spaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{msgcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, #{msgdate,jdbcType=TIMESTAMP}, 
+      #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+    insert into UserSpaceMsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="spaceid != null" >
+        SpaceId,
+      </if>
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent,
+      </if>
+      <if test="replyid != null" >
+        ReplyId,
+      </if>
+      <if test="msgdate != null" >
+        MsgDate,
+      </if>
+      <if test="replystatus != null" >
+        ReplyStatus,
+      </if>
+      <if test="replydate != null" >
+        ReplyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="spaceid != null" >
+        #{spaceid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyid != null" >
+        #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="msgdate != null" >
+        #{msgdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replystatus != null" >
+        #{replystatus,jdbcType=TINYINT},
+      </if>
+      <if test="replydate != null" >
+        #{replydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+    update UserSpaceMsg
+    <set >
+      <if test="spaceid != null" >
+        SpaceId = #{spaceid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyid != null" >
+        ReplyId = #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="msgdate != null" >
+        MsgDate = #{msgdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replystatus != null" >
+        ReplyStatus = #{replystatus,jdbcType=TINYINT},
+      </if>
+      <if test="replydate != null" >
+        ReplyDate = #{replydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+    update UserSpaceMsg
+    set SpaceId = #{spaceid,jdbcType=INTEGER},
+      UserId = #{userid,jdbcType=INTEGER},
+      MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      ReplyId = #{replyid,jdbcType=INTEGER},
+      MsgDate = #{msgdate,jdbcType=TIMESTAMP},
+      ReplyStatus = #{replystatus,jdbcType=TINYINT},
+      ReplyDate = #{replydate,jdbcType=TIMESTAMP}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>

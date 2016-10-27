@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.NoteCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.NoteComment" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="NoteId" property="noteid" jdbcType="INTEGER" />
+    <result column="UserId" property="userid" jdbcType="INTEGER" />
+    <result column="CommentContent" property="commentcontent" jdbcType="VARCHAR" />
+    <result column="ReplyId" property="replyid" jdbcType="INTEGER" />
+    <result column="CommentDate" property="commentdate" jdbcType="TIMESTAMP" />
+    <result column="ReplyStatus" property="replystatus" jdbcType="TINYINT" />
+    <result column="ReplyDate" property="replydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, NoteId, UserId, CommentContent, ReplyId, CommentDate, ReplyStatus, ReplyDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from NoteComment
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from NoteComment
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.NoteComment" >
+    insert into NoteComment (TabId, NoteId, UserId, 
+      CommentContent, ReplyId, CommentDate, 
+      ReplyStatus, ReplyDate)
+    values (#{tabid,jdbcType=INTEGER}, #{noteid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, 
+      #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.NoteComment" >
+    insert into NoteComment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="noteid != null" >
+        NoteId,
+      </if>
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="commentcontent != null" >
+        CommentContent,
+      </if>
+      <if test="replyid != null" >
+        ReplyId,
+      </if>
+      <if test="commentdate != null" >
+        CommentDate,
+      </if>
+      <if test="replystatus != null" >
+        ReplyStatus,
+      </if>
+      <if test="replydate != null" >
+        ReplyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="noteid != null" >
+        #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null" >
+        #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyid != null" >
+        #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="commentdate != null" >
+        #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replystatus != null" >
+        #{replystatus,jdbcType=TINYINT},
+      </if>
+      <if test="replydate != null" >
+        #{replydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.NoteComment" >
+    update NoteComment
+    <set >
+      <if test="noteid != null" >
+        NoteId = #{noteid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null" >
+        CommentContent = #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyid != null" >
+        ReplyId = #{replyid,jdbcType=INTEGER},
+      </if>
+      <if test="commentdate != null" >
+        CommentDate = #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replystatus != null" >
+        ReplyStatus = #{replystatus,jdbcType=TINYINT},
+      </if>
+      <if test="replydate != null" >
+        ReplyDate = #{replydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.NoteComment" >
+    update NoteComment
+    set NoteId = #{noteid,jdbcType=INTEGER},
+      UserId = #{userid,jdbcType=INTEGER},
+      CommentContent = #{commentcontent,jdbcType=VARCHAR},
+      ReplyId = #{replyid,jdbcType=INTEGER},
+      CommentDate = #{commentdate,jdbcType=TIMESTAMP},
+      ReplyStatus = #{replystatus,jdbcType=TINYINT},
+      ReplyDate = #{replydate,jdbcType=TIMESTAMP}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>
