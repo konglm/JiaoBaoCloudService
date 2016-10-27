@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.NoteMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.Note" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="StudentId" property="studentid" jdbcType="INTEGER" />
+    <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="PublisherId" property="publisherid" jdbcType="INTEGER" />
+    <result column="PublishDate" property="publishdate" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, StudentId, MsgContent, PublisherId, PublishDate, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Note
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Note
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.Note" >
+    insert into Note (TabId, StudentId, MsgContent, 
+      PublisherId, PublishDate, Status
+      )
+    values (#{tabid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+      #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.Note" >
+    insert into Note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="studentid != null" >
+        StudentId,
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent,
+      </if>
+      <if test="publisherid != null" >
+        PublisherId,
+      </if>
+      <if test="publishdate != null" >
+        PublishDate,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherid != null" >
+        #{publisherid,jdbcType=INTEGER},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.Note" >
+    update Note
+    <set >
+      <if test="studentid != null" >
+        StudentId = #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherid != null" >
+        PublisherId = #{publisherid,jdbcType=INTEGER},
+      </if>
+      <if test="publishdate != null" >
+        PublishDate = #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.Note" >
+    update Note
+    set StudentId = #{studentid,jdbcType=INTEGER},
+      MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      PublisherId = #{publisherid,jdbcType=INTEGER},
+      PublishDate = #{publishdate,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 获取所有点到记事的信息 -->
+  <select id="getAllNote" resultType="com.goldeneyes.pojo.Note">
+  	select TabId, StudentId, MsgContent, PublisherId, PublishDate 
+  	from Note where Status = 1
+  </select>
+</mapper>
