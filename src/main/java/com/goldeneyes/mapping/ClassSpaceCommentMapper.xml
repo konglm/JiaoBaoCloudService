@@ -10,9 +10,11 @@
     <result column="CommentDate" property="commentdate" jdbcType="TIMESTAMP" />
     <result column="ReplyStatus" property="replystatus" jdbcType="TINYINT" />
     <result column="ReplyDate" property="replydate" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, ClassSpaceId, UserId, CommentContent, ReplyId, CommentDate, ReplyStatus, ReplyDate
+    TabId, ClassSpaceId, UserId, CommentContent, ReplyId, CommentDate, ReplyStatus, ReplyDate, 
+    Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,10 +29,12 @@
   <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
     insert into ClassSpaceComment (TabId, ClassSpaceId, UserId, 
       CommentContent, ReplyId, CommentDate, 
-      ReplyStatus, ReplyDate)
+      ReplyStatus, ReplyDate, Status
+      )
     values (#{tabid,jdbcType=INTEGER}, #{classspaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
       #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, 
-      #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP})
+      #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
     insert into ClassSpaceComment
@@ -59,6 +63,9 @@
       <if test="replydate != null" >
         ReplyDate,
       </if>
+      <if test="status != null" >
+        Status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tabid != null" >
@@ -84,6 +91,9 @@
       </if>
       <if test="replydate != null" >
         #{replydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -111,6 +121,9 @@
       <if test="replydate != null" >
         ReplyDate = #{replydate,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
     </set>
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
@@ -122,7 +135,8 @@
       ReplyId = #{replyid,jdbcType=INTEGER},
       CommentDate = #{commentdate,jdbcType=TIMESTAMP},
       ReplyStatus = #{replystatus,jdbcType=TINYINT},
-      ReplyDate = #{replydate,jdbcType=TIMESTAMP}
+      ReplyDate = #{replydate,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -19,6 +19,8 @@ public class UserSpaceMsg {
 
     private Date replydate;
 
+    private Byte status;
+
     public Integer getTabid() {
         return tabid;
     }
@@ -81,5 +83,13 @@ public class UserSpaceMsg {
 
     public void setReplydate(Date replydate) {
         this.replydate = replydate;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }
