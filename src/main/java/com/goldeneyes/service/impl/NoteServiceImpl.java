@@ -135,11 +135,84 @@ public class NoteServiceImpl implements NoteService {
 	 *  @author konglm
 	 */
 	@Override
-	public void addNoteEnc(int studentId, String noteStr, String encType, String encAddr, String encImg, int teacherId,
+	public int addNoteEnc(int studentId, String noteStr, String encType, String encAddr, String encImg, int teacherId,
 			int encOrder) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int addNoteComment(int userId, int noteId, String commentStr) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentStr) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int sendNoteForUser(int userId, int spaceType, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int setNoteReadByUser(int userId, int spaceType, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int setNoteLikeByUser(int userId, int spaceType, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int setNoteCommentReplyByUser(int userId, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int offNoteByStudent(int studentId, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int delNoteByStudent(int studentId, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int delNoteCommentByStudent(int studentId, int noteId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	
 
 }

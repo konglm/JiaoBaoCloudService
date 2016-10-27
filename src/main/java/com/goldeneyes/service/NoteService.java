@@ -97,7 +97,7 @@ public interface NoteService {
 	 * @param studentId
 	 * @param noteStr
 	 * @param teacherId
-	 * @return 新增的点到记事ID
+	 * @return 0：失败，其他：新增的点到记事ID
 	 */
 	public int addNote(int studentId,String noteStr,int teacherId);
 	/**
@@ -109,6 +109,76 @@ public interface NoteService {
 	 * @param encImg
 	 * @param teacherId
 	 * @param encOrder
+	 * @return 是否删除成功 0失败1成功
 	 */
-	public void addNoteEnc(int studentId,String noteStr,String encType,String encAddr,String encImg,int teacherId,int encOrder);
+	public int addNoteEnc(int studentId,String noteStr,String encType,String encAddr,String encImg,int teacherId,int encOrder);
+	/**
+	 * 新增某用户某点到记事评论
+	 * @param userId
+	 * @param noteId
+	 * @param commentStr
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int addNoteComment(int userId,int noteId,String commentStr);
+	/**
+	 * 新增某用户某点到记事评论回复
+	 * @param userId
+	 * @param replyUserId
+	 * @param noteId
+	 * @param commentStr
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int addNoteCommentReply(int userId,int replyUserId,int noteId,String commentStr);
+	/**
+	 * 推送给某用户的某点到记事
+	 * @param userId
+	 * @param spaceType
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int sendNoteForUser(int userId,int spaceType,int noteId);
+	/**
+	 * 修改某用户某点到记事阅读状态为已读
+	 * @param userId
+	 * @param spaceType
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int setNoteReadByUser(int userId,int spaceType,int noteId);
+	/**
+	 * 新增某用户某点到记事点赞状态为点赞
+	 * @param userId
+	 * @param spaceType
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int setNoteLikeByUser(int userId,int spaceType,int noteId);
+	/**
+	 * 修改某用户某点到记事评论回复查看状态
+	 * @param userId
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int setNoteCommentReplyByUser(int userId,int noteId);
+	/**
+	 * 屏蔽某学生某点到记事信息
+	 * @param studentId
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int offNoteByStudent(int studentId,int noteId);
+	/**
+	 * 删除某学生某点到记事（附件一起删除）
+	 * @param studentId
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int delNoteByStudent(int studentId,int noteId);
+	/**
+	 * 删除某用户某点到记事评论
+	 * @param studentId
+	 * @param noteId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int delNoteCommentByStudent(int studentId,int noteId);
 }
