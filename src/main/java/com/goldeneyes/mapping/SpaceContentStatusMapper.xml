@@ -25,10 +25,10 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
-    insert into SpaceContentStatus (TabId, UserId, SpaceType, 
+    insert into SpaceContentStatus (UserId, SpaceType, 
       SpaceId, IsRead, ReadDate, 
       IsLike, LikeDate)
-    values (#{tabid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{spacetype,jdbcType=TINYINT}, 
+    values (#{userid,jdbcType=INTEGER}, #{spacetype,jdbcType=TINYINT}, 
       #{spaceid,jdbcType=INTEGER}, #{isread,jdbcType=TINYINT}, #{readdate,jdbcType=TIMESTAMP}, 
       #{islike,jdbcType=TINYINT}, #{likedate,jdbcType=TIMESTAMP})
   </insert>

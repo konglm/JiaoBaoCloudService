@@ -170,8 +170,9 @@ public class NoteServiceImpl implements NoteService {
 		note.setMsgcontent(noteStr);
 		note.setPublisherid(teacherId);
 		note.setPublishdate(new Date());
+		note.setStatus(CommonTool.int2byte(1));
 		try {
-			noteMapper.insert(note);
+			noteMapper.insert(note);		
 		} catch (Exception e) {
 			return 0;
 		}
@@ -211,6 +212,9 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setNoteid(noteId);
 		noteComment.setCommentcontent(commentStr);
 		noteComment.setCommentdate(new Date());
+		noteComment.setReplyid(0);
+		noteComment.setReplystatus(CommonTool.int2byte(1));
+		noteComment.setStatus(CommonTool.int2byte(1));
 		try {
 			noteCommentMapper.insert(noteComment);
 		} catch (Exception e) {

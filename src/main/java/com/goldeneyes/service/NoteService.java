@@ -102,7 +102,6 @@ public interface NoteService {
 	public int addNote(int studentId,String noteStr,int teacherId);
 	/**
 	 * 新增某学生点到记事附件
-	 * @param studentId
 	 * @param noteId
 	 * @param encType
 	 * @param encAddr
