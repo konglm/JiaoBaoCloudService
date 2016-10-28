@@ -103,11 +103,15 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
-  
   <!-- 获取所有点到记事的信息 -->
   <select id="getAllNote" resultType="com.goldeneyes.pojo.Note">
   	select TabId, StudentId, MsgContent, PublisherId, PublishDate 
   	from Note where Status = 1
+  </select>
+  
+  <!-- 取点到记事表的最大ID+1 -->
+  <select id="getMaxId" resultType="java.lang.Integer">
+  	select MAX(n.TabId) + 1 from note n
   </select>
   
   <!-- 获取用户未读点到记事条数 -->
@@ -148,4 +152,11 @@
   	from Note n 
   	where n.Status = 1 and n.TabId = #{0}
   </select>
+  <!-- 屏蔽某学生某点到记事信息 -->
+  <update id="offNoteByStudent" parameterType="com.goldeneyes.pojo.Note" >
+    update Note
+    set 
+      Status = 0
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
 </mapper>

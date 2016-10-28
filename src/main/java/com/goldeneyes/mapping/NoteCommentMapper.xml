@@ -159,4 +159,18 @@
   	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.UserId = #{0}
 	order by nc.CommentDate desc
   </select>
+  <!-- 修改某用户某点到记事评论回复查看状态 -->
+  <update id="setNoteCommentReplyByUser" parameterType="com.goldeneyes.pojo.NoteComment" >
+    update NoteComment
+    set 
+      ReplyStatus = 1,
+      ReplyDate = getdate()
+    where NoteId = #{noteid,jdbcType=INTEGER}
+    and UserId = #{userid,jdbcType=INTEGER}
+  </update>
+  <!-- 删除某点到记事的评论 -->
+  <delete id="deleteByNoteId" parameterType="java.lang.Integer" >
+    delete from NoteComment
+    where NoteId = #{noteId,jdbcType=INTEGER}
+  </delete>
 </mapper>

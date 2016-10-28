@@ -34,4 +34,16 @@ public interface NoteCommentMapper {
 	 * @return
 	 */
 	List<NoteComment> getNoteCommentReplysByUser(int userId);
+	/**
+	 * 修改某用户某点到记事评论回复查看状态
+	 * @param record
+	 * @return
+	 */
+	int setNoteCommentReplyByUser(NoteComment record);
+	/**
+	 * 删除某点到记事的评论
+	 * @param noteId
+	 * @return
+	 */
+	int deleteByNoteId(int noteId);
 }

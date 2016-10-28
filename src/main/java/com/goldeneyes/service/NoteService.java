@@ -34,7 +34,7 @@ public interface NoteService {
 	 * @param spaceType
 	 * @return
 	 */
-	public int getNotesCntByUser(int userId,int spaceType);
+	public int getNoReadNotesCntByUser(int userId,int spaceType);
 	/**
 	 * 获取用户未读点到记事列表
 	 * @param userId
@@ -49,7 +49,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return
 	 */
-	public boolean getIsLikeNoteByUser(int userId,int spaceType,int noteId);
+	public int getIsLikeNoteByUser(int userId,int spaceType,int noteId);
 	/**
 	 * 获取点到记事所有评论
 	 * @param noteId
@@ -91,7 +91,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return
 	 */
-	public NoteEnc getNoteEncById(int noteId);
+	public List<NoteEnc> getNoteEncById(int noteId);
 	/**
 	 * 新增某学生点到记事信息
 	 * @param studentId
@@ -103,7 +103,7 @@ public interface NoteService {
 	/**
 	 * 新增某学生点到记事附件
 	 * @param studentId
-	 * @param noteStr
+	 * @param noteId
 	 * @param encType
 	 * @param encAddr
 	 * @param encImg
@@ -111,7 +111,7 @@ public interface NoteService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addNoteEnc(int studentId,String noteStr,String encType,String encAddr,String encImg,int teacherId,int encOrder);
+	public int addNoteEnc(int noteId,String encType,String encAddr,String encImg,int teacherId,int encOrder);
 	/**
 	 * 新增某用户某点到记事评论
 	 * @param userId
@@ -166,19 +166,17 @@ public interface NoteService {
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offNoteByStudent(int studentId,int noteId);
+	public int offNoteByStudent(int noteId);
 	/**
 	 * 删除某学生某点到记事（附件一起删除）
-	 * @param studentId
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delNoteByStudent(int studentId,int noteId);
+	public int delNoteByStudent(int noteId);
 	/**
 	 * 删除某用户某点到记事评论
-	 * @param studentId
-	 * @param noteId
+	 * @param noteCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delNoteCommentByStudent(int studentId,int noteId);
+	public int delNoteCommentByStudent(int noteCommentId);
 }

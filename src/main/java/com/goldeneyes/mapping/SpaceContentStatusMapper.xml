@@ -125,4 +125,28 @@
       LikeDate = #{likedate,jdbcType=TIMESTAMP}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  <!-- 修改某用户某点到记事阅读状态为已读 -->
+  <update id="setNoteReadByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+  	update SpaceContentStatus
+    set IsRead = 1,
+      ReadDate = getdate()
+    where UserId = #{userid,jdbcType=INTEGER}
+    and SpaceType = #{spacetype,jdbcType=TINYINT}
+    and SpaceId = #{spaceid,jdbcType=INTEGER}
+  </update> 
+  <!-- 新增某用户某点到记事点赞状态为点赞 -->
+  <update id="setNoteLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+  	update SpaceContentStatus
+    set IsLike = 1,
+      LikeDate = getdate()
+    where UserId = #{userid,jdbcType=INTEGER}
+    and SpaceType = #{spacetype,jdbcType=TINYINT}
+    and SpaceId = #{spaceid,jdbcType=INTEGER}
+  </update> 
+  <!-- 删除某点到记事的阅读状态 -->
+  <delete id="deleteByNoteId" parameterType="java.lang.Integer" >
+    delete from SpaceContentStatus
+    where SpaceType = 1
+    and SpaceId = #{noteId,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -14,17 +14,23 @@
 
 package com.goldeneyes.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.goldeneyes.IDao.NoteCommentMapper;
+import com.goldeneyes.IDao.NoteEncMapper;
 import com.goldeneyes.IDao.NoteMapper;
+import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.pojo.Note;
 import com.goldeneyes.pojo.NoteComment;
 import com.goldeneyes.pojo.NoteEnc;
+import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.NoteService;
+import com.goldeneyes.util.CommonTool;
 
 /**
  * @author konglm
@@ -34,8 +40,15 @@ import com.goldeneyes.service.NoteService;
 public class NoteServiceImpl implements NoteService {
 	@Resource
 	NoteMapper noteMapper;
+	@Resource
+	NoteCommentMapper noteCommentMapper;
+	@Resource
+	NoteEncMapper noteEncMapper;
+	@Resource
+	SpaceContentStatusMapper spaceContentStatusMapper;
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<Note> getAllNote() {
@@ -43,176 +56,308 @@ public class NoteServiceImpl implements NoteService {
 		List<Note> notes = noteMapper.getAllNote();
 		return notes;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public int getNotesCntByUser(int userId, int spaceType) {
+	public int getNoReadNotesCntByUser(int userId, int spaceType) {
 		// TODO Auto-generated method stub
-		return 0;
+		int cnt = noteMapper.getNoReadNotesCntByUser(userId, spaceType);
+		return cnt;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<Note> getNoReadNotesByUser(int userId, int spaceType) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Note> notes = noteMapper.getNoReadNotesByUser(userId, spaceType);
+		return notes;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public boolean getIsLikeNoteByUser(int userId, int spaceType, int noteId) {
+	public int getIsLikeNoteByUser(int userId, int spaceType, int noteId) {
 		// TODO Auto-generated method stub
-		return false;
+		int isLike = noteMapper.getIsLikeNoteByUser(userId, spaceType, noteId);
+		return isLike;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<NoteComment> getNoteCommentsByUser(int noteId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsByUser(noteId);
+		return noteComments;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<Integer> getIsLikeUsersByNote(int noteId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Integer> isLikers = noteMapper.getIsLikeUsersByNote(noteId);
+		return isLikers;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int getNoteCommentReplysCntByUser(int userId) {
 		// TODO Auto-generated method stub
-		return 0;
+		int cnt = noteCommentMapper.getNoteCommentReplysCntByUser(userId);
+		return cnt;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<NoteComment> getNoteCommentReplysByUser(int userId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentReplysByUser(userId);
+		return noteComments;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<Note> getNotesByStudent(int studentId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Note> notes = noteMapper.getNotesByStudent(studentId);
+		return notes;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public Note getNoteById(int noteId) {
 		// TODO Auto-generated method stub
-		return null;
+		Note note = noteMapper.getNoteById(noteId);
+		return note;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public NoteEnc getNoteEncById(int noteId) {
+	public List<NoteEnc> getNoteEncById(int noteId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<NoteEnc> noteEncs = noteEncMapper.getNoteEncById(noteId);
+		return noteEncs;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int addNote(int studentId, String noteStr, int teacherId) {
 		// TODO Auto-generated method stub
-		return 0;
+		int maxId = noteMapper.getMaxId(); // 为了返回ID，手工插入ID值
+		Note note = new Note();
+		note.setTabid(maxId);
+		note.setStudentid(studentId);
+		note.setMsgcontent(noteStr);
+		note.setPublisherid(teacherId);
+		note.setPublishdate(new Date());
+		try {
+			noteMapper.insert(note);
+		} catch (Exception e) {
+			return 0;
+		}
+		return maxId;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public int addNoteEnc(int studentId, String noteStr, String encType, String encAddr, String encImg, int teacherId,
-			int encOrder) {
+	public int addNoteEnc(int noteId, String encType, String encAddr, String encImg, int teacherId, int encOrder) {
 		// TODO Auto-generated method stub
-		return 0;
+		NoteEnc noteEnc = new NoteEnc();
+		noteEnc.setNoteid(noteId);
+		noteEnc.setEnctype(encType);
+		noteEnc.setEncaddr(encAddr);
+		noteEnc.setEncimgaddr(encImg);
+		noteEnc.setPublisherid(teacherId);
+		noteEnc.setPublishdate(new Date());
+		noteEnc.setEncorder(encOrder);
+		try {
+			noteEncMapper.insert(noteEnc);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int addNoteComment(int userId, int noteId, String commentStr) {
 		// TODO Auto-generated method stub
-		return 0;
+		NoteComment noteComment = new NoteComment();
+		noteComment.setUserid(userId);
+		noteComment.setNoteid(noteId);
+		noteComment.setCommentcontent(commentStr);
+		noteComment.setCommentdate(new Date());
+		try {
+			noteCommentMapper.insert(noteComment);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentStr) {
 		// TODO Auto-generated method stub
-		return 0;
+		NoteComment noteComment = new NoteComment();
+		noteComment.setUserid(userId);
+		noteComment.setNoteid(noteId);
+		noteComment.setCommentcontent(commentStr);
+		noteComment.setCommentdate(new Date());
+		noteComment.setReplyid(replyUserId);
+		try {
+			noteCommentMapper.insert(noteComment);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int sendNoteForUser(int userId, int spaceType, int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
 	 *  @author konglm
 	 */
 	@Override
 	public int setNoteReadByUser(int userId, int spaceType, int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+		spaceContentStatus.setSpaceid(noteId);
+		try{
+			spaceContentStatusMapper.setNoteReadByUser(spaceContentStatus);
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int setNoteLikeByUser(int userId, int spaceType, int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+		spaceContentStatus.setSpaceid(noteId);
+		try{
+			spaceContentStatusMapper.setNoteLikeByUser(spaceContentStatus);
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int setNoteCommentReplyByUser(int userId, int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+		NoteComment noteComment = new NoteComment();
+		noteComment.setUserid(userId);
+		noteComment.setNoteid(noteId);
+		try {
+			noteCommentMapper.setNoteCommentReplyByUser(noteComment);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public int offNoteByStudent(int studentId, int noteId) {
+	public int offNoteByStudent(int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+		Note note = new Note();
+		note.setTabid(noteId);
+		try {
+			noteMapper.insert(note);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public int delNoteByStudent(int studentId, int noteId) {
+	public int delNoteByStudent(int noteId) {
 		// TODO Auto-generated method stub
-		return 0;
+		try{
+			noteMapper.deleteByPrimaryKey(noteId);
+			noteEncMapper.deleteByNoteId(noteId);
+			noteCommentMapper.deleteByNoteId(noteId);
+			spaceContentStatusMapper.deleteByNoteId(noteId);
+		} catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
+
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
-	public int delNoteCommentByStudent(int studentId, int noteId) {
+	public int delNoteCommentByStudent(int noteCommentId) {
 		// TODO Auto-generated method stub
-		return 0;
+		try{
+			noteCommentMapper.deleteByPrimaryKey(noteCommentId);
+		} catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
-	
-	
 
 }

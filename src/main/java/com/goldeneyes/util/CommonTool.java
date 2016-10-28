@@ -24,27 +24,33 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public class CommonTool {
-	
-	//测试用main函数
+
+	// 测试用main函数
 	public static void main(String[] args) {
-		
-	}
-	
-	//输出json字符串
-	public static void outJsonString(HttpServletResponse response,String str) {
-	    PrintWriter out = null;
-	    try {
-	    	response.setContentType("text/html;charset=utf-8");
-	        out = response.getWriter();        
-	        out.write(str);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }finally {
-	        if (out != null) {
-	            out.close();
-	        }
-	    }
+
 	}
 
-	
+	// 输出json字符串
+	public static void outJsonString(HttpServletResponse response, String str) {
+		PrintWriter out = null;
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			out = response.getWriter();
+			out.write(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+	}
+
+	public static byte int2byte(int res) {
+		byte[] targets = new byte[1];
+
+		targets[0] = (byte) (res & 0xff);// 最低位
+		return targets[0];
+	}
+
 }

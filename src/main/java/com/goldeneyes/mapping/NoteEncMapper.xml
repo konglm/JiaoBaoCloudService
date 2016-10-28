@@ -145,4 +145,9 @@
   	from NoteEnc ne 
   	where ne.NoteId = #{0} order by ne.EncOrder
   </select>
+  <!-- 删除某点到记事的附件 -->
+  <delete id="deleteByNoteId" parameterType="java.lang.Integer" >
+    delete from NoteEnc
+    where NoteId = #{noteId,jdbcType=INTEGER}
+  </delete>
 </mapper>

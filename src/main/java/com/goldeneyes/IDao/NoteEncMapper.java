@@ -1,5 +1,7 @@
 package com.goldeneyes.IDao;
 
+import java.util.List;
+
 import com.goldeneyes.pojo.NoteEnc;
 
 public interface NoteEncMapper {
@@ -19,5 +21,11 @@ public interface NoteEncMapper {
 	 * @param noteId
 	 * @return
 	 */
-	NoteEnc getNoteEncById(int noteId);
+	List<NoteEnc> getNoteEncById(int noteId);
+	/**
+	 * 删除某点到记事的附件
+	 * @param noteId
+	 * @return
+	 */
+	int deleteByNoteId(int noteId);
 }

@@ -19,6 +19,11 @@ public interface NoteMapper {
     
     List<Note> getAllNote();
     /**
+     * 获取最大ID
+     * @return
+     */
+    int getMaxId();
+    /**
 	 * 获取用户未读点到记事条数
 	 * @param userId
 	 * @param spaceType
@@ -32,6 +37,14 @@ public interface NoteMapper {
 	 * @return
 	 */
 	List<Note> getNoReadNotesByUser(int userId,int spaceType);
+	/**
+	 * 获取用户某条点到记事是否点赞
+	 * @param userId
+	 * @param spaceType
+	 * @param noteId
+	 * @return
+	 */
+	int getIsLikeNoteByUser(int userId,int spaceType,int noteId);
 	/**
 	 * 获取点到记事所有点赞用户
 	 * @param noteId
@@ -50,4 +63,10 @@ public interface NoteMapper {
 	 * @return
 	 */
 	Note getNoteById(int noteId);
+	/**
+	 * 屏蔽某学生某点到记事信息
+	 * @param record
+	 * @return
+	 */
+	int offNoteByStudent(Note record);
 }
