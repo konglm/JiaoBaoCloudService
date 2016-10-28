@@ -138,4 +138,11 @@
       EncOrder = #{encorder,jdbcType=INTEGER}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  
+  <!-- 获取某条点到记事附件列表 -->
+  <select id="getNoteEncById" resultType="com.goldeneyes.pojo.NoteEnc">
+  	select ne.EncType,ne.EncName,ne.EncAddr,ne.EncImgAddr,ne.PublisherId,ne.PublishDate 
+  	from NoteEnc ne 
+  	where ne.NoteId = #{0} order by ne.EncOrder
+  </select>
 </mapper>

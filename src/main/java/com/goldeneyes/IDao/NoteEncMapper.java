@@ -14,4 +14,10 @@ public interface NoteEncMapper {
     int updateByPrimaryKeySelective(NoteEnc record);
 
     int updateByPrimaryKey(NoteEnc record);
+    /**
+	 * 获取某条点到记事附件列表
+	 * @param noteId
+	 * @return
+	 */
+	NoteEnc getNoteEncById(int noteId);
 }

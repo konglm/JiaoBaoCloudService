@@ -109,22 +109,43 @@
   	select TabId, StudentId, MsgContent, PublisherId, PublishDate 
   	from Note where Status = 1
   </select>
+  
   <!-- 获取用户未读点到记事条数 -->
   <select id="getNoReadNotesCntByUser" resultType="java.lang.Integer">
   	select COUNT(n.TabId) 
-  	from SpaceContentStatus s,Note n 
-  	where s.SpaceId=n.TabId and s.IsRead=0 and n.Status=1 and s.SpaceType=1 and s.UserId = #{0}
+  	from SpaceContentStatus ss,Note n 
+  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
   </select>
   <!-- 获取用户未读点到记事列表 -->
   <select id="getNoReadNotesByUser" resultType="com.goldeneyes.pojo.Note">
   	select n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate 
-  	from SpaceContentStatus s,Note n 
-  	where s.SpaceId=n.TabId and s.IsRead=0 and n.Status=1 and s.SpaceType=1 and s.UserId = #{0}
+  	from SpaceContentStatus ss,Note n 
+  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  	order by n.PublishDate desc
   </select>
   <!-- 获取用户某条点到记事是否点赞 -->
   <select id="getIsLikeNoteByUser" resultType="java.lang.Integer">
   	select s.IsLike 
-  	from SpaceContentStatus s,Note n 
-	where s.SpaceId=n.TabId and n.Status=1 and s.SpaceType=1 and n.TabId = #{0} and s.UserId = #{1}
+  	from SpaceContentStatus ss,Note n 
+	where ss.SpaceId=n.TabId and n.Status=1 and ss.SpaceType=1 and n.TabId = #{0} and ss.UserId = #{1}
+  </select>
+  <!-- 获取点到记事所有点赞用户 -->
+  <select id="getIsLikeUsersByNote" resultType="java.lang.Integer">
+  	select ss.UserId 
+  	from SpaceContentStatus ss 
+  	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
+  </select>
+  <!-- 获取某学生点到记事列表 -->
+  <select id="getNotesByStudent" resultType="com.goldeneyes.pojo.Note">
+  	select n.TabId,n.MsgContent,n.PublisherId,n.PublishDate 
+  	from Note n 
+  	where n.Status = 1 and n.StudentId = #{0}
+	order by n.PublishDate desc
+  </select>
+  <!-- 获取某条点到记事信息 -->
+  <select id="getNoteById" resultType="com.goldeneyes.pojo.Note">
+  	select n.TabId,n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate 
+  	from Note n 
+  	where n.Status = 1 and n.TabId = #{0}
   </select>
 </mapper>

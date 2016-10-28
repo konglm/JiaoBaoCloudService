@@ -32,4 +32,22 @@ public interface NoteMapper {
 	 * @return
 	 */
 	List<Note> getNoReadNotesByUser(int userId,int spaceType);
+	/**
+	 * 获取点到记事所有点赞用户
+	 * @param noteId
+	 * @return
+	 */
+	List<Integer> getIsLikeUsersByNote(int noteId);
+	/**
+	 * 获取某学生点到记事列表
+	 * @param studentId
+	 * @return
+	 */
+	List<Note> getNotesByStudent(int studentId);
+	/**
+	 * 获取某条点到记事信息
+	 * @param noteId
+	 * @return
+	 */
+	Note getNoteById(int noteId);
 }
