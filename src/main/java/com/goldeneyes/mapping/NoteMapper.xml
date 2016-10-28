@@ -109,4 +109,22 @@
   	select TabId, StudentId, MsgContent, PublisherId, PublishDate 
   	from Note where Status = 1
   </select>
+  <!-- 获取用户未读点到记事条数 -->
+  <select id="getNoReadNotesCntByUser" resultType="java.lang.Integer">
+  	select COUNT(n.TabId) 
+  	from SpaceContentStatus s,Note n 
+  	where s.SpaceId=n.TabId and s.IsRead=0 and n.Status=1 and s.SpaceType=1 and s.UserId = #{0}
+  </select>
+  <!-- 获取用户未读点到记事列表 -->
+  <select id="getNoReadNotesByUser" resultType="com.goldeneyes.pojo.Note">
+  	select n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate 
+  	from SpaceContentStatus s,Note n 
+  	where s.SpaceId=n.TabId and s.IsRead=0 and n.Status=1 and s.SpaceType=1 and s.UserId = #{0}
+  </select>
+  <!-- 获取用户某条点到记事是否点赞 -->
+  <select id="getIsLikeNoteByUser" resultType="java.lang.Integer">
+  	select s.IsLike 
+  	from SpaceContentStatus s,Note n 
+	where s.SpaceId=n.TabId and n.Status=1 and s.SpaceType=1 and n.TabId = #{0} and s.UserId = #{1}
+  </select>
 </mapper>
