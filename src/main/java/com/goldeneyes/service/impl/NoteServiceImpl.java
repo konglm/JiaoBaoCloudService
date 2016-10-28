@@ -235,6 +235,8 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setCommentcontent(commentStr);
 		noteComment.setCommentdate(new Date());
 		noteComment.setReplyid(replyUserId);
+		noteComment.setReplystatus(CommonTool.int2byte(1));
+		noteComment.setStatus(CommonTool.int2byte(1));
 		try {
 			noteCommentMapper.insert(noteComment);
 		} catch (Exception e) {
@@ -253,6 +255,9 @@ public class NoteServiceImpl implements NoteService {
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userId);
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+		spaceContentStatus.setSpaceid(noteId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+		spaceContentStatus.setIslike(CommonTool.int2byte(0));
 
 		try {
 			spaceContentStatusMapper.insert(spaceContentStatus);
@@ -304,11 +309,10 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int setNoteCommentReplyByUser(int userId, int noteId) {
+	public int setNoteCommentReplyByUser(int noteCommentId) {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
-		noteComment.setUserid(userId);
-		noteComment.setNoteid(noteId);
+		noteComment.setTabid(noteCommentId);
 		try {
 			noteCommentMapper.setNoteCommentReplyByUser(noteComment);
 		} catch (Exception e) {
@@ -326,7 +330,7 @@ public class NoteServiceImpl implements NoteService {
 		Note note = new Note();
 		note.setTabid(noteId);
 		try {
-			noteMapper.insert(note);
+			noteMapper.offNoteByStudent(note);
 		} catch (Exception e) {
 			return 0;
 		}

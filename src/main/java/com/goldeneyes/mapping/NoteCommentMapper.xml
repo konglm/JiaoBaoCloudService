@@ -165,8 +165,7 @@
     set 
       ReplyStatus = 1,
       ReplyDate = getdate()
-    where NoteId = #{noteid,jdbcType=INTEGER}
-    and UserId = #{userid,jdbcType=INTEGER}
+    where TabId = #{tabid,jdbcType=INTEGER}
   </update>
   <!-- 删除某点到记事的评论 -->
   <delete id="deleteByNoteId" parameterType="java.lang.Integer" >

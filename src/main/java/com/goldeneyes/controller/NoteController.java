@@ -416,10 +416,9 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteCommentReplyByUser.do")
 	public void setNoteCommentReplyByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		int noteId = Integer.parseInt(request.getParameter("noteId"));
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		int noteCommentId = Integer.parseInt(request.getParameter("noteCommentId"));
 
-		int success = noteService.setNoteCommentReplyByUser(userId, noteId);
+		int success = noteService.setNoteCommentReplyByUser(noteCommentId);
 		JSONObject jsonobj = new JSONObject();
 		jsonobj.put("Result", success);
 		// 在这里输出，手机端就拿到web返回的值了

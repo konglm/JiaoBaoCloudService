@@ -158,7 +158,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setNoteCommentReplyByUser(int userId,int noteId);
+	public int setNoteCommentReplyByUser(int noteCommentId);
 	/**
 	 * 屏蔽某学生某点到记事信息
 	 * @param studentId
