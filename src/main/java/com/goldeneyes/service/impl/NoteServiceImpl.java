@@ -51,7 +51,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Note> getAllNote() {
+	public List<Note> getAllNote() throws Exception {
 		// TODO Auto-generated method stub
 		List<Note> notes = noteMapper.getAllNote();
 		return notes;
@@ -61,7 +61,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoReadNotesCntByUser(int userId, int spaceType) {
+	public int getNoReadNotesCntByUser(int userId, int spaceType) throws Exception {
 		// TODO Auto-generated method stub
 		int cnt = noteMapper.getNoReadNotesCntByUser(userId, spaceType);
 		return cnt;
@@ -71,7 +71,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Note> getNoReadNotesByUser(int userId, int spaceType) {
+	public List<Note> getNoReadNotesByUser(int userId, int spaceType) throws Exception {
 		// TODO Auto-generated method stub
 		List<Note> notes = noteMapper.getNoReadNotesByUser(userId, spaceType);
 		return notes;
@@ -81,7 +81,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int getIsLikeNoteByUser(int userId, int spaceType, int noteId) {
+	public int getIsLikeNoteByUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		int isLike = noteMapper.getIsLikeNoteByUser(userId, spaceType, noteId);
 		return isLike;
@@ -91,7 +91,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteComment> getNoteCommentsByUser(int noteId) {
+	public List<NoteComment> getNoteCommentsByUser(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsByUser(noteId);
 		return noteComments;
@@ -101,7 +101,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Integer> getIsLikeUsersByNote(int noteId) {
+	public List<Integer> getIsLikeUsersByNote(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		List<Integer> isLikers = noteMapper.getIsLikeUsersByNote(noteId);
 		return isLikers;
@@ -111,7 +111,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoteCommentReplysCntByUser(int userId) {
+	public int getNoteCommentReplysCntByUser(int userId) throws Exception {
 		// TODO Auto-generated method stub
 		int cnt = noteCommentMapper.getNoteCommentReplysCntByUser(userId);
 		return cnt;
@@ -121,7 +121,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteComment> getNoteCommentReplysByUser(int userId) {
+	public List<NoteComment> getNoteCommentReplysByUser(int userId) throws Exception {
 		// TODO Auto-generated method stub
 		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentReplysByUser(userId);
 		return noteComments;
@@ -131,7 +131,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Note> getNotesByStudent(int studentId) {
+	public List<Note> getNotesByStudent(int studentId) throws Exception {
 		// TODO Auto-generated method stub
 		List<Note> notes = noteMapper.getNotesByStudent(studentId);
 		return notes;
@@ -141,7 +141,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public Note getNoteById(int noteId) {
+	public Note getNoteById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		Note note = noteMapper.getNoteById(noteId);
 		return note;
@@ -151,7 +151,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteEnc> getNoteEncById(int noteId) {
+	public List<NoteEnc> getNoteEncById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		List<NoteEnc> noteEncs = noteEncMapper.getNoteEncById(noteId);
 		return noteEncs;
@@ -161,7 +161,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNote(int studentId, String noteStr, int teacherId) {
+	public int addNote(int studentId, String noteStr, int teacherId) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = noteMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		Note note = new Note();
@@ -183,7 +183,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteEnc(int noteId, String encType, String encAddr, String encImg, int teacherId, int encOrder) {
+	public int addNoteEnc(int noteId, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
 		// TODO Auto-generated method stub
 		NoteEnc noteEnc = new NoteEnc();
 		noteEnc.setNoteid(noteId);
@@ -205,7 +205,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteComment(int userId, int noteId, String commentStr) {
+	public int addNoteComment(int userId, int noteId, String commentStr) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setUserid(userId);
@@ -227,7 +227,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentStr) {
+	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentStr) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setUserid(userId);
@@ -249,7 +249,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int sendNoteForUser(int userId, int spaceType, int noteId) {
+	public int sendNoteForUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
@@ -271,7 +271,7 @@ public class NoteServiceImpl implements NoteService {
 	 *  @author konglm
 	 */
 	@Override
-	public int setNoteReadByUser(int userId, int spaceType, int noteId) {
+	public int setNoteReadByUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userId);
@@ -290,7 +290,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int setNoteLikeByUser(int userId, int spaceType, int noteId) {
+	public int setNoteLikeByUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userId);
@@ -309,7 +309,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int setNoteCommentReplyByUser(int noteCommentId) {
+	public int setNoteCommentReplyByUser(int noteCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setTabid(noteCommentId);
@@ -325,7 +325,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int offNoteByStudent(int noteId) {
+	public int offNoteByStudent(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		Note note = new Note();
 		note.setTabid(noteId);
@@ -341,7 +341,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int delNoteByStudent(int noteId) {
+	public int delNoteByStudent(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			noteMapper.deleteByPrimaryKey(noteId);
@@ -358,7 +358,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int delNoteCommentByStudent(int noteCommentId) {
+	public int delNoteCommentByStudent(int noteCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			noteCommentMapper.deleteByPrimaryKey(noteCommentId);

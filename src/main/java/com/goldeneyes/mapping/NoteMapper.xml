@@ -106,7 +106,7 @@
   <!-- 获取所有点到记事的信息 -->
   <select id="getAllNote" resultType="com.goldeneyes.pojo.Note">
   	select TabId, StudentId, MsgContent, PublisherId, PublishDate 
-  	from Note where Status = 1
+  	from Note where Status = 1 order by PublishDate desc
   </select>
   
   <!-- 取点到记事表的最大ID+1 -->
