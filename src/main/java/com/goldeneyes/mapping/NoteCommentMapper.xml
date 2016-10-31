@@ -150,13 +150,13 @@
   <select id="getNoteCommentReplysCntByUser" resultType="java.lang.Integer">
   	select COUNT(nc.TabId) 
   	from NoteComment nc 
-  	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.UserId = #{0}
+  	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.ReplyId = #{0}
   </select>
   <!-- 获取用户点到记事所有未读评论回复列表 -->
   <select id="getNoteCommentReplysByUser" resultType="com.goldeneyes.pojo.NoteComment">
-  	select nc.NoteId,nc.CommentContent,nc.CommentContent 
+  	select nc.UserId,nc.NoteId,nc.CommentContent
   	from NoteComment nc 
-  	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.UserId = #{0}
+  	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.ReplyId = #{0}
 	order by nc.CommentDate desc
   </select>
   <!-- 修改某用户某点到记事评论回复查看状态 -->

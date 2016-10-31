@@ -213,7 +213,7 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setCommentcontent(commentStr);
 		noteComment.setCommentdate(new Date());
 		noteComment.setReplyid(0);
-		noteComment.setReplystatus(CommonTool.int2byte(1));
+		noteComment.setReplystatus(CommonTool.int2byte(0));
 		noteComment.setStatus(CommonTool.int2byte(1));
 		try {
 			noteCommentMapper.insert(noteComment);
@@ -235,7 +235,7 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setCommentcontent(commentStr);
 		noteComment.setCommentdate(new Date());
 		noteComment.setReplyid(replyUserId);
-		noteComment.setReplystatus(CommonTool.int2byte(1));
+		noteComment.setReplystatus(CommonTool.int2byte(0));
 		noteComment.setStatus(CommonTool.int2byte(1));
 		try {
 			noteCommentMapper.insert(noteComment);

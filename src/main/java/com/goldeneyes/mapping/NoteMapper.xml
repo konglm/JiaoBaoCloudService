@@ -129,9 +129,9 @@
   </select>
   <!-- 获取用户某条点到记事是否点赞 -->
   <select id="getIsLikeNoteByUser" resultType="java.lang.Integer">
-  	select ss.IsLike 
-  	from SpaceContentStatus ss,Note n 
-	where ss.SpaceId=n.TabId and n.Status=1 and ss.SpaceType=1 and n.TabId = #{0} and ss.UserId = #{1}
+  	select count(ss.IsLike) likeCnt 
+  	from SpaceContentStatus ss 
+	where ss.SpaceType=1 and ss.SpaceId = #{0} and ss.UserId = #{1}
   </select>
   <!-- 获取点到记事所有点赞用户 -->
   <select id="getIsLikeUsersByNote" resultType="java.lang.Integer">

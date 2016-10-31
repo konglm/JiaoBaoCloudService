@@ -339,9 +339,7 @@ public class NoteController {
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("UserId", noteComment.getUserid());
 				jsonobj.put("CommentContent", noteComment.getCommentcontent());
-				jsonobj.put("ReplyId", noteComment.getReplyid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("CommentDate", formater.format(noteComment.getCommentdate()));
+				jsonobj.put("NoteId", noteComment.getNoteid());
 				jsonArray.put(jsonobj);
 			}
 			// 在这里输出，手机端就拿到web返回的值了
