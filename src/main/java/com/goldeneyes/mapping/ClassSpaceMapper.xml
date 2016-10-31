@@ -140,7 +140,7 @@
   	from SpaceContentStatus ss 
   	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
   </select>
-  <!-- 获取某学生班级空间列表 -->
+  <!-- 获取某班级空间列表 -->
   <select id="getClassSpacesByClass" resultType="com.goldeneyes.pojo.ClassSpace">
   	select c.TabId,c.MsgContent,c.PublisherId,c.PublishDate 
   	from ClassSpace c 

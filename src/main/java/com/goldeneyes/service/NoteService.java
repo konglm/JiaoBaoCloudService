@@ -153,15 +153,13 @@ public interface NoteService {
 	 */
 	public int setNoteLikeByUser(int userId,int spaceType,int noteId) throws Exception;
 	/**
-	 * 修改某用户某点到记事评论回复查看状态
-	 * @param userId
-	 * @param noteId
+	 * 修改某点到记事评论回复查看状态
+	 * @param noteCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
 	public int setNoteCommentReplyByUser(int noteCommentId) throws Exception;
 	/**
-	 * 屏蔽某学生某点到记事信息
-	 * @param studentId
+	 * 屏蔽某点到记事信息
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */

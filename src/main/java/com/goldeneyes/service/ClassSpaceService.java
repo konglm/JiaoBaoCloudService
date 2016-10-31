@@ -45,22 +45,22 @@ public interface ClassSpaceService {
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
 	 * @param spaceType
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	public int getIsLikeClassSpaceByUser(int userId,int spaceType,int ClassSpaceId) throws Exception;
+	public int getIsLikeClassSpaceByUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
 	 * 获取班级空间所有评论
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	public List<ClassSpaceComment> getClassSpaceCommentsByUser(int ClassSpaceId) throws Exception;
+	public List<ClassSpaceComment> getClassSpaceCommentsByUser(int classSpaceId) throws Exception;
 	/**
 	 * 获取班级空间所有点赞用户
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	public List<Integer> getIsLikeUsersByClassSpace(int ClassSpaceId) throws Exception;
+	public List<Integer> getIsLikeUsersByClassSpace(int classSpaceId) throws Exception;
 	/**
 	 * 获取用户班级空间所有未读评论回复条数
 	 * @param userId
@@ -75,33 +75,33 @@ public interface ClassSpaceService {
 	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId) throws Exception;
 	/**
 	 * 获取某学生班级空间列表
-	 * @param studentId
+	 * @param classId
 	 * @return
 	 */
-	public List<ClassSpace> getClassSpacesByClass(int studentId) throws Exception;
+	public List<ClassSpace> getClassSpacesByClass(int classId) throws Exception;
 	/**
 	 * 获取某条班级空间信息
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	public ClassSpace getClassSpaceById(int ClassSpaceId) throws Exception;
+	public ClassSpace getClassSpaceById(int classSpaceId) throws Exception;
 	/**
 	 * 获取某条班级空间附件列表
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	public List<ClassSpaceEnc> getClassSpaceEncById(int ClassSpaceId) throws Exception;
+	public List<ClassSpaceEnc> getClassSpaceEncById(int classSpaceId) throws Exception;
 	/**
 	 * 新增某学生班级空间信息
-	 * @param studentId
-	 * @param ClassSpaceStr
+	 * @param classId
+	 * @param classSpaceStr
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的班级空间ID
 	 */
-	public int addClassSpace(int studentId,String ClassSpaceStr,int teacherId) throws Exception;
+	public int addClassSpace(int classId,String classSpaceStr,int teacherId) throws Exception;
 	/**
 	 * 新增某学生班级空间附件
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @param encType
 	 * @param encAddr
 	 * @param encImg
@@ -109,72 +109,70 @@ public interface ClassSpaceService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceEnc(int ClassSpaceId,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addClassSpaceEnc(int classSpaceId,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
 	/**
 	 * 新增某用户某班级空间评论
 	 * @param userId
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @param commentStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceComment(int userId,int ClassSpaceId,String commentStr) throws Exception;
+	public int addClassSpaceComment(int userId,int classSpaceId,String commentStr) throws Exception;
 	/**
 	 * 新增某用户某班级空间评论回复
 	 * @param userId
 	 * @param replyUserId
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @param commentStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceCommentReply(int userId,int replyUserId,int ClassSpaceId,String commentStr) throws Exception;
+	public int addClassSpaceCommentReply(int userId,int replyUserId,int classSpaceId,String commentStr) throws Exception;
 	/**
 	 * 推送给某用户的某班级空间
 	 * @param userId
 	 * @param spaceType
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int sendClassSpaceForUser(int userId,int spaceType,int ClassSpaceId) throws Exception;
+	public int sendClassSpaceForUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
 	 * 修改某用户某班级空间阅读状态为已读
 	 * @param userId
 	 * @param spaceType
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceReadByUser(int userId,int spaceType,int ClassSpaceId) throws Exception;
+	public int setClassSpaceReadByUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
 	 * 新增某用户某班级空间点赞状态为点赞
 	 * @param userId
 	 * @param spaceType
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceLikeByUser(int userId,int spaceType,int ClassSpaceId) throws Exception;
+	public int setClassSpaceLikeByUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
-	 * 修改某用户某班级空间评论回复查看状态
-	 * @param userId
-	 * @param ClassSpaceId
+	 * 修改某班级空间评论回复查看状态
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceCommentReplyByUser(int ClassSpaceCommentId) throws Exception;
+	public int setClassSpaceCommentReplyByUser(int classSpaceCommentId) throws Exception;
 	/**
 	 * 屏蔽某学生某班级空间信息
-	 * @param studentId
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offClassSpaceByClass(int ClassSpaceId) throws Exception;
+	public int offClassSpaceByClass(int classSpaceId) throws Exception;
 	/**
 	 * 删除某学生某班级空间（附件一起删除）
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delClassSpaceByClass(int ClassSpaceId) throws Exception;
+	public int delClassSpaceByClass(int classSpaceId) throws Exception;
 	/**
 	 * 删除某用户某班级空间评论
-	 * @param ClassSpaceCommentId
+	 * @param classSpaceCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delClassSpaceCommentByClass(int ClassSpaceCommentId) throws Exception;
+	public int delClassSpaceCommentByClass(int classSpaceCommentId) throws Exception;
 }

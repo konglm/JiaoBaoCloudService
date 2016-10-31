@@ -357,19 +357,19 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpacesByClass.do")
 	public void getClassSpacesByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
-		if (request.getParameter("studentId") == null) {
+		if (request.getParameter("classId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
 		} else {
-			int studentId = 0;
+			int classId = 0;
 			try {
-				studentId = Integer.parseInt(request.getParameter("studentId"));
+				classId = Integer.parseInt(request.getParameter("classId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
 			List<ClassSpace> classSpaces = new ArrayList<ClassSpace>();
 			try {
-				classSpaces = classSpaceService.getClassSpacesByClass(studentId);
+				classSpaces = classSpaceService.getClassSpacesByClass(classId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -486,15 +486,15 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpace.do")
 	public void addClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
-		if ((request.getParameter("studentId") == null) || (request.getParameter("classSpaceStr") == null)
+		if ((request.getParameter("classId") == null) || (request.getParameter("classSpaceStr") == null)
 				|| (request.getParameter("teacherId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
 		} else {
-			int studentId = 0;
+			int classId = 0;
 			String classSpaceStr = "";
 			int teacherId = 0;
 			try {
-				studentId = Integer.parseInt(request.getParameter("studentId"));
+				classId = Integer.parseInt(request.getParameter("classId"));
 				classSpaceStr = request.getParameter("classSpaceStr");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 			} catch (Exception e) {
@@ -504,7 +504,7 @@ public class ClassSpaceController {
 
 			int id = 0;
 			try {
-				id = classSpaceService.addClassSpace(studentId, classSpaceStr, teacherId);
+				id = classSpaceService.addClassSpace(classId, classSpaceStr, teacherId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

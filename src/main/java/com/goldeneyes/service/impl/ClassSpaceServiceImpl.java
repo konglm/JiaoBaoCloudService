@@ -131,9 +131,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpace> getClassSpacesByClass(int studentId) throws Exception {
+	public List<ClassSpace> getClassSpacesByClass(int classId) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpace> classSpaces = classSpaceMapper.getClassSpacesByClass(studentId);
+		List<ClassSpace> classSpaces = classSpaceMapper.getClassSpacesByClass(classId);
 		return classSpaces;
 	}
 
@@ -161,12 +161,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpace(int studentId, String classSpaceStr, int teacherId) throws Exception {
+	public int addClassSpace(int classId, String classSpaceStr, int teacherId) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = classSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		ClassSpace classSpace = new ClassSpace();
 		classSpace.setTabid(maxId);
-		classSpace.setClassid(studentId);
+		classSpace.setClassid(classId);
 		classSpace.setMsgcontent(classSpaceStr);
 		classSpace.setPublisherid(teacherId);
 		classSpace.setPublishdate(new Date());
