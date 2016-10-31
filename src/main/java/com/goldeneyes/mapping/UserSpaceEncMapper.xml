@@ -148,6 +148,6 @@
   <!-- 删除某用户空间的附件 -->
   <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
     delete from UserSpaceEnc
-    where UserSpaceId = #{noteId,jdbcType=INTEGER}
+    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
   </delete>
 </mapper>

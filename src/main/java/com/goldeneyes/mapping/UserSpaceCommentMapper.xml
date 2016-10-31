@@ -170,6 +170,6 @@
   <!-- 删除某用户空间的评论 -->
   <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
     delete from UserSpaceComment
-    where UserSpaceId = #{noteId,jdbcType=INTEGER}
+    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
   </delete>
 </mapper>

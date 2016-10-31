@@ -3,7 +3,6 @@ package com.goldeneyes.IDao;
 import java.util.List;
 
 import com.goldeneyes.pojo.ClassSpace;
-import com.goldeneyes.pojo.Note;
 
 public interface ClassSpaceMapper {
     int deleteByPrimaryKey(Integer tabid);
@@ -54,10 +53,10 @@ public interface ClassSpaceMapper {
 	List<Integer> getIsLikeUsersById(int classSpaceId);
 	/**
 	 * 获取某学生班级空间列表
-	 * @param studentId
+	 * @param classId
 	 * @return
 	 */
-	List<ClassSpace> getClassSpacesByClass(int studentId);
+	List<ClassSpace> getClassSpacesByClass(int classId);
 	/**
 	 * 获取某条班级空间信息
 	 * @param classSpaceId

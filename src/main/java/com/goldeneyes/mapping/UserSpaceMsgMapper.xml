@@ -169,6 +169,6 @@
   <!-- 删除某用户空间的留言 -->
   <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
     delete from UserSpaceMsg
-    where UserSpaceId = #{noteId,jdbcType=INTEGER}
+    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
   </delete>
 </mapper>

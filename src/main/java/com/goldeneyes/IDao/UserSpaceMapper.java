@@ -52,8 +52,8 @@ public interface UserSpaceMapper {
 	 */
 	List<Integer> getIsLikeUsersById(int userSpaceId);
 	/**
-	 * 获取某学生用户空间列表
-	 * @param studentId
+	 * 获取某用户空间列表
+	 * @param userId
 	 * @return
 	 */
 	List<UserSpace> getUserSpacesByUser(int userId);
