@@ -111,7 +111,7 @@
   
   <!-- 取点到记事表的最大ID+1 -->
   <select id="getMaxId" resultType="java.lang.Integer">
-  	select MAX(n.TabId) + 1 from note n
+  	select MAX(n.TabId) + 1 from Note n
   </select>
   
   <!-- 获取用户未读点到记事条数 -->

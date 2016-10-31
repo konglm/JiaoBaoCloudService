@@ -42,16 +42,16 @@ public interface ClassSpaceMapper {
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
 	 * @param spaceType
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	int getIsLikeClassSpaceByUser(int userId,int spaceType,int ClassSpaceId);
+	int getIsLikeClassSpaceByUser(int userId,int spaceType,int classSpaceId);
 	/**
 	 * 获取班级空间所有点赞用户
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	List<Integer> getIsLikeUsersByClassSpace(int ClassSpaceId);
+	List<Integer> getIsLikeUsersByClassSpace(int classSpaceId);
 	/**
 	 * 获取某学生班级空间列表
 	 * @param studentId
@@ -60,10 +60,10 @@ public interface ClassSpaceMapper {
 	List<ClassSpace> getClassSpacesByClass(int studentId);
 	/**
 	 * 获取某条班级空间信息
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	ClassSpace getClassSpaceById(int ClassSpaceId);
+	ClassSpace getClassSpaceById(int classSpaceId);
 	/**
 	 * 屏蔽某学生某班级空间信息
 	 * @param record

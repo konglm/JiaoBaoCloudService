@@ -139,4 +139,37 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  <!-- 获取用户空间所有评论 -->
+  <select id="getUserSpaceCommentsByUser" resultType="com.goldeneyes.pojo.UserSpaceComment">
+  	select uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
+  	from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.UserSpaceId = #{0}
+  	order by uc.CommentDate desc
+  </select>
+  <!-- 获取用户用户空间所有未读评论回复条数 -->
+  <select id="getUserSpaceCommentReplysCntByUser" resultType="java.lang.Integer">
+  	select COUNT(uc.TabId) 
+  	from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.ReplyStatus = 0 and uc.ReplyId = #{0}
+  </select>
+  <!-- 获取用户用户空间所有未读评论回复列表 -->
+  <select id="getUserSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceComment">
+  	select uc.UserId,uc.UserSpaceId,uc.CommentContent
+  	from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.ReplyStatus = 0 and uc.ReplyId = #{0}
+	order by uc.CommentDate desc
+  </select>
+  <!-- 修改某用户空间评论回复查看状态 -->
+  <update id="setUserSpaceCommentReplyByUser" parameterType="com.goldeneyes.pojo.UserSpaceComment" >
+    update UserSpaceComment
+    set 
+      ReplyStatus = 1,
+      ReplyDate = getdate()
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 删除某用户空间的评论 -->
+  <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
+    delete from UserSpaceComment
+    where UserSpaceId = #{noteId,jdbcType=INTEGER}
+  </delete>
 </mapper>

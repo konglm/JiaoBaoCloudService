@@ -19,14 +19,14 @@ public interface ClassSpaceEncMapper {
     
     /**
    	 * 获取某条班级空间附件列表
-   	 * @param ClassSpaceId
+   	 * @param classSpaceId
    	 * @return
    	 */
-   	List<ClassSpaceEnc> getClassSpaceEncById(int ClassSpaceId);
+   	List<ClassSpaceEnc> getClassSpaceEncById(int classSpaceId);
    	/**
    	 * 删除某班级空间的附件
-   	 * @param ClassSpaceId
+   	 * @param classSpaceId
    	 * @return
    	 */
-   	int deleteByClassSpaceId(int ClassSpaceId);
+   	int deleteByClassSpaceId(int classSpaceId);
 }

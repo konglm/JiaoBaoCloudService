@@ -18,10 +18,10 @@ public interface ClassSpaceCommentMapper {
     int updateByPrimaryKey(ClassSpaceComment record);
     /**
 	 * 获取班级空间所有评论
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	List<ClassSpaceComment> getClassSpaceCommentsByUser(int ClassSpaceId);
+	List<ClassSpaceComment> getClassSpaceCommentsByUser(int classSpaceId);
 	/**
 	 * 获取用户班级空间所有未读评论回复条数
 	 * @param userId
@@ -42,8 +42,8 @@ public interface ClassSpaceCommentMapper {
 	int setClassSpaceCommentReplyByUser(ClassSpaceComment record);
 	/**
 	 * 删除某班级空间的评论
-	 * @param ClassSpaceId
+	 * @param classSpaceId
 	 * @return
 	 */
-	int deleteByClassSpaceId(int ClassSpaceId);
+	int deleteByClassSpaceId(int classSpaceId);
 }
