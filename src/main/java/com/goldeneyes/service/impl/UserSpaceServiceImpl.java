@@ -25,10 +25,12 @@ import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.IDao.UserSpaceCommentMapper;
 import com.goldeneyes.IDao.UserSpaceEncMapper;
 import com.goldeneyes.IDao.UserSpaceMapper;
+import com.goldeneyes.IDao.UserSpaceMsgMapper;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceEnc;
+import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
 
@@ -46,6 +48,8 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	UserSpaceEncMapper userSpaceEncMapper;
 	@Resource
 	SpaceContentStatusMapper spaceContentStatusMapper;
+	@Resource
+	UserSpaceMsgMapper userSpaceMsgMapper;
 
 	/**
 	 * @author konglm
@@ -362,6 +366,110 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		// TODO Auto-generated method stub
 		try{
 			userSpaceCommentMapper.deleteByPrimaryKey(userSpaceCommentId);
+		} catch(Exception e){
+			return 0;
+		}
+		return 1;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId) throws Exception {
+		// TODO Auto-generated method stub
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgsById(userSpaceId);
+		return userSpaceMsgs;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getUserSpaceMsgReplysCntByUser(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMsgMapper.getUserSpaceMsgReplysCntByUser(userId);
+		return cnt;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgReplysByUser(userId);
+		return userSpaceMsgs;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int addUserSpaceMsg(int userId, int userSpaceId, String msgStr) throws Exception {
+		// TODO Auto-generated method stub
+		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setUserid(userId);
+		userSpaceMsg.setUserspaceid(userSpaceId);
+		userSpaceMsg.setMsgcontent(msgStr);
+		userSpaceMsg.setMsgdate(new Date());
+		userSpaceMsg.setReplyid(0);
+		userSpaceMsg.setReplystatus(CommonTool.int2byte(0));
+		userSpaceMsg.setStatus(CommonTool.int2byte(1));
+		try {
+			userSpaceMsgMapper.insert(userSpaceMsg);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int addUserSpaceMsgReply(int userId, int replyUserId, int userSpaceId, String msgStr) throws Exception {
+		// TODO Auto-generated method stub
+		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setUserid(userId);
+		userSpaceMsg.setUserspaceid(userSpaceId);
+		userSpaceMsg.setMsgcontent(msgStr);
+		userSpaceMsg.setMsgdate(new Date());
+		userSpaceMsg.setReplyid(replyUserId);
+		userSpaceMsg.setReplystatus(CommonTool.int2byte(0));
+		userSpaceMsg.setStatus(CommonTool.int2byte(1));
+		try {
+			userSpaceMsgMapper.insert(userSpaceMsg);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int setUserSpaceMsgReplyByUser(int userSpaceMsgId) throws Exception {
+		// TODO Auto-generated method stub
+		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setTabid(userSpaceMsgId);
+		try {
+			userSpaceMsgMapper.setUserSpaceMsgReplyByUser(userSpaceMsg);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int delUserSpaceMsgByUser(int userSpaceMsgId) throws Exception {
+		// TODO Auto-generated method stub
+		try{
+			userSpaceMsgMapper.deleteByPrimaryKey(userSpaceMsgId);
 		} catch(Exception e){
 			return 0;
 		}

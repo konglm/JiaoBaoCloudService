@@ -19,6 +19,7 @@ import java.util.List;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceEnc;
+import com.goldeneyes.pojo.UserSpaceMsg;
 
 /**
  * @author konglm
@@ -175,4 +176,51 @@ public interface UserSpaceService {
 	 * @return 是否删除成功 0失败1成功
 	 */
 	public int delUserSpaceCommentByUser(int noteCommentId) throws Exception;
+	/**
+	 * 获取用户空间所有留言
+	 * @param noteId
+	 * @return
+	 */
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId) throws Exception;
+	/**
+	 * 获取用户用户空间所有未读留言回复条数
+	 * @param userId
+	 * @return
+	 */
+	public int getUserSpaceMsgReplysCntByUser(int userId) throws Exception;
+	/**
+	 * 获取用户用户空间所有未读留言回复列表
+	 * @param userId
+	 * @return
+	 */
+	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId) throws Exception;
+	/**
+	 * 新增某用户某用户空间留言
+	 * @param userId
+	 * @param noteId
+	 * @param msgStr
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int addUserSpaceMsg(int userId,int userSpaceId,String msgStr) throws Exception;
+	/**
+	 * 新增某用户某用户空间留言回复
+	 * @param userId
+	 * @param replyUserId
+	 * @param noteId
+	 * @param msgStr
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgStr) throws Exception;
+	/**
+	 * 修改某用户空间留言回复查看状态
+	 * @param noteMsgId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int setUserSpaceMsgReplyByUser(int userSpaceMsgId) throws Exception;
+	/**
+	 * 删除某用户某用户空间留言
+	 * @param noteMsgId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int delUserSpaceMsgByUser(int userSpaceMsgId) throws Exception;
 }

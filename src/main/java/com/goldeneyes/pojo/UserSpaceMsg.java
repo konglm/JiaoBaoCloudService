@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserSpaceMsg {
     private Integer tabid;
 
-    private Integer spaceid;
+    private Integer userspaceid;
 
     private Integer userid;
 
@@ -29,12 +29,12 @@ public class UserSpaceMsg {
         this.tabid = tabid;
     }
 
-    public Integer getSpaceid() {
-        return spaceid;
+    public Integer getUserspaceid() {
+        return userspaceid;
     }
 
-    public void setSpaceid(Integer spaceid) {
-        this.spaceid = spaceid;
+    public void setUserspaceid(Integer userspaceid) {
+        this.userspaceid = userspaceid;
     }
 
     public Integer getUserid() {

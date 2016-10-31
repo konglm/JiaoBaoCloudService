@@ -55,7 +55,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return
 	 */
-	public List<NoteComment> getNoteCommentsByUser(int noteId) throws Exception;
+	public List<NoteComment> getNoteCommentsById(int noteId) throws Exception;
 	/**
 	 * 获取点到记事所有点赞用户
 	 * @param noteId

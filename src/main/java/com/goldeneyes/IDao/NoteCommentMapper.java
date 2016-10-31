@@ -21,7 +21,7 @@ public interface NoteCommentMapper {
 	 * @param noteId
 	 * @return
 	 */
-	List<NoteComment> getNoteCommentsByUser(int noteId);
+	List<NoteComment> getNoteCommentsById(int noteId);
 	/**
 	 * 获取用户点到记事所有未读评论回复条数
 	 * @param userId

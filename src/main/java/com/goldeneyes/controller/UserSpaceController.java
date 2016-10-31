@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceEnc;
+import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
 
@@ -945,6 +946,298 @@ public class UserSpaceController {
 			int success = 0;
 			try {
 				success = userSpaceService.delUserSpaceCommentByUser(userSpaceCommentId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 4).toString());
+			} else {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("Result", success);
+				jsonArray.put(jsonobj);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+			}
+
+		}
+	}
+	/**
+	 * 获取用户空间所有留言
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getUserSpaceMsgsByUser.do")
+	public void getUserSpaceMsgsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if (request.getParameter("userSpaceId") == null) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceId = 0;
+			try {
+				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
+			try {
+				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userSpaceId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+
+			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("UserId", userSpaceMsg.getUserid());
+				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
+				jsonobj.put("ReplyId", userSpaceMsg.getReplyid());
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				jsonobj.put("MsgDate", formater.format(userSpaceMsg.getMsgdate()));
+				jsonArray.put(jsonobj);
+			}
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+	/**
+	 * 获取用户用户空间所有未读留言回复条数
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getUserSpaceMsgReplysCntByUser.do")
+	public void getUserSpaceMsgReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if (request.getParameter("userId") == null) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userId = 0;
+			try {
+				userId = Integer.parseInt(request.getParameter("userId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+			int cnt = 0;
+			try {
+				cnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("Result", cnt);
+			jsonArray.put(jsonobj);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+
+	/**
+	 * 获取用户用户空间所有未读留言回复列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getUserSpaceMsgReplysByUser.do")
+	public void getUserSpaceMsgReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if (request.getParameter("userId") == null) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userId = 0;
+			try {
+				userId = Integer.parseInt(request.getParameter("userId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
+			try {
+				userSpaceMsgs = userSpaceService.getUserSpaceMsgReplysByUser(userId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+
+			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("UserId", userSpaceMsg.getUserid());
+				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
+				jsonobj.put("UserSpaceId", userSpaceMsg.getUserspaceid());
+				jsonArray.put(jsonobj);
+			}
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+	/**
+	 * 新增某用户某用户空间留言
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/addUserSpaceMsg.do")
+	public void addUserSpaceMsg(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("msgStr") == null)
+				|| (request.getParameter("userId") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceId = 0;
+			String msgStr = "";
+			int userId = 0;
+			try {
+				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
+				msgStr = request.getParameter("msgStr");
+				userId = Integer.parseInt(request.getParameter("userId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.addUserSpaceMsg(userId, userSpaceId, msgStr);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 4).toString());
+			} else {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("Result", success);
+				jsonArray.put(jsonobj);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+			}
+		}
+	}
+
+	/**
+	 * 新增某用户某用户空间留言回复
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/addUserSpaceMsgReply.do")
+	public void addUserSpaceMsgReply(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("msgStr") == null)
+				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceId = 0;
+			String msgStr = "";
+			int userId = 0;
+			int replyUserId = 0;
+			try {
+				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
+				msgStr = request.getParameter("msgStr");
+				userId = Integer.parseInt(request.getParameter("userId"));
+				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgStr);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 4).toString());
+			} else {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("Result", success);
+				jsonArray.put(jsonobj);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+			}
+		}
+	}
+	/**
+	 * 修改某用户某用户空间留言回复查看状态
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/setUserSpaceMsgReplyByUser.do")
+	public void setUserSpaceMsgReplyByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if (request.getParameter("userSpaceMsgId") == null) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceMsgId = 0;
+			try {
+				userSpaceMsgId = Integer.parseInt(request.getParameter("userSpaceMsgId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.setUserSpaceMsgReplyByUser(userSpaceMsgId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 4).toString());
+			} else {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("Result", success);
+				jsonArray.put(jsonobj);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+			}
+		}
+	}
+	/**
+	 * 删除某用户某用户空间留言
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/delUserSpaceMsgByUser.do")
+	public void delUserSpaceMsgByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if (request.getParameter("userSpaceMsgId") == null) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceMsgId = 0;
+			try {
+				userSpaceMsgId = Integer.parseInt(request.getParameter("userSpaceMsgId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.delUserSpaceMsgByUser(userSpaceMsgId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

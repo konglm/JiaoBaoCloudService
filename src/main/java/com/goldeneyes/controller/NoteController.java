@@ -210,7 +210,7 @@ public class NoteController {
 			}
 			List<NoteComment> noteComments = new ArrayList<NoteComment>();
 			try {
-				noteComments = noteService.getNoteCommentsByUser(noteId);
+				noteComments = noteService.getNoteCommentsById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

@@ -140,7 +140,7 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
   <!-- 获取点到记事所有评论 -->
-  <select id="getNoteCommentsByUser" resultType="com.goldeneyes.pojo.NoteComment">
+  <select id="getNoteCommentsById" resultType="com.goldeneyes.pojo.NoteComment">
   	select nc.UserId,nc.CommentContent,nc.ReplyId,nc.CommentDate 
   	from NoteComment nc 
   	where nc.Status = 1 and nc.NoteId = #{0}

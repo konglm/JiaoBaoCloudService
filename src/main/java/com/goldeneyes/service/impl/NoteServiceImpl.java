@@ -91,9 +91,9 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteComment> getNoteCommentsByUser(int noteId) throws Exception {
+	public List<NoteComment> getNoteCommentsById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
-		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsByUser(noteId);
+		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsById(noteId);
 		return noteComments;
 	}
 
