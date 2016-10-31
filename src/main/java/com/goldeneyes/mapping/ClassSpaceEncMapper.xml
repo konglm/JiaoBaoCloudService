@@ -139,4 +139,16 @@
       EncOrder = #{encorder,jdbcType=INTEGER}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  
+   <!-- 获取某条班级空间附件列表 -->
+  <select id="getClassSpaceEncById" resultType="com.goldeneyes.pojo.ClassSpaceEnc">
+  	select ce.EncType,ce.EncName,ce.EncAddr,ce.EncImgAddr,ce.PublisherId,ce.PublishDate 
+  	from ClassSpaceEnc ce 
+  	where ce.NoteId = #{0} order by ce.EncOrder
+  </select>
+  <!-- 删除某班级空间的附件 -->
+  <delete id="deleteByNoteId" parameterType="java.lang.Integer" >
+    delete from ClassSpaceEnc
+    where NoteId = #{noteId,jdbcType=INTEGER}
+  </delete>
 </mapper>

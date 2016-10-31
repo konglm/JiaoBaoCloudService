@@ -103,4 +103,61 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  
+  <!-- 获取所有班级空间的信息 -->
+  <select id="getAllClassSpace" resultType="com.goldeneyes.pojo.ClassSpace">
+  	select TabId, ClassId, MsgContent, PublisherId, PublishDate 
+  	from ClassSpace where Status = 1 order by PublishDate desc
+  </select>
+  
+  <!-- 取班级空间表的最大ID+1 -->
+  <select id="getMaxId" resultType="java.lang.Integer">
+  	select MAX(c.TabId) + 1 from ClassSpace c
+  </select>
+  
+  <!-- 获取用户未读班级空间条数 -->
+  <select id="getNoReadClassSpacesCntByUser" resultType="java.lang.Integer">
+  	select COUNT(c.TabId) 
+  	from SpaceContentStatus ss,ClassSpace c 
+  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  </select>
+  <!-- 获取用户未读班级空间列表 -->
+  <select id="getNoReadClassSpacesByUser" resultType="com.goldeneyes.pojo.ClassSpace">
+  	select c.ClassId,c.MsgContent,c.PublisherId,c.PublishDate 
+  	from SpaceContentStatus ss,ClassSpace c 
+  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  	order by c.PublishDate desc
+  </select>
+  <!-- 获取用户某条班级空间是否点赞 -->
+  <select id="getIsLikeClassSpaceByUser" resultType="java.lang.Integer">
+  	select count(ss.IsLike) likeCnt 
+  	from SpaceContentStatus ss 
+	where ss.SpaceType=1 and ss.SpaceId = #{0} and ss.UserId = #{1}
+  </select>
+  <!-- 获取班级空间所有点赞用户 -->
+  <select id="getIsLikeUsersByClassSpace" resultType="java.lang.Integer">
+  	select ss.UserId 
+  	from SpaceContentStatus ss 
+  	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
+  </select>
+  <!-- 获取某学生班级空间列表 -->
+  <select id="getClassSpacesByClass" resultType="com.goldeneyes.pojo.ClassSpace">
+  	select c.TabId,c.MsgContent,c.PublisherId,c.PublishDate 
+  	from ClassSpace c 
+  	where c.Status = 1 and c.ClassId = #{0}
+	order by c.PublishDate desc
+  </select>
+  <!-- 获取某条班级空间信息 -->
+  <select id="getClassSpaceById" resultType="com.goldeneyes.pojo.ClassSpace">
+  	select c.TabId,c.ClassId,c.MsgContent,c.PublisherId,c.PublishDate 
+  	from ClassSpace c 
+  	where c.Status = 1 and c.TabId = #{0}
+  </select>
+  <!-- 屏蔽某学生某班级空间信息 -->
+  <update id="offClassSpaceByClass" parameterType="com.goldeneyes.pojo.ClassSpace" >
+    update ClassSpace
+    set 
+      Status = 0
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
 </mapper>

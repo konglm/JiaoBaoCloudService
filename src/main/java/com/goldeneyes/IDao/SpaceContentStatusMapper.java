@@ -32,4 +32,22 @@ public interface SpaceContentStatusMapper {
      * @return
      */
     int deleteByNoteId(int noteId);
+    /**
+     * 修改某用户某班级空间阅读状态为已读
+     * @param record
+     * @return
+     */
+    int setClassSpaceReadByUser(SpaceContentStatus record);
+    /**
+     * 新增某用户某班级空间点赞状态为点赞
+     * @param record
+     * @return
+     */
+    int setClassSpaceLikeByUser(SpaceContentStatus record);
+    /**
+     * 删除某班级空间的阅读状态
+     * @param ClassSpaceId
+     * @return
+     */
+    int deleteByClassSpaceId(int ClassSpaceId);
 }

@@ -149,4 +149,28 @@
     where SpaceType = 1
     and SpaceId = #{noteId,jdbcType=INTEGER}
   </delete>
+  <!-- 修改某用户某班级空间阅读状态为已读 -->
+  <update id="setClassSpaceReadByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+  	update SpaceContentStatus
+    set IsRead = 1,
+      ReadDate = getdate()
+    where UserId = #{userid,jdbcType=INTEGER}
+    and SpaceType = #{spacetype,jdbcType=TINYINT}
+    and SpaceId = #{spaceid,jdbcType=INTEGER}
+  </update> 
+  <!-- 新增某用户某班级空间点赞状态为点赞 -->
+  <update id="setClassSpaceLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
+  	update SpaceContentStatus
+    set IsLike = 1,
+      LikeDate = getdate()
+    where UserId = #{userid,jdbcType=INTEGER}
+    and SpaceType = #{spacetype,jdbcType=TINYINT}
+    and SpaceId = #{spaceid,jdbcType=INTEGER}
+  </update> 
+  <!-- 删除某班级空间的阅读状态 -->
+  <delete id="deleteByClassSpaceId" parameterType="java.lang.Integer" >
+    delete from SpaceContentStatus
+    where SpaceType = 1
+    and SpaceId = #{ClassSpaceId,jdbcType=INTEGER}
+  </delete>
 </mapper>

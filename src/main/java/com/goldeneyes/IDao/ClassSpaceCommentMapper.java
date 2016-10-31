@@ -1,5 +1,7 @@
 package com.goldeneyes.IDao;
 
+import java.util.List;
+
 import com.goldeneyes.pojo.ClassSpaceComment;
 
 public interface ClassSpaceCommentMapper {
@@ -14,4 +16,34 @@ public interface ClassSpaceCommentMapper {
     int updateByPrimaryKeySelective(ClassSpaceComment record);
 
     int updateByPrimaryKey(ClassSpaceComment record);
+    /**
+	 * 获取班级空间所有评论
+	 * @param ClassSpaceId
+	 * @return
+	 */
+	List<ClassSpaceComment> getClassSpaceCommentsByUser(int ClassSpaceId);
+	/**
+	 * 获取用户班级空间所有未读评论回复条数
+	 * @param userId
+	 * @return
+	 */
+	int getClassSpaceCommentReplysCntByUser(int userId);
+	/**
+	 * 获取用户班级空间所有未读评论回复列表
+	 * @param userId
+	 * @return
+	 */
+	List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId);
+	/**
+	 * 修改某用户某班级空间评论回复查看状态
+	 * @param record
+	 * @return
+	 */
+	int setClassSpaceCommentReplyByUser(ClassSpaceComment record);
+	/**
+	 * 删除某班级空间的评论
+	 * @param ClassSpaceId
+	 * @return
+	 */
+	int deleteByClassSpaceId(int ClassSpaceId);
 }
