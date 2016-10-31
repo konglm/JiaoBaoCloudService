@@ -39,7 +39,7 @@ public interface UserSpaceMsgMapper {
    	 * @param record
    	 * @return
    	 */
-   	int setUserSpaceMsgReplyByUser(UserSpaceMsg record);
+   	int setUserSpaceMsgReplyById(UserSpaceMsg record);
    	/**
    	 * 删除某用户空间的留言
    	 * @param userSpaceId

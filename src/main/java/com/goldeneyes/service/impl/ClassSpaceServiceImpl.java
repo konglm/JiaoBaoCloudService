@@ -91,9 +91,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpaceComment> getClassSpaceCommentsByUser(int classSpaceId) throws Exception {
+	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentsByUser(classSpaceId);
+		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentsById(classSpaceId);
 		return classSpaceComments;
 	}
 
@@ -101,9 +101,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Integer> getIsLikeUsersByClassSpace(int classSpaceId) throws Exception {
+	public List<Integer> getIsLikeUsersById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		List<Integer> isLikers = classSpaceMapper.getIsLikeUsersByClassSpace(classSpaceId);
+		List<Integer> isLikers = classSpaceMapper.getIsLikeUsersById(classSpaceId);
 		return isLikers;
 	}
 
@@ -309,12 +309,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setClassSpaceCommentReplyByUser(int classSpaceCommentId) throws Exception {
+	public int setClassSpaceCommentReplyById(int classSpaceCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
 		classSpaceComment.setTabid(classSpaceCommentId);
 		try {
-			classSpaceCommentMapper.setClassSpaceCommentReplyByUser(classSpaceComment);
+			classSpaceCommentMapper.setClassSpaceCommentReplyById(classSpaceComment);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -325,12 +325,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int offClassSpaceByClass(int classSpaceId) throws Exception {
+	public int offClassSpaceById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpace classSpace = new ClassSpace();
 		classSpace.setTabid(classSpaceId);
 		try {
-			classSpaceMapper.offClassSpaceByClass(classSpace);
+			classSpaceMapper.offClassSpaceById(classSpace);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -341,7 +341,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int delClassSpaceByClass(int classSpaceId) throws Exception {
+	public int delClassSpaceById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			classSpaceMapper.deleteByPrimaryKey(classSpaceId);
@@ -358,7 +358,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int delClassSpaceCommentByClass(int classSpaceCommentId) throws Exception {
+	public int delClassSpaceCommentById(int classSpaceCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			classSpaceCommentMapper.deleteByPrimaryKey(classSpaceCommentId);

@@ -140,7 +140,7 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
   <!-- 获取用户空间所有评论 -->
-  <select id="getUserSpaceCommentsByUser" resultType="com.goldeneyes.pojo.UserSpaceComment">
+  <select id="getUserSpaceCommentsById" resultType="com.goldeneyes.pojo.UserSpaceComment">
   	select uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
   	from UserSpaceComment uc 
   	where uc.Status = 1 and uc.UserSpaceId = #{0}

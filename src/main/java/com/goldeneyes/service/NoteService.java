@@ -61,7 +61,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return
 	 */
-	public List<Integer> getIsLikeUsersByNote(int noteId) throws Exception;
+	public List<Integer> getIsLikeUsersById(int noteId) throws Exception;
 	/**
 	 * 获取用户点到记事所有未读评论回复条数
 	 * @param userId
@@ -157,23 +157,23 @@ public interface NoteService {
 	 * @param noteCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setNoteCommentReplyByUser(int noteCommentId) throws Exception;
+	public int setNoteCommentReplyById(int noteCommentId) throws Exception;
 	/**
 	 * 屏蔽某点到记事信息
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offNoteByStudent(int noteId) throws Exception;
+	public int offNoteById(int noteId) throws Exception;
 	/**
 	 * 删除某学生某点到记事（附件一起删除）
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delNoteByStudent(int noteId) throws Exception;
+	public int delNoteById(int noteId) throws Exception;
 	/**
 	 * 删除某用户某点到记事评论
 	 * @param noteCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delNoteCommentByStudent(int noteCommentId) throws Exception;
+	public int delNoteCommentById(int noteCommentId) throws Exception;
 }

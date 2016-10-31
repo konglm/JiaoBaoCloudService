@@ -50,7 +50,7 @@ public interface NoteMapper {
 	 * @param noteId
 	 * @return
 	 */
-	List<Integer> getIsLikeUsersByNote(int noteId);
+	List<Integer> getIsLikeUsersById(int noteId);
 	/**
 	 * 获取某学生点到记事列表
 	 * @param studentId
@@ -68,5 +68,5 @@ public interface NoteMapper {
 	 * @param record
 	 * @return
 	 */
-	int offNoteByStudent(Note record);
+	int offNoteById(Note record);
 }

@@ -21,7 +21,7 @@ public interface ClassSpaceCommentMapper {
 	 * @param classSpaceId
 	 * @return
 	 */
-	List<ClassSpaceComment> getClassSpaceCommentsByUser(int classSpaceId);
+	List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId);
 	/**
 	 * 获取用户班级空间所有未读评论回复条数
 	 * @param userId
@@ -39,7 +39,7 @@ public interface ClassSpaceCommentMapper {
 	 * @param record
 	 * @return
 	 */
-	int setClassSpaceCommentReplyByUser(ClassSpaceComment record);
+	int setClassSpaceCommentReplyById(ClassSpaceComment record);
 	/**
 	 * 删除某班级空间的评论
 	 * @param classSpaceId

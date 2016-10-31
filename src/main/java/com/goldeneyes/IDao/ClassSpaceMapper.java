@@ -51,7 +51,7 @@ public interface ClassSpaceMapper {
 	 * @param classSpaceId
 	 * @return
 	 */
-	List<Integer> getIsLikeUsersByClassSpace(int classSpaceId);
+	List<Integer> getIsLikeUsersById(int classSpaceId);
 	/**
 	 * 获取某学生班级空间列表
 	 * @param studentId
@@ -69,5 +69,5 @@ public interface ClassSpaceMapper {
 	 * @param record
 	 * @return
 	 */
-	int offClassSpaceByClass(ClassSpace record);
+	int offClassSpaceById(ClassSpace record);
 }

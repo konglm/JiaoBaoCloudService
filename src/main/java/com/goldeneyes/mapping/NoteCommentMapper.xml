@@ -160,7 +160,7 @@
 	order by nc.CommentDate desc
   </select>
   <!-- 修改某用户某点到记事评论回复查看状态 -->
-  <update id="setNoteCommentReplyByUser" parameterType="com.goldeneyes.pojo.NoteComment" >
+  <update id="setNoteCommentReplyById" parameterType="com.goldeneyes.pojo.NoteComment" >
     update NoteComment
     set 
       ReplyStatus = 1,

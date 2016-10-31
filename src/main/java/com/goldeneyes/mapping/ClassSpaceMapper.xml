@@ -135,7 +135,7 @@
 	where ss.SpaceType=1 and ss.SpaceId = #{0} and ss.UserId = #{1}
   </select>
   <!-- 获取班级空间所有点赞用户 -->
-  <select id="getIsLikeUsersByClassSpace" resultType="java.lang.Integer">
+  <select id="getIsLikeUsersById" resultType="java.lang.Integer">
   	select ss.UserId 
   	from SpaceContentStatus ss 
   	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
@@ -154,7 +154,7 @@
   	where c.Status = 1 and c.TabId = #{0}
   </select>
   <!-- 屏蔽某学生某班级空间信息 -->
-  <update id="offClassSpaceByClass" parameterType="com.goldeneyes.pojo.ClassSpace" >
+  <update id="offClassSpaceById" parameterType="com.goldeneyes.pojo.ClassSpace" >
     update ClassSpace
     set 
       Status = 0

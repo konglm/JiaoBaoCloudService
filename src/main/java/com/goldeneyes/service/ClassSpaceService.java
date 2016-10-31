@@ -54,13 +54,13 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return
 	 */
-	public List<ClassSpaceComment> getClassSpaceCommentsByUser(int classSpaceId) throws Exception;
+	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId) throws Exception;
 	/**
 	 * 获取班级空间所有点赞用户
 	 * @param classSpaceId
 	 * @return
 	 */
-	public List<Integer> getIsLikeUsersByClassSpace(int classSpaceId) throws Exception;
+	public List<Integer> getIsLikeUsersById(int classSpaceId) throws Exception;
 	/**
 	 * 获取用户班级空间所有未读评论回复条数
 	 * @param userId
@@ -156,23 +156,23 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceCommentReplyByUser(int classSpaceCommentId) throws Exception;
+	public int setClassSpaceCommentReplyById(int classSpaceCommentId) throws Exception;
 	/**
 	 * 屏蔽某学生某班级空间信息
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offClassSpaceByClass(int classSpaceId) throws Exception;
+	public int offClassSpaceById(int classSpaceId) throws Exception;
 	/**
 	 * 删除某学生某班级空间（附件一起删除）
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delClassSpaceByClass(int classSpaceId) throws Exception;
+	public int delClassSpaceById(int classSpaceId) throws Exception;
 	/**
 	 * 删除某用户某班级空间评论
 	 * @param classSpaceCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delClassSpaceCommentByClass(int classSpaceCommentId) throws Exception;
+	public int delClassSpaceCommentById(int classSpaceCommentId) throws Exception;
 }

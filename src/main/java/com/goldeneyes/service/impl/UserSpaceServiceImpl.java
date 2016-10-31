@@ -95,9 +95,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceComment> getUserSpaceCommentsByUser(int userSpaceId) throws Exception {
+	public List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentsByUser(userSpaceId);
+		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentsById(userSpaceId);
 		return userSpaceComments;
 	}
 
@@ -105,9 +105,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Integer> getIsLikeUsersByUserSpace(int userSpaceId) throws Exception {
+	public List<Integer> getIsLikeUsersById(int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		List<Integer> isLikers = userSpaceMapper.getIsLikeUsersByUserSpace(userSpaceId);
+		List<Integer> isLikers = userSpaceMapper.getIsLikeUsersById(userSpaceId);
 		return isLikers;
 	}
 
@@ -329,12 +329,12 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int offUserSpaceByUser(int userSpaceId) throws Exception {
+	public int offUserSpaceById(int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpace userSpace = new UserSpace();
 		userSpace.setTabid(userSpaceId);
 		try {
-			userSpaceMapper.offUserSpaceByUser(userSpace);
+			userSpaceMapper.offUserSpaceById(userSpace);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -345,7 +345,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int delUserSpaceByUser(int userSpaceId) throws Exception {
+	public int delUserSpaceById(int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			userSpaceMapper.deleteByPrimaryKey(userSpaceId);
@@ -362,7 +362,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int delUserSpaceCommentByUser(int userSpaceCommentId) throws Exception {
+	public int delUserSpaceCommentById(int userSpaceCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			userSpaceCommentMapper.deleteByPrimaryKey(userSpaceCommentId);
@@ -450,12 +450,12 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 *  @author konglm
 	 */
 	@Override
-	public int setUserSpaceMsgReplyByUser(int userSpaceMsgId) throws Exception {
+	public int setUserSpaceMsgReplyById(int userSpaceMsgId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(userSpaceMsgId);
 		try {
-			userSpaceMsgMapper.setUserSpaceMsgReplyByUser(userSpaceMsg);
+			userSpaceMsgMapper.setUserSpaceMsgReplyById(userSpaceMsg);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -466,7 +466,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 *  @author konglm
 	 */
 	@Override
-	public int delUserSpaceMsgByUser(int userSpaceMsgId) throws Exception {
+	public int delUserSpaceMsgById(int userSpaceMsgId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			userSpaceMsgMapper.deleteByPrimaryKey(userSpaceMsgId);

@@ -141,7 +141,7 @@
   </update>
   
   <!-- 获取班级空间所有评论 -->
-  <select id="getClassSpaceCommentsByUser" resultType="com.goldeneyes.pojo.ClassSpaceComment">
+  <select id="getClassSpaceCommentsById" resultType="com.goldeneyes.pojo.ClassSpaceComment">
   	select cc.UserId,cc.CommentContent,cc.ReplyId,cc.CommentDate 
   	from ClassSpaceComment cc 
   	where cc.Status = 1 and cc.ClassSpaceId = #{0}
@@ -161,12 +161,12 @@
 	order by cc.CommentDate desc
   </select>
   <!-- 修改某用户某班级空间评论回复查看状态 -->
-  <update id="setClassSpaceCommentReplyByUser" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
+  <update id="setClassSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
     update ClassSpaceComment
     set 
       ReplyStatus = 1,
       ReplyDate = getdate()
-    where TabId = #{tabid,jdbcType=INTEGER}
+    where TabId = #{tabid,jdbcType=INTEGER} 
   </update>
   <!-- 删除某班级空间的评论 -->
   <delete id="deleteByClassSpaceId" parameterType="java.lang.Integer" >

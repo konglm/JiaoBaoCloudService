@@ -101,9 +101,9 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Integer> getIsLikeUsersByNote(int noteId) throws Exception {
+	public List<Integer> getIsLikeUsersById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
-		List<Integer> isLikers = noteMapper.getIsLikeUsersByNote(noteId);
+		List<Integer> isLikers = noteMapper.getIsLikeUsersById(noteId);
 		return isLikers;
 	}
 
@@ -309,12 +309,12 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int setNoteCommentReplyByUser(int noteCommentId) throws Exception {
+	public int setNoteCommentReplyById(int noteCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setTabid(noteCommentId);
 		try {
-			noteCommentMapper.setNoteCommentReplyByUser(noteComment);
+			noteCommentMapper.setNoteCommentReplyById(noteComment);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -325,12 +325,12 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int offNoteByStudent(int noteId) throws Exception {
+	public int offNoteById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		Note note = new Note();
 		note.setTabid(noteId);
 		try {
-			noteMapper.offNoteByStudent(note);
+			noteMapper.offNoteById(note);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -341,7 +341,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int delNoteByStudent(int noteId) throws Exception {
+	public int delNoteById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			noteMapper.deleteByPrimaryKey(noteId);
@@ -358,7 +358,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int delNoteCommentByStudent(int noteCommentId) throws Exception {
+	public int delNoteCommentById(int noteCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		try{
 			noteCommentMapper.deleteByPrimaryKey(noteCommentId);

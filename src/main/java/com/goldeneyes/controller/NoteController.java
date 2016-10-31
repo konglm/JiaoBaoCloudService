@@ -238,8 +238,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersByNote.do")
-	public void getIsLikeUsersByNote(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getIsLikeUsersById.do")
+	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -253,7 +253,7 @@ public class NoteController {
 			}
 			List<Integer> userIds = new ArrayList<Integer>();
 			try {
-				userIds = noteService.getIsLikeUsersByNote(noteId);
+				userIds = noteService.getIsLikeUsersById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -805,8 +805,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setNoteCommentReplyByUser.do")
-	public void setNoteCommentReplyByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/setNoteCommentReplyById.do")
+	public void setNoteCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -821,7 +821,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.setNoteCommentReplyByUser(noteCommentId);
+				success = noteService.setNoteCommentReplyById(noteCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -846,8 +846,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offNoteByStudent.do")
-	public void offNoteByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/offNoteById.do")
+	public void offNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -862,7 +862,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.offNoteByStudent(noteId);
+				success = noteService.offNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -887,8 +887,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delNoteByStudent.do")
-	public void delNoteByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/delNoteById.do")
+	public void delNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -903,7 +903,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.delNoteByStudent(noteId);
+				success = noteService.delNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -928,8 +928,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delNoteCommentByStudent.do")
-	public void delNoteCommentByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/delNoteCommentById.do")
+	public void delNoteCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -944,7 +944,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.delNoteCommentByStudent(noteCommentId);
+				success = noteService.delNoteCommentById(noteCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

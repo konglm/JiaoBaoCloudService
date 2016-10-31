@@ -21,7 +21,7 @@ public interface UserSpaceCommentMapper {
 	 * @param userSpaceId
 	 * @return
 	 */
-	List<UserSpaceComment> getUserSpaceCommentsByUser(int userSpaceId);
+	List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId);
 	/**
 	 * 获取用户用户空间所有未读评论回复条数
 	 * @param userId

@@ -39,7 +39,7 @@ public interface NoteCommentMapper {
 	 * @param record
 	 * @return
 	 */
-	int setNoteCommentReplyByUser(NoteComment record);
+	int setNoteCommentReplyById(NoteComment record);
 	/**
 	 * 删除某点到记事的评论
 	 * @param noteId

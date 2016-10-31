@@ -41,16 +41,16 @@ public interface UserSpaceMapper {
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
 	 * @param spaceType
-	 * @param noteId
+	 * @param userSpaceId
 	 * @return
 	 */
-	int getIsLikeUserSpaceByUser(int userId,int spaceType,int noteId);
+	int getIsLikeUserSpaceByUser(int userId,int spaceType,int userSpaceId);
 	/**
 	 * 获取用户空间所有点赞用户
-	 * @param noteId
+	 * @param userSpaceId
 	 * @return
 	 */
-	List<Integer> getIsLikeUsersByUserSpace(int noteId);
+	List<Integer> getIsLikeUsersById(int userSpaceId);
 	/**
 	 * 获取某学生用户空间列表
 	 * @param studentId
@@ -59,14 +59,14 @@ public interface UserSpaceMapper {
 	List<UserSpace> getUserSpacesByUser(int userId);
 	/**
 	 * 获取某条用户空间信息
-	 * @param noteId
+	 * @param userSpaceId
 	 * @return
 	 */
-	UserSpace getUserSpaceById(int noteId);
+	UserSpace getUserSpaceById(int userSpaceId);
 	/**
 	 * 屏蔽某学生某用户空间信息
 	 * @param record
 	 * @return
 	 */
-	int offUserSpaceByUser(UserSpace record);
+	int offUserSpaceById(UserSpace record);
 }

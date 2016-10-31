@@ -195,8 +195,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceCommentsByUser.do")
-	public void getClassSpaceCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getClassSpaceCommentsById.do")
+	public void getClassSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -210,7 +210,7 @@ public class ClassSpaceController {
 			}
 			List<ClassSpaceComment> classSpaceComments = new ArrayList<ClassSpaceComment>();
 			try {
-				classSpaceComments = classSpaceService.getClassSpaceCommentsByUser(classSpaceId);
+				classSpaceComments = classSpaceService.getClassSpaceCommentsById(classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -238,8 +238,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersByClassSpace.do")
-	public void getIsLikeUsersByClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getIsLikeUsersById.do")
+	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -253,7 +253,7 @@ public class ClassSpaceController {
 			}
 			List<Integer> userIds = new ArrayList<Integer>();
 			try {
-				userIds = classSpaceService.getIsLikeUsersByClassSpace(classSpaceId);
+				userIds = classSpaceService.getIsLikeUsersById(classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -805,8 +805,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setClassSpaceCommentReplyByUser.do")
-	public void setClassSpaceCommentReplyByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/setClassSpaceCommentReplyById.do")
+	public void setClassSpaceCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -821,7 +821,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.setClassSpaceCommentReplyByUser(classSpaceCommentId);
+				success = classSpaceService.setClassSpaceCommentReplyById(classSpaceCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -846,8 +846,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offClassSpaceByClass.do")
-	public void offClassSpaceByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/offClassSpaceById.do")
+	public void offClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -862,7 +862,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.offClassSpaceByClass(classSpaceId);
+				success = classSpaceService.offClassSpaceById(classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -887,8 +887,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delClassSpaceByClass.do")
-	public void delClassSpaceByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/delClassSpaceById.do")
+	public void delClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -903,7 +903,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.delClassSpaceByClass(classSpaceId);
+				success = classSpaceService.delClassSpaceById(classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -928,8 +928,8 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delClassSpaceCommentByClass.do")
-	public void delClassSpaceCommentByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/delClassSpaceCommentById.do")
+	public void delClassSpaceCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("classSpaceCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -944,7 +944,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.delClassSpaceCommentByClass(classSpaceCommentId);
+				success = classSpaceService.delClassSpaceCommentById(classSpaceCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
