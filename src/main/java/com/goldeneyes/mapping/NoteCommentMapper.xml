@@ -154,7 +154,7 @@
   </select>
   <!-- 获取用户点到记事所有未读评论回复列表 -->
   <select id="getNoteCommentReplysByUser" resultType="com.goldeneyes.pojo.NoteComment">
-  	select nc.UserId,nc.NoteId,nc.CommentContent
+  	select nc.TabId,nc.UserId,nc.NoteId,nc.CommentContent
   	from NoteComment nc 
   	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.ReplyId = #{0}
 	order by nc.CommentDate desc

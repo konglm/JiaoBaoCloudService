@@ -145,7 +145,7 @@ public interface UserSpaceService {
 	 */
 	public int setUserSpaceReadByUser(int userId,int spaceType,int userSpaceId) throws Exception;
 	/**
-	 * 新增某用户某用户空间点赞状态为点赞
+	 * 修改某用户某用户空间点赞状态为点赞
 	 * @param userId
 	 * @param spaceType
 	 * @param userSpaceId

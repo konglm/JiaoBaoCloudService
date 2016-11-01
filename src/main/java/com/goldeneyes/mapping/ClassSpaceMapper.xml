@@ -123,7 +123,7 @@
   </select>
   <!-- 获取用户未读班级空间列表 -->
   <select id="getNoReadClassSpacesByUser" resultType="com.goldeneyes.pojo.ClassSpace">
-  	select c.ClassId,c.MsgContent,c.PublisherId,c.PublishDate 
+  	select c.TabId,c.ClassId,c.MsgContent,c.PublisherId,c.PublishDate 
   	from SpaceContentStatus ss,ClassSpace c 
   	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
   	order by c.PublishDate desc

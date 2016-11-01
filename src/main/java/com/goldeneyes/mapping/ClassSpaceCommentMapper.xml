@@ -155,7 +155,7 @@
   </select>
   <!-- 获取用户班级空间所有未读评论回复列表 -->
   <select id="getClassSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.ClassSpaceComment">
-  	select cc.UserId,cc.ClassSpaceId,cc.CommentContent
+  	select cc.TabId,cc.UserId,cc.ClassSpaceId,cc.CommentContent
   	from ClassSpaceComment cc 
   	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
 	order by cc.CommentDate desc

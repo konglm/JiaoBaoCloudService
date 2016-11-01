@@ -40,7 +40,7 @@ import net.sf.json.JSONArray;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/note")
 public class NoteController {
 	@Resource
 	NoteService noteService;
@@ -137,6 +137,7 @@ public class NoteController {
 			}
 			for (Note note : notes) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", note.getTabid());
 				jsonobj.put("StudentId", note.getStudentid());
 				jsonobj.put("MsgContent", note.getMsgcontent());
 				jsonobj.put("PublisherId", note.getPublisherid());
@@ -195,7 +196,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentsByUser.do")
+	@RequestMapping("/getNoteCommentsById.do")
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteId") == null) {
@@ -337,6 +338,7 @@ public class NoteController {
 
 			for (NoteComment noteComment : noteComments) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", noteComment.getTabid());
 				jsonobj.put("UserId", noteComment.getUserid());
 				jsonobj.put("CommentContent", noteComment.getCommentcontent());
 				jsonobj.put("NoteId", noteComment.getNoteid());
@@ -378,6 +380,7 @@ public class NoteController {
 
 			for (Note note : notes) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", note.getTabid());
 				jsonobj.put("StudentId", note.getStudentid());
 				jsonobj.put("MsgContent", note.getMsgcontent());
 				jsonobj.put("PublisherId", note.getPublisherid());
@@ -756,7 +759,7 @@ public class NoteController {
 	}
 
 	/**
-	 * 新增某用户某点到记事点赞状态为点赞
+	 * 修改某用户某点到记事点赞状态为点赞
 	 * 
 	 * @param request
 	 * @param response

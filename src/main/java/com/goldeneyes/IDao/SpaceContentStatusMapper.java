@@ -21,7 +21,7 @@ public interface SpaceContentStatusMapper {
      */
     int setNoteReadByUser(SpaceContentStatus record);
     /**
-     * 新增某用户某点到记事点赞状态为点赞
+     * 修改某用户某点到记事点赞状态为点赞
      * @param record
      * @return
      */
@@ -39,7 +39,7 @@ public interface SpaceContentStatusMapper {
      */
     int setClassSpaceReadByUser(SpaceContentStatus record);
     /**
-     * 新增某用户某班级空间点赞状态为点赞
+     * 修改某用户某班级空间点赞状态为点赞
      * @param record
      * @return
      */
@@ -57,7 +57,7 @@ public interface SpaceContentStatusMapper {
      */
     int setUserSpaceReadByUser(SpaceContentStatus record);
     /**
-     * 新增某用户某用户空间点赞状态为点赞
+     * 修改某用户某用户空间点赞状态为点赞
      * @param record
      * @return
      */

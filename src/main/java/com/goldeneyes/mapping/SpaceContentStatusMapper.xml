@@ -134,7 +134,7 @@
     and SpaceType = #{spacetype,jdbcType=TINYINT}
     and SpaceId = #{spaceid,jdbcType=INTEGER}
   </update> 
-  <!-- 新增某用户某点到记事点赞状态为点赞 -->
+  <!-- 修改某用户某点到记事点赞状态为点赞 -->
   <update id="setNoteLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
   	update SpaceContentStatus
     set IsLike = 1,
@@ -159,7 +159,7 @@
     and SpaceType = #{spacetype,jdbcType=TINYINT}
     and SpaceId = #{spaceid,jdbcType=INTEGER}
   </update> 
-  <!-- 新增某用户某班级空间点赞状态为点赞 -->
+  <!-- 修改某用户某班级空间点赞状态为点赞 -->
   <update id="setClassSpaceLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
   	update SpaceContentStatus
     set IsLike = 1,
@@ -184,7 +184,7 @@
     and SpaceType = #{spacetype,jdbcType=TINYINT}
     and SpaceId = #{spaceid,jdbcType=INTEGER}
   </update> 
-  <!-- 新增某用户某用户空间点赞状态为点赞 -->
+  <!-- 修改某用户某用户空间点赞状态为点赞 -->
   <update id="setUserSpaceLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
   	update SpaceContentStatus
     set IsLike = 1,

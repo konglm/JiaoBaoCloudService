@@ -153,7 +153,7 @@
   </select>
   <!-- 获取用户用户空间所有未读留言回复列表 -->
   <select id="getUserSpaceMsgReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceMsg">
-  	select um.UserId,um.UserSpaceId,um.MsgContent
+  	select um.TabId,um.UserId,um.UserSpaceId,um.MsgContent
   	from UserSpaceMsg um 
   	where um.Status = 1 and um.ReplyStatus = 0 and um.ReplyId = #{0}
 	order by um.MsgDate desc

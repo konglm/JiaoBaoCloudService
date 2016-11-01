@@ -154,7 +154,7 @@
   </select>
   <!-- 获取用户用户空间所有未读评论回复列表 -->
   <select id="getUserSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceComment">
-  	select uc.UserId,uc.UserSpaceId,uc.CommentContent
+  	select uc.TabId,uc.UserId,uc.UserSpaceId,uc.CommentContent
   	from UserSpaceComment uc 
   	where uc.Status = 1 and uc.ReplyStatus = 0 and uc.ReplyId = #{0}
 	order by uc.CommentDate desc

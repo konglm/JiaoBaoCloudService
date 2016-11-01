@@ -122,7 +122,7 @@
   </select>
   <!-- 获取用户未读用户空间列表 -->
   <select id="getNoReadUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
-  	select u.UserId,u.MsgContent,u.PublisherId,u.PublishDate 
+  	select u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate 
   	from SpaceContentStatus ss,UserSpace u 
   	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
   	order by u.PublishDate desc

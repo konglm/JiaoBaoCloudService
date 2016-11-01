@@ -41,7 +41,7 @@ import net.sf.json.JSONObject;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/userSpace")
 public class UserSpaceController {
 	@Resource
 	UserSpaceService userSpaceService;
@@ -138,6 +138,7 @@ public class UserSpaceController {
 			}
 			for (UserSpace userSpace : userSpaces) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpace.getTabid());
 				jsonobj.put("UserId", userSpace.getUserid());
 				jsonobj.put("MsgContent", userSpace.getMsgcontent());
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
@@ -338,6 +339,7 @@ public class UserSpaceController {
 
 			for (UserSpaceComment userSpaceComment : userSpaceComments) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpaceComment.getTabid());
 				jsonobj.put("UserId", userSpaceComment.getUserid());
 				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
 				jsonobj.put("UserSpaceId", userSpaceComment.getUserspaceid());
@@ -379,6 +381,7 @@ public class UserSpaceController {
 
 			for (UserSpace userSpace : userSpaces) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpace.getTabid());
 				jsonobj.put("UserId", userSpace.getUserid());
 				jsonobj.put("MsgContent", userSpace.getMsgcontent());
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
@@ -757,7 +760,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 新增某用户某用户空间点赞状态为点赞
+	 * 修改某用户某用户空间点赞状态为点赞
 	 * 
 	 * @param request
 	 * @param response
@@ -1072,6 +1075,7 @@ public class UserSpaceController {
 
 			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpaceMsg.getTabid());
 				jsonobj.put("UserId", userSpaceMsg.getUserid());
 				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
 				jsonobj.put("UserSpaceId", userSpaceMsg.getUserspaceid());

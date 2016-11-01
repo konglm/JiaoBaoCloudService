@@ -122,7 +122,7 @@
   </select>
   <!-- 获取用户未读点到记事列表 -->
   <select id="getNoReadNotesByUser" resultType="com.goldeneyes.pojo.Note">
-  	select n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate 
+  	select n.TabId,n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate 
   	from SpaceContentStatus ss,Note n 
   	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
   	order by n.PublishDate desc

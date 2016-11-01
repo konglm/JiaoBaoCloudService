@@ -144,7 +144,7 @@ public interface ClassSpaceService {
 	 */
 	public int setClassSpaceReadByUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
-	 * 新增某用户某班级空间点赞状态为点赞
+	 * 修改某用户某班级空间点赞状态为点赞
 	 * @param userId
 	 * @param spaceType
 	 * @param classSpaceId

@@ -145,7 +145,7 @@ public interface NoteService {
 	 */
 	public int setNoteReadByUser(int userId,int spaceType,int noteId) throws Exception;
 	/**
-	 * 新增某用户某点到记事点赞状态为点赞
+	 * 修改某用户某点到记事点赞状态为点赞
 	 * @param userId
 	 * @param spaceType
 	 * @param noteId
