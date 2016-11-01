@@ -160,7 +160,7 @@
 	order by uc.CommentDate desc
   </select>
   <!-- 修改某用户空间评论回复查看状态 -->
-  <update id="setUserSpaceCommentReplyByUser" parameterType="com.goldeneyes.pojo.UserSpaceComment" >
+  <update id="setUserSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.UserSpaceComment" >
     update UserSpaceComment
     set 
       ReplyStatus = 1,

@@ -26,11 +26,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
-    insert into UserSpaceMsg (TabId, UserSpaceId, UserId, 
+    insert into UserSpaceMsg (UserSpaceId, UserId, 
       MsgContent, ReplyId, MsgDate, 
       ReplyStatus, ReplyDate, Status
       )
-    values (#{tabid,jdbcType=INTEGER}, #{userspaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+    values (#{userspaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
       #{msgcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, #{msgdate,jdbcType=TIMESTAMP}, 
       #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
       )
@@ -159,7 +159,7 @@
 	order by um.MsgDate desc
   </select>
   <!-- 修改某用户空间留言回复查看状态 -->
-  <update id="setUserSpaceMsgReplyByUser" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+  <update id="setUserSpaceMsgReplyById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
     set 
       ReplyStatus = 1,

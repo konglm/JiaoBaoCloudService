@@ -157,7 +157,7 @@ public interface UserSpaceService {
 	 * @param userSpaceCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setUserSpaceCommentReplyByUser(int userSpaceCommentId) throws Exception;
+	public int setUserSpaceCommentReplyById(int userSpaceCommentId) throws Exception;
 	/**
 	 * 屏蔽某用户空间信息
 	 * @param userSpaceId

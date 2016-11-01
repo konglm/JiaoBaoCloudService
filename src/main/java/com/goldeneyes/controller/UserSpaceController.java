@@ -809,8 +809,8 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceCommentReplyByUser.do")
-	public void setUserSpaceCommentReplyByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/setUserSpaceCommentReplyById.do")
+	public void setUserSpaceCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("userSpaceCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -825,7 +825,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.setUserSpaceCommentReplyByUser(userSpaceCommentId);
+				success = userSpaceService.setUserSpaceCommentReplyById(userSpaceCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -973,8 +973,8 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgsByUser.do")
-	public void getUserSpaceMsgsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getUserSpaceMsgsById.do")
+	public void getUserSpaceMsgsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("userSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());

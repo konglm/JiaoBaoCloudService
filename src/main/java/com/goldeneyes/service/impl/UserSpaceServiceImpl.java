@@ -313,12 +313,12 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setUserSpaceCommentReplyByUser(int userSpaceCommentId) throws Exception {
+	public int setUserSpaceCommentReplyById(int userSpaceCommentId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
 		userSpaceComment.setTabid(userSpaceCommentId);
 		try {
-			userSpaceCommentMapper.setUserSpaceCommentReplyByUser(userSpaceComment);
+			userSpaceCommentMapper.setUserSpaceCommentReplyById(userSpaceComment);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -351,6 +351,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 			userSpaceMapper.deleteByPrimaryKey(userSpaceId);
 			userSpaceEncMapper.deleteByUserSpaceId(userSpaceId);
 			userSpaceCommentMapper.deleteByUserSpaceId(userSpaceId);
+			userSpaceMsgMapper.deleteByUserSpaceId(userSpaceId);
 			spaceContentStatusMapper.deleteByUserSpaceId(userSpaceId);
 		} catch(Exception e){
 			return 0;

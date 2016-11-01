@@ -39,7 +39,7 @@ public interface UserSpaceCommentMapper {
 	 * @param record
 	 * @return
 	 */
-	int setUserSpaceCommentReplyByUser(UserSpaceComment record);
+	int setUserSpaceCommentReplyById(UserSpaceComment record);
 	/**
 	 * 删除某用户空间的评论
 	 * @param userSpaceId
