@@ -94,7 +94,7 @@ public class UserSpaceController {
 			}
 			int cnt = 0;
 			try {
-				cnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 1);
+				cnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -130,7 +130,7 @@ public class UserSpaceController {
 			}
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
-				userSpaces = userSpaceService.getNoReadUserSpacesByUser(userId, 1);
+				userSpaces = userSpaceService.getNoReadUserSpacesByUser(userId, 3);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -176,7 +176,7 @@ public class UserSpaceController {
 
 			int isLike = 0;
 			try {
-				isLike = userSpaceService.getIsLikeUserSpaceByUser(userId, 1, userSpaceId);
+				isLike = userSpaceService.getIsLikeUserSpaceByUser(userId, 3, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -698,7 +698,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.sendUserSpaceForUser(userId, 1, userSpaceId);
+				success = userSpaceService.sendUserSpaceForUser(userId, 3, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -741,7 +741,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.setUserSpaceReadByUser(userId, 1, userSpaceId);
+				success = userSpaceService.setUserSpaceReadByUser(userId, 3, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -784,7 +784,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.setUserSpaceLikeByUser(userId, 1, userSpaceId);
+				success = userSpaceService.setUserSpaceLikeByUser(userId, 3, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

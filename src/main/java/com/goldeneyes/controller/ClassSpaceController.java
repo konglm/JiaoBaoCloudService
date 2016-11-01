@@ -93,7 +93,7 @@ public class ClassSpaceController {
 			}
 			int cnt = 0;
 			try {
-				cnt = classSpaceService.getNoReadClassSpacesCntByUser(userId, 1);
+				cnt = classSpaceService.getNoReadClassSpacesCntByUser(userId, 2);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -129,7 +129,7 @@ public class ClassSpaceController {
 			}
 			List<ClassSpace> classSpaces = new ArrayList<ClassSpace>();
 			try {
-				classSpaces = classSpaceService.getNoReadClassSpacesByUser(userId, 1);
+				classSpaces = classSpaceService.getNoReadClassSpacesByUser(userId, 2);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -175,7 +175,7 @@ public class ClassSpaceController {
 
 			int isLike = 0;
 			try {
-				isLike = classSpaceService.getIsLikeClassSpaceByUser(userId, 1, classSpaceId);
+				isLike = classSpaceService.getIsLikeClassSpaceByUser(userId, 2, classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -697,7 +697,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.sendClassSpaceForUser(userId, 1, classSpaceId);
+				success = classSpaceService.sendClassSpaceForUser(userId, 2, classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -740,7 +740,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.setClassSpaceReadByUser(userId, 1, classSpaceId);
+				success = classSpaceService.setClassSpaceReadByUser(userId, 2, classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -783,7 +783,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.setClassSpaceLikeByUser(userId, 1, classSpaceId);
+				success = classSpaceService.setClassSpaceLikeByUser(userId, 2, classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

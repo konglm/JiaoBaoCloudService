@@ -111,33 +111,33 @@
   
   <!-- 取用户空间表的最大ID+1 -->
   <select id="getMaxId" resultType="java.lang.Integer">
-  	select MAX(u.TabId) + 1 from UserSpace u
+  	select isnull(MAX(u.TabId) + 1,1) from UserSpace u
   </select>
   
   <!-- 获取用户未读用户空间条数 -->
   <select id="getNoReadUserSpacesCntByUser" resultType="java.lang.Integer">
   	select COUNT(u.TabId) 
   	from SpaceContentStatus ss,UserSpace u 
-  	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=3 and ss.UserId = #{0}
   </select>
   <!-- 获取用户未读用户空间列表 -->
   <select id="getNoReadUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
   	select u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate 
   	from SpaceContentStatus ss,UserSpace u 
-  	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=3 and ss.UserId = #{0}
   	order by u.PublishDate desc
   </select>
   <!-- 获取用户某条用户空间是否点赞 -->
   <select id="getIsLikeUserSpaceByUser" resultType="java.lang.Integer">
   	select count(ss.IsLike) likeCnt 
   	from SpaceContentStatus ss 
-	where ss.SpaceType=1 and ss.SpaceId = #{0} and ss.UserId = #{1}
+	where ss.SpaceType=#{1} and ss.SpaceId = #{2} and ss.UserId = #{0} and ss.IsLike = 1
   </select>
   <!-- 获取用户空间所有点赞用户 -->
   <select id="getIsLikeUsersById" resultType="java.lang.Integer">
   	select ss.UserId 
   	from SpaceContentStatus ss 
-  	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
+  	where ss.SpaceType = 3 and ss.IsLike = 1 and ss.SpaceId = #{0}
   </select>
   <!-- 获取某学生用户空间列表 -->
   <select id="getUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">

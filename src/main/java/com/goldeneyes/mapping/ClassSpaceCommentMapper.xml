@@ -27,11 +27,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    insert into ClassSpaceComment (TabId, ClassSpaceId, UserId, 
+    insert into ClassSpaceComment (ClassSpaceId, UserId, 
       CommentContent, ReplyId, CommentDate, 
       ReplyStatus, ReplyDate, Status
       )
-    values (#{tabid,jdbcType=INTEGER}, #{classspaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+    values (#{classspaceid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
       #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, 
       #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
       )

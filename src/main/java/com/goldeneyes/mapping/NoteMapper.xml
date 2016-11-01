@@ -111,7 +111,7 @@
   
   <!-- 取点到记事表的最大ID+1 -->
   <select id="getMaxId" resultType="java.lang.Integer">
-  	select MAX(n.TabId) + 1 from Note n
+  	select isnull(MAX(n.TabId) + 1,1) from Note n
   </select>
   
   <!-- 获取用户未读点到记事条数 -->
@@ -131,7 +131,7 @@
   <select id="getIsLikeNoteByUser" resultType="java.lang.Integer">
   	select count(ss.IsLike) likeCnt 
   	from SpaceContentStatus ss 
-	where ss.SpaceType=1 and ss.SpaceId = #{0} and ss.UserId = #{1}
+	where ss.SpaceType=#{1} and ss.SpaceId = #{2} and ss.UserId = #{0} and ss.IsLike = 1
   </select>
   <!-- 获取点到记事所有点赞用户 -->
   <select id="getIsLikeUsersById" resultType="java.lang.Integer">
