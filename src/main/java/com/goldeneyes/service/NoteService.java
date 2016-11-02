@@ -41,7 +41,7 @@ public interface NoteService {
 	 * @param spaceType
 	 * @return
 	 */
-	public List<Note> getNoReadNotesByUser(int userId,int spaceType) throws Exception;
+	public List<Note> getNoReadNotesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户某条点到记事是否点赞
 	 * @param userId
@@ -51,11 +51,17 @@ public interface NoteService {
 	 */
 	public int getIsLikeNoteByUser(int userId,int spaceType,int noteId) throws Exception;
 	/**
+	 * 获取点到记事所有评论条数
+	 * @param noteId
+	 * @return
+	 */
+	public int getNoteCommentsCntById(int noteId) throws Exception;
+	/**
 	 * 获取点到记事所有评论
 	 * @param noteId
 	 * @return
 	 */
-	public List<NoteComment> getNoteCommentsById(int noteId) throws Exception;
+	public List<NoteComment> getNoteCommentsById(int noteId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取点到记事所有点赞用户
 	 * @param noteId
@@ -73,13 +79,19 @@ public interface NoteService {
 	 * @param userId
 	 * @return
 	 */
-	public List<NoteComment> getNoteCommentReplysByUser(int userId) throws Exception;
+	public List<NoteComment> getNoteCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception;
+	/**
+	 * 获取某学生点到记事条数
+	 * @param studentId
+	 * @return
+	 */
+	public int getNotesCntByStudent(int studentId) throws Exception;
 	/**
 	 * 获取某学生点到记事列表
 	 * @param studentId
 	 * @return
 	 */
-	public List<Note> getNotesByStudent(int studentId) throws Exception;
+	public List<Note> getNotesByStudent(int studentId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取某条点到记事信息
 	 * @param noteId

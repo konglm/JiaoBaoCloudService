@@ -17,11 +17,17 @@ public interface NoteCommentMapper {
 
     int updateByPrimaryKey(NoteComment record);
     /**
+   	 * 获取点到记事所有评论条数
+   	 * @param noteId
+   	 * @return
+   	 */
+   	int getNoteCommentsCntById(int noteId);
+    /**
 	 * 获取点到记事所有评论
 	 * @param noteId
 	 * @return
 	 */
-	List<NoteComment> getNoteCommentsById(int noteId);
+	List<NoteComment> getNoteCommentsById(int noteId,int pageIndex,int pageSize);
 	/**
 	 * 获取用户点到记事所有未读评论回复条数
 	 * @param userId
@@ -33,7 +39,7 @@ public interface NoteCommentMapper {
 	 * @param userId
 	 * @return
 	 */
-	List<NoteComment> getNoteCommentReplysByUser(int userId);
+	List<NoteComment> getNoteCommentReplysByUser(int userId,int pageIndex,int pageSize);
 	/**
 	 * 修改某用户某点到记事评论回复查看状态
 	 * @param record

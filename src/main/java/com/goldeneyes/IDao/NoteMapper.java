@@ -36,7 +36,7 @@ public interface NoteMapper {
 	 * @param spaceType
 	 * @return
 	 */
-	List<Note> getNoReadNotesByUser(int userId,int spaceType);
+	List<Note> getNoReadNotesByUser(int userId,int spaceType,int pageIndex,int pageSize);
 	/**
 	 * 获取用户某条点到记事是否点赞
 	 * @param userId
@@ -52,11 +52,17 @@ public interface NoteMapper {
 	 */
 	List<Integer> getIsLikeUsersById(int noteId);
 	/**
+	 * 获取某学生点到记事条数
+	 * @param studentId
+	 * @return
+	 */
+	int getNotesCntByStudent(int studentId);
+	/**
 	 * 获取某学生点到记事列表
 	 * @param studentId
 	 * @return
 	 */
-	List<Note> getNotesByStudent(int studentId);
+	List<Note> getNotesByStudent(int studentId,int pageIndex,int pageSize);
 	/**
 	 * 获取某条点到记事信息
 	 * @param noteId

@@ -117,19 +117,23 @@ public class NoteController {
 	@RequestMapping("/getNoReadNotesByUser.do")
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
-		if (request.getParameter("userId") == null) {
+		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
 		} else {
 			int userId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
+				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
 			List<Note> notes = new ArrayList<Note>();
 			try {
-				notes = noteService.getNoReadNotesByUser(userId, 1);
+				notes = noteService.getNoReadNotesByUser(userId, 1, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -188,16 +192,16 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
 		}
 	}
-
+	
 	/**
-	 * 获取点到记事所有评论
+	 * 获取点到记事所有评论条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentsById.do")
-	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getNoteCommentsCntById.do")
+	public void getNoteCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("noteId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -209,9 +213,51 @@ public class NoteController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
+			int cnt = 0;
+			try {
+				cnt = noteService.getNoteCommentsCntById(noteId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("Result", cnt);
+			jsonArray.put(jsonobj);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+
+
+	/**
+	 * 获取点到记事所有评论
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNoteCommentsById.do")
+	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int noteId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			try {
+				noteId = Integer.parseInt(request.getParameter("noteId"));
+				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
 			List<NoteComment> noteComments = new ArrayList<NoteComment>();
 			try {
-				noteComments = noteService.getNoteCommentsById(noteId);
+				noteComments = noteService.getNoteCommentsById(noteId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -317,19 +363,23 @@ public class NoteController {
 	@RequestMapping("/getNoteCommentReplysByUser.do")
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
-		if (request.getParameter("userId") == null) {
+		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
 		} else {
 			int userId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
+				userId = Integer.parseInt(request.getParameter("pageIndex"));
+				userId = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
 			List<NoteComment> noteComments = new ArrayList<NoteComment>();
 			try {
-				noteComments = noteService.getNoteCommentReplysByUser(userId);
+				noteComments = noteService.getNoteCommentReplysByUser(userId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
@@ -348,16 +398,16 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
 		}
 	}
-
+	
 	/**
-	 * 获取某学生点到记事列表
+	 * 获取某学生点到记事条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNotesByStudent.do")
-	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getNotesCntByStudent.do")
+	public void getNotesCntByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("studentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -369,9 +419,50 @@ public class NoteController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
+			int cnt = 0;
+			try {
+				cnt = noteService.getNotesCntByStudent(studentId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("Result", cnt);
+			jsonArray.put(jsonobj);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+
+	/**
+	 * 获取某学生点到记事列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNotesByStudent.do")
+	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int studentId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			try {
+				studentId = Integer.parseInt(request.getParameter("studentId"));
+				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
 			List<Note> notes = new ArrayList<Note>();
 			try {
-				notes = noteService.getNotesByStudent(studentId);
+				notes = noteService.getNotesByStudent(studentId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

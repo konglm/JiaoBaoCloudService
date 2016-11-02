@@ -71,9 +71,9 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<Note> getNoReadNotesByUser(int userId, int spaceType) throws Exception {
+	public List<Note> getNoReadNotesByUser(int userId, int spaceType,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<Note> notes = noteMapper.getNoReadNotesByUser(userId, spaceType);
+		List<Note> notes = noteMapper.getNoReadNotesByUser(userId, spaceType, pageIndex, pageSize);
 		return notes;
 	}
 
@@ -86,14 +86,24 @@ public class NoteServiceImpl implements NoteService {
 		int isLike = noteMapper.getIsLikeNoteByUser(userId, spaceType, noteId);
 		return isLike;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getNoteCommentsCntById(int noteId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = noteCommentMapper.getNoteCommentsCntById(noteId);
+		return cnt;
+	}
 
 	/**
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteComment> getNoteCommentsById(int noteId) throws Exception {
+	public List<NoteComment> getNoteCommentsById(int noteId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsById(noteId);
+		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentsById(noteId,pageIndex,pageSize);
 		return noteComments;
 	}
 
@@ -121,19 +131,30 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteComment> getNoteCommentReplysByUser(int userId) throws Exception {
+	public List<NoteComment> getNoteCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentReplysByUser(userId);
+		List<NoteComment> noteComments = noteCommentMapper.getNoteCommentReplysByUser(userId,pageIndex,pageSize);
 		return noteComments;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getNotesCntByStudent(int studentId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = noteMapper.getNotesCntByStudent(studentId);
+		return cnt;
+	}
+
 
 	/**
 	 * @author konglm
 	 */
 	@Override
-	public List<Note> getNotesByStudent(int studentId) throws Exception {
+	public List<Note> getNotesByStudent(int studentId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<Note> notes = noteMapper.getNotesByStudent(studentId);
+		List<Note> notes = noteMapper.getNotesByStudent(studentId,pageIndex,pageSize);
 		return notes;
 	}
 
