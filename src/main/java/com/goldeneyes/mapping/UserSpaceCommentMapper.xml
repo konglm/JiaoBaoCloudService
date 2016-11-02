@@ -139,11 +139,20 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
-  <!-- 获取用户空间所有评论 -->
-  <select id="getUserSpaceCommentsById" resultType="com.goldeneyes.pojo.UserSpaceComment">
-  	select uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
+  <!-- 获取用户空间所有评论条数 -->
+  <select id="getUserSpaceCommentsCntById" resultType="java.lang.Integer">
+  	select count(uc.TabId)
   	from UserSpaceComment uc 
   	where uc.Status = 1 and uc.UserSpaceId = #{0}
+  </select>
+  <!-- 获取用户空间所有评论 -->
+  <select id="getUserSpaceCommentsById" resultType="com.goldeneyes.pojo.UserSpaceComment">
+  	select top(#{2}) uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
+  	from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.UserSpaceId = #{0}
+  	and uc.TabId not in (select top((#{1}-1) * #{2}) TabId from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.UserSpaceId = #{0}
+  	order by uc.CommentDate desc)
   	order by uc.CommentDate desc
   </select>
   <!-- 获取用户用户空间所有未读评论回复条数 -->
@@ -154,9 +163,13 @@
   </select>
   <!-- 获取用户用户空间所有未读评论回复列表 -->
   <select id="getUserSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceComment">
-  	select uc.TabId,uc.UserId,uc.UserSpaceId,uc.CommentContent
+  	select top(#{2}) uc.TabId,uc.UserId,uc.UserSpaceId,uc.CommentContent
   	from UserSpaceComment uc 
   	where uc.Status = 1 and uc.ReplyStatus = 0 and uc.ReplyId = #{0}
+  	and uc.TabId not in (select top((#{1}-1) * #{2}) uc.TabId
+  	from UserSpaceComment uc 
+  	where uc.Status = 1 and uc.ReplyStatus = 0 and uc.ReplyId = #{0}
+  	order by uc.CommentDate desc)
 	order by uc.CommentDate desc
   </select>
   <!-- 修改某用户空间评论回复查看状态 -->

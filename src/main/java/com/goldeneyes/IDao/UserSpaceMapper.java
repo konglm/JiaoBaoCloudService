@@ -36,7 +36,7 @@ public interface UserSpaceMapper {
 	 * @param spaceType
 	 * @return
 	 */
-	List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType);
+	List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize);
 	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
@@ -52,11 +52,17 @@ public interface UserSpaceMapper {
 	 */
 	List<Integer> getIsLikeUsersById(int userSpaceId);
 	/**
+	 * 获取某用户空间条数
+	 * @param userId
+	 * @return
+	 */
+	int getUserSpacesCntByUser(int userId);
+	/**
 	 * 获取某用户空间列表
 	 * @param userId
 	 * @return
 	 */
-	List<UserSpace> getUserSpacesByUser(int userId);
+	List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize);
 	/**
 	 * 获取某条用户空间信息
 	 * @param userSpaceId

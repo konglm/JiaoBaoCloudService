@@ -17,11 +17,17 @@ public interface UserSpaceCommentMapper {
 
     int updateByPrimaryKey(UserSpaceComment record);
     /**
+   	 * 获取用户空间所有评论条数
+   	 * @param userSpaceId
+   	 * @return
+   	 */
+   	int getUserSpaceCommentsCntById(int userSpaceId);
+    /**
 	 * 获取用户空间所有评论
 	 * @param userSpaceId
 	 * @return
 	 */
-	List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId);
+	List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId,int pageIndex,int pageSize);
 	/**
 	 * 获取用户用户空间所有未读评论回复条数
 	 * @param userId
@@ -33,7 +39,7 @@ public interface UserSpaceCommentMapper {
 	 * @param userId
 	 * @return
 	 */
-	List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId);
+	List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize);
 	/**
 	 * 修改某用户某用户空间评论回复查看状态
 	 * @param record

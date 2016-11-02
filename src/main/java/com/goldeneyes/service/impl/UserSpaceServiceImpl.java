@@ -75,9 +75,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType) throws Exception {
+	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType);
+		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType,pageIndex,pageSize);
 		return userSpaces;
 	}
 
@@ -90,14 +90,24 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		int isLike = userSpaceMapper.getIsLikeUserSpaceByUser(userId, spaceType, userSpaceId);
 		return isLike;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getUserSpaceCommentsCntById(int userSpaceId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceCommentMapper.getUserSpaceCommentsCntById(userSpaceId);
+		return cnt;
+	}
 
 	/**
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId) throws Exception {
+	public List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentsById(userSpaceId);
+		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentsById(userSpaceId,pageIndex,pageSize);
 		return userSpaceComments;
 	}
 
@@ -125,19 +135,29 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId) throws Exception {
+	public List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentReplysByUser(userId);
+		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getUserSpaceCommentReplysByUser(userId,pageIndex,pageSize);
 		return userSpaceComments;
+	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getUserSpacesCntByUser(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMapper.getUserSpacesCntByUser(userId);
+		return cnt;
 	}
 
 	/**
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getUserSpacesByUser(int userId) throws Exception {
+	public List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId);
+		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId,pageIndex,pageSize);
 		return userSpaces;
 	}
 
@@ -397,9 +417,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 *  @author konglm
 	 */
 	@Override
-	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId) throws Exception {
+	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgReplysByUser(userId);
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgReplysByUser(userId,pageIndex,pageSize);
 		return userSpaceMsgs;
 	}
 

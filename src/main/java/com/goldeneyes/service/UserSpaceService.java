@@ -41,7 +41,7 @@ public interface UserSpaceService {
 	 * @param spaceType
 	 * @return
 	 */
-	public List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType) throws Exception;
+	public List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
@@ -51,11 +51,17 @@ public interface UserSpaceService {
 	 */
 	public int getIsLikeUserSpaceByUser(int userId,int spaceType,int userSpaceId) throws Exception;
 	/**
+	 * 获取用户空间所有评论条数
+	 * @param userSpaceId
+	 * @return
+	 */
+	public int getUserSpaceCommentsCntById(int userSpaceId) throws Exception;
+	/**
 	 * 获取用户空间所有评论
 	 * @param userSpaceId
 	 * @return
 	 */
-	public List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId) throws Exception;
+	public List<UserSpaceComment> getUserSpaceCommentsById(int userSpaceId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户空间所有点赞用户
 	 * @param userSpaceId
@@ -73,13 +79,19 @@ public interface UserSpaceService {
 	 * @param userId
 	 * @return
 	 */
-	public List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId) throws Exception;
+	public List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception;
+	/**
+	 * 获取某用户空间条数
+	 * @param userId
+	 * @return
+	 */
+	public int getUserSpacesCntByUser(int userId) throws Exception;
 	/**
 	 * 获取某用户空间列表
 	 * @param userId
 	 * @return
 	 */
-	public List<UserSpace> getUserSpacesByUser(int userId) throws Exception;
+	public List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取某条用户空间信息
 	 * @param userSpaceId
@@ -193,7 +205,7 @@ public interface UserSpaceService {
 	 * @param userId
 	 * @return
 	 */
-	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId) throws Exception;
+	public List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 新增某用户某用户空间留言
 	 * @param userId

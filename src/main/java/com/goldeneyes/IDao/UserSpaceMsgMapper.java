@@ -33,7 +33,7 @@ public interface UserSpaceMsgMapper {
    	 * @param userId
    	 * @return
    	 */
-   	List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId);
+   	List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId,int pageIndex,int pageSize);
    	/**
    	 * 修改某用户某用户空间留言回复查看状态
    	 * @param record
