@@ -266,6 +266,7 @@ public class NoteController {
 
 			for (NoteComment noteComment : noteComments) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", noteComment.getTabid());
 				jsonobj.put("UserId", noteComment.getUserid());
 				jsonobj.put("CommentContent", noteComment.getCommentcontent());
 				jsonobj.put("ReplyId", noteComment.getReplyid());

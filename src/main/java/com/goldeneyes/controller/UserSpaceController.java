@@ -268,6 +268,7 @@ public class UserSpaceController {
 
 			for (UserSpaceComment userSpaceComment : userSpaceComments) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpaceComment.getTabid());
 				jsonobj.put("UserId", userSpaceComment.getUserid());
 				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
 				jsonobj.put("ReplyId", userSpaceComment.getReplyid());
@@ -1134,6 +1135,7 @@ public class UserSpaceController {
 
 			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpaceMsg.getTabid());
 				jsonobj.put("UserId", userSpaceMsg.getUserid());
 				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
 				jsonobj.put("ReplyId", userSpaceMsg.getReplyid());

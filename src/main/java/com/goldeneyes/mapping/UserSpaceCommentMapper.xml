@@ -147,7 +147,7 @@
   </select>
   <!-- 获取用户空间所有评论 -->
   <select id="getUserSpaceCommentsById" resultType="com.goldeneyes.pojo.UserSpaceComment">
-  	select top(#{2}) uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
+  	select top(#{2}) uc.TabId,uc.UserId,uc.CommentContent,uc.ReplyId,uc.CommentDate 
   	from UserSpaceComment uc 
   	where uc.Status = 1 and uc.UserSpaceId = #{0}
   	and uc.TabId not in (select top((#{1}-1) * #{2}) TabId from UserSpaceComment uc 
