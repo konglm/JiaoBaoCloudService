@@ -71,9 +71,9 @@ public class CommonTool {
 	 * @param jArray
 	 * @return
 	 */
-	public static JSONObject outJson(JSONArray jArray,int outResult){
+	public static JSONObject outJson(JSONObject jObject,int outResult){
 		JSONObject jsonobj = new JSONObject();
-		jsonobj.put("RspData", jArray);
+		jsonobj.put("RspData", jObject);
 		switch(outResult){
 			case 1:{
 				jsonobj.put("RspCode", "1");
