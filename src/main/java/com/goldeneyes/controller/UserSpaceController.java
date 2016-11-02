@@ -1061,16 +1061,16 @@ public class UserSpaceController {
 
 		}
 	}
-
+	
 	/**
-	 * 获取用户空间所有留言
+	 * 获取用户空间所有留言条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgsById.do")
-	public void getUserSpaceMsgsById(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/getUserSpaceMsgsCntById.do")
+	public void getUserSpaceMsgsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONArray jsonArray = new JSONArray();
 		if (request.getParameter("userSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
@@ -1082,9 +1082,50 @@ public class UserSpaceController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
 			}
+			int cnt = 0;
+			try {
+				cnt = userSpaceService.getUserSpaceMsgsCntById(userSpaceId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());
+				return;
+			}
+
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("Result", cnt);
+			jsonArray.put(jsonobj);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 1).toString());
+		}
+	}
+
+	/**
+	 * 获取用户空间所有留言
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getUserSpaceMsgsById.do")
+	public void getUserSpaceMsgsById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		JSONArray jsonArray = new JSONArray();
+		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 5).toString());
+		} else {
+			int userSpaceId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			try {
+				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
+				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
+				return;
+			}
 			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
 			try {
-				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userSpaceId);
+				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userSpaceId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 2).toString());

@@ -265,6 +265,7 @@ public class ClassSpaceController {
 
 			for (ClassSpaceComment classSpaceComment : classSpaceComments) {
 				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", classSpaceComment.getTabid());
 				jsonobj.put("UserId", classSpaceComment.getUserid());
 				jsonobj.put("CommentContent", classSpaceComment.getCommentcontent());
 				jsonobj.put("ReplyId", classSpaceComment.getReplyid());

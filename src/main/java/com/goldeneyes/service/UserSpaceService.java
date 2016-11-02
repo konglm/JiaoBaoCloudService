@@ -189,11 +189,17 @@ public interface UserSpaceService {
 	 */
 	public int delUserSpaceCommentById(int userSpaceCommentId) throws Exception;
 	/**
+	 * 获取用户空间所有留言条数
+	 * @param userSpaceId
+	 * @return
+	 */
+	public int getUserSpaceMsgsCntById(int userSpaceId) throws Exception;
+	/**
 	 * 获取用户空间所有留言
 	 * @param userSpaceId
 	 * @return
 	 */
-	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId) throws Exception;
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户用户空间所有未读留言回复条数
 	 * @param userId

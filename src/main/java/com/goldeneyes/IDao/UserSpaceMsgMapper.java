@@ -17,11 +17,17 @@ public interface UserSpaceMsgMapper {
 
     int updateByPrimaryKey(UserSpaceMsg record);
     /**
+   	 * 获取用户空间所有留言条数
+   	 * @param userSpaceId
+   	 * @return
+   	 */
+    int getUserSpaceMsgsCntById(int userSpaceId);
+    /**
    	 * 获取用户空间所有留言
    	 * @param userSpaceId
    	 * @return
    	 */
-   	List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId);
+   	List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId,int pageIndex,int pageSize);
    	/**
    	 * 获取用户用户空间所有未读留言回复条数
    	 * @param userId

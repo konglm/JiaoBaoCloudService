@@ -392,14 +392,24 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		}
 		return 1;
 	}
+	
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getUserSpaceMsgsCntById(int userSpaceId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMsgMapper.getUserSpaceMsgsCntById(userSpaceId);
+		return cnt;
+	}
 
 	/**
 	 *  @author konglm
 	 */
 	@Override
-	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId) throws Exception {
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgsById(userSpaceId);
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgsById(userSpaceId,pageIndex,pageSize);
 		return userSpaceMsgs;
 	}
 
