@@ -17,11 +17,17 @@ public interface ClassSpaceCommentMapper {
 
     int updateByPrimaryKey(ClassSpaceComment record);
     /**
+	 * 获取班级空间所有评论条数
+	 * @param classSpaceId
+	 * @return
+	 */
+    int getClassSpaceCommentsCntById(int classSpaceId);
+    /**
 	 * 获取班级空间所有评论
 	 * @param classSpaceId
 	 * @return
 	 */
-	List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId);
+	List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId,int pageIndex,int pageSize);
 	/**
 	 * 获取用户班级空间所有未读评论回复条数
 	 * @param userId
@@ -33,7 +39,7 @@ public interface ClassSpaceCommentMapper {
 	 * @param userId
 	 * @return
 	 */
-	List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId);
+	List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize);
 	/**
 	 * 修改某用户某班级空间评论回复查看状态
 	 * @param record

@@ -71,9 +71,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpace> getNoReadClassSpacesByUser(int userId, int spaceType) throws Exception {
+	public List<ClassSpace> getNoReadClassSpacesByUser(int userId, int spaceType,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpace> classSpaces = classSpaceMapper.getNoReadClassSpacesByUser(userId, spaceType);
+		List<ClassSpace> classSpaces = classSpaceMapper.getNoReadClassSpacesByUser(userId, spaceType,pageIndex,pageSize);
 		return classSpaces;
 	}
 
@@ -91,9 +91,19 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId) throws Exception {
+	public int getClassSpaceCommentsCntById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentsById(classSpaceId);
+		int cnt = classSpaceCommentMapper.getClassSpaceCommentsCntById(classSpaceId);
+		return cnt;
+	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId,int pageIndex,int pageSize) throws Exception {
+		// TODO Auto-generated method stub
+		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentsById(classSpaceId,pageIndex,pageSize);
 		return classSpaceComments;
 	}
 
@@ -121,19 +131,29 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId) throws Exception {
+	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentReplysByUser(userId);
+		List<ClassSpaceComment> classSpaceComments = classSpaceCommentMapper.getClassSpaceCommentReplysByUser(userId,pageIndex,pageSize);
 		return classSpaceComments;
+	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getClassSpacesCntByClass(int classId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = classSpaceMapper.getClassSpacesCntByClass(classId);
+		return cnt;
 	}
 
 	/**
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpace> getClassSpacesByClass(int classId) throws Exception {
+	public List<ClassSpace> getClassSpacesByClass(int classId,int pageIndex,int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<ClassSpace> classSpaces = classSpaceMapper.getClassSpacesByClass(classId);
+		List<ClassSpace> classSpaces = classSpaceMapper.getClassSpacesByClass(classId,pageIndex,pageSize);
 		return classSpaces;
 	}
 

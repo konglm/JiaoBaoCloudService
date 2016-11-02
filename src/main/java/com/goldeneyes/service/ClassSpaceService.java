@@ -40,7 +40,7 @@ public interface ClassSpaceService {
 	 * @param spaceType
 	 * @return
 	 */
-	public List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType) throws Exception;
+	public List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
@@ -50,11 +50,17 @@ public interface ClassSpaceService {
 	 */
 	public int getIsLikeClassSpaceByUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
+	 * 获取班级空间所有评论条数
+	 * @param classSpaceId
+	 * @return
+	 */
+	public int getClassSpaceCommentsCntById(int classSpaceId) throws Exception;
+	/**
 	 * 获取班级空间所有评论
 	 * @param classSpaceId
 	 * @return
 	 */
-	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId) throws Exception;
+	public List<ClassSpaceComment> getClassSpaceCommentsById(int classSpaceId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取班级空间所有点赞用户
 	 * @param classSpaceId
@@ -72,13 +78,19 @@ public interface ClassSpaceService {
 	 * @param userId
 	 * @return
 	 */
-	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId) throws Exception;
+	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception;
+	/**
+	 * 获取某学生班级空间条数
+	 * @param classId
+	 * @return
+	 */
+	public int getClassSpacesCntByClass(int classId) throws Exception;
 	/**
 	 * 获取某学生班级空间列表
 	 * @param classId
 	 * @return
 	 */
-	public List<ClassSpace> getClassSpacesByClass(int classId) throws Exception;
+	public List<ClassSpace> getClassSpacesByClass(int classId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取某条班级空间信息
 	 * @param classSpaceId

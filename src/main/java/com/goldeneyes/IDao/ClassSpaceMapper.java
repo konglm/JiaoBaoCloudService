@@ -36,7 +36,7 @@ public interface ClassSpaceMapper {
 	 * @param spaceType
 	 * @return
 	 */
-	List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType);
+	List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize);
 	/**
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
@@ -52,11 +52,17 @@ public interface ClassSpaceMapper {
 	 */
 	List<Integer> getIsLikeUsersById(int classSpaceId);
 	/**
-	 * 获取某学生班级空间列表
+	 * 获取班级空间条数
 	 * @param classId
 	 * @return
 	 */
-	List<ClassSpace> getClassSpacesByClass(int classId);
+	int getClassSpacesCntByClass(int classId);
+	/**
+	 * 获取班级空间列表
+	 * @param classId
+	 * @return
+	 */
+	List<ClassSpace> getClassSpacesByClass(int classId,int pageIndex,int pageSize);
 	/**
 	 * 获取某条班级空间信息
 	 * @param classSpaceId

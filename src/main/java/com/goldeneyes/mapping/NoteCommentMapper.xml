@@ -140,7 +140,7 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
   <!-- 获取点到记事所有评论条数 -->
-  <select id="getNoteCommentsCntById" resultType="com.goldeneyes.pojo.NoteComment">
+  <select id="getNoteCommentsCntById" resultType="java.lang.Integer">
   	select COUNT(nc.TabId)
   	from NoteComment nc 
   	where nc.Status = 1 and nc.NoteId = #{0}

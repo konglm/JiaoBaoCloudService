@@ -145,7 +145,7 @@
   	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
   </select>
   <!-- 获取某学生点到记事条数 -->
-  <select id="getNotesCntByStudent" resultType="com.goldeneyes.pojo.Note">
+  <select id="getNotesCntByStudent" resultType="java.lang.Integer">
   	select count(n.TabId) 
   	from Note n 
   	where n.Status = 1 and n.StudentId = #{0}
