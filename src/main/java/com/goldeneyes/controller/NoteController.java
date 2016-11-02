@@ -372,8 +372,8 @@ public class NoteController {
 			int pageSize = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
-				userId = Integer.parseInt(request.getParameter("pageIndex"));
-				userId = Integer.parseInt(request.getParameter("pageSize"));
+				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;

@@ -1204,7 +1204,7 @@ public class UserSpaceController {
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				userId = Integer.parseInt(request.getParameter("pageSize"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;

@@ -148,7 +148,6 @@
   	select count(c.TabId) 
   	from ClassSpace c 
   	where c.Status = 1 and c.ClassId = #{0}
-	order by c.PublishDate desc
   </select>
   <!-- 获取某班级空间列表 -->
   <select id="getClassSpacesByClass" resultType="com.goldeneyes.pojo.ClassSpace">

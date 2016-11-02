@@ -455,7 +455,7 @@ public class ClassSpaceController {
 			try {
 				classId = Integer.parseInt(request.getParameter("classId"));
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				classId = Integer.parseInt(request.getParameter("pageSize"));
+				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonArray, 3).toString());
 				return;
