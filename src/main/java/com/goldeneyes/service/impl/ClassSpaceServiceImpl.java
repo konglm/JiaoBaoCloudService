@@ -181,13 +181,13 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpace(int classId, String classSpaceStr, int teacherId) throws Exception {
+	public int addClassSpace(int classId, String msgContent, int teacherId) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = classSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		ClassSpace classSpace = new ClassSpace();
 		classSpace.setTabid(maxId);
 		classSpace.setClassid(classId);
-		classSpace.setMsgcontent(classSpaceStr);
+		classSpace.setMsgcontent(msgContent);
 		classSpace.setPublisherid(teacherId);
 		classSpace.setPublishdate(new Date());
 		classSpace.setStatus(CommonTool.int2byte(1));
@@ -225,12 +225,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpaceComment(int userId, int classSpaceId, String commentStr) throws Exception {
+	public int addClassSpaceComment(int userId, int classSpaceId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
 		classSpaceComment.setUserid(userId);
 		classSpaceComment.setClassspaceid(classSpaceId);
-		classSpaceComment.setCommentcontent(commentStr);
+		classSpaceComment.setCommentcontent(commentContent);
 		classSpaceComment.setCommentdate(new Date());
 		classSpaceComment.setReplyid(0);
 		classSpaceComment.setReplystatus(CommonTool.int2byte(0));
@@ -247,12 +247,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpaceCommentReply(int userId, int replyUserId, int classSpaceId, String commentStr) throws Exception {
+	public int addClassSpaceCommentReply(int userId, int replyUserId, int classSpaceId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
 		classSpaceComment.setUserid(userId);
 		classSpaceComment.setClassspaceid(classSpaceId);
-		classSpaceComment.setCommentcontent(commentStr);
+		classSpaceComment.setCommentcontent(commentContent);
 		classSpaceComment.setCommentdate(new Date());
 		classSpaceComment.setReplyid(replyUserId);
 		classSpaceComment.setReplystatus(CommonTool.int2byte(0));

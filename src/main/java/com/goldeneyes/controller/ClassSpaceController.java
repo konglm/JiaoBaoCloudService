@@ -599,16 +599,16 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpace.do")
 	public void addClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classId") == null) || (request.getParameter("classSpaceStr") == null)
+		if ((request.getParameter("classId") == null) || (request.getParameter("msgContent") == null)
 				|| (request.getParameter("teacherId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int classId = 0;
-			String classSpaceStr = "";
+			String msgContent = "";
 			int teacherId = 0;
 			try {
 				classId = Integer.parseInt(request.getParameter("classId"));
-				classSpaceStr = request.getParameter("classSpaceStr");
+				msgContent = request.getParameter("msgContent");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
@@ -617,7 +617,7 @@ public class ClassSpaceController {
 
 			int id = 0;
 			try {
-				id = classSpaceService.addClassSpace(classId, classSpaceStr, teacherId);
+				id = classSpaceService.addClassSpace(classId, msgContent, teacherId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
@@ -698,16 +698,16 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceComment.do")
 	public void addClassSpaceComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentStr") == null)
+		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int classSpaceId = 0;
-			String commentStr = "";
+			String commentContent = "";
 			int userId = 0;
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				commentStr = request.getParameter("commentStr");
+				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
@@ -716,7 +716,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.addClassSpaceComment(userId, classSpaceId, commentStr);
+				success = classSpaceService.addClassSpaceComment(userId, classSpaceId, commentContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
@@ -744,17 +744,17 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceCommentReply.do")
 	public void addClassSpaceCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentStr") == null)
+		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int classSpaceId = 0;
-			String commentStr = "";
+			String commentContent = "";
 			int userId = 0;
 			int replyUserId = 0;
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				commentStr = request.getParameter("commentStr");
+				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
 			} catch (Exception e) {
@@ -764,7 +764,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.addClassSpaceCommentReply(userId, replyUserId, classSpaceId, commentStr);
+				success = classSpaceService.addClassSpaceCommentReply(userId, replyUserId, classSpaceId, commentContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

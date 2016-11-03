@@ -107,11 +107,11 @@ public interface UserSpaceService {
 	/**
 	 * 新增某学生用户空间信息
 	 * @param userId
-	 * @param userSpaceStr
+	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的用户空间ID
 	 */
-	public int addUserSpace(int userId,String userSpaceStr,int teacherId) throws Exception;
+	public int addUserSpace(int userId,String msgContent,int teacherId) throws Exception;
 	/**
 	 * 新增某学生用户空间附件
 	 * @param userSpaceId
@@ -127,19 +127,19 @@ public interface UserSpaceService {
 	 * 新增某用户某用户空间评论
 	 * @param userId
 	 * @param userSpaceId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceComment(int userId,int userSpaceId,String commentStr) throws Exception;
+	public int addUserSpaceComment(int userId,int userSpaceId,String commentContent) throws Exception;
 	/**
 	 * 新增某用户某用户空间评论回复
 	 * @param userId
 	 * @param replyUserId
 	 * @param userSpaceId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceCommentReply(int userId,int replyUserId,int userSpaceId,String commentStr) throws Exception;
+	public int addUserSpaceCommentReply(int userId,int replyUserId,int userSpaceId,String commentContent) throws Exception;
 	/**
 	 * 推送给某用户的某用户空间
 	 * @param userId

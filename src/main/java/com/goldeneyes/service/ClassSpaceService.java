@@ -106,11 +106,11 @@ public interface ClassSpaceService {
 	/**
 	 * 新增某学生班级空间信息
 	 * @param classId
-	 * @param classSpaceStr
+	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的班级空间ID
 	 */
-	public int addClassSpace(int classId,String classSpaceStr,int teacherId) throws Exception;
+	public int addClassSpace(int classId,String msgContent,int teacherId) throws Exception;
 	/**
 	 * 新增某学生班级空间附件
 	 * @param classSpaceId
@@ -126,19 +126,19 @@ public interface ClassSpaceService {
 	 * 新增某用户某班级空间评论
 	 * @param userId
 	 * @param classSpaceId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceComment(int userId,int classSpaceId,String commentStr) throws Exception;
+	public int addClassSpaceComment(int userId,int classSpaceId,String commentContent) throws Exception;
 	/**
 	 * 新增某用户某班级空间评论回复
 	 * @param userId
 	 * @param replyUserId
 	 * @param classSpaceId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceCommentReply(int userId,int replyUserId,int classSpaceId,String commentStr) throws Exception;
+	public int addClassSpaceCommentReply(int userId,int replyUserId,int classSpaceId,String commentContent) throws Exception;
 	/**
 	 * 推送给某用户的某班级空间
 	 * @param userId

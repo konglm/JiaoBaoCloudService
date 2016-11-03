@@ -602,16 +602,16 @@ public class NoteController {
 	@RequestMapping("/addNote.do")
 	public void addNote(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("studentId") == null) || (request.getParameter("noteStr") == null)
+		if ((request.getParameter("studentId") == null) || (request.getParameter("msgContent") == null)
 				|| (request.getParameter("teacherId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int studentId = 0;
-			String noteStr = "";
+			String msgContent = "";
 			int teacherId = 0;
 			try {
 				studentId = Integer.parseInt(request.getParameter("studentId"));
-				noteStr = request.getParameter("noteStr");
+				msgContent = request.getParameter("msgContent");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
@@ -620,7 +620,7 @@ public class NoteController {
 
 			int id = 0;
 			try {
-				id = noteService.addNote(studentId, noteStr, teacherId);
+				id = noteService.addNote(studentId, msgContent, teacherId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
@@ -697,16 +697,16 @@ public class NoteController {
 	@RequestMapping("/addNoteComment.do")
 	public void addNoteComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("noteId") == null) || (request.getParameter("commentStr") == null)
+		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int noteId = 0;
-			String commentStr = "";
+			String commentContent = "";
 			int userId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
-				commentStr = request.getParameter("commentStr");
+				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
@@ -715,7 +715,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.addNoteComment(userId, noteId, commentStr);
+				success = noteService.addNoteComment(userId, noteId, commentContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
@@ -741,17 +741,17 @@ public class NoteController {
 	@RequestMapping("/addNoteCommentReply.do")
 	public void addNoteCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("noteId") == null) || (request.getParameter("commentStr") == null)
+		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int noteId = 0;
-			String commentStr = "";
+			String commentContent = "";
 			int userId = 0;
 			int replyUserId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
-				commentStr = request.getParameter("commentStr");
+				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
 			} catch (Exception e) {
@@ -761,7 +761,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.addNoteCommentReply(userId, replyUserId, noteId, commentStr);
+				success = noteService.addNoteCommentReply(userId, replyUserId, noteId, commentContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

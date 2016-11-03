@@ -107,11 +107,11 @@ public interface NoteService {
 	/**
 	 * 新增某学生点到记事信息
 	 * @param studentId
-	 * @param noteStr
+	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的点到记事ID
 	 */
-	public int addNote(int studentId,String noteStr,int teacherId) throws Exception;
+	public int addNote(int studentId,String msgContent,int teacherId) throws Exception;
 	/**
 	 * 新增某学生点到记事附件
 	 * @param noteId
@@ -127,19 +127,19 @@ public interface NoteService {
 	 * 新增某用户某点到记事评论
 	 * @param userId
 	 * @param noteId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addNoteComment(int userId,int noteId,String commentStr) throws Exception;
+	public int addNoteComment(int userId,int noteId,String commentContent) throws Exception;
 	/**
 	 * 新增某用户某点到记事评论回复
 	 * @param userId
 	 * @param replyUserId
 	 * @param noteId
-	 * @param commentStr
+	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addNoteCommentReply(int userId,int replyUserId,int noteId,String commentStr) throws Exception;
+	public int addNoteCommentReply(int userId,int replyUserId,int noteId,String commentContent) throws Exception;
 	/**
 	 * 推送给某用户的某点到记事
 	 * @param userId

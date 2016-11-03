@@ -182,13 +182,13 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNote(int studentId, String noteStr, int teacherId) throws Exception {
+	public int addNote(int studentId, String msgContent, int teacherId) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = noteMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		Note note = new Note();
 		note.setTabid(maxId);
 		note.setStudentid(studentId);
-		note.setMsgcontent(noteStr);
+		note.setMsgcontent(msgContent);
 		note.setPublisherid(teacherId);
 		note.setPublishdate(new Date());
 		note.setStatus(CommonTool.int2byte(1));
@@ -226,12 +226,12 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteComment(int userId, int noteId, String commentStr) throws Exception {
+	public int addNoteComment(int userId, int noteId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setUserid(userId);
 		noteComment.setNoteid(noteId);
-		noteComment.setCommentcontent(commentStr);
+		noteComment.setCommentcontent(commentContent);
 		noteComment.setCommentdate(new Date());
 		noteComment.setReplyid(0);
 		noteComment.setReplystatus(CommonTool.int2byte(0));
@@ -248,12 +248,12 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentStr) throws Exception {
+	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setUserid(userId);
 		noteComment.setNoteid(noteId);
-		noteComment.setCommentcontent(commentStr);
+		noteComment.setCommentcontent(commentContent);
 		noteComment.setCommentdate(new Date());
 		noteComment.setReplyid(replyUserId);
 		noteComment.setReplystatus(CommonTool.int2byte(0));
