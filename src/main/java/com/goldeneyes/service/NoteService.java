@@ -111,7 +111,7 @@ public interface NoteService {
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的点到记事ID
 	 */
-	public int addNote(int studentId,String msgContent,int teacherId) throws Exception;
+	public int addNote(int studentId,String msgContent,int teacherId,int noteType,int checkType) throws Exception;
 	/**
 	 * 新增某学生点到记事附件
 	 * @param noteId

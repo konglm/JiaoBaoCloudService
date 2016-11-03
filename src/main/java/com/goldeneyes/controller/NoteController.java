@@ -152,6 +152,8 @@ public class NoteController {
 				jsonobj.put("PublisherId", note.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(note.getPublishdate()));
+				jsonobj.put("NoteType", note.getNotetype());
+				jsonobj.put("CheckType", note.getChecktype());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -497,6 +499,8 @@ public class NoteController {
 				jsonobj.put("PublisherId", note.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(note.getPublishdate()));
+				jsonobj.put("NoteType", note.getNotetype());
+				jsonobj.put("CheckType", note.getChecktype());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -540,6 +544,8 @@ public class NoteController {
 			jsonData.put("PublisherId", note.getPublisherid());
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			jsonData.put("PublishDate", formater.format(note.getPublishdate()));
+			jsonData.put("NoteType", note.getNotetype());
+			jsonData.put("CheckType", note.getChecktype());
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
 		}
@@ -603,16 +609,21 @@ public class NoteController {
 	public void addNote(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("studentId") == null) || (request.getParameter("msgContent") == null)
-				|| (request.getParameter("teacherId") == null)) {
+				|| (request.getParameter("teacherId") == null) || (request.getParameter("noteType") == null)
+				|| (request.getParameter("checkType") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int studentId = 0;
 			String msgContent = "";
 			int teacherId = 0;
+			int noteType = 0;
+			int checkType = 0;
 			try {
 				studentId = Integer.parseInt(request.getParameter("studentId"));
 				msgContent = request.getParameter("msgContent");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
+				noteType = Integer.parseInt(request.getParameter("noteType"));
+				checkType = Integer.parseInt(request.getParameter("checkType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
 				return;
@@ -620,7 +631,7 @@ public class NoteController {
 
 			int id = 0;
 			try {
-				id = noteService.addNote(studentId, msgContent, teacherId);
+				id = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

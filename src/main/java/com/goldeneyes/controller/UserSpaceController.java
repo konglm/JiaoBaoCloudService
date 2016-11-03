@@ -154,6 +154,7 @@ public class UserSpaceController {
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+				jsonobj.put("NoteType", userSpace.getNotetype());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -500,6 +501,7 @@ public class UserSpaceController {
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+				jsonobj.put("NoteType", userSpace.getNotetype());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -543,6 +545,7 @@ public class UserSpaceController {
 			jsonData.put("PublisherId", userSpace.getPublisherid());
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			jsonData.put("PublishDate", formater.format(userSpace.getPublishdate()));
+			jsonData.put("NoteType", userSpace.getNotetype());
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
 		}
@@ -606,16 +609,18 @@ public class UserSpaceController {
 	public void addUserSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("msgContent") == null)
-				|| (request.getParameter("teacherId") == null)) {
+				|| (request.getParameter("teacherId") == null) || (request.getParameter("noteType") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int userId = 0;
 			String msgContent = "";
 			int teacherId = 0;
+			int noteType = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				msgContent = request.getParameter("msgContent");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
+				noteType = Integer.parseInt(request.getParameter("noteType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
 				return;
@@ -623,7 +628,7 @@ public class UserSpaceController {
 
 			int id = 0;
 			try {
-				id = userSpaceService.addUserSpace(userId, msgContent, teacherId);
+				id = userSpaceService.addUserSpace(userId, msgContent, teacherId, noteType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

@@ -13,6 +13,8 @@ public class UserSpace {
 
     private Date publishdate;
 
+    private Byte notetype;
+
     private Byte status;
 
     public Integer getTabid() {
@@ -53,6 +55,14 @@ public class UserSpace {
 
     public void setPublishdate(Date publishdate) {
         this.publishdate = publishdate;
+    }
+
+    public Byte getNotetype() {
+        return notetype;
+    }
+
+    public void setNotetype(Byte notetype) {
+        this.notetype = notetype;
     }
 
     public Byte getStatus() {

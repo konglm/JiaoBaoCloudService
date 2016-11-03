@@ -185,7 +185,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpace(int userId, String msgContent, int teacherId) throws Exception {
+	public int addUserSpace(int userId, String msgContent, int teacherId, int noteType) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = userSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		UserSpace userSpace = new UserSpace();
@@ -195,6 +195,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpace.setPublisherid(teacherId);
 		userSpace.setPublishdate(new Date());
 		userSpace.setStatus(CommonTool.int2byte(1));
+		userSpace.setNotetype(CommonTool.int2byte(noteType));
 		try {
 			userSpaceMapper.insert(userSpace);		
 		} catch (Exception e) {
