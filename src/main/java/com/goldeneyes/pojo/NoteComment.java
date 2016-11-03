@@ -7,6 +7,8 @@ public class NoteComment {
 
     private Integer noteid;
 
+    private Integer upperid;
+
     private Integer userid;
 
     private String commentcontent;
@@ -35,6 +37,14 @@ public class NoteComment {
 
     public void setNoteid(Integer noteid) {
         this.noteid = noteid;
+    }
+
+    public Integer getUpperid() {
+        return upperid;
+    }
+
+    public void setUpperid(Integer upperid) {
+        this.upperid = upperid;
     }
 
     public Integer getUserid() {

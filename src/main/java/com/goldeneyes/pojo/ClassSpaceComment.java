@@ -7,6 +7,8 @@ public class ClassSpaceComment {
 
     private Integer classspaceid;
 
+    private Integer upperid;
+
     private Integer userid;
 
     private String commentcontent;
@@ -35,6 +37,14 @@ public class ClassSpaceComment {
 
     public void setClassspaceid(Integer classspaceid) {
         this.classspaceid = classspaceid;
+    }
+
+    public Integer getUpperid() {
+        return upperid;
+    }
+
+    public void setUpperid(Integer upperid) {
+        this.upperid = upperid;
     }
 
     public Integer getUserid() {

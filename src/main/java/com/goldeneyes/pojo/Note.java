@@ -7,6 +7,10 @@ public class Note {
 
     private Integer studentid;
 
+    private Byte notetype;
+
+    private Byte checktype;
+
     private String msgcontent;
 
     private Integer publisherid;
@@ -29,6 +33,22 @@ public class Note {
 
     public void setStudentid(Integer studentid) {
         this.studentid = studentid;
+    }
+
+    public Byte getNotetype() {
+        return notetype;
+    }
+
+    public void setNotetype(Byte notetype) {
+        this.notetype = notetype;
+    }
+
+    public Byte getChecktype() {
+        return checktype;
+    }
+
+    public void setChecktype(Byte checktype) {
+        this.checktype = checktype;
     }
 
     public String getMsgcontent() {
