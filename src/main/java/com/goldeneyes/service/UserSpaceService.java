@@ -139,7 +139,7 @@ public interface UserSpaceService {
 	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceCommentReply(int userId,int replyUserId,int userSpaceId,String commentContent) throws Exception;
+	public int addUserSpaceCommentReply(int userId,int replyUserId,int userSpaceId,String commentContent,int upperId) throws Exception;
 	/**
 	 * 推送给某用户的某用户空间
 	 * @param userId
@@ -228,7 +228,7 @@ public interface UserSpaceService {
 	 * @param msgStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgStr) throws Exception;
+	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgStr,int upperId) throws Exception;
 	/**
 	 * 修改某用户空间留言回复查看状态
 	 * @param userSpaceMsgId

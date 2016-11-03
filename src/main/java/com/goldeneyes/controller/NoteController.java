@@ -753,18 +753,21 @@ public class NoteController {
 	public void addNoteCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
-				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
+				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)
+				|| (request.getParameter("upperId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int noteId = 0;
 			String commentContent = "";
 			int userId = 0;
 			int replyUserId = 0;
+			int upperId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
+				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
 				return;
@@ -772,7 +775,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.addNoteCommentReply(userId, replyUserId, noteId, commentContent);
+				success = noteService.addNoteCommentReply(userId, replyUserId, noteId, commentContent, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

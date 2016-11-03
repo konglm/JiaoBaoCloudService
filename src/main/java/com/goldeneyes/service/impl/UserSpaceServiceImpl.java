@@ -252,7 +252,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpaceCommentReply(int userId, int replyUserId, int userSpaceId, String commentContent) throws Exception {
+	public int addUserSpaceCommentReply(int userId, int replyUserId, int userSpaceId, String commentContent,int upperId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
 		userSpaceComment.setUserid(userId);
@@ -262,6 +262,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceComment.setReplyid(replyUserId);
 		userSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		userSpaceComment.setStatus(CommonTool.int2byte(1));
+		userSpaceComment.setUpperid(upperId);
 		try {
 			userSpaceCommentMapper.insert(userSpaceComment);
 		} catch (Exception e) {
@@ -460,7 +461,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 *  @author konglm
 	 */
 	@Override
-	public int addUserSpaceMsgReply(int userId, int replyUserId, int userSpaceId, String msgStr) throws Exception {
+	public int addUserSpaceMsgReply(int userId, int replyUserId, int userSpaceId, String msgStr,int upperId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setUserid(userId);
@@ -470,6 +471,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceMsg.setReplyid(replyUserId);
 		userSpaceMsg.setReplystatus(CommonTool.int2byte(0));
 		userSpaceMsg.setStatus(CommonTool.int2byte(1));
+		userSpaceMsg.setUpperid(upperId);
 		try {
 			userSpaceMsgMapper.insert(userSpaceMsg);
 		} catch (Exception e) {

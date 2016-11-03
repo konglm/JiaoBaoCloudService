@@ -750,18 +750,21 @@ public class UserSpaceController {
 	public void addUserSpaceCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("commentContent") == null)
-				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
+				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)
+				|| (request.getParameter("upperId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int userSpaceId = 0;
 			String commentContent = "";
 			int userId = 0;
 			int replyUserId = 0;
+			int upperId = 0;
 			try {
 				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
 				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
+				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
 				return;
@@ -769,7 +772,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceCommentReply(userId, replyUserId, userSpaceId, commentContent);
+				success = userSpaceService.addUserSpaceCommentReply(userId, replyUserId, userSpaceId, commentContent, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
@@ -1296,18 +1299,21 @@ public class UserSpaceController {
 	public void addUserSpaceMsgReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("msgStr") == null)
-				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)) {
+				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)
+				|| (request.getParameter("upperId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
 		} else {
 			int userSpaceId = 0;
 			String msgStr = "";
 			int userId = 0;
 			int replyUserId = 0;
+			int upperId = 0;
 			try {
 				userSpaceId = Integer.parseInt(request.getParameter("userSpaceId"));
 				msgStr = request.getParameter("msgStr");
 				userId = Integer.parseInt(request.getParameter("userId"));
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
+				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
 				return;
@@ -1315,7 +1321,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgStr);
+				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgStr, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());

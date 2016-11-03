@@ -138,7 +138,7 @@ public interface ClassSpaceService {
 	 * @param commentContent
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceCommentReply(int userId,int replyUserId,int classSpaceId,String commentContent) throws Exception;
+	public int addClassSpaceCommentReply(int userId,int replyUserId,int classSpaceId,String commentContent,int upperId) throws Exception;
 	/**
 	 * 推送给某用户的某班级空间
 	 * @param userId

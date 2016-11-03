@@ -247,7 +247,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpaceCommentReply(int userId, int replyUserId, int classSpaceId, String commentContent) throws Exception {
+	public int addClassSpaceCommentReply(int userId, int replyUserId, int classSpaceId, String commentContent,int upperId) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
 		classSpaceComment.setUserid(userId);
@@ -257,6 +257,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		classSpaceComment.setReplyid(replyUserId);
 		classSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		classSpaceComment.setStatus(CommonTool.int2byte(1));
+		classSpaceComment.setUpperid(upperId);
 		try {
 			classSpaceCommentMapper.insert(classSpaceComment);
 		} catch (Exception e) {

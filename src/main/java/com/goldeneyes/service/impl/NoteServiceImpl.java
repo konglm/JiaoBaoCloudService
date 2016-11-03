@@ -250,7 +250,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentContent) throws Exception {
+	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentContent,int upperId) throws Exception {
 		// TODO Auto-generated method stub
 		NoteComment noteComment = new NoteComment();
 		noteComment.setUserid(userId);
@@ -260,6 +260,7 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setReplyid(replyUserId);
 		noteComment.setReplystatus(CommonTool.int2byte(0));
 		noteComment.setStatus(CommonTool.int2byte(1));
+		noteComment.setUpperid(upperId);
 		try {
 			noteCommentMapper.insert(noteComment);
 		} catch (Exception e) {
