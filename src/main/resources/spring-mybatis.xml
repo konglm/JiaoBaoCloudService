@@ -70,9 +70,9 @@
 	<tx:advice id="userTxAdvice" transaction-manager="transactionManager">
     <tx:attributes>
       <tx:method name="add*" propagation="REQUIRED" read-only="false" 
-                            rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>
+                            rollback-for="java.lang.Exception" />
       <tx:method name="del*" propagation="REQUIRED" read-only="false" 
-                            rollback-for="java.lang.RuntimeException" />
+                            rollback-for="java.lang.Exception" />
       <tx:method name="set*" propagation="REQUIRED" read-only="false" 
                             rollback-for="java.lang.Exception" />
       <tx:method name="get*" propagation="SUPPORTS"/>

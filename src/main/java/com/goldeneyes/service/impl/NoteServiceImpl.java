@@ -31,6 +31,7 @@ import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.NoteService;
 import com.goldeneyes.util.CommonTool;
+import com.goldeneyes.vo.BusinessException;
 
 /**
  * @author konglm
@@ -282,12 +283,15 @@ public class NoteServiceImpl implements NoteService {
 		spaceContentStatus.setSpaceid(noteId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
 		spaceContentStatus.setIslike(CommonTool.int2byte(0));
+		
+		
 
 		try {
 			spaceContentStatusMapper.insert(spaceContentStatus);
 		} catch (Exception e) {
 			return 0;
 		}
+		
 		return 1;
 	}
 

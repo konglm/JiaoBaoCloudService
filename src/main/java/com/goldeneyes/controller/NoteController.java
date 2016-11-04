@@ -31,6 +31,7 @@ import com.goldeneyes.pojo.NoteComment;
 import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.service.NoteService;
 import com.goldeneyes.util.CommonTool;
+import com.goldeneyes.vo.BusinessException;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JSONArray;
