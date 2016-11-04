@@ -178,7 +178,7 @@
   	where u.Status = 1 and u.TabId = #{0}
   </select>
   <!-- 屏蔽某学生某用户空间信息 -->
-  <update id="offUserSpaceById" parameterType="com.goldeneyes.pojo.UserSpace" >
+  <update id="setOffUserSpaceById" parameterType="com.goldeneyes.pojo.UserSpace" >
     update UserSpace
     set 
       Status = 0

@@ -798,8 +798,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/sendNoteForUser")
-	public void sendNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/addNoteForUser")
+	public void addNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
@@ -816,7 +816,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.sendNoteForUser(userId, 1, noteId);
+				success = noteService.addNoteForUser(userId, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -960,8 +960,8 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offNoteById")
-	public void offNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/setOffNoteById")
+	public void setOffNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
@@ -976,7 +976,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.offNoteById(noteId);
+				success = noteService.setOffNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

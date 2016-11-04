@@ -273,7 +273,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int sendNoteForUser(int userId, int spaceType, int noteId) throws Exception {
+	public int addNoteForUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
@@ -349,12 +349,12 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int offNoteById(int noteId) throws Exception {
+	public int setOffNoteById(int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		Note note = new Note();
 		note.setTabid(noteId);
 		try {
-			noteMapper.offNoteById(note);
+			noteMapper.setOffNoteById(note);
 		} catch (Exception e) {
 			return 0;
 		}

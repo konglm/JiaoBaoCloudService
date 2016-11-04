@@ -166,7 +166,7 @@
   	where c.Status = 1 and c.TabId = #{0}
   </select>
   <!-- 屏蔽某学生某班级空间信息 -->
-  <update id="offClassSpaceById" parameterType="com.goldeneyes.pojo.ClassSpace" >
+  <update id="setOffClassSpaceById" parameterType="com.goldeneyes.pojo.ClassSpace" >
     update ClassSpace
     set 
       Status = 0

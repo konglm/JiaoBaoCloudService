@@ -189,7 +189,7 @@
   	where n.Status = 1 and n.TabId = #{0}
   </select>
   <!-- 屏蔽某学生某点到记事信息 -->
-  <update id="offNoteById" parameterType="com.goldeneyes.pojo.Note" >
+  <update id="setOffNoteById" parameterType="com.goldeneyes.pojo.Note" >
     update Note
     set 
       Status = 0

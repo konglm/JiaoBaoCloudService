@@ -275,7 +275,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int sendUserSpaceForUser(int userId, int spaceType, int userSpaceId) throws Exception {
+	public int addUserSpaceForUser(int userId, int spaceType, int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
@@ -351,12 +351,12 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int offUserSpaceById(int userSpaceId) throws Exception {
+	public int setOffUserSpaceById(int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpace userSpace = new UserSpace();
 		userSpace.setTabid(userSpaceId);
 		try {
-			userSpaceMapper.offUserSpaceById(userSpace);
+			userSpaceMapper.setOffUserSpaceById(userSpace);
 		} catch (Exception e) {
 			return 0;
 		}

@@ -270,7 +270,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int sendClassSpaceForUser(int userId, int spaceType, int classSpaceId) throws Exception {
+	public int addClassSpaceForUser(int userId, int spaceType, int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
@@ -346,12 +346,12 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int offClassSpaceById(int classSpaceId) throws Exception {
+	public int setOffClassSpaceById(int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpace classSpace = new ClassSpace();
 		classSpace.setTabid(classSpaceId);
 		try {
-			classSpaceMapper.offClassSpaceById(classSpace);
+			classSpaceMapper.setOffClassSpaceById(classSpace);
 		} catch (Exception e) {
 			return 0;
 		}

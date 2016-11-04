@@ -146,7 +146,7 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int sendClassSpaceForUser(int userId,int spaceType,int classSpaceId) throws Exception;
+	public int addClassSpaceForUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
 	 * 修改某用户某班级空间阅读状态为已读
 	 * @param userId
@@ -174,7 +174,7 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offClassSpaceById(int classSpaceId) throws Exception;
+	public int setOffClassSpaceById(int classSpaceId) throws Exception;
 	/**
 	 * 删除某学生某班级空间（附件一起删除）
 	 * @param classSpaceId

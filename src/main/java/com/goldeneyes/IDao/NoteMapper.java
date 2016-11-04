@@ -74,5 +74,5 @@ public interface NoteMapper {
 	 * @param record
 	 * @return
 	 */
-	int offNoteById(Note record);
+	int setOffNoteById(Note record);
 }

@@ -15,6 +15,7 @@ package com.goldeneyes.util;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -30,6 +31,8 @@ import java.util.HashMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -38,8 +41,11 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 public class EncryptUtil {
+	private static final String MAC_NAME = "HmacSHA1";    
+    private static final String ENCODING = "UTF-8";  
 
 	public static void main(String[] args) throws Exception {
+		System.out.println(hmacSHA1Encrypt("appid=HBuilder&shaketype=reg&uuid=70C72521-2CD6-45DD-AF6E-375654EB734A","jsy309"));
 		System.out.println(desEncrypt("admin", "jsy11111"));
 		System.out.println(desDecrypt("JKG5DkSGuOA=", "jsy11111"));
 		System.out.println(getBase64("admin"));
@@ -70,6 +76,29 @@ public class EncryptUtil {
 		ming = decryptByPrivateKey(mi, priKey);
 		System.err.println(ming);
 	}
+	
+	/**
+	 * HMACSHA1 加密（签名用）
+	 * @param encryptText
+	 * @param encryptKey
+	 * @return
+	 * @throws Exception
+	 */
+	public static String hmacSHA1Encrypt(String encryptText, String encryptKey) throws Exception     
+    {           
+        byte[] data=encryptKey.getBytes(ENCODING);  
+        //根据给定的字节数组构造一个密钥,第二参数指定一个密钥算法的名称  
+        SecretKey secretKey = new SecretKeySpec(data, MAC_NAME);   
+        //生成一个指定 Mac 算法 的 Mac 对象  
+        Mac mac = Mac.getInstance(MAC_NAME);   
+        //用给定密钥初始化 Mac 对象  
+        mac.init(secretKey);    
+          
+        byte[] text = encryptText.getBytes(ENCODING);    
+        //完成 Mac 操作   
+        return new BASE64Encoder().encode(mac.doFinal(text));    
+    }    
+
 
 	/**
 	 * DES加密

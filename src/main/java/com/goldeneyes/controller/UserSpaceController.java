@@ -795,8 +795,8 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/sendUserSpaceForUser")
-	public void sendUserSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/addUserSpaceForUser")
+	public void addUserSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("userSpaceId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
@@ -813,7 +813,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.sendUserSpaceForUser(userId, 3, userSpaceId);
+				success = userSpaceService.addUserSpaceForUser(userId, 3, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -957,8 +957,8 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offUserSpaceById")
-	public void offUserSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/setOffUserSpaceById")
+	public void setOffUserSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
@@ -973,7 +973,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.offUserSpaceById(userSpaceId);
+				success = userSpaceService.setOffUserSpaceById(userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

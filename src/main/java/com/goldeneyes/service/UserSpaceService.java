@@ -147,7 +147,7 @@ public interface UserSpaceService {
 	 * @param userSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int sendUserSpaceForUser(int userId,int spaceType,int userSpaceId) throws Exception;
+	public int addUserSpaceForUser(int userId,int spaceType,int userSpaceId) throws Exception;
 	/**
 	 * 修改某用户某用户空间阅读状态为已读
 	 * @param userId
@@ -175,7 +175,7 @@ public interface UserSpaceService {
 	 * @param userSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offUserSpaceById(int userSpaceId) throws Exception;
+	public int setOffUserSpaceById(int userSpaceId) throws Exception;
 	/**
 	 * 删除某学生某用户空间（附件一起删除）
 	 * @param userSpaceId

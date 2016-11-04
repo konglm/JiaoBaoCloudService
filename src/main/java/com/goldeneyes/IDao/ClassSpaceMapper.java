@@ -74,5 +74,5 @@ public interface ClassSpaceMapper {
 	 * @param record
 	 * @return
 	 */
-	int offClassSpaceById(ClassSpace record);
+	int setOffClassSpaceById(ClassSpace record);
 }

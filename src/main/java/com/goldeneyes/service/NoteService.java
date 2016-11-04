@@ -147,7 +147,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int sendNoteForUser(int userId,int spaceType,int noteId) throws Exception;
+	public int addNoteForUser(int userId,int spaceType,int noteId) throws Exception;
 	/**
 	 * 修改某用户某点到记事阅读状态为已读
 	 * @param userId
@@ -175,7 +175,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int offNoteById(int noteId) throws Exception;
+	public int setOffNoteById(int noteId) throws Exception;
 	/**
 	 * 删除某学生某点到记事（附件一起删除）
 	 * @param noteId

@@ -74,5 +74,5 @@ public interface UserSpaceMapper {
 	 * @param record
 	 * @return
 	 */
-	int offUserSpaceById(UserSpace record);
+	int setOffUserSpaceById(UserSpace record);
 }
