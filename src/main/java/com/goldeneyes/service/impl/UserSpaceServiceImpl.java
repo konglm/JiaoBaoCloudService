@@ -473,7 +473,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceMsg.setStatus(CommonTool.int2byte(1));
 		userSpaceMsg.setUpperid(upperId);
 		try {
-			userSpaceMsgMapper.insert(userSpaceMsg);
+			userSpaceMsgMapper.insert(userSpaceMsg);                                                                                                           
 		} catch (Exception e) {
 			return 0;
 		}

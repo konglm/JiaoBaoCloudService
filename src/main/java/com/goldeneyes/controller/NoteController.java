@@ -54,7 +54,7 @@ public class NoteController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 			return;
 		}
 		JSONArray jsonArray = new JSONArray();
@@ -70,7 +70,7 @@ public class NoteController {
 		}
 		jsonData.put("Data", jsonArray);
 		// 在这里输出，手机端就拿到web返回的值了
-		CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+		CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 	}
 
 	/**
@@ -84,13 +84,13 @@ public class NoteController {
 	public void getNoReadNotesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int cnt = 0;
@@ -98,12 +98,12 @@ public class NoteController {
 				cnt = noteService.getNoReadNotesCntByUser(userId, 1);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			jsonData.put("Result", cnt);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -118,7 +118,7 @@ public class NoteController {
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -128,7 +128,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -140,7 +140,7 @@ public class NoteController {
 				notes = noteService.getNoReadNotesByUser(userId, 1, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -160,7 +160,7 @@ public class NoteController {
 			jsonData.put("TotalPage", totalPage);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -175,7 +175,7 @@ public class NoteController {
 	public void getIsLikeNoteByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
@@ -183,7 +183,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -192,12 +192,12 @@ public class NoteController {
 				isLike = noteService.getIsLikeNoteByUser(userId, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			jsonData.put("Result", isLike);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 	
@@ -212,13 +212,13 @@ public class NoteController {
 	public void getNoteCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int cnt = 0;
@@ -226,13 +226,13 @@ public class NoteController {
 				cnt = noteService.getNoteCommentsCntById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 
 			jsonData.put("Result", cnt);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -248,7 +248,7 @@ public class NoteController {
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			int pageIndex = 0;
@@ -258,7 +258,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -270,7 +270,7 @@ public class NoteController {
 				noteComments = noteService.getNoteCommentsById(noteId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -288,7 +288,7 @@ public class NoteController {
 			jsonData.put("TotalPage", totalPage);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -303,13 +303,13 @@ public class NoteController {
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			List<Integer> userIds = new ArrayList<Integer>();
@@ -317,7 +317,7 @@ public class NoteController {
 				userIds = noteService.getIsLikeUsersById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -328,7 +328,7 @@ public class NoteController {
 			}
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -343,13 +343,13 @@ public class NoteController {
 	public void getNoteCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int cnt = 0;
@@ -357,12 +357,12 @@ public class NoteController {
 				cnt = noteService.getNoteCommentReplysCntByUser(userId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			jsonData.put("Result", cnt);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -377,7 +377,7 @@ public class NoteController {
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -387,7 +387,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -399,7 +399,7 @@ public class NoteController {
 				noteComments = noteService.getNoteCommentReplysByUser(userId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -415,7 +415,7 @@ public class NoteController {
 			jsonData.put("TotalPage", totalPage);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 	
@@ -430,13 +430,13 @@ public class NoteController {
 	public void getNotesCntByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("studentId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
 			try {
 				studentId = Integer.parseInt(request.getParameter("studentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int cnt = 0;
@@ -444,13 +444,13 @@ public class NoteController {
 				cnt = noteService.getNotesCntByStudent(studentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 
 			jsonData.put("Result", cnt);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -465,7 +465,7 @@ public class NoteController {
 	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
 			int pageIndex = 0;
@@ -475,7 +475,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -487,7 +487,7 @@ public class NoteController {
 				notes = noteService.getNotesByStudent(studentId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -507,7 +507,7 @@ public class NoteController {
 			jsonData.put("TotalPage", totalPage);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -522,13 +522,13 @@ public class NoteController {
 	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			Note note = new Note();
@@ -536,7 +536,7 @@ public class NoteController {
 				note = noteService.getNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			jsonData.put("StudentId", note.getStudentid());
@@ -547,7 +547,7 @@ public class NoteController {
 			jsonData.put("NoteType", note.getNotetype());
 			jsonData.put("CheckType", note.getChecktype());
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -562,13 +562,13 @@ public class NoteController {
 	public void getNoteEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 			List<NoteEnc> noteEncs = new ArrayList<NoteEnc>();
@@ -576,7 +576,7 @@ public class NoteController {
 				noteEncs = noteService.getNoteEncById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			JSONArray jsonArray = new JSONArray();
@@ -594,7 +594,7 @@ public class NoteController {
 			}
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 
@@ -611,7 +611,7 @@ public class NoteController {
 		if ((request.getParameter("studentId") == null) || (request.getParameter("msgContent") == null)
 				|| (request.getParameter("teacherId") == null) || (request.getParameter("noteType") == null)
 				|| (request.getParameter("checkType") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
 			String msgContent = "";
@@ -625,7 +625,7 @@ public class NoteController {
 				noteType = Integer.parseInt(request.getParameter("noteType"));
 				checkType = Integer.parseInt(request.getParameter("checkType"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -634,15 +634,15 @@ public class NoteController {
 				id = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (id == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("ID", id);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -660,7 +660,7 @@ public class NoteController {
 		if ((request.getParameter("noteId") == null) || (request.getParameter("encType") == null)
 				|| (request.getParameter("encAddr") == null) || (request.getParameter("encImg") == null)
 				|| (request.getParameter("teacherId") == null) || (request.getParameter("encOrder") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			String encType = "";
@@ -676,7 +676,7 @@ public class NoteController {
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 				encOrder = Integer.parseInt(request.getParameter("encOrder"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -685,15 +685,15 @@ public class NoteController {
 				success = noteService.addNoteEnc(noteId, encType, encAddr, encImg, teacherId, encOrder);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -710,7 +710,7 @@ public class NoteController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			String commentContent = "";
@@ -720,7 +720,7 @@ public class NoteController {
 				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -729,15 +729,15 @@ public class NoteController {
 				success = noteService.addNoteComment(userId, noteId, commentContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -755,7 +755,7 @@ public class NoteController {
 		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
 				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)
 				|| (request.getParameter("upperId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			String commentContent = "";
@@ -769,7 +769,7 @@ public class NoteController {
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
 				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -778,15 +778,15 @@ public class NoteController {
 				success = noteService.addNoteCommentReply(userId, replyUserId, noteId, commentContent, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -802,7 +802,7 @@ public class NoteController {
 	public void sendNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
@@ -810,7 +810,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -819,15 +819,15 @@ public class NoteController {
 				success = noteService.sendNoteForUser(userId, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -843,7 +843,7 @@ public class NoteController {
 	public void setNoteReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
@@ -851,7 +851,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -860,15 +860,15 @@ public class NoteController {
 				success = noteService.setNoteReadByUser(userId, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -884,7 +884,7 @@ public class NoteController {
 	public void setNoteLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
@@ -892,7 +892,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -901,15 +901,15 @@ public class NoteController {
 				success = noteService.setNoteLikeByUser(userId, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -925,13 +925,13 @@ public class NoteController {
 	public void setNoteCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteCommentId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteCommentId = 0;
 			try {
 				noteCommentId = Integer.parseInt(request.getParameter("noteCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -940,15 +940,15 @@ public class NoteController {
 				success = noteService.setNoteCommentReplyById(noteCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -964,13 +964,13 @@ public class NoteController {
 	public void offNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -979,15 +979,15 @@ public class NoteController {
 				success = noteService.offNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -1003,13 +1003,13 @@ public class NoteController {
 	public void delNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -1018,15 +1018,15 @@ public class NoteController {
 				success = noteService.delNoteById(noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 		}
 	}
@@ -1042,13 +1042,13 @@ public class NoteController {
 	public void delNoteCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteCommentId") == null) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 5).toString());
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteCommentId = 0;
 			try {
 				noteCommentId = Integer.parseInt(request.getParameter("noteCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 3).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 				return;
 			}
 
@@ -1057,15 +1057,15 @@ public class NoteController {
 				success = noteService.delNoteCommentById(noteCommentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 2).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 4).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, 1).toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 
 		}

@@ -71,32 +71,32 @@ public class CommonTool {
 	 * @param jArray
 	 * @return
 	 */
-	public static JSONObject outJson(JSONObject jObject,int outResult){
+	public static JSONObject outJson(JSONObject jObject,String outResult){
 		JSONObject jsonobj = new JSONObject();
 		jsonobj.put("RspData", jObject);
 		switch(outResult){
-			case 1:{
-				jsonobj.put("RspCode", "1");
+			case "0000":{
+				jsonobj.put("RspCode", "0000");
 				jsonobj.put("RspTxt", "正常");
 				break;
 			}
-			case 2:{
-				jsonobj.put("RspCode", "2");
+			case "1001":{
+				jsonobj.put("RspCode", "1001");
 				jsonobj.put("RspTxt", "数据库异常");
 				break;
 			}
-			case 3:{
-				jsonobj.put("RspCode", "3");
-				jsonobj.put("RspTxt", "参数错误");
+			case "1002":{
+				jsonobj.put("RspCode", "1002");
+				jsonobj.put("RspTxt", "参数类型错误");
 				break;
 			}
-			case 4:{
-				jsonobj.put("RspCode", "4");
+			case "1003":{
+				jsonobj.put("RspCode", "1003");
 				jsonobj.put("RspTxt", "数据库更新失败");
 				break;
 			}
-			case 5:{
-				jsonobj.put("RspCode", "5");
+			case "1004":{
+				jsonobj.put("RspCode", "1004");
 				jsonobj.put("RspTxt", "参数不全");
 				break;
 			}
