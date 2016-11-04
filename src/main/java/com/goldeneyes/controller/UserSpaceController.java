@@ -46,7 +46,7 @@ public class UserSpaceController {
 	@Resource
 	UserSpaceService userSpaceService;
 
-	@RequestMapping("/getAllUserSpaces.do")
+	@RequestMapping("/getAllUserSpaces")
 	public void getAllUserSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		List<UserSpace> userSpaces = new ArrayList<UserSpace>();
@@ -81,7 +81,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesCntByUser.do")
+	@RequestMapping("/getNoReadUserSpacesCntByUser")
 	public void getNoReadUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -115,7 +115,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesByUser.do")
+	@RequestMapping("/getNoReadUserSpacesByUser")
 	public void getNoReadUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
@@ -172,7 +172,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUserSpaceByUser.do")
+	@RequestMapping("/getIsLikeUserSpaceByUser")
 	public void getIsLikeUserSpaceByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("userSpaceId") == null)) {
@@ -209,7 +209,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentsCntById.do")
+	@RequestMapping("/getUserSpaceCommentsCntById")
 	public void getUserSpaceCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -243,7 +243,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentsById.do")
+	@RequestMapping("/getUserSpaceCommentsById")
 	public void getUserSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("pageIndex") == null)
@@ -299,7 +299,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersById.do")
+	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -339,7 +339,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentReplysCntByUser.do")
+	@RequestMapping("/getUserSpaceCommentReplysCntByUser")
 	public void getUserSpaceCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response,
 			Model model) {
 		JSONObject jsonData = new JSONObject();
@@ -374,7 +374,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentReplysByUser.do")
+	@RequestMapping("/getUserSpaceCommentReplysByUser")
 	public void getUserSpaceCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
@@ -428,7 +428,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpacesCntByUser.do")
+	@RequestMapping("/getUserSpacesCntByUser")
 	public void getUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -462,7 +462,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpacesByUser.do")
+	@RequestMapping("/getUserSpacesByUser")
 	public void getUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
@@ -519,7 +519,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceById.do")
+	@RequestMapping("/getUserSpaceById")
 	public void getUserSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -558,7 +558,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceEncById.do")
+	@RequestMapping("/getUserSpaceEncById")
 	public void getUserSpaceEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -605,7 +605,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpace.do")
+	@RequestMapping("/addUserSpace")
 	public void addUserSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("msgContent") == null)
@@ -651,7 +651,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceEnc.do")
+	@RequestMapping("/addUserSpaceEnc")
 	public void addUserSpaceEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("encType") == null)
@@ -702,7 +702,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceComment.do")
+	@RequestMapping("/addUserSpaceComment")
 	public void addUserSpaceComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("commentContent") == null)
@@ -746,7 +746,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceCommentReply.do")
+	@RequestMapping("/addUserSpaceCommentReply")
 	public void addUserSpaceCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("commentContent") == null)
@@ -795,7 +795,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/sendUserSpaceForUser.do")
+	@RequestMapping("/sendUserSpaceForUser")
 	public void sendUserSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("userSpaceId") == null)) {
@@ -836,7 +836,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceReadByUser.do")
+	@RequestMapping("/setUserSpaceReadByUser")
 	public void setUserSpaceReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("userSpaceId") == null)) {
@@ -877,7 +877,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceLikeByUser.do")
+	@RequestMapping("/setUserSpaceLikeByUser")
 	public void setUserSpaceLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("userSpaceId") == null)) {
@@ -918,7 +918,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceCommentReplyById.do")
+	@RequestMapping("/setUserSpaceCommentReplyById")
 	public void setUserSpaceCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceCommentId") == null) {
@@ -957,7 +957,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offUserSpaceById.do")
+	@RequestMapping("/offUserSpaceById")
 	public void offUserSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -996,7 +996,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delUserSpaceById.do")
+	@RequestMapping("/delUserSpaceById")
 	public void delUserSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -1035,7 +1035,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delUserSpaceCommentById.do")
+	@RequestMapping("/delUserSpaceCommentById")
 	public void delUserSpaceCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceCommentId") == null) {
@@ -1075,7 +1075,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgsCntById.do")
+	@RequestMapping("/getUserSpaceMsgsCntById")
 	public void getUserSpaceMsgsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceId") == null) {
@@ -1110,7 +1110,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgsById.do")
+	@RequestMapping("/getUserSpaceMsgsById")
 	public void getUserSpaceMsgsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -1163,7 +1163,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgReplysCntByUser.do")
+	@RequestMapping("/getUserSpaceMsgReplysCntByUser")
 	public void getUserSpaceMsgReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -1197,7 +1197,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgReplysByUser.do")
+	@RequestMapping("/getUserSpaceMsgReplysByUser")
 	public void getUserSpaceMsgReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
@@ -1251,7 +1251,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceMsg.do")
+	@RequestMapping("/addUserSpaceMsg")
 	public void addUserSpaceMsg(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("msgStr") == null)
@@ -1295,7 +1295,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceMsgReply.do")
+	@RequestMapping("/addUserSpaceMsgReply")
 	public void addUserSpaceMsgReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userSpaceId") == null) || (request.getParameter("msgStr") == null)
@@ -1344,7 +1344,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceMsgReplyById.do")
+	@RequestMapping("/setUserSpaceMsgReplyById")
 	public void setUserSpaceMsgReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceMsgId") == null) {
@@ -1383,7 +1383,7 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delUserSpaceMsgById.do")
+	@RequestMapping("/delUserSpaceMsgById")
 	public void delUserSpaceMsgById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userSpaceMsgId") == null) {

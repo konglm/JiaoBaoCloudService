@@ -82,7 +82,7 @@ public class CommonTool {
 			}
 			case "1001":{
 				jsonobj.put("RspCode", "1001");
-				jsonobj.put("RspTxt", "数据库异常");
+				jsonobj.put("RspTxt", "数据库连接异常");
 				break;
 			}
 			case "1002":{

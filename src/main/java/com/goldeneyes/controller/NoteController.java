@@ -45,7 +45,7 @@ public class NoteController {
 	@Resource
 	NoteService noteService;
 
-	@RequestMapping("/getAllNotes.do")
+	@RequestMapping("/getAllNotes")
 	public void getAllNote(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		List<Note> notes = new ArrayList<Note>();
@@ -80,7 +80,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadNotesCntByUser.do")
+	@RequestMapping("/getNoReadNotesCntByUser")
 	public void getNoReadNotesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -114,7 +114,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadNotesByUser.do")
+	@RequestMapping("/getNoReadNotesByUser")
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -171,7 +171,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeNoteByUser.do")
+	@RequestMapping("/getIsLikeNoteByUser")
 	public void getIsLikeNoteByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
@@ -208,7 +208,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentsCntById.do")
+	@RequestMapping("/getNoteCommentsCntById")
 	public void getNoteCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -244,7 +244,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentsById.do")
+	@RequestMapping("/getNoteCommentsById")
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -299,7 +299,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersById.do")
+	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -339,7 +339,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentReplysCntByUser.do")
+	@RequestMapping("/getNoteCommentReplysCntByUser")
 	public void getNoteCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -373,7 +373,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteCommentReplysByUser.do")
+	@RequestMapping("/getNoteCommentReplysByUser")
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -426,7 +426,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNotesCntByStudent.do")
+	@RequestMapping("/getNotesCntByStudent")
 	public void getNotesCntByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("studentId") == null) {
@@ -461,7 +461,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNotesByStudent.do")
+	@RequestMapping("/getNotesByStudent")
 	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -518,7 +518,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteById.do")
+	@RequestMapping("/getNoteById")
 	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -558,7 +558,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteEncById.do")
+	@RequestMapping("/getNoteEncById")
 	public void getNoteEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -605,7 +605,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addNote.do")
+	@RequestMapping("/addNote")
 	public void addNote(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("studentId") == null) || (request.getParameter("msgContent") == null)
@@ -654,7 +654,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addNoteEnc.do")
+	@RequestMapping("/addNoteEnc")
 	public void addNoteEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("encType") == null)
@@ -705,7 +705,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addNoteComment.do")
+	@RequestMapping("/addNoteComment")
 	public void addNoteComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
@@ -749,7 +749,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addNoteCommentReply.do")
+	@RequestMapping("/addNoteCommentReply")
 	public void addNoteCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("commentContent") == null)
@@ -798,7 +798,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/sendNoteForUser.do")
+	@RequestMapping("/sendNoteForUser")
 	public void sendNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
@@ -839,7 +839,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setNoteReadByUser.do")
+	@RequestMapping("/setNoteReadByUser")
 	public void setNoteReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
@@ -880,7 +880,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setNoteLikeByUser.do")
+	@RequestMapping("/setNoteLikeByUser")
 	public void setNoteLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("noteId") == null)) {
@@ -921,7 +921,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setNoteCommentReplyById.do")
+	@RequestMapping("/setNoteCommentReplyById")
 	public void setNoteCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteCommentId") == null) {
@@ -960,7 +960,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offNoteById.do")
+	@RequestMapping("/offNoteById")
 	public void offNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -999,7 +999,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delNoteById.do")
+	@RequestMapping("/delNoteById")
 	public void delNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteId") == null) {
@@ -1038,7 +1038,7 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delNoteCommentById.do")
+	@RequestMapping("/delNoteCommentById")
 	public void delNoteCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("noteCommentId") == null) {

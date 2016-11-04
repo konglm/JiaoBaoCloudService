@@ -45,7 +45,7 @@ public class ClassSpaceController {
 	@Resource
 	ClassSpaceService classSpaceService;
 
-	@RequestMapping("/getAllClassSpaces.do")
+	@RequestMapping("/getAllClassSpaces")
 	public void getAllClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		List<ClassSpace> classSpaces = new ArrayList<ClassSpace>();
@@ -80,7 +80,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadClassSpacesCntByUser.do")
+	@RequestMapping("/getNoReadClassSpacesCntByUser")
 	public void getNoReadClassSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -114,7 +114,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadClassSpacesByUser.do")
+	@RequestMapping("/getNoReadClassSpacesByUser")
 	public void getNoReadClassSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -169,7 +169,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeClassSpaceByUser.do")
+	@RequestMapping("/getIsLikeClassSpaceByUser")
 	public void getIsLikeClassSpaceByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
@@ -206,7 +206,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceCommentsCntById.do")
+	@RequestMapping("/getClassSpaceCommentsCntById")
 	public void getClassSpaceCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -240,7 +240,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceCommentsById.do")
+	@RequestMapping("/getClassSpaceCommentsById")
 	public void getClassSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -295,7 +295,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersById.do")
+	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -335,7 +335,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceCommentReplysCntByUser.do")
+	@RequestMapping("/getClassSpaceCommentReplysCntByUser")
 	public void getClassSpaceCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("userId") == null) {
@@ -369,7 +369,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceCommentReplysByUser.do")
+	@RequestMapping("/getClassSpaceCommentReplysByUser")
 	public void getClassSpaceCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -422,7 +422,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpacesCntByClass.do")
+	@RequestMapping("/getClassSpacesCntByClass")
 	public void getClassSpacesCntByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classId") == null) {
@@ -456,7 +456,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpacesByClass.do")
+	@RequestMapping("/getClassSpacesByClass")
 	public void getClassSpacesByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
@@ -511,7 +511,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceById.do")
+	@RequestMapping("/getClassSpaceById")
 	public void getClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -549,7 +549,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceEncById.do")
+	@RequestMapping("/getClassSpaceEncById")
 	public void getClassSpaceEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -596,7 +596,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addClassSpace.do")
+	@RequestMapping("/addClassSpace")
 	public void addClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classId") == null) || (request.getParameter("msgContent") == null)
@@ -642,7 +642,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addClassSpaceEnc.do")
+	@RequestMapping("/addClassSpaceEnc")
 	public void addClassSpaceEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("encType") == null)
@@ -695,7 +695,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addClassSpaceComment.do")
+	@RequestMapping("/addClassSpaceComment")
 	public void addClassSpaceComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
@@ -741,7 +741,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addClassSpaceCommentReply.do")
+	@RequestMapping("/addClassSpaceCommentReply")
 	public void addClassSpaceCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
@@ -792,7 +792,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/sendClassSpaceForUser.do")
+	@RequestMapping("/sendClassSpaceForUser")
 	public void sendClassSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
@@ -835,7 +835,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setClassSpaceReadByUser.do")
+	@RequestMapping("/setClassSpaceReadByUser")
 	public void setClassSpaceReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
@@ -878,7 +878,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setClassSpaceLikeByUser.do")
+	@RequestMapping("/setClassSpaceLikeByUser")
 	public void setClassSpaceLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
@@ -921,7 +921,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setClassSpaceCommentReplyById.do")
+	@RequestMapping("/setClassSpaceCommentReplyById")
 	public void setClassSpaceCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceCommentId") == null) {
@@ -962,7 +962,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/offClassSpaceById.do")
+	@RequestMapping("/offClassSpaceById")
 	public void offClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -1003,7 +1003,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delClassSpaceById.do")
+	@RequestMapping("/delClassSpaceById")
 	public void delClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceId") == null) {
@@ -1044,7 +1044,7 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delClassSpaceCommentById.do")
+	@RequestMapping("/delClassSpaceCommentById")
 	public void delClassSpaceCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
 		if (request.getParameter("classSpaceCommentId") == null) {
