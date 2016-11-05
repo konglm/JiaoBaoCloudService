@@ -14,9 +14,11 @@
 
 package com.goldeneyes.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -118,10 +120,12 @@ public class NoteController {
 	@RequestMapping("/getNoReadNotesByUser")
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
+				|| (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0)
+				|| (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -203,7 +207,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
-	
+
 	/**
 	 * 获取点到记事所有评论条数
 	 * 
@@ -239,7 +243,6 @@ public class NoteController {
 		}
 	}
 
-
 	/**
 	 * 获取点到记事所有评论
 	 * 
@@ -250,11 +253,13 @@ public class NoteController {
 	@RequestMapping("/getNoteCommentsById")
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null)
+				|| (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
-		} else{
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0)
+				|| (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+		} else {
 			int noteId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
@@ -272,7 +277,7 @@ public class NoteController {
 			try {
 				totalCnt = noteService.getNoteCommentsCntById(noteId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				noteComments = noteService.getNoteCommentsById(noteId,pageIndex,pageSize);
+				noteComments = noteService.getNoteCommentsById(noteId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -381,10 +386,12 @@ public class NoteController {
 	@RequestMapping("/getNoteCommentReplysByUser")
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null)
+				|| (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0)
+				|| (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -403,7 +410,7 @@ public class NoteController {
 			try {
 				totalCnt = noteService.getNoteCommentReplysCntByUser(userId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				noteComments = noteService.getNoteCommentReplysByUser(userId,pageIndex,pageSize);
+				noteComments = noteService.getNoteCommentReplysByUser(userId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -425,7 +432,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
-	
+
 	/**
 	 * 获取某学生点到记事条数
 	 * 
@@ -471,10 +478,33 @@ public class NoteController {
 	@RequestMapping("/getNotesByStudent")
 	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		System.out.println("studentId1=" + request.getParameter("studentId"));
+		System.out.println("pageIndex1=" + request.getParameter("pageIndex"));
+		System.out.println("pageSize1=" + request.getParameter("pageSize"));
+		System.out.println("studentId2=" + request.getAttribute("studentId"));
+		System.out.println("pageIndex2=" + request.getAttribute("pageIndex"));
+		System.out.println("pageSize2=" + request.getAttribute("pageSize"));
+		Map<String, String[]> params = request.getParameterMap();
+		String queryString = "";
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				queryString += key + "=" + value + "&";
+			}
+		}
+		try {
+			System.out.println("post=" + CommonTool.getRequestPostStr(request));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null)
+				|| (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0)
+				|| (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 		} else {
 			int studentId = 0;
 			int pageIndex = 0;
@@ -493,7 +523,7 @@ public class NoteController {
 			try {
 				totalCnt = noteService.getNotesCntByStudent(studentId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				notes = noteService.getNotesByStudent(studentId,pageIndex,pageSize);
+				notes = noteService.getNotesByStudent(studentId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
