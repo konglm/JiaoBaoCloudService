@@ -138,7 +138,7 @@ public class UserSpaceController {
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
 				totalCnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaces = userSpaceService.getNoReadUserSpacesByUser(userId, 3, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -266,7 +266,7 @@ public class UserSpaceController {
 			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
 			try {
 				totalCnt = userSpaceService.getUserSpaceCommentsCntById(userSpaceId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaceComments = userSpaceService.getUserSpaceCommentsById(userSpaceId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -397,7 +397,7 @@ public class UserSpaceController {
 			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
 			try {
 				totalCnt = userSpaceService.getUserSpaceCommentReplysCntByUser(userId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaceComments = userSpaceService.getUserSpaceCommentReplysByUser(userId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -485,7 +485,7 @@ public class UserSpaceController {
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
 				totalCnt = userSpaceService.getUserSpacesCntByUser(userId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaces = userSpaceService.getUserSpacesByUser(userId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -1220,7 +1220,7 @@ public class UserSpaceController {
 			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
 			try {
 				totalCnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaceMsgs = userSpaceService.getUserSpaceMsgReplysByUser(userId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

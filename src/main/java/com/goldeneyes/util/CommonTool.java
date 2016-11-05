@@ -33,11 +33,20 @@ public class CommonTool {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println(getTotalPage(8,2));
+	}
 
+	public static int getTotalPage(int totalCnt, int pageSize) {
+		if (totalCnt % pageSize == 0) {
+			return totalCnt / pageSize;
+		} else {
+			return totalCnt / pageSize + 1;
+		}
 	}
 
 	/**
 	 * 输出json字符串
+	 * 
 	 * @param response
 	 * @param str
 	 */
@@ -55,8 +64,10 @@ public class CommonTool {
 			}
 		}
 	}
+
 	/**
 	 * Int转Byte
+	 * 
 	 * @param res
 	 * @return
 	 */
@@ -66,62 +77,64 @@ public class CommonTool {
 		targets[0] = (byte) (res & 0xff);// 最低位
 		return targets[0];
 	}
+
 	/**
 	 * 封装JSON返回
+	 * 
 	 * @param jArray
 	 * @return
 	 */
-	public static JSONObject outJson(JSONObject jObject,String outResult){
+	public static JSONObject outJson(JSONObject jObject, String outResult) {
 		JSONObject jsonobj = new JSONObject();
 		jsonobj.put("RspData", jObject);
-		switch(outResult){
-			case "0000":{
-				jsonobj.put("RspCode", "0000");
-				jsonobj.put("RspTxt", "正常");
-				break;
-			}
-			case "1001":{
-				jsonobj.put("RspCode", "1001");
-				jsonobj.put("RspTxt", "数据库连接异常");
-				break;
-			}
-			case "1002":{
-				jsonobj.put("RspCode", "1002");
-				jsonobj.put("RspTxt", "参数类型错误");
-				break;
-			}
-			case "1003":{
-				jsonobj.put("RspCode", "1003");
-				jsonobj.put("RspTxt", "数据库更新失败");
-				break;
-			}
-			case "1004":{
-				jsonobj.put("RspCode", "1004");
-				jsonobj.put("RspTxt", "参数不全");
-				break;
-			}
-			case "1005":{
-				jsonobj.put("RspCode", "1005");
-				jsonobj.put("RspTxt", "参数值为空");
-				break;
-			}
-			case "1006":{
-				jsonobj.put("RspCode", "1006");
-				jsonobj.put("RspTxt", "上传失败");
-				break;
-			}
-			case "1007":{
-				jsonobj.put("RspCode", "1007");
-				jsonobj.put("RspTxt", "Url被篡改");
-				break;
-			}
-			case "1008":{
-				jsonobj.put("RspCode", "1008");
-				jsonobj.put("RspTxt", "令牌已过期或不存在");
-				break;
-			}
+		switch (outResult) {
+		case "0000": {
+			jsonobj.put("RspCode", "0000");
+			jsonobj.put("RspTxt", "正常");
+			break;
 		}
-		
+		case "1001": {
+			jsonobj.put("RspCode", "1001");
+			jsonobj.put("RspTxt", "数据库连接异常");
+			break;
+		}
+		case "1002": {
+			jsonobj.put("RspCode", "1002");
+			jsonobj.put("RspTxt", "参数类型错误");
+			break;
+		}
+		case "1003": {
+			jsonobj.put("RspCode", "1003");
+			jsonobj.put("RspTxt", "数据库更新失败");
+			break;
+		}
+		case "1004": {
+			jsonobj.put("RspCode", "1004");
+			jsonobj.put("RspTxt", "参数不全");
+			break;
+		}
+		case "1005": {
+			jsonobj.put("RspCode", "1005");
+			jsonobj.put("RspTxt", "参数值为空");
+			break;
+		}
+		case "1006": {
+			jsonobj.put("RspCode", "1006");
+			jsonobj.put("RspTxt", "上传失败");
+			break;
+		}
+		case "1007": {
+			jsonobj.put("RspCode", "1007");
+			jsonobj.put("RspTxt", "Url被篡改");
+			break;
+		}
+		case "1008": {
+			jsonobj.put("RspCode", "1008");
+			jsonobj.put("RspTxt", "令牌已过期或不存在");
+			break;
+		}
+		}
+
 		return jsonobj;
 	}
 

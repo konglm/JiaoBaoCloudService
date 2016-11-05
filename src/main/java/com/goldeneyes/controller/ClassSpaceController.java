@@ -136,7 +136,7 @@ public class ClassSpaceController {
 			List<ClassSpace> classSpaces = new ArrayList<ClassSpace>();
 			try {
 				totalCnt = classSpaceService.getNoReadClassSpacesCntByUser(userId, 2);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				classSpaces = classSpaceService.getNoReadClassSpacesByUser(userId, 2,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -262,7 +262,7 @@ public class ClassSpaceController {
 			List<ClassSpaceComment> classSpaceComments = new ArrayList<ClassSpaceComment>();
 			try {
 				totalCnt = classSpaceService.getClassSpaceCommentsCntById(classSpaceId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				classSpaceComments = classSpaceService.getClassSpaceCommentsById(classSpaceId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -391,7 +391,7 @@ public class ClassSpaceController {
 			List<ClassSpaceComment> classSpaceComments = new ArrayList<ClassSpaceComment>();
 			try {
 				totalCnt = classSpaceService.getClassSpaceCommentReplysCntByUser(userId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				classSpaceComments = classSpaceService.getClassSpaceCommentReplysByUser(userId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -478,7 +478,7 @@ public class ClassSpaceController {
 			List<ClassSpace> classSpaces = new ArrayList<ClassSpace>();
 			try {
 				totalCnt = classSpaceService.getClassSpacesCntByClass(classId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				classSpaces = classSpaceService.getClassSpacesByClass(classId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

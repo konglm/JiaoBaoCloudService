@@ -137,7 +137,7 @@ public class NoteController {
 			List<Note> notes = new ArrayList<Note>();
 			try {
 				totalCnt = noteService.getNoReadNotesCntByUser(userId, 1);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				notes = noteService.getNoReadNotesByUser(userId, 1, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -267,7 +267,7 @@ public class NoteController {
 			List<NoteComment> noteComments = new ArrayList<NoteComment>();
 			try {
 				totalCnt = noteService.getNoteCommentsCntById(noteId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				noteComments = noteService.getNoteCommentsById(noteId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -396,7 +396,7 @@ public class NoteController {
 			List<NoteComment> noteComments = new ArrayList<NoteComment>();
 			try {
 				totalCnt = noteService.getNoteCommentReplysCntByUser(userId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				noteComments = noteService.getNoteCommentReplysByUser(userId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -484,7 +484,7 @@ public class NoteController {
 			List<Note> notes = new ArrayList<Note>();
 			try {
 				totalCnt = noteService.getNotesCntByStudent(studentId);
-				totalPage = totalCnt/pageSize + 1;
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				notes = noteService.getNotesByStudent(studentId,pageIndex,pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
