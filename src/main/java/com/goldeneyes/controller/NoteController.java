@@ -120,6 +120,8 @@ public class NoteController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -250,7 +252,9 @@ public class NoteController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("noteId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+		} else{
 			int noteId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
@@ -379,6 +383,8 @@ public class NoteController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -467,6 +473,8 @@ public class NoteController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("studentId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int studentId = 0;
 			int pageIndex = 0;

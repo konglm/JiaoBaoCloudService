@@ -119,6 +119,8 @@ public class ClassSpaceController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -245,6 +247,8 @@ public class ClassSpaceController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int classSpaceId = 0;
 			int pageIndex = 0;
@@ -374,6 +378,8 @@ public class ClassSpaceController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -461,6 +467,8 @@ public class ClassSpaceController {
 		JSONObject jsonData = new JSONObject();
 		if ((request.getParameter("classId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int classId = 0;
 			int pageIndex = 0;

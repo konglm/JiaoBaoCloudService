@@ -120,16 +120,21 @@ public class CommonTool {
 		}
 		case "1006": {
 			jsonobj.put("RspCode", "1006");
-			jsonobj.put("RspTxt", "上传失败");
+			jsonobj.put("RspTxt", "分页相关参数值必须大于零");
 			break;
 		}
 		case "1007": {
 			jsonobj.put("RspCode", "1007");
-			jsonobj.put("RspTxt", "Url被篡改");
+			jsonobj.put("RspTxt", "上传档案失败");
 			break;
 		}
 		case "1008": {
 			jsonobj.put("RspCode", "1008");
+			jsonobj.put("RspTxt", "Url被篡改");
+			break;
+		}
+		case "1009": {
+			jsonobj.put("RspCode", "1009");
 			jsonobj.put("RspTxt", "令牌已过期或不存在");
 			break;
 		}
