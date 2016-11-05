@@ -91,7 +91,7 @@ public class NoteController {
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -131,7 +131,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -186,7 +186,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -221,7 +221,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -263,7 +263,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -314,7 +314,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			List<Integer> userIds = new ArrayList<Integer>();
@@ -354,7 +354,7 @@ public class NoteController {
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -394,7 +394,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -443,7 +443,7 @@ public class NoteController {
 			try {
 				studentId = Integer.parseInt(request.getParameter("studentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -484,7 +484,7 @@ public class NoteController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -537,7 +537,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			Note note = new Note();
@@ -577,7 +577,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			List<NoteEnc> noteEncs = new ArrayList<NoteEnc>();
@@ -634,7 +634,7 @@ public class NoteController {
 				noteType = Integer.parseInt(request.getParameter("noteType"));
 				checkType = Integer.parseInt(request.getParameter("checkType"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -647,7 +647,7 @@ public class NoteController {
 				return;
 			}
 			if (id == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("ID", id);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -685,7 +685,7 @@ public class NoteController {
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 				encOrder = Integer.parseInt(request.getParameter("encOrder"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -698,7 +698,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -729,7 +729,7 @@ public class NoteController {
 				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -742,7 +742,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -778,7 +778,7 @@ public class NoteController {
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
 				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -791,7 +791,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -819,7 +819,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -832,7 +832,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -860,7 +860,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -873,7 +873,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -901,7 +901,7 @@ public class NoteController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -914,7 +914,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -940,7 +940,7 @@ public class NoteController {
 			try {
 				noteCommentId = Integer.parseInt(request.getParameter("noteCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -953,7 +953,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -979,7 +979,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -992,7 +992,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -1018,7 +1018,7 @@ public class NoteController {
 			try {
 				noteId = Integer.parseInt(request.getParameter("noteId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -1031,7 +1031,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
@@ -1057,7 +1057,7 @@ public class NoteController {
 			try {
 				noteCommentId = Integer.parseInt(request.getParameter("noteCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -1070,7 +1070,7 @@ public class NoteController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了

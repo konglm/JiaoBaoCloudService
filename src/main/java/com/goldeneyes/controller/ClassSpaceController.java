@@ -90,7 +90,7 @@ public class ClassSpaceController {
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -130,7 +130,7 @@ public class ClassSpaceController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -183,7 +183,7 @@ public class ClassSpaceController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -218,7 +218,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -258,7 +258,7 @@ public class ClassSpaceController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -309,7 +309,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			List<Integer> userIds = new ArrayList<Integer>();
@@ -349,7 +349,7 @@ public class ClassSpaceController {
 			try {
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -389,7 +389,7 @@ public class ClassSpaceController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -438,7 +438,7 @@ public class ClassSpaceController {
 			try {
 				classId = Integer.parseInt(request.getParameter("classId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int cnt = 0;
@@ -478,7 +478,7 @@ public class ClassSpaceController {
 				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
 				pageSize = Integer.parseInt(request.getParameter("pageSize"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -529,7 +529,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			ClassSpace classSpace = new ClassSpace();
@@ -567,7 +567,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			List<ClassSpaceEnc> classSpaceEncs = new ArrayList<ClassSpaceEnc>();
@@ -619,7 +619,7 @@ public class ClassSpaceController {
 				msgContent = request.getParameter("msgContent");
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -632,7 +632,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (id == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("ID", id);
@@ -672,7 +672,7 @@ public class ClassSpaceController {
 				teacherId = Integer.parseInt(request.getParameter("teacherId"));
 				encOrder = Integer.parseInt(request.getParameter("encOrder"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -685,7 +685,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -718,7 +718,7 @@ public class ClassSpaceController {
 				commentContent = request.getParameter("commentContent");
 				userId = Integer.parseInt(request.getParameter("userId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -731,7 +731,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -769,7 +769,7 @@ public class ClassSpaceController {
 				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
 				upperId = Integer.parseInt(request.getParameter("upperId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -782,7 +782,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -812,7 +812,7 @@ public class ClassSpaceController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -825,7 +825,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -855,7 +855,7 @@ public class ClassSpaceController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -868,7 +868,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -898,7 +898,7 @@ public class ClassSpaceController {
 				userId = Integer.parseInt(request.getParameter("userId"));
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -911,7 +911,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -939,7 +939,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceCommentId = Integer.parseInt(request.getParameter("classSpaceCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -952,7 +952,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -980,7 +980,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -993,7 +993,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -1021,7 +1021,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -1034,7 +1034,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
 				jsonData.put("Result", success);
@@ -1062,7 +1062,7 @@ public class ClassSpaceController {
 			try {
 				classSpaceCommentId = Integer.parseInt(request.getParameter("classSpaceCommentId"));
 			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 
@@ -1075,7 +1075,7 @@ public class ClassSpaceController {
 				return;
 			}
 			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了

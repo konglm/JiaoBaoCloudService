@@ -98,13 +98,13 @@ public class CommonTool {
 			jsonobj.put("RspTxt", "数据库连接异常");
 			break;
 		}
-		case "1002": {
-			jsonobj.put("RspCode", "1002");
+		case "1003": {
+			jsonobj.put("RspCode", "1003");
 			jsonobj.put("RspTxt", "参数类型错误");
 			break;
 		}
-		case "1003": {
-			jsonobj.put("RspCode", "1003");
+		case "1002": {
+			jsonobj.put("RspCode", "1002");
 			jsonobj.put("RspTxt", "数据库更新失败");
 			break;
 		}
