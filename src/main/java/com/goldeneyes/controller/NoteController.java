@@ -147,9 +147,7 @@ public class NoteController {
 		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null)
 				|| (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0)
-				|| (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+			return;
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -160,6 +158,10 @@ public class NoteController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -316,9 +318,7 @@ public class NoteController {
 		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("pageIndex") == null)
 				|| (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0)
-				|| (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+			return;
 		} else {
 			int noteId = 0;
 			int pageIndex = 0;
@@ -329,6 +329,10 @@ public class NoteController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -485,9 +489,7 @@ public class NoteController {
 		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null)
 				|| (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0)
-				|| (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+			return;
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -498,6 +500,10 @@ public class NoteController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -598,12 +604,10 @@ public class NoteController {
 		}
 		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 		
-		if ((jsonObject.getString("studentId") == null) || (jsonObject.getString("pageIndex") == null)
-				|| (jsonObject.getString("pageSize") == null)) {
+		if (!jsonObject.has("studentId") || !jsonObject.has("pageIndex")
+				|| !jsonObject.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0)
-				|| (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+			return;
 		} else {
 			int studentId = 0;
 			int pageIndex = 0;
@@ -616,6 +620,10 @@ public class NoteController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+				return;
+			} 
 			int totalCnt = 0;
 			int totalPage = 0;
 			List<Note> notes = new ArrayList<Note>();

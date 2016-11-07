@@ -145,8 +145,7 @@ public class ClassSpaceController {
 				
 		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+			return;
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -157,6 +156,10 @@ public class ClassSpaceController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -311,8 +314,7 @@ public class ClassSpaceController {
 				
 		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+			return;
 		} else {
 			int classSpaceId = 0;
 			int pageIndex = 0;
@@ -323,6 +325,10 @@ public class ClassSpaceController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -479,8 +485,7 @@ public class ClassSpaceController {
 						
 		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+			return;
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
@@ -491,6 +496,10 @@ public class ClassSpaceController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
@@ -592,8 +601,7 @@ public class ClassSpaceController {
 						
 		if ((jsonObject.getString("classId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
+			return;
 		} else {
 			int classId = 0;
 			int pageIndex = 0;
@@ -604,6 +612,10 @@ public class ClassSpaceController {
 				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
 			}
 			int totalCnt = 0;
