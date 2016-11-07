@@ -14,6 +14,7 @@
 
 package com.goldeneyes.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +84,24 @@ public class ClassSpaceController {
 	@RequestMapping("/getNoReadClassSpacesCntByUser")
 	public void getNoReadClassSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("userId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+				
+		if (jsonObject.getString("userId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -117,18 +130,31 @@ public class ClassSpaceController {
 	@RequestMapping("/getNoReadClassSpacesByUser")
 	public void getNoReadClassSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+				
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -174,14 +200,26 @@ public class ClassSpaceController {
 	@RequestMapping("/getIsLikeClassSpaceByUser")
 	public void getIsLikeClassSpaceByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("classSpaceId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int classSpaceId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -211,12 +249,25 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceCommentsCntById")
 	public void getClassSpaceCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+				
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -245,18 +296,31 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceCommentsById")
 	public void getClassSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+				
+		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int classSpaceId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
+				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -302,12 +366,25 @@ public class ClassSpaceController {
 	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+				
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -342,12 +419,24 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceCommentReplysCntByUser")
 	public void getClassSpaceCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("userId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("userId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -376,18 +465,30 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceCommentReplysByUser")
 	public void getClassSpaceCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int userId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -431,12 +532,24 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpacesCntByClass")
 	public void getClassSpacesCntByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classId = 0;
 			try {
-				classId = Integer.parseInt(request.getParameter("classId"));
+				classId = Integer.parseInt(jsonObject.getString("classId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -465,18 +578,30 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpacesByClass")
 	public void getClassSpacesByClass(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classId") == null) || (request.getParameter("pageIndex") == null) || (request.getParameter("pageSize") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else if ((Integer.parseInt(request.getParameter("pageIndex")) <= 0) || (Integer.parseInt(request.getParameter("pageSize")) <= 0)) {
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("classId") == null) || (jsonObject.getString("pageIndex") == null) || (jsonObject.getString("pageSize") == null)) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else if ((Integer.parseInt(jsonObject.getString("pageIndex")) <= 0) || (Integer.parseInt(jsonObject.getString("pageSize")) <= 0)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString()); 
 		} else {
 			int classId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				classId = Integer.parseInt(request.getParameter("classId"));
-				pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-				pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				classId = Integer.parseInt(jsonObject.getString("classId"));
+				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -522,12 +647,24 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceById")
 	public void getClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -560,12 +697,24 @@ public class ClassSpaceController {
 	@RequestMapping("/getClassSpaceEncById")
 	public void getClassSpaceEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -607,17 +756,29 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpace")
 	public void addClassSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classId") == null) || (request.getParameter("msgContent") == null)
-				|| (request.getParameter("teacherId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("classId") == null) || (jsonObject.getString("msgContent") == null)
+				|| (jsonObject.getString("teacherId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classId = 0;
 			String msgContent = "";
 			int teacherId = 0;
 			try {
-				classId = Integer.parseInt(request.getParameter("classId"));
-				msgContent = request.getParameter("msgContent");
-				teacherId = Integer.parseInt(request.getParameter("teacherId"));
+				classId = Integer.parseInt(jsonObject.getString("classId"));
+				msgContent = jsonObject.getString("msgContent");
+				teacherId = Integer.parseInt(jsonObject.getString("teacherId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -653,9 +814,21 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceEnc")
 	public void addClassSpaceEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("encType") == null)
-				|| (request.getParameter("encAddr") == null) || (request.getParameter("encImg") == null)
-				|| (request.getParameter("teacherId") == null) || (request.getParameter("encOrder") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("encType") == null)
+				|| (jsonObject.getString("encAddr") == null) || (jsonObject.getString("encImg") == null)
+				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
@@ -665,12 +838,12 @@ public class ClassSpaceController {
 			int teacherId = 0;
 			int encOrder = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				encType = request.getParameter("encType");
-				encAddr = request.getParameter("encAddr");
-				encImg = request.getParameter("encImg");
-				teacherId = Integer.parseInt(request.getParameter("teacherId"));
-				encOrder = Integer.parseInt(request.getParameter("encOrder"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
+				encType = jsonObject.getString("encType");
+				encAddr = jsonObject.getString("encAddr");
+				encImg = jsonObject.getString("encImg");
+				teacherId = Integer.parseInt(jsonObject.getString("teacherId"));
+				encOrder = Integer.parseInt(jsonObject.getString("encOrder"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -706,17 +879,29 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceComment")
 	public void addClassSpaceComment(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
-				|| (request.getParameter("userId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("commentContent") == null)
+				|| (jsonObject.getString("userId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			String commentContent = "";
 			int userId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				commentContent = request.getParameter("commentContent");
-				userId = Integer.parseInt(request.getParameter("userId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
+				commentContent = jsonObject.getString("commentContent");
+				userId = Integer.parseInt(jsonObject.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -752,9 +937,21 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceCommentReply")
 	public void addClassSpaceCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("classSpaceId") == null) || (request.getParameter("commentContent") == null)
-				|| (request.getParameter("userId") == null) || (request.getParameter("replyUserId") == null)
-				|| (request.getParameter("upperId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("commentContent") == null)
+				|| (jsonObject.getString("userId") == null) || (jsonObject.getString("replyUserId") == null)
+				|| (jsonObject.getString("upperId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
@@ -763,11 +960,11 @@ public class ClassSpaceController {
 			int replyUserId = 0;
 			int upperId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
-				commentContent = request.getParameter("commentContent");
-				userId = Integer.parseInt(request.getParameter("userId"));
-				replyUserId = Integer.parseInt(request.getParameter("replyUserId"));
-				upperId = Integer.parseInt(request.getParameter("upperId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
+				commentContent = jsonObject.getString("commentContent");
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				replyUserId = Integer.parseInt(jsonObject.getString("replyUserId"));
+				upperId = Integer.parseInt(jsonObject.getString("upperId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -803,14 +1000,26 @@ public class ClassSpaceController {
 	@RequestMapping("/addClassSpaceForUser")
 	public void addClassSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("classSpaceId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int classSpaceId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -846,14 +1055,26 @@ public class ClassSpaceController {
 	@RequestMapping("/setClassSpaceReadByUser")
 	public void setClassSpaceReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("classSpaceId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int classSpaceId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -889,14 +1110,26 @@ public class ClassSpaceController {
 	@RequestMapping("/setClassSpaceLikeByUser")
 	public void setClassSpaceLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if ((request.getParameter("userId") == null) || (request.getParameter("classSpaceId") == null)) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("classSpaceId") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int classSpaceId = 0;
 			try {
-				userId = Integer.parseInt(request.getParameter("userId"));
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				userId = Integer.parseInt(jsonObject.getString("userId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -932,12 +1165,24 @@ public class ClassSpaceController {
 	@RequestMapping("/setClassSpaceCommentReplyById")
 	public void setClassSpaceCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceCommentId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceCommentId = 0;
 			try {
-				classSpaceCommentId = Integer.parseInt(request.getParameter("classSpaceCommentId"));
+				classSpaceCommentId = Integer.parseInt(jsonObject.getString("classSpaceCommentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -973,12 +1218,24 @@ public class ClassSpaceController {
 	@RequestMapping("/setOffClassSpaceById")
 	public void setOffClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1014,12 +1271,24 @@ public class ClassSpaceController {
 	@RequestMapping("/delClassSpaceById")
 	public void delClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
 			try {
-				classSpaceId = Integer.parseInt(request.getParameter("classSpaceId"));
+				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1055,12 +1324,24 @@ public class ClassSpaceController {
 	@RequestMapping("/delClassSpaceCommentById")
 	public void delClassSpaceCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		JSONObject jsonData = new JSONObject();
-		if (request.getParameter("classSpaceCommentId") == null) {
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = CommonTool.getRequestPostStr(request);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+						
+		if (jsonObject.getString("classSpaceCommentId") == null) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceCommentId = 0;
 			try {
-				classSpaceCommentId = Integer.parseInt(request.getParameter("classSpaceCommentId"));
+				classSpaceCommentId = Integer.parseInt(jsonObject.getString("classSpaceCommentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
