@@ -15,13 +15,21 @@
 package com.goldeneyes.util;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import com.goldeneyes.pojo.Note;
+import com.goldeneyes.util.CommonTool;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author konglm
@@ -31,10 +39,11 @@ public class CommonTool {
 
 	/**
 	 * 测试用main函数
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(getTotalPage(8,2));
+		System.out.println(getTotalPage(8, 2));
 	}
 
 	public static int getTotalPage(int totalCnt, int pageSize) {
@@ -139,56 +148,130 @@ public class CommonTool {
 			jsonobj.put("RspTxt", "令牌已过期或不存在");
 			break;
 		}
+		case "1010": {
+			jsonobj.put("RspCode", "1010");
+			jsonobj.put("RspTxt", "url连接失败");
+			break;
+		}
 		}
 
 		return jsonobj;
 	}
-	
-	/**      
-     * 描述:获取 post 请求的 byte[] 数组
-     * <pre>
-     * 举例：
-     * </pre>
-     * @param request
-     * @return
-     * @throws IOException      
-     */
-    public static byte[] getRequestPostBytes(HttpServletRequest request)
-            throws IOException {
-        int contentLength = request.getContentLength();
-        if(contentLength<0){
-            return null;
-        }
-        byte buffer[] = new byte[contentLength];
-        for (int i = 0; i < contentLength;) {
 
-            int readlen = request.getInputStream().read(buffer, i,
-                    contentLength - i);
-            if (readlen == -1) {
-                break;
-            }
-            i += readlen;
-        }
-        return buffer;
-    }
+	/**
+	 * 描述:获取 post 请求的 byte[] 数组
+	 * 
+	 * <pre>
+	 * 举例：
+	 * </pre>
+	 * 
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
+	public static byte[] getRequestPostBytes(HttpServletRequest request) throws IOException {
+		int contentLength = request.getContentLength();
+		if (contentLength < 0) {
+			return null;
+		}
+		byte buffer[] = new byte[contentLength];
+		for (int i = 0; i < contentLength;) {
 
-    /**      
-     * 描述:获取 post 请求内容
-     * <pre>
-     * 举例：
-     * </pre>
-     * @param request
-     * @return
-     * @throws IOException      
-     */
-    public static String getRequestPostStr(HttpServletRequest request)
-            throws IOException {
-        byte buffer[] = getRequestPostBytes(request);
-        String charEncoding = request.getCharacterEncoding();
-        if (charEncoding == null) {
-            charEncoding = "UTF-8";
-        }
-        return new String(buffer, charEncoding);
-    }
+			int readlen = request.getInputStream().read(buffer, i, contentLength - i);
+			if (readlen == -1) {
+				break;
+			}
+			i += readlen;
+		}
+		return buffer;
+	}
+
+	/**
+	 * 描述:获取 post 请求内容
+	 * 
+	 * <pre>
+	 * 举例：
+	 * </pre>
+	 * 
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getRequestPostStr(HttpServletRequest request) throws IOException {
+		byte buffer[] = getRequestPostBytes(request);
+		String charEncoding = request.getCharacterEncoding();
+		if (charEncoding == null) {
+			charEncoding = "UTF-8";
+		}
+		return new String(buffer, charEncoding);
+	}
+
+	/**
+	 * post调用其他的接口，传入json，接收json
+	 * @param request
+	 * @param urlStr
+	 * @param obj
+	 * @return
+	 */
+	public static String getJsonFromRequest(String urlStr,JSONObject obj) {
+		String returnJson = "";
+		
+		try {			
+			// 创建url资源
+			URL url = new URL(urlStr);
+			// 建立http连接
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			// 设置允许输出
+			conn.setDoOutput(true);
+
+			conn.setDoInput(true);
+
+			// 设置不用缓存
+			conn.setUseCaches(false);
+			// 设置传递方式
+			conn.setRequestMethod("POST");
+			// 设置维持长连接
+			conn.setRequestProperty("Connection", "Keep-Alive");
+			// 设置文件字符集:
+			conn.setRequestProperty("Charset", "UTF-8");
+			// 转换为字节数组
+			byte[] data = (obj.toString()).getBytes();
+			// 设置文件长度
+			conn.setRequestProperty("Content-Length", String.valueOf(data.length));
+
+			// 设置文件类型:
+			conn.setRequestProperty("contentType", "application/json");
+
+			// 开始连接请求
+			conn.connect();
+			OutputStream out = conn.getOutputStream();
+			// 写入请求的字符串
+			out.write((obj.toString()).getBytes());
+			out.flush();
+			out.close();
+
+			// 请求返回的状态
+			if (conn.getResponseCode() == 200) {
+				// 请求返回的数据
+				InputStream in = conn.getInputStream();
+				
+				try {
+					byte[] data1 = new byte[in.available()];
+					in.read(data1);
+					// 转成字符串
+					returnJson = new String(data1);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					return CommonTool.outJson(new JSONObject(), "1010").toString();
+				}
+			} else {
+				return CommonTool.outJson(new JSONObject(), "1010").toString();
+			}
+
+		} catch (Exception e) {
+			return CommonTool.outJson(new JSONObject(), "1010").toString();
+		}
+		return returnJson;
+	}
 
 }
