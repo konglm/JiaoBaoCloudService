@@ -840,10 +840,12 @@ public class ClassSpaceController {
 						
 		if ((jsonObject.getString("classSpaceId") == null) || (jsonObject.getString("encType") == null)
 				|| (jsonObject.getString("encAddr") == null) || (jsonObject.getString("encImg") == null)
-				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)) {
+				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)
+				|| (jsonObject.getString("encName") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int classSpaceId = 0;
+			String encName = "";
 			String encType = "";
 			String encAddr = "";
 			String encImg = "";
@@ -851,6 +853,7 @@ public class ClassSpaceController {
 			int encOrder = 0;
 			try {
 				classSpaceId = Integer.parseInt(jsonObject.getString("classSpaceId"));
+				encName = jsonObject.getString("encName");
 				encType = jsonObject.getString("encType");
 				encAddr = jsonObject.getString("encAddr");
 				encImg = jsonObject.getString("encImg");
@@ -863,7 +866,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.addClassSpaceEnc(classSpaceId, encType, encAddr, encImg, teacherId, encOrder);
+				success = classSpaceService.addClassSpaceEnc(classSpaceId,encName, encType, encAddr, encImg, teacherId, encOrder);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

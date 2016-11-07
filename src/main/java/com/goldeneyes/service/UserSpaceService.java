@@ -122,7 +122,7 @@ public interface UserSpaceService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceEnc(int userSpaceId,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
 	/**
 	 * 新增某用户某用户空间评论
 	 * @param userId

@@ -203,10 +203,11 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addClassSpaceEnc(int classSpaceId, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
+	public int addClassSpaceEnc(int classSpaceId,String encName, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
 		// TODO Auto-generated method stub
 		ClassSpaceEnc classSpaceEnc = new ClassSpaceEnc();
 		classSpaceEnc.setClassspaceid(classSpaceId);
+		classSpaceEnc.setEncname(encName);
 		classSpaceEnc.setEnctype(encType);
 		classSpaceEnc.setEncaddr(encAddr);
 		classSpaceEnc.setEncimgaddr(encImg);

@@ -207,7 +207,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public int addNoteEnc(int noteId, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
+	public int addNoteEnc(int noteId, String encName, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
 		// TODO Auto-generated method stub
 		NoteEnc noteEnc = new NoteEnc();
 		noteEnc.setNoteid(noteId);
@@ -217,6 +217,7 @@ public class NoteServiceImpl implements NoteService {
 		noteEnc.setPublisherid(teacherId);
 		noteEnc.setPublishdate(new Date());
 		noteEnc.setEncorder(encOrder);
+		noteEnc.setEncname(encName);
 		try {
 			noteEncMapper.insert(noteEnc);
 		} catch (Exception e) {

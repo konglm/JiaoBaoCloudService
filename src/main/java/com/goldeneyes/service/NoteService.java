@@ -122,7 +122,7 @@ public interface NoteService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addNoteEnc(int noteId,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addNoteEnc(int noteId, String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
 	/**
 	 * 新增某用户某点到记事评论
 	 * @param userId

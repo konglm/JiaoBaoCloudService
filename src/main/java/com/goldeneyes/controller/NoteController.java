@@ -853,10 +853,12 @@ public class NoteController {
 				
 		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("encType") == null)
 				|| (jsonObject.getString("encAddr") == null) || (jsonObject.getString("encImg") == null)
-				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)) {
+				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)
+				|| (jsonObject.getString("encName") == null)) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
+			String encName = "";
 			String encType = "";
 			String encAddr = "";
 			String encImg = "";
@@ -864,6 +866,7 @@ public class NoteController {
 			int encOrder = 0;
 			try {
 				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				encName = jsonObject.getString("encName");
 				encType = jsonObject.getString("encType");
 				encAddr = jsonObject.getString("encAddr");
 				encImg = jsonObject.getString("encImg");
@@ -876,7 +879,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.addNoteEnc(noteId, encType, encAddr, encImg, teacherId, encOrder);
+				success = noteService.addNoteEnc(noteId,encName, encType, encAddr, encImg, teacherId, encOrder);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

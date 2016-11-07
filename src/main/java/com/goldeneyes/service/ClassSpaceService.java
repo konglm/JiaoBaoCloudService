@@ -121,7 +121,7 @@ public interface ClassSpaceService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addClassSpaceEnc(int classSpaceId,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addClassSpaceEnc(int classSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
 	/**
 	 * 新增某用户某班级空间评论
 	 * @param userId

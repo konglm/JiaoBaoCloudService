@@ -208,10 +208,11 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpaceEnc(int userSpaceId, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
+	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceEnc userSpaceEnc = new UserSpaceEnc();
 		userSpaceEnc.setUserspaceid(userSpaceId);
+		userSpaceEnc.setEncname(encName);
 		userSpaceEnc.setEnctype(encType);
 		userSpaceEnc.setEncaddr(encAddr);
 		userSpaceEnc.setEncimgaddr(encImg);
