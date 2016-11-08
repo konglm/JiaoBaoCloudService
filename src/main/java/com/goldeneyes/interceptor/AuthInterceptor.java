@@ -47,7 +47,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return false;
