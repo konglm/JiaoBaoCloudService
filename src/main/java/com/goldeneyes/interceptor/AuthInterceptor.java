@@ -23,6 +23,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goldeneyes.util.CommonTool;
+import com.goldeneyes.util.EncryptUtil;
 
 import net.sf.json.JSONObject;
 
@@ -45,24 +46,29 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
-			jsonInput = JSONObject.fromObject(requestStr); 
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return false;
 		}
-		 
-		//判断验证参数是否传递过来
-		if (!jsonInput.has("uuid") || !jsonInput.has("appid")
-				|| !jsonInput.has("sign") || !jsonInput.has("token")) {
+
+		// 判断验证参数是否传递过来
+		if (!jsonInput.has("uuid") || !jsonInput.has("appid") || !jsonInput.has("sign") || !jsonInput.has("token")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1011").toString());
 			return false;
 		}
+
+		// 验证url是否被篡改
+		String sign = EncryptUtil.hmacSHA1Encrypt("uuid=" + jsonInput.getString("uuid") + "&appid="
+				+ jsonInput.getString("appid") + "&token=" + jsonInput.getString("token"), "jsy309");
+		if(!sign.equals(jsonInput.getString("sign"))){
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1008").toString());
+			return false;
+		}
+		// 验证Token时间是否超期
 		
-		//验证url是否被篡改
-		
-		//验证Token时间是否超期
-		
+		request.setAttribute("requestStr", requestStr);
 		return true;
 	}
 

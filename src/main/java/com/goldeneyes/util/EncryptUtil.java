@@ -45,7 +45,7 @@ public class EncryptUtil {
     private static final String ENCODING = "UTF-8";  
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(hmacSHA1Encrypt("appid=HBuilder&shaketype=reg&uuid=70C72521-2CD6-45DD-AF6E-375654EB734A","jsy309"));
+		System.out.println(hmacSHA1Encrypt("uuid=70C72521-2CD6-45DD-AF6E-375654EB734A&appid=HBuilder&token=C72521","jsy309"));
 		System.out.println(desEncrypt("admin", "jsy11111"));
 		System.out.println(desDecrypt("JKG5DkSGuOA=", "jsy11111"));
 		System.out.println(getBase64("admin"));

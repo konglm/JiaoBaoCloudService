@@ -14,7 +14,6 @@
 
 package com.goldeneyes.controller;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,9 +90,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -140,9 +139,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -216,9 +215,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -268,9 +267,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -318,9 +317,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -394,9 +393,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -450,9 +449,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -499,9 +498,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -572,9 +571,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -621,9 +620,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -696,9 +695,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -749,9 +748,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -811,9 +810,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -872,9 +871,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -943,9 +942,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1004,9 +1003,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1070,9 +1069,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1128,9 +1127,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1186,9 +1185,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1244,9 +1243,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1300,9 +1299,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1356,9 +1355,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
@@ -1412,9 +1411,9 @@ public class ClassSpaceController {
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
-			requestStr = CommonTool.getRequestPostStr(request);
+			requestStr = (String) request.getAttribute("requestStr");
 			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (IOException e1) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;

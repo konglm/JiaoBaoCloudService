@@ -145,7 +145,7 @@ public class CommonTool {
 		}
 		case "1010": {
 			jsonobj.put("RspCode", "1010");
-			jsonobj.put("RspTxt", "url连接失败");
+			jsonobj.put("RspTxt", "Url连接失败");
 			break;
 		}
 		case "1011": {

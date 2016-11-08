@@ -31,7 +31,6 @@ import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.NoteService;
 import com.goldeneyes.util.CommonTool;
-import com.goldeneyes.vo.BusinessException;
 
 /**
  * @author konglm
