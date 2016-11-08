@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
-import com.goldeneyes.pojo.UserSpaceEnc;
 import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
@@ -190,6 +189,9 @@ public class UserSpaceController {
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
 				jsonobj.put("NoteType", userSpace.getNotetype());
+				jsonobj.put("EncType", userSpace.getEnctype());
+				jsonobj.put("EncAddr", userSpace.getEncaddr());
+				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -672,6 +674,9 @@ public class UserSpaceController {
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
 				jsonobj.put("NoteType", userSpace.getNotetype());
+				jsonobj.put("EncType", userSpace.getEnctype());
+				jsonobj.put("EncAddr", userSpace.getEncaddr());
+				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -731,68 +736,9 @@ public class UserSpaceController {
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			jsonData.put("PublishDate", formater.format(userSpace.getPublishdate()));
 			jsonData.put("NoteType", userSpace.getNotetype());
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
-
-	/**
-	 * 获取某条用户空间附件列表
-	 * 
-	 * @param request
-	 * @param response
-	 * @param model
-	 */
-	@RequestMapping("/getUserSpaceEncById")
-	public void getUserSpaceEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
-		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-						
-		if (!jsonInput.has("userSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userSpaceId = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			List<UserSpaceEnc> userSpaceEncs = new ArrayList<UserSpaceEnc>();
-			try {
-				userSpaceEncs = userSpaceService.getUserSpaceEncById(userSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpaceEnc userSpaceEnc : userSpaceEncs) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("EncType", userSpaceEnc.getEnctype());
-				jsonobj.put("EncName", userSpaceEnc.getEncname());
-				jsonobj.put("EncAddr", userSpaceEnc.getEncaddr());
-				jsonobj.put("EncImgAddr", userSpaceEnc.getEncimgaddr());
-				jsonobj.put("PublisherId", userSpaceEnc.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("PublishDate", formater.format(userSpaceEnc.getPublishdate()));
-				jsonobj.put("EncOrder", userSpaceEnc.getEncorder());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("Data", jsonArray);
+			jsonData.put("EncType", userSpace.getEnctype());
+			jsonData.put("EncAddr", userSpace.getEncaddr());
+			jsonData.put("EncImgAddr", userSpace.getEncimgaddr());
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
@@ -824,16 +770,23 @@ public class UserSpaceController {
 		}
 						
 		if (!jsonInput.has("userId") || !jsonInput.has("msgContent")
-				|| !jsonInput.has("noteType")) {
+				|| !jsonInput.has("noteType") || !jsonInput.has("encType")
+				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			String msgContent = "";
 			int noteType = 0;
+			int encType = 0;
+			String encAddr = "";
+			String encImg = "";
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				msgContent = jsonInput.getString("msgContent");
 				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+				encType = Integer.parseInt(jsonInput.getString("encType"));
+				encAddr = jsonInput.getString("encAddr");
+				encImg = jsonInput.getString("encImg");
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -841,7 +794,7 @@ public class UserSpaceController {
 
 			int id = 0;
 			try {
-				id = userSpaceService.addUserSpace(userId, msgContent, noteType);
+				id = userSpaceService.addUserSpace(userId, msgContent, noteType,encType,encAddr,encImg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -851,75 +804,6 @@ public class UserSpaceController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("ID", id);
-				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-			}
-		}
-	}
-
-	/**
-	 * 新增某用户空间附件
-	 * 
-	 * @param request
-	 * @param response
-	 * @param model
-	 */
-	@RequestMapping("/addUserSpaceEnc")
-	public void addUserSpaceEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
-		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-						
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("encType")
-				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")
-				|| !jsonInput.has("userId") || !jsonInput.has("encOrder")
-				|| !jsonInput.has("encName")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userSpaceId = 0;
-			String encName = "";
-			String encType = "";
-			String encAddr = "";
-			String encImg = "";
-			int userId = 0;
-			int encOrder = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-				encName = jsonInput.getString("encName");
-				encType = jsonInput.getString("encType");
-				encAddr = jsonInput.getString("encAddr");
-				encImg = jsonInput.getString("encImg");
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				encOrder = Integer.parseInt(jsonInput.getString("encOrder"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-
-			int success = 0;
-			try {
-				success = userSpaceService.addUserSpaceEnc(userSpaceId,encName, encType, encAddr, encImg, userId, encOrder);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
-			} else {
-				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}

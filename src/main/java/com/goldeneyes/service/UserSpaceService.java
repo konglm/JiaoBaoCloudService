@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
-import com.goldeneyes.pojo.UserSpaceEnc;
 import com.goldeneyes.pojo.UserSpaceMsg;
 
 /**
@@ -99,30 +98,13 @@ public interface UserSpaceService {
 	 */
 	public UserSpace getUserSpaceById(int userSpaceId) throws Exception;
 	/**
-	 * 获取某条用户空间附件列表
-	 * @param userSpaceId
-	 * @return
-	 */
-	public List<UserSpaceEnc> getUserSpaceEncById(int userSpaceId) throws Exception;
-	/**
 	 * 新增某用户空间信息
 	 * @param userId
 	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的用户空间ID
 	 */
-	public int addUserSpace(int userId,String msgContent,int noteType) throws Exception;
-	/**
-	 * 新增某用户空间附件
-	 * @param userSpaceId
-	 * @param encType
-	 * @param encAddr
-	 * @param encImg
-	 * @param teacherId
-	 * @param encOrder
-	 * @return 是否删除成功 0失败1成功
-	 */
-	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int userId,int encOrder) throws Exception;
+	public int addUserSpace(int userId,String msgContent,int noteType,int encType,String encAddr,String encImg) throws Exception;
 	/**
 	 * 新增某用户某用户空间评论
 	 * @param userId

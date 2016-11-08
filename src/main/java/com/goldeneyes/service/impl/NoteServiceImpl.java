@@ -22,12 +22,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.goldeneyes.IDao.NoteCommentMapper;
-import com.goldeneyes.IDao.NoteEncMapper;
 import com.goldeneyes.IDao.NoteMapper;
 import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.pojo.Note;
 import com.goldeneyes.pojo.NoteComment;
-import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.NoteService;
 import com.goldeneyes.util.CommonTool;
@@ -42,8 +40,6 @@ public class NoteServiceImpl implements NoteService {
 	NoteMapper noteMapper;
 	@Resource
 	NoteCommentMapper noteCommentMapper;
-	@Resource
-	NoteEncMapper noteEncMapper;
 	@Resource
 	SpaceContentStatusMapper spaceContentStatusMapper;
 
@@ -172,17 +168,7 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
-	public List<NoteEnc> getNoteEncById(int noteId) throws Exception {
-		// TODO Auto-generated method stub
-		List<NoteEnc> noteEncs = noteEncMapper.getNoteEncById(noteId);
-		return noteEncs;
-	}
-
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addNote(int studentId, String msgContent, int teacherId,int noteType,int checkType) throws Exception {
+	public int addNote(int studentId, String msgContent, int teacherId,int noteType,int checkType,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = noteMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		Note note = new Note();
@@ -194,35 +180,15 @@ public class NoteServiceImpl implements NoteService {
 		note.setStatus(CommonTool.int2byte(1));
 		note.setNotetype(CommonTool.int2byte(noteType));
 		note.setChecktype(CommonTool.int2byte(checkType));
+		note.setEnctype(CommonTool.int2byte(encType));
+		note.setEncaddr(encAddr);
+		note.setEncimgaddr(encImg);
 		try {
 			noteMapper.insert(note);		
 		} catch (Exception e) {
 			return 0;
 		}
 		return maxId;
-	}
-
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addNoteEnc(int noteId, String encName, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
-		// TODO Auto-generated method stub
-		NoteEnc noteEnc = new NoteEnc();
-		noteEnc.setNoteid(noteId);
-		noteEnc.setEnctype(encType);
-		noteEnc.setEncaddr(encAddr);
-		noteEnc.setEncimgaddr(encImg);
-		noteEnc.setPublisherid(teacherId);
-		noteEnc.setPublishdate(new Date());
-		noteEnc.setEncorder(encOrder);
-		noteEnc.setEncname(encName);
-		try {
-			noteEncMapper.insert(noteEnc);
-		} catch (Exception e) {
-			return 0;
-		}
-		return 1;
 	}
 
 	/**
@@ -373,7 +339,6 @@ public class NoteServiceImpl implements NoteService {
 		// TODO Auto-generated method stub
 		try{
 			noteMapper.deleteByPrimaryKey(noteId);
-			noteEncMapper.deleteByNoteId(noteId);
 			noteCommentMapper.deleteByNoteId(noteId);
 			spaceContentStatusMapper.deleteByNoteId(noteId);
 		} catch(Exception e){

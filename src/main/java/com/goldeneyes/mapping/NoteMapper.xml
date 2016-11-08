@@ -7,12 +7,16 @@
     <result column="NoteType" property="notetype" jdbcType="TINYINT" />
     <result column="CheckType" property="checktype" jdbcType="TINYINT" />
     <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="EncType" property="enctype" jdbcType="TINYINT" />
+    <result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
+    <result column="EncImgAddr" property="encimgaddr" jdbcType="VARCHAR" />
     <result column="PublisherId" property="publisherid" jdbcType="INTEGER" />
     <result column="PublishDate" property="publishdate" jdbcType="TIMESTAMP" />
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, StudentId, NoteType, CheckType, MsgContent, PublisherId, PublishDate, Status
+    TabId, StudentId, NoteType, CheckType, MsgContent, EncType, EncAddr, EncImgAddr, 
+    PublisherId, PublishDate, Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +30,12 @@
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.Note" >
     insert into Note (TabId, StudentId, NoteType, 
-      CheckType, MsgContent, PublisherId, 
+      CheckType, MsgContent, EncType, 
+      EncAddr, EncImgAddr, PublisherId, 
       PublishDate, Status)
     values (#{tabid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{notetype,jdbcType=TINYINT}, 
-      #{checktype,jdbcType=TINYINT}, #{msgcontent,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER}, 
+      #{checktype,jdbcType=TINYINT}, #{msgcontent,jdbcType=VARCHAR}, #{enctype,jdbcType=TINYINT}, 
+      #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER}, 
       #{publishdate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.goldeneyes.pojo.Note" >
@@ -49,6 +55,15 @@
       </if>
       <if test="msgcontent != null" >
         MsgContent,
+      </if>
+      <if test="enctype != null" >
+        EncType,
+      </if>
+      <if test="encaddr != null" >
+        EncAddr,
+      </if>
+      <if test="encimgaddr != null" >
+        EncImgAddr,
       </if>
       <if test="publisherid != null" >
         PublisherId,
@@ -76,6 +91,15 @@
       <if test="msgcontent != null" >
         #{msgcontent,jdbcType=VARCHAR},
       </if>
+      <if test="enctype != null" >
+        #{enctype,jdbcType=TINYINT},
+      </if>
+      <if test="encaddr != null" >
+        #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encimgaddr != null" >
+        #{encimgaddr,jdbcType=VARCHAR},
+      </if>
       <if test="publisherid != null" >
         #{publisherid,jdbcType=INTEGER},
       </if>
@@ -102,6 +126,15 @@
       <if test="msgcontent != null" >
         MsgContent = #{msgcontent,jdbcType=VARCHAR},
       </if>
+      <if test="enctype != null" >
+        EncType = #{enctype,jdbcType=TINYINT},
+      </if>
+      <if test="encaddr != null" >
+        EncAddr = #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encimgaddr != null" >
+        EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
+      </if>
       <if test="publisherid != null" >
         PublisherId = #{publisherid,jdbcType=INTEGER},
       </if>
@@ -120,6 +153,9 @@
       NoteType = #{notetype,jdbcType=TINYINT},
       CheckType = #{checktype,jdbcType=TINYINT},
       MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      EncType = #{enctype,jdbcType=TINYINT},
+      EncAddr = #{encaddr,jdbcType=VARCHAR},
+      EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
       PublisherId = #{publisherid,jdbcType=INTEGER},
       PublishDate = #{publishdate,jdbcType=TIMESTAMP},
       Status = #{status,jdbcType=TINYINT}
@@ -145,6 +181,7 @@
   <!-- 获取用户未读点到记事列表 -->
   <select id="getNoReadNotesByUser" resultType="com.goldeneyes.pojo.Note">
   	select top(#{3}) n.TabId,n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate,n.NoteType,n.CheckType 
+  	,n.EncType,n.EncAddr,n.EncImgAddr
   	from SpaceContentStatus ss,Note n 
   	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
   	and (n.TabId NOT IN
@@ -174,7 +211,8 @@
   </select>
   <!-- 获取某学生点到记事列表 -->
   <select id="getNotesByStudent" resultType="com.goldeneyes.pojo.Note">
-  	select top(#{2}) n.TabId,n.MsgContent,n.PublisherId,n.PublishDate,n.NoteType,n.CheckType 
+  	select top(#{2}) n.TabId,n.MsgContent,n.PublisherId,n.PublishDate,n.NoteType,n.CheckType
+  	,n.EncType,n.EncAddr,n.EncImgAddr 
   	from Note n 
   	where n.Status = 1 and n.StudentId = #{0}
   	and n.TabId not in (select top((#{1}-1) * #{2}) n.TabId from Note n 
@@ -185,6 +223,7 @@
   <!-- 获取某条点到记事信息 -->
   <select id="getNoteById" resultType="com.goldeneyes.pojo.Note">
   	select n.TabId,n.StudentId,n.MsgContent,n.PublisherId,n.PublishDate,n.NoteType,n.CheckType 
+  	,n.EncType,n.EncAddr,n.EncImgAddr
   	from Note n 
   	where n.Status = 1 and n.TabId = #{0}
   </select>

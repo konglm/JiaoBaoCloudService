@@ -22,12 +22,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.goldeneyes.IDao.ClassSpaceCommentMapper;
-import com.goldeneyes.IDao.ClassSpaceEncMapper;
 import com.goldeneyes.IDao.ClassSpaceMapper;
 import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.pojo.ClassSpace;
 import com.goldeneyes.pojo.ClassSpaceComment;
-import com.goldeneyes.pojo.ClassSpaceEnc;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.ClassSpaceService;
 import com.goldeneyes.util.CommonTool;
@@ -42,8 +40,6 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	ClassSpaceMapper classSpaceMapper;
 	@Resource
 	ClassSpaceCommentMapper classSpaceCommentMapper;
-	@Resource
-	ClassSpaceEncMapper classSpaceEncMapper;
 	@Resource
 	SpaceContentStatusMapper spaceContentStatusMapper;
 
@@ -171,17 +167,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<ClassSpaceEnc> getClassSpaceEncById(int classSpaceId) throws Exception {
-		// TODO Auto-generated method stub
-		List<ClassSpaceEnc> classSpaceEncs = classSpaceEncMapper.getClassSpaceEncById(classSpaceId);
-		return classSpaceEncs;
-	}
-
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addClassSpace(int classId, String msgContent, int teacherId) throws Exception {
+	public int addClassSpace(int classId, String msgContent, int teacherId,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = classSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		ClassSpace classSpace = new ClassSpace();
@@ -191,6 +177,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		classSpace.setPublisherid(teacherId);
 		classSpace.setPublishdate(new Date());
 		classSpace.setStatus(CommonTool.int2byte(1));
+		classSpace.setEnctype(CommonTool.int2byte(encType));
+		classSpace.setEncaddr(encAddr);
+		classSpace.setEncimgaddr(encImg);
 		try {
 			classSpaceMapper.insert(classSpace);		
 		} catch (Exception e) {
@@ -199,28 +188,6 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		return maxId;
 	}
 
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addClassSpaceEnc(int classSpaceId,String encName, String encType, String encAddr, String encImg, int teacherId, int encOrder) throws Exception {
-		// TODO Auto-generated method stub
-		ClassSpaceEnc classSpaceEnc = new ClassSpaceEnc();
-		classSpaceEnc.setClassspaceid(classSpaceId);
-		classSpaceEnc.setEncname(encName);
-		classSpaceEnc.setEnctype(encType);
-		classSpaceEnc.setEncaddr(encAddr);
-		classSpaceEnc.setEncimgaddr(encImg);
-		classSpaceEnc.setPublisherid(teacherId);
-		classSpaceEnc.setPublishdate(new Date());
-		classSpaceEnc.setEncorder(encOrder);
-		try {
-			classSpaceEncMapper.insert(classSpaceEnc);
-		} catch (Exception e) {
-			return 0;
-		}
-		return 1;
-	}
 
 	/**
 	 * @author konglm
@@ -367,7 +334,6 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		// TODO Auto-generated method stub
 		try{
 			classSpaceMapper.deleteByPrimaryKey(classSpaceId);
-			classSpaceEncMapper.deleteByClassSpaceId(classSpaceId);
 			classSpaceCommentMapper.deleteByClassSpaceId(classSpaceId);
 			spaceContentStatusMapper.deleteByClassSpaceId(classSpaceId);
 		} catch(Exception e){

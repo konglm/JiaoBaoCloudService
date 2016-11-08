@@ -23,13 +23,11 @@ import org.springframework.stereotype.Service;
 
 import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.IDao.UserSpaceCommentMapper;
-import com.goldeneyes.IDao.UserSpaceEncMapper;
 import com.goldeneyes.IDao.UserSpaceMapper;
 import com.goldeneyes.IDao.UserSpaceMsgMapper;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
-import com.goldeneyes.pojo.UserSpaceEnc;
 import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
@@ -44,8 +42,6 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	UserSpaceMapper userSpaceMapper;
 	@Resource
 	UserSpaceCommentMapper userSpaceCommentMapper;
-	@Resource
-	UserSpaceEncMapper userSpaceEncMapper;
 	@Resource
 	SpaceContentStatusMapper spaceContentStatusMapper;
 	@Resource
@@ -175,17 +171,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceEnc> getUserSpaceEncById(int userSpaceId) throws Exception {
-		// TODO Auto-generated method stub
-		List<UserSpaceEnc> userSpaceEncs = userSpaceEncMapper.getUserSpaceEncById(userSpaceId);
-		return userSpaceEncs;
-	}
-
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addUserSpace(int userId, String msgContent, int noteType) throws Exception {
+	public int addUserSpace(int userId, String msgContent, int noteType,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = userSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		UserSpace userSpace = new UserSpace();
@@ -196,35 +182,15 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpace.setPublishdate(new Date());
 		userSpace.setStatus(CommonTool.int2byte(1));
 		userSpace.setNotetype(CommonTool.int2byte(noteType));
+		userSpace.setEnctype(CommonTool.int2byte(encType));
+		userSpace.setEncaddr(encAddr);
+		userSpace.setEncimgaddr(encImg);
 		try {
 			userSpaceMapper.insert(userSpace);		
 		} catch (Exception e) {
 			return 0;
 		}
 		return maxId;
-	}
-
-	/**
-	 * @author konglm
-	 */
-	@Override
-	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int userId,int encOrder) throws Exception {
-		// TODO Auto-generated method stub
-		UserSpaceEnc userSpaceEnc = new UserSpaceEnc();
-		userSpaceEnc.setUserspaceid(userSpaceId);
-		userSpaceEnc.setEncname(encName);
-		userSpaceEnc.setEnctype(encType);
-		userSpaceEnc.setEncaddr(encAddr);
-		userSpaceEnc.setEncimgaddr(encImg);
-		userSpaceEnc.setPublisherid(userId);
-		userSpaceEnc.setPublishdate(new Date());
-		userSpaceEnc.setEncorder(encOrder);
-		try {
-			userSpaceEncMapper.insert(userSpaceEnc);
-		} catch (Exception e) {
-			return 0;
-		}
-		return 1;
 	}
 
 	/**
@@ -372,7 +338,6 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		// TODO Auto-generated method stub
 		try{
 			userSpaceMapper.deleteByPrimaryKey(userSpaceId);
-			userSpaceEncMapper.deleteByUserSpaceId(userSpaceId);
 			userSpaceCommentMapper.deleteByUserSpaceId(userSpaceId);
 			userSpaceMsgMapper.deleteByUserSpaceId(userSpaceId);
 			spaceContentStatusMapper.deleteByUserSpaceId(userSpaceId);

@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.goldeneyes.pojo.Note;
 import com.goldeneyes.pojo.NoteComment;
-import com.goldeneyes.pojo.NoteEnc;
 
 /**
  * @author konglm
@@ -99,30 +98,13 @@ public interface NoteService {
 	 */
 	public Note getNoteById(int noteId) throws Exception;
 	/**
-	 * 获取某条点到记事附件列表
-	 * @param noteId
-	 * @return
-	 */
-	public List<NoteEnc> getNoteEncById(int noteId) throws Exception;
-	/**
 	 * 新增某学生点到记事信息
 	 * @param studentId
 	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的点到记事ID
 	 */
-	public int addNote(int studentId,String msgContent,int teacherId,int noteType,int checkType) throws Exception;
-	/**
-	 * 新增某学生点到记事附件
-	 * @param noteId
-	 * @param encType
-	 * @param encAddr
-	 * @param encImg
-	 * @param teacherId
-	 * @param encOrder
-	 * @return 是否删除成功 0失败1成功
-	 */
-	public int addNoteEnc(int noteId, String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addNote(int studentId,String msgContent,int teacherId,int noteType,int checkType,int encType,String encAddr,String encImg) throws Exception;
 	/**
 	 * 新增某用户某点到记事评论
 	 * @param userId

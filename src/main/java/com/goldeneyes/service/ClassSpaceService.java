@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.goldeneyes.pojo.ClassSpace;
 import com.goldeneyes.pojo.ClassSpaceComment;
-import com.goldeneyes.pojo.ClassSpaceEnc;
 
 /**
  * @author konglm
@@ -98,30 +97,13 @@ public interface ClassSpaceService {
 	 */
 	public ClassSpace getClassSpaceById(int classSpaceId) throws Exception;
 	/**
-	 * 获取某条班级空间附件列表
-	 * @param classSpaceId
-	 * @return
-	 */
-	public List<ClassSpaceEnc> getClassSpaceEncById(int classSpaceId) throws Exception;
-	/**
 	 * 新增某班级空间信息
 	 * @param classId
 	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的班级空间ID
 	 */
-	public int addClassSpace(int classId,String msgContent,int teacherId) throws Exception;
-	/**
-	 * 新增某班级空间附件
-	 * @param classSpaceId
-	 * @param encType
-	 * @param encAddr
-	 * @param encImg
-	 * @param teacherId
-	 * @param encOrder
-	 * @return 是否删除成功 0失败1成功
-	 */
-	public int addClassSpaceEnc(int classSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addClassSpace(int classId,String msgContent,int teacherId,int encType,String encAddr,String encImg) throws Exception;
 	/**
 	 * 新增某用户某班级空间评论
 	 * @param userId

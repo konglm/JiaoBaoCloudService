@@ -9,6 +9,12 @@ public class ClassSpace {
 
     private String msgcontent;
 
+    private Byte enctype;
+
+    private String encaddr;
+
+    private String encimgaddr;
+
     private Integer publisherid;
 
     private Date publishdate;
@@ -37,6 +43,30 @@ public class ClassSpace {
 
     public void setMsgcontent(String msgcontent) {
         this.msgcontent = msgcontent == null ? null : msgcontent.trim();
+    }
+
+    public Byte getEnctype() {
+        return enctype;
+    }
+
+    public void setEnctype(Byte enctype) {
+        this.enctype = enctype;
+    }
+
+    public String getEncaddr() {
+        return encaddr;
+    }
+
+    public void setEncaddr(String encaddr) {
+        this.encaddr = encaddr == null ? null : encaddr.trim();
+    }
+
+    public String getEncimgaddr() {
+        return encimgaddr;
+    }
+
+    public void setEncimgaddr(String encimgaddr) {
+        this.encimgaddr = encimgaddr == null ? null : encimgaddr.trim();
     }
 
     public Integer getPublisherid() {

@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldeneyes.pojo.Note;
 import com.goldeneyes.pojo.NoteComment;
-import com.goldeneyes.pojo.NoteEnc;
 import com.goldeneyes.service.NoteService;
 import com.goldeneyes.util.CommonTool;
 
@@ -192,6 +191,9 @@ public class NoteController {
 				jsonobj.put("PublishDate", formater.format(note.getPublishdate()));
 				jsonobj.put("NoteType", note.getNotetype());
 				jsonobj.put("CheckType", note.getChecktype());
+				jsonobj.put("EncType", note.getEnctype());
+				jsonobj.put("EncAddr", note.getEncaddr());
+				jsonobj.put("EncImgAddr", note.getEncimgaddr());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -677,6 +679,9 @@ public class NoteController {
 				jsonobj.put("PublishDate", formater.format(note.getPublishdate()));
 				jsonobj.put("NoteType", note.getNotetype());
 				jsonobj.put("CheckType", note.getChecktype());
+				jsonobj.put("EncType", note.getEnctype());
+				jsonobj.put("EncAddr", note.getEncaddr());
+				jsonobj.put("EncImgAddr", note.getEncimgaddr());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -737,68 +742,9 @@ public class NoteController {
 			jsonData.put("PublishDate", formater.format(note.getPublishdate()));
 			jsonData.put("NoteType", note.getNotetype());
 			jsonData.put("CheckType", note.getChecktype());
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
-
-	/**
-	 * 获取某条点到记事附件列表
-	 * 
-	 * @param request
-	 * @param response
-	 * @param model
-	 */
-	@RequestMapping("/getNoteEncById")
-	public void getNoteEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
-		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} 
-				
-		if (!jsonInput.has("noteId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int noteId = 0;
-			try {
-				noteId = Integer.parseInt(jsonInput.getString("noteId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			List<NoteEnc> noteEncs = new ArrayList<NoteEnc>();
-			try {
-				noteEncs = noteService.getNoteEncById(noteId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (NoteEnc noteEnc : noteEncs) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("EncType", noteEnc.getEnctype());
-				jsonobj.put("EncName", noteEnc.getEncname());
-				jsonobj.put("EncAddr", noteEnc.getEncaddr());
-				jsonobj.put("EncImgAddr", noteEnc.getEncimgaddr());
-				jsonobj.put("PublisherId", noteEnc.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("PublishDate", formater.format(noteEnc.getPublishdate()));
-				jsonobj.put("EncOrder", noteEnc.getEncorder());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("Data", jsonArray);
+			jsonData.put("EncType", note.getEnctype());
+			jsonData.put("EncAddr", note.getEncaddr());
+			jsonData.put("EncImgAddr", note.getEncimgaddr());
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
@@ -831,7 +777,8 @@ public class NoteController {
 				
 		if (!jsonInput.has("studentId") || !jsonInput.has("msgContent")
 				|| !jsonInput.has("teacherId") || !jsonInput.has("noteType")
-				|| !jsonInput.has("checkType")) {
+				|| !jsonInput.has("checkType") || !jsonInput.has("encType")
+				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
@@ -839,12 +786,18 @@ public class NoteController {
 			int teacherId = 0;
 			int noteType = 0;
 			int checkType = 0;
+			int encType = 0;
+			String encAddr = "";
+			String encImg = "";
 			try {
 				studentId = Integer.parseInt(jsonInput.getString("studentId"));
 				msgContent = jsonInput.getString("msgContent");
 				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
 				noteType = Integer.parseInt(jsonInput.getString("noteType"));
 				checkType = Integer.parseInt(jsonInput.getString("checkType"));
+				encType = Integer.parseInt(jsonInput.getString("encType"));
+				encAddr = jsonInput.getString("encAddr");
+				encImg = jsonInput.getString("encImg");
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -852,7 +805,7 @@ public class NoteController {
 
 			int id = 0;
 			try {
-				id = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType);
+				id = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType,encType,encAddr,encImg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -862,75 +815,6 @@ public class NoteController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				jsonData.put("ID", id);
-				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-			}
-		}
-	}
-
-	/**
-	 * 新增某学生点到记事附件
-	 * 
-	 * @param request
-	 * @param response
-	 * @param model
-	 */
-	@RequestMapping("/addNoteEnc")
-	public void addNoteEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
-		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-				
-		if (!jsonInput.has("noteId") || !jsonInput.has("encType")
-				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")
-				|| !jsonInput.has("teacherId") || !jsonInput.has("encOrder")
-				|| !jsonInput.has("encName")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int noteId = 0;
-			String encName = "";
-			String encType = "";
-			String encAddr = "";
-			String encImg = "";
-			int teacherId = 0;
-			int encOrder = 0;
-			try {
-				noteId = Integer.parseInt(jsonInput.getString("noteId"));
-				encName = jsonInput.getString("encName");
-				encType = jsonInput.getString("encType");
-				encAddr = jsonInput.getString("encAddr");
-				encImg = jsonInput.getString("encImg");
-				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
-				encOrder = Integer.parseInt(jsonInput.getString("encOrder"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-
-			int success = 0;
-			try {
-				success = noteService.addNoteEnc(noteId,encName, encType, encAddr, encImg, teacherId, encOrder);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
-			} else {
-				jsonData.put("Result", success);
 				// 在这里输出，手机端就拿到web返回的值了
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
