@@ -558,7 +558,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 获取某学生用户空间条数
+	 * 获取用户空间条数
 	 * 
 	 * @param request
 	 * @param response
@@ -607,7 +607,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 获取某学生用户空间列表
+	 * 获取某用户空间列表
 	 * 
 	 * @param request
 	 * @param response
@@ -800,7 +800,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 新增某学生用户空间信息
+	 * 新增某用户空间信息
 	 * 
 	 * @param request
 	 * @param response
@@ -825,17 +825,15 @@ public class UserSpaceController {
 		}
 						
 		if (!jsonInput.has("userId") || !jsonInput.has("msgContent")
-				|| !jsonInput.has("teacherId") || !jsonInput.has("noteType")) {
+				|| !jsonInput.has("noteType")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			String msgContent = "";
-			int teacherId = 0;
 			int noteType = 0;
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				msgContent = jsonInput.getString("msgContent");
-				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
 				noteType = Integer.parseInt(jsonInput.getString("noteType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
@@ -844,7 +842,7 @@ public class UserSpaceController {
 
 			int id = 0;
 			try {
-				id = userSpaceService.addUserSpace(userId, msgContent, teacherId, noteType);
+				id = userSpaceService.addUserSpace(userId, msgContent, noteType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -861,7 +859,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 新增某学生用户空间附件
+	 * 新增某用户空间附件
 	 * 
 	 * @param request
 	 * @param response
@@ -887,7 +885,7 @@ public class UserSpaceController {
 						
 		if (!jsonInput.has("userSpaceId") || !jsonInput.has("encType")
 				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")
-				|| !jsonInput.has("teacherId") || !jsonInput.has("encOrder")
+				|| !jsonInput.has("userId") || !jsonInput.has("encOrder")
 				|| !jsonInput.has("encName")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -896,7 +894,7 @@ public class UserSpaceController {
 			String encType = "";
 			String encAddr = "";
 			String encImg = "";
-			int teacherId = 0;
+			int userId = 0;
 			int encOrder = 0;
 			try {
 				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
@@ -904,7 +902,7 @@ public class UserSpaceController {
 				encType = jsonInput.getString("encType");
 				encAddr = jsonInput.getString("encAddr");
 				encImg = jsonInput.getString("encImg");
-				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 				encOrder = Integer.parseInt(jsonInput.getString("encOrder"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
@@ -913,7 +911,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceEnc(userSpaceId,encName, encType, encAddr, encImg, teacherId, encOrder);
+				success = userSpaceService.addUserSpaceEnc(userSpaceId,encName, encType, encAddr, encImg, userId, encOrder);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -1275,7 +1273,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 屏蔽某学生某用户空间信息
+	 * 屏蔽某用户空间信息
 	 * 
 	 * @param request
 	 * @param response
@@ -1329,7 +1327,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 删除某学生某用户空间（附件一起删除）
+	 * 删除某用户空间（附件一起删除）
 	 * 
 	 * @param request
 	 * @param response

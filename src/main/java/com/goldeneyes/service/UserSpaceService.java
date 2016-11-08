@@ -105,15 +105,15 @@ public interface UserSpaceService {
 	 */
 	public List<UserSpaceEnc> getUserSpaceEncById(int userSpaceId) throws Exception;
 	/**
-	 * 新增某学生用户空间信息
+	 * 新增某用户空间信息
 	 * @param userId
 	 * @param msgContent
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的用户空间ID
 	 */
-	public int addUserSpace(int userId,String msgContent,int teacherId,int noteType) throws Exception;
+	public int addUserSpace(int userId,String msgContent,int noteType) throws Exception;
 	/**
-	 * 新增某学生用户空间附件
+	 * 新增某用户空间附件
 	 * @param userSpaceId
 	 * @param encType
 	 * @param encAddr
@@ -122,7 +122,7 @@ public interface UserSpaceService {
 	 * @param encOrder
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception;
+	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int userId,int encOrder) throws Exception;
 	/**
 	 * 新增某用户某用户空间评论
 	 * @param userId
@@ -177,7 +177,7 @@ public interface UserSpaceService {
 	 */
 	public int setOffUserSpaceById(int userSpaceId) throws Exception;
 	/**
-	 * 删除某学生某用户空间（附件一起删除）
+	 * 删除某空间（附件一起删除）
 	 * @param userSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */

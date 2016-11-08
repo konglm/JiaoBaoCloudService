@@ -556,7 +556,7 @@ public class ClassSpaceController {
 	}
 	
 	/**
-	 * 获取某学生班级空间条数
+	 * 获取某班级空间条数
 	 * 
 	 * @param request
 	 * @param response
@@ -605,7 +605,7 @@ public class ClassSpaceController {
 	}
 
 	/**
-	 * 获取某学生班级空间列表
+	 * 获取某班级空间列表
 	 * 
 	 * @param request
 	 * @param response
@@ -795,7 +795,7 @@ public class ClassSpaceController {
 	}
 
 	/**
-	 * 新增某学生班级空间信息
+	 * 新增某班级空间信息
 	 * 
 	 * @param request
 	 * @param response
@@ -856,7 +856,7 @@ public class ClassSpaceController {
 	}
 
 	/**
-	 * 新增某学生班级空间附件
+	 * 新增某班级空间附件
 	 * 
 	 * @param request
 	 * @param response
@@ -1284,7 +1284,7 @@ public class ClassSpaceController {
 	}
 
 	/**
-	 * 屏蔽某学生某班级空间信息
+	 * 屏蔽某班级空间信息
 	 * 
 	 * @param request
 	 * @param response
@@ -1340,7 +1340,7 @@ public class ClassSpaceController {
 	}
 
 	/**
-	 * 删除某学生某班级空间（附件一起删除）
+	 * 删除某班级空间（附件一起删除）
 	 * 
 	 * @param request
 	 * @param response

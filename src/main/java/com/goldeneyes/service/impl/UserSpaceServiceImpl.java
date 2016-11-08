@@ -185,14 +185,14 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpace(int userId, String msgContent, int teacherId, int noteType) throws Exception {
+	public int addUserSpace(int userId, String msgContent, int noteType) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = userSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		UserSpace userSpace = new UserSpace();
 		userSpace.setTabid(maxId);
 		userSpace.setUserid(userId);
 		userSpace.setMsgcontent(msgContent);
-		userSpace.setPublisherid(teacherId);
+		userSpace.setPublisherid(userId);
 		userSpace.setPublishdate(new Date());
 		userSpace.setStatus(CommonTool.int2byte(1));
 		userSpace.setNotetype(CommonTool.int2byte(noteType));
@@ -208,7 +208,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int teacherId,int encOrder) throws Exception {
+	public int addUserSpaceEnc(int userSpaceId,String encName,String encType,String encAddr,String encImg,int userId,int encOrder) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceEnc userSpaceEnc = new UserSpaceEnc();
 		userSpaceEnc.setUserspaceid(userSpaceId);
@@ -216,7 +216,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceEnc.setEnctype(encType);
 		userSpaceEnc.setEncaddr(encAddr);
 		userSpaceEnc.setEncimgaddr(encImg);
-		userSpaceEnc.setPublisherid(teacherId);
+		userSpaceEnc.setPublisherid(userId);
 		userSpaceEnc.setPublishdate(new Date());
 		userSpaceEnc.setEncorder(encOrder);
 		try {

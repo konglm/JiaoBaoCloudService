@@ -80,13 +80,13 @@ public interface ClassSpaceService {
 	 */
 	public List<ClassSpaceComment> getClassSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize) throws Exception;
 	/**
-	 * 获取某学生班级空间条数
+	 * 获取某班级空间条数
 	 * @param classId
 	 * @return
 	 */
 	public int getClassSpacesCntByClass(int classId) throws Exception;
 	/**
-	 * 获取某学生班级空间列表
+	 * 获取某班级空间列表
 	 * @param classId
 	 * @return
 	 */
@@ -104,7 +104,7 @@ public interface ClassSpaceService {
 	 */
 	public List<ClassSpaceEnc> getClassSpaceEncById(int classSpaceId) throws Exception;
 	/**
-	 * 新增某学生班级空间信息
+	 * 新增某班级空间信息
 	 * @param classId
 	 * @param msgContent
 	 * @param teacherId
@@ -112,7 +112,7 @@ public interface ClassSpaceService {
 	 */
 	public int addClassSpace(int classId,String msgContent,int teacherId) throws Exception;
 	/**
-	 * 新增某学生班级空间附件
+	 * 新增某班级空间附件
 	 * @param classSpaceId
 	 * @param encType
 	 * @param encAddr
@@ -170,13 +170,13 @@ public interface ClassSpaceService {
 	 */
 	public int setClassSpaceCommentReplyById(int classSpaceCommentId) throws Exception;
 	/**
-	 * 屏蔽某学生某班级空间信息
+	 * 屏蔽某班级空间信息
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
 	public int setOffClassSpaceById(int classSpaceId) throws Exception;
 	/**
-	 * 删除某学生某班级空间（附件一起删除）
+	 * 删除某班级空间（附件一起删除）
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
