@@ -170,9 +170,7 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int addNote(int studentId, String msgContent, int teacherId,int noteType,int checkType,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
-		int maxId = noteMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		Note note = new Note();
-		note.setTabid(maxId);
 		note.setStudentid(studentId);
 		note.setMsgcontent(msgContent);
 		note.setPublisherid(teacherId);
@@ -188,7 +186,7 @@ public class NoteServiceImpl implements NoteService {
 		} catch (Exception e) {
 			return 0;
 		}
-		return maxId;
+		return 1;
 	}
 
 	/**

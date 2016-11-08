@@ -169,9 +169,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	@Override
 	public int addClassSpace(int classId, String msgContent, int teacherId,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
-		int maxId = classSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		ClassSpace classSpace = new ClassSpace();
-		classSpace.setTabid(maxId);
 		classSpace.setClassid(classId);
 		classSpace.setMsgcontent(msgContent);
 		classSpace.setPublisherid(teacherId);
@@ -185,7 +183,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		return maxId;
+		return 1;
 	}
 
 

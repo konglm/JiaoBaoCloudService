@@ -173,9 +173,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	@Override
 	public int addUserSpace(int userId, String msgContent, int noteType,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
-		int maxId = userSpaceMapper.getMaxId(); // 为了返回ID，手工插入ID值
 		UserSpace userSpace = new UserSpace();
-		userSpace.setTabid(maxId);
 		userSpace.setUserid(userId);
 		userSpace.setMsgcontent(msgContent);
 		userSpace.setPublisherid(userId);
@@ -190,7 +188,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		return maxId;
+		return 1;
 	}
 
 	/**

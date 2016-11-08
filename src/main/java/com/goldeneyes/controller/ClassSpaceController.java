@@ -787,19 +787,19 @@ public class ClassSpaceController {
 				return;
 			}
 
-			int id = 0;
+			int success = 0;
 			try {
-				id = classSpaceService.addClassSpace(classId, msgContent, teacherId,encType,encAddr,encImg);
+				success = classSpaceService.addClassSpace(classId, msgContent, teacherId,encType,encAddr,encImg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
-			if (id == 0) {
+			if (success == 0) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
 			} else {
 				
-				jsonData.put("ID", id);
+				jsonData.put("Result", success);
 				
 				// 在这里输出，手机端就拿到web返回的值了
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
