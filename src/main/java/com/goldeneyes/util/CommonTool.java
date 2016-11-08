@@ -22,13 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import com.goldeneyes.pojo.Note;
 import com.goldeneyes.util.CommonTool;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -108,16 +103,16 @@ public class CommonTool {
 			jsonobj.put("RspTxt", "数据库连接异常");
 			break;
 		}
-		case "1003": {
-			jsonobj.put("RspCode", "1003");
-			jsonobj.put("RspTxt", "参数类型错误");
-			break;
-		}
 		case "1002": {
 			jsonobj.put("RspCode", "1002");
 			jsonobj.put("RspTxt", "数据库更新失败");
 			break;
 		}
+		case "1003": {
+			jsonobj.put("RspCode", "1003");
+			jsonobj.put("RspTxt", "参数类型错误");
+			break;
+		}		
 		case "1004": {
 			jsonobj.put("RspCode", "1004");
 			jsonobj.put("RspTxt", "参数不全");
@@ -151,6 +146,11 @@ public class CommonTool {
 		case "1010": {
 			jsonobj.put("RspCode", "1010");
 			jsonobj.put("RspTxt", "url连接失败");
+			break;
+		}
+		case "1011": {
+			jsonobj.put("RspCode", "1011");
+			jsonobj.put("RspTxt", "缺少验证参数");
 			break;
 		}
 		}

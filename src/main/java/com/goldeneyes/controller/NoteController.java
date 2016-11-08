@@ -85,25 +85,29 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoReadNotesCntByUser")
 	public void getNoReadNotesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+		
 				
-		if (jsonObject.getString("userId") == null) {
+		if (!jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -131,21 +135,25 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoReadNotesByUser")
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+		
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null)
-				|| (jsonObject.getString("pageSize") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -153,9 +161,9 @@ public class NoteController {
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -206,27 +214,31 @@ public class NoteController {
 	 */
 	@RequestMapping("/getIsLikeNoteByUser")
 	public void getIsLikeNoteByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+		
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("noteId") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -255,25 +267,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentsCntById")
 	public void getNoteCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -302,21 +317,24 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentsById")
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("pageIndex") == null)
-				|| (jsonObject.getString("pageSize") == null)) {
+		if (!jsonInput.has("noteId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -324,9 +342,9 @@ public class NoteController {
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
-				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -375,25 +393,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -427,25 +448,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentReplysCntByUser")
 	public void getNoteCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("userId") == null) {
+		if (!jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -473,21 +497,24 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentReplysByUser")
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("pageIndex") == null)
-				|| (jsonObject.getString("pageSize") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -495,9 +522,9 @@ public class NoteController {
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -544,25 +571,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNotesCntByStudent")
 	public void getNotesCntByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("studentId") == null) {
+		if (!jsonInput.has("studentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
 			try {
-				studentId = Integer.parseInt(jsonObject.getString("studentId"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -591,21 +621,24 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNotesByStudent")
 	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 		
-		if (!jsonObject.has("studentId") || !jsonObject.has("pageIndex")
-				|| !jsonObject.has("pageSize")) {
+		if (!jsonInput.has("studentId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -613,9 +646,9 @@ public class NoteController {
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				studentId = Integer.parseInt(jsonObject.getString("studentId"));
-				pageIndex = Integer.parseInt(jsonObject.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonObject.getString("pageSize"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -666,25 +699,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteById")
 	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -718,25 +754,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteEncById")
 	public void getNoteEncById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
-		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
+		} 
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -777,22 +816,25 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNote")
 	public void addNote(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("studentId") == null) || (jsonObject.getString("msgContent") == null)
-				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("noteType") == null)
-				|| (jsonObject.getString("checkType") == null)) {
+		if (!jsonInput.has("studentId") || !jsonInput.has("msgContent")
+				|| !jsonInput.has("teacherId") || !jsonInput.has("noteType")
+				|| !jsonInput.has("checkType")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int studentId = 0;
@@ -801,11 +843,11 @@ public class NoteController {
 			int noteType = 0;
 			int checkType = 0;
 			try {
-				studentId = Integer.parseInt(jsonObject.getString("studentId"));
-				msgContent = jsonObject.getString("msgContent");
-				teacherId = Integer.parseInt(jsonObject.getString("teacherId"));
-				noteType = Integer.parseInt(jsonObject.getString("noteType"));
-				checkType = Integer.parseInt(jsonObject.getString("checkType"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
+				msgContent = jsonInput.getString("msgContent");
+				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
+				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+				checkType = Integer.parseInt(jsonInput.getString("checkType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -838,23 +880,26 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteEnc")
 	public void addNoteEnc(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("encType") == null)
-				|| (jsonObject.getString("encAddr") == null) || (jsonObject.getString("encImg") == null)
-				|| (jsonObject.getString("teacherId") == null) || (jsonObject.getString("encOrder") == null)
-				|| (jsonObject.getString("encName") == null)) {
+		if (!jsonInput.has("noteId") || !jsonInput.has("encType")
+				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")
+				|| !jsonInput.has("teacherId") || !jsonInput.has("encOrder")
+				|| !jsonInput.has("encName")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
@@ -865,13 +910,13 @@ public class NoteController {
 			int teacherId = 0;
 			int encOrder = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
-				encName = jsonObject.getString("encName");
-				encType = jsonObject.getString("encType");
-				encAddr = jsonObject.getString("encAddr");
-				encImg = jsonObject.getString("encImg");
-				teacherId = Integer.parseInt(jsonObject.getString("teacherId"));
-				encOrder = Integer.parseInt(jsonObject.getString("encOrder"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+				encName = jsonInput.getString("encName");
+				encType = jsonInput.getString("encType");
+				encAddr = jsonInput.getString("encAddr");
+				encImg = jsonInput.getString("encImg");
+				teacherId = Integer.parseInt(jsonInput.getString("teacherId"));
+				encOrder = Integer.parseInt(jsonInput.getString("encOrder"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -904,30 +949,33 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteComment")
 	public void addNoteComment(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("commentContent") == null)
-				|| (jsonObject.getString("userId") == null)) {
+		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent")
+				|| !jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			String commentContent = "";
 			int userId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
-				commentContent = jsonObject.getString("commentContent");
-				userId = Integer.parseInt(jsonObject.getString("userId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+				commentContent = jsonInput.getString("commentContent");
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -960,22 +1008,25 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteCommentReply")
 	public void addNoteCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("noteId") == null) || (jsonObject.getString("commentContent") == null)
-				|| (jsonObject.getString("userId") == null) || (jsonObject.getString("replyUserId") == null)
-				|| (jsonObject.getString("upperId") == null)) {
+		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent")
+				|| !jsonInput.has("userId") || !jsonInput.has("replyUserId")
+				|| !jsonInput.has("upperId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
@@ -984,11 +1035,11 @@ public class NoteController {
 			int replyUserId = 0;
 			int upperId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
-				commentContent = jsonObject.getString("commentContent");
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				replyUserId = Integer.parseInt(jsonObject.getString("replyUserId"));
-				upperId = Integer.parseInt(jsonObject.getString("upperId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+				commentContent = jsonInput.getString("commentContent");
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				replyUserId = Integer.parseInt(jsonInput.getString("replyUserId"));
+				upperId = Integer.parseInt(jsonInput.getString("upperId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1021,27 +1072,30 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteForUser")
 	public void addNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("noteId") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1074,27 +1128,30 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteReadByUser")
 	public void setNoteReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("noteId") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1127,27 +1184,30 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteLikeByUser")
 	public void setNoteLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if ((jsonObject.getString("userId") == null) || (jsonObject.getString("noteId") == null)) {
+		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
 			int noteId = 0;
 			try {
-				userId = Integer.parseInt(jsonObject.getString("userId"));
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1180,25 +1240,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteCommentReplyById")
 	public void setNoteCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteCommentId") == null) {
+		if (!jsonInput.has("noteCommentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteCommentId = 0;
 			try {
-				noteCommentId = Integer.parseInt(jsonObject.getString("noteCommentId"));
+				noteCommentId = Integer.parseInt(jsonInput.getString("noteCommentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1231,25 +1294,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/setOffNoteById")
 	public void setOffNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1282,25 +1348,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/delNoteById")
 	public void delNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteId") == null) {
+		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
 			try {
-				noteId = Integer.parseInt(jsonObject.getString("noteId"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1333,25 +1402,28 @@ public class NoteController {
 	 */
 	@RequestMapping("/delNoteCommentById")
 	public void delNoteCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
 		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
 		
 		//接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = CommonTool.getRequestPostStr(request);
+			jsonInput = JSONObject.fromObject(requestStr);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		JSONObject jsonObject = JSONObject.fromObject(requestStr);
 				
-		if (jsonObject.getString("noteCommentId") == null) {
+		if (!jsonInput.has("noteCommentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteCommentId = 0;
 			try {
-				noteCommentId = Integer.parseInt(jsonObject.getString("noteCommentId"));
+				noteCommentId = Integer.parseInt(jsonInput.getString("noteCommentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
