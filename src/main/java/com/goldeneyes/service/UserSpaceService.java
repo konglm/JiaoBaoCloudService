@@ -19,6 +19,7 @@ import java.util.List;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceMsg;
+import com.goldeneyes.vo.AboutMe;
 
 /**
  * @author konglm
@@ -237,4 +238,16 @@ public interface UserSpaceService {
 	 * @return 是否删除成功 0失败1成功
 	 */
 	public int delUserSpaceMsgById(int userSpaceMsgId) throws Exception;
+	/**
+	 * 获取与我相关的数量
+	 * @param userId
+	 * @return
+	 */
+	public int getAboutMeCnt(int userId);
+	/**
+	 * 获取与我相关
+	 * @param userId
+	 * @return
+	 */
+	public List<AboutMe> getAboutMe(int userId,int pageIndex,int pageSize);
 }

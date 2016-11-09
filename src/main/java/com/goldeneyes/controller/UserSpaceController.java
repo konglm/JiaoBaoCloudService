@@ -31,6 +31,7 @@ import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
+import com.goldeneyes.vo.AboutMe;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -1933,6 +1934,81 @@ public class UserSpaceController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 			}
 
+		}
+	}
+	
+	/**
+	 * 获取用户未读用户空间列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getAboutMe")
+	public void getAboutMe(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
+		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+						
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		} else {
+			int userId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+				return;
+			}
+			int totalCnt = 0;
+			int totalPage = 0;
+			List<AboutMe> aboutMes = new ArrayList<AboutMe>();
+			try {
+				totalCnt = userSpaceService.getAboutMeCnt(userId);
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+				aboutMes = userSpaceService.getAboutMe(userId,pageIndex,pageSize);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			JSONArray jsonArray = new JSONArray();
+			for (AboutMe aboutMe : aboutMes) {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("MsgType", aboutMe.getMsgType());
+				jsonobj.put("UserId", aboutMe.getUserId());
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				jsonobj.put("MsgDate", formater.format(aboutMe.getMsgDate()));
+				jsonobj.put("TabId", aboutMe.getTabId());
+				jsonArray.put(jsonobj);
+			}
+			jsonData.put("TotalCnt", totalCnt);
+			jsonData.put("TotalPage", totalPage);
+			jsonData.put("Data", jsonArray);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
 }

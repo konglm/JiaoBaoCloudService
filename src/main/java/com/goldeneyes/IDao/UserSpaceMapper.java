@@ -3,6 +3,7 @@ package com.goldeneyes.IDao;
 import java.util.List;
 
 import com.goldeneyes.pojo.UserSpace;
+import com.goldeneyes.vo.AboutMe;
 
 public interface UserSpaceMapper {
     int deleteByPrimaryKey(Integer tabid);
@@ -89,4 +90,16 @@ public interface UserSpaceMapper {
 	 * @return
 	 */
 	int setOffUserSpaceById(UserSpace record);
+	/**
+	 * 获取与我相关的数量
+	 * @param userId
+	 * @return
+	 */
+	int getAboutMeCnt(int userId);
+	/**
+	 * 获取与我相关
+	 * @param userId
+	 * @return
+	 */
+	List<AboutMe> getAboutMe(int userId,int pageIndex,int pageSize);
 }

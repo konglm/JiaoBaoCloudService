@@ -31,6 +31,7 @@ import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceMsg;
 import com.goldeneyes.service.UserSpaceService;
 import com.goldeneyes.util.CommonTool;
+import com.goldeneyes.vo.AboutMe;
 
 /**
  * @author konglm
@@ -493,5 +494,25 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 			return 0;
 		}
 		return 1;
+	}
+	
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getAboutMeCnt(int userId) {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMapper.getAboutMeCnt(userId);
+		return cnt;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<AboutMe> getAboutMe(int userId,int pageIndex,int pageSize) {
+		// TODO Auto-generated method stub
+		List<AboutMe> aboutMes = userSpaceMapper.getAboutMe(userId,pageIndex,pageSize);
+		return aboutMes;
 	}
 }
