@@ -42,6 +42,20 @@ public interface UserSpaceService {
 	 */
 	public List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
+	 * 获取用户未读某用户空间条数
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId) throws Exception;
+	/**
+	 * 获取用户未读某用户空间列表
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId) throws Exception;
+	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
 	 * @param spaceType

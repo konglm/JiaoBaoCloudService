@@ -77,6 +77,26 @@ public class NoteServiceImpl implements NoteService {
 	 * @author konglm
 	 */
 	@Override
+	public int getNoReadNotesCntByUserForStudent(int userId, int spaceType,int studentId) throws Exception {
+		// TODO Auto-generated method stub
+		int isLike = noteMapper.getNoReadNotesCntByUserForStudent(userId, spaceType,studentId);
+		return isLike;
+	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public List<Note> getNoReadNotesByUserForStudent(int userId, int spaceType,int pageIndex,int pageSize,int studentId) throws Exception {
+		// TODO Auto-generated method stub
+		List<Note> notes = noteMapper.getNoReadNotesByUserForStudent(userId, spaceType, pageIndex, pageSize,studentId);
+		return notes;
+	}
+
+	/**
+	 * @author konglm
+	 */
+	@Override
 	public int getIsLikeNoteByUser(int userId, int spaceType, int noteId) throws Exception {
 		// TODO Auto-generated method stub
 		int isLike = noteMapper.getIsLikeNoteByUser(userId, spaceType, noteId);

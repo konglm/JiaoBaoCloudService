@@ -38,6 +38,20 @@ public interface UserSpaceMapper {
 	 */
 	List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize);
 	/**
+	 * 获取用户未读某用户空间条数
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId);
+	/**
+	 * 获取用户未读某用户空间列表
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId);
+	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
 	 * @param spaceType

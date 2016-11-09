@@ -202,6 +202,140 @@ public class UserSpaceController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
+	
+	/**
+	 * 获取用户未读用户空间条数
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNoReadUserSpacesCntByUserForPublisher")
+	public void getNoReadUserSpacesCntByUserForPublisher(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
+		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+						
+		if (!jsonInput.has("userId") || !jsonInput.has("publisherId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else {
+			int userId = 0;
+			int publisherId = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				publisherId = Integer.parseInt(jsonInput.getString("publisherId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			int cnt = 0;
+			try {
+				cnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			jsonData.put("Result", cnt);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+		}
+	}
+
+	/**
+	 * 获取用户未读用户空间列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNoReadUserSpacesByUserForPublisher")
+	public void getNoReadUserSpacesByUserForPublisher(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
+		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+						
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize") || !jsonInput.has("publisherId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		} else {
+			int userId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			int publisherId = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+				publisherId = Integer.parseInt(jsonInput.getString("publisherId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+				return;
+			}
+			int totalCnt = 0;
+			int totalPage = 0;
+			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
+			try {
+				totalCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+				userSpaces = userSpaceService.getNoReadUserSpacesByUserForPublisher(userId, 3, pageIndex, pageSize, publisherId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			JSONArray jsonArray = new JSONArray();
+			for (UserSpace userSpace : userSpaces) {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", userSpace.getTabid());
+				jsonobj.put("UserId", userSpace.getUserid());
+				jsonobj.put("MsgContent", userSpace.getMsgcontent());
+				jsonobj.put("PublisherId", userSpace.getPublisherid());
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+				jsonobj.put("NoteType", userSpace.getNotetype());
+				jsonobj.put("EncType", userSpace.getEnctype());
+				jsonobj.put("EncAddr", userSpace.getEncaddr());
+				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
+				jsonobj.put("EncIntro", userSpace.getEncintro());
+				jsonArray.put(jsonobj);
+			}
+			jsonData.put("TotalCnt", totalCnt);
+			jsonData.put("TotalPage", totalPage);
+			jsonData.put("Data", jsonArray);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+		}
+	}
 
 	/**
 	 * 获取用户某条用户空间是否点赞

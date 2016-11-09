@@ -76,6 +76,26 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType,pageIndex,pageSize);
 		return userSpaces;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getNoReadUserSpacesCntByUserForPublisher(int userId, int spaceType,int publisherId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUserForPublisher(userId, spaceType,publisherId);
+		return cnt;
+	}
+
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId, int spaceType,int pageIndex,int pageSize,int publisherId) throws Exception {
+		// TODO Auto-generated method stub
+		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUserForPublisher(userId, spaceType,pageIndex,pageSize,publisherId);
+		return userSpaces;
+	}
 
 	/**
 	 * @author konglm

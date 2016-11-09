@@ -72,6 +72,26 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		List<ClassSpace> classSpaces = classSpaceMapper.getNoReadClassSpacesByUser(userId, spaceType,pageIndex,pageSize);
 		return classSpaces;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int getNoReadClassSpacesCntByUserForClass(int userId, int spaceType,int classId) throws Exception {
+		// TODO Auto-generated method stub
+		int cnt = classSpaceMapper.getNoReadClassSpacesCntByUserForClass(userId, spaceType,classId);
+		return cnt;
+	}
+
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public List<ClassSpace> getNoReadClassSpacesByUserForClass(int userId, int spaceType,int pageIndex,int pageSize,int classId) throws Exception {
+		// TODO Auto-generated method stub
+		List<ClassSpace> classSpaces = classSpaceMapper.getNoReadClassSpacesByUserForClass(userId, spaceType,pageIndex,pageSize,classId);
+		return classSpaces;
+	}
 
 	/**
 	 * @author konglm

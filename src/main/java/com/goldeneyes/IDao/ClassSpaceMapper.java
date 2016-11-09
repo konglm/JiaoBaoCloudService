@@ -38,6 +38,20 @@ public interface ClassSpaceMapper {
 	 */
 	List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize);
 	/**
+	 * 获取用户未读某班级空间条数
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	int getNoReadClassSpacesCntByUserForClass(int userId,int spaceType,int classId);
+	/**
+	 * 获取用户未读某班级空间列表
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	List<ClassSpace> getNoReadClassSpacesByUserForClass(int userId,int spaceType,int pageIndex,int pageSize,int classId);
+	/**
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
 	 * @param spaceType

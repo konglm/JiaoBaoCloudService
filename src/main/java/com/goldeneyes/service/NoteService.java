@@ -42,6 +42,20 @@ public interface NoteService {
 	 */
 	public List<Note> getNoReadNotesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
+	 * 获取用户未读点到记事条数
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public int getNoReadNotesCntByUserForStudent(int userId,int spaceType,int studentId) throws Exception;
+	/**
+	 * 获取用户未读点到记事列表
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public List<Note> getNoReadNotesByUserForStudent(int userId,int spaceType,int pageIndex,int pageSize,int studentId) throws Exception;
+	/**
 	 * 获取用户某条点到记事是否点赞
 	 * @param userId
 	 * @param spaceType

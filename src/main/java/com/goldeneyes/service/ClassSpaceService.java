@@ -41,6 +41,20 @@ public interface ClassSpaceService {
 	 */
 	public List<ClassSpace> getNoReadClassSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
 	/**
+	 * 获取用户未读某班级空间条数
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public int getNoReadClassSpacesCntByUserForClass(int userId,int spaceType,int classId) throws Exception;
+	/**
+	 * 获取用户未读某班级空间列表
+	 * @param userId
+	 * @param spaceType
+	 * @return
+	 */
+	public List<ClassSpace> getNoReadClassSpacesByUserForClass(int userId,int spaceType,int pageIndex,int pageSize,int classId) throws Exception;
+	/**
 	 * 获取用户某条班级空间是否点赞
 	 * @param userId
 	 * @param spaceType

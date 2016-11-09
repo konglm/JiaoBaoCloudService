@@ -203,6 +203,142 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
+	
+	/**
+	 * 获取用户未读某学生点到记事条数
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNoReadNotesCntByUserForStudent")
+	public void getNoReadNotesCntByUserForStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
+		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		
+				
+		if (!jsonInput.has("userId") || !jsonInput.has("studentId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else {
+			int userId = 0;
+			int studentId = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			int cnt = 0;
+			try {
+				cnt = noteService.getNoReadNotesCntByUserForStudent(userId, 1, studentId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			jsonData.put("Result", cnt);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+		}
+	}
+
+	/**
+	 * 获取用户未读某学生点到记事列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/getNoReadNotesByUserForStudent")
+	public void getNoReadNotesByUserForStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
+		//返回参数用
+		JSONObject jsonData = new JSONObject();
+		//接收参数用
+		JSONObject jsonInput =  new JSONObject();
+		
+		//接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+		
+				
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
+				|| !jsonInput.has("pageSize") || !jsonInput.has("studentId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		} else {
+			int userId = 0;
+			int pageIndex = 0;
+			int pageSize = 0;
+			int studentId = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+			if ((pageIndex <= 0) || (pageSize <= 0)) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+				return;
+			}
+			int totalCnt = 0;
+			int totalPage = 0;
+			List<Note> notes = new ArrayList<Note>();
+			try {
+				totalCnt = noteService.getNoReadNotesCntByUserForStudent(userId, 1, studentId);
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+				notes = noteService.getNoReadNotesByUserForStudent(userId, 1, pageIndex, pageSize, studentId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			JSONArray jsonArray = new JSONArray();
+			for (Note note : notes) {
+				JSONObject jsonobj = new JSONObject();
+				jsonobj.put("TabId", note.getTabid());
+				jsonobj.put("StudentId", note.getStudentid());
+				jsonobj.put("MsgContent", note.getMsgcontent());
+				jsonobj.put("PublisherId", note.getPublisherid());
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				jsonobj.put("PublishDate", formater.format(note.getPublishdate()));
+				jsonobj.put("NoteType", note.getNotetype());
+				jsonobj.put("CheckType", note.getChecktype());
+				jsonobj.put("EncType", note.getEnctype());
+				jsonobj.put("EncAddr", note.getEncaddr());
+				jsonobj.put("EncImgAddr", note.getEncimgaddr());
+				jsonArray.put(jsonobj);
+			}
+			jsonData.put("TotalCnt", totalCnt);
+			jsonData.put("TotalPage", totalPage);
+			jsonData.put("Data", jsonArray);
+			// 在这里输出，手机端就拿到web返回的值了
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+		}
+	}
 
 	/**
 	 * 获取用户某条点到记事是否点赞
