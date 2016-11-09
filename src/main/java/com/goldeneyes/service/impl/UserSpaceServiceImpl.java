@@ -171,7 +171,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpace(int userId, String msgContent, int noteType,int encType,String encAddr,String encImg) throws Exception {
+	public int addUserSpace(int userId, String msgContent, int noteType,int encType,String encAddr,String encImg,String encIntro) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpace userSpace = new UserSpace();
 		userSpace.setUserid(userId);
@@ -183,6 +183,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpace.setEnctype(CommonTool.int2byte(encType));
 		userSpace.setEncaddr(encAddr);
 		userSpace.setEncimgaddr(encImg);
+		userSpace.setEncintro(encIntro);
 		try {
 			userSpaceMapper.insert(userSpace);		
 		} catch (Exception e) {

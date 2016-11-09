@@ -8,13 +8,14 @@
     <result column="EncType" property="enctype" jdbcType="TINYINT" />
     <result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
     <result column="EncImgAddr" property="encimgaddr" jdbcType="VARCHAR" />
+    <result column="EncIntro" property="encintro" jdbcType="VARCHAR" />
     <result column="PublisherId" property="publisherid" jdbcType="INTEGER" />
     <result column="PublishDate" property="publishdate" jdbcType="TIMESTAMP" />
     <result column="NoteType" property="notetype" jdbcType="TINYINT" />
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, UserId, MsgContent, EncType, EncAddr, EncImgAddr, PublisherId, PublishDate, 
+    TabId, UserId, MsgContent, EncType, EncAddr, EncImgAddr, EncIntro, PublisherId, PublishDate, 
     NoteType, Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,14 +29,14 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.UserSpace" >
-    insert into UserSpace (UserId, MsgContent, 
+    insert into UserSpace (TabId, UserId, MsgContent, 
       EncType, EncAddr, EncImgAddr, 
-      PublisherId, PublishDate, NoteType, 
-      Status)
-    values (#{userid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+      EncIntro, PublisherId, PublishDate, 
+      NoteType, Status)
+    values (#{tabid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
       #{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, 
-      #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, #{notetype,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT})
+      #{encintro,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, 
+      #{notetype,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.goldeneyes.pojo.UserSpace" >
     insert into UserSpace
@@ -57,6 +58,9 @@
       </if>
       <if test="encimgaddr != null" >
         EncImgAddr,
+      </if>
+      <if test="encintro != null" >
+        EncIntro,
       </if>
       <if test="publisherid != null" >
         PublisherId,
@@ -90,6 +94,9 @@
       <if test="encimgaddr != null" >
         #{encimgaddr,jdbcType=VARCHAR},
       </if>
+      <if test="encintro != null" >
+        #{encintro,jdbcType=VARCHAR},
+      </if>
       <if test="publisherid != null" >
         #{publisherid,jdbcType=INTEGER},
       </if>
@@ -122,6 +129,9 @@
       <if test="encimgaddr != null" >
         EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
       </if>
+      <if test="encintro != null" >
+        EncIntro = #{encintro,jdbcType=VARCHAR},
+      </if>
       <if test="publisherid != null" >
         PublisherId = #{publisherid,jdbcType=INTEGER},
       </if>
@@ -144,6 +154,7 @@
       EncType = #{enctype,jdbcType=TINYINT},
       EncAddr = #{encaddr,jdbcType=VARCHAR},
       EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
+      EncIntro = #{encintro,jdbcType=VARCHAR},
       PublisherId = #{publisherid,jdbcType=INTEGER},
       PublishDate = #{publishdate,jdbcType=TIMESTAMP},
       NoteType = #{notetype,jdbcType=TINYINT},
@@ -170,7 +181,7 @@
   <!-- 获取用户未读用户空间列表 -->
   <select id="getNoReadUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
   	select top(#{3}) u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
-  	,u.EncType,u.EncAddr,u.EncImgAddr 
+  	,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro 
   	from SpaceContentStatus ss,UserSpace u 
   	where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
   	and u.TabId not in (select top((#{2}-1) * #{3}) u.TabId
@@ -200,7 +211,7 @@
   <!-- 获取某学生用户空间列表 -->
   <select id="getUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
   	select top(#{2}) u.TabId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType 
-  	,u.EncType,u.EncAddr,u.EncImgAddr
+  	,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
   	from UserSpace u 
   	where u.Status = 1 and u.UserId = #{0}
   	and u.TabId not in (select top((#{1}-1) * #{2}) u.TabId
@@ -212,7 +223,7 @@
   <!-- 获取某条用户空间信息 -->
   <select id="getUserSpaceById" resultType="com.goldeneyes.pojo.UserSpace">
   	select u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType 
-  	,u.EncType,u.EncAddr,u.EncImgAddr
+  	,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
   	from UserSpace u 
   	where u.Status = 1 and u.TabId = #{0}
   </select>

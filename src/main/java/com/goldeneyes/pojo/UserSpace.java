@@ -15,6 +15,8 @@ public class UserSpace {
 
     private String encimgaddr;
 
+    private String encintro;
+
     private Integer publisherid;
 
     private Date publishdate;
@@ -69,6 +71,14 @@ public class UserSpace {
 
     public void setEncimgaddr(String encimgaddr) {
         this.encimgaddr = encimgaddr == null ? null : encimgaddr.trim();
+    }
+
+    public String getEncintro() {
+        return encintro;
+    }
+
+    public void setEncintro(String encintro) {
+        this.encintro = encintro == null ? null : encintro.trim();
     }
 
     public Integer getPublisherid() {

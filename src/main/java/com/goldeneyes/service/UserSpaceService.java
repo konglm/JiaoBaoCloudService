@@ -104,7 +104,7 @@ public interface UserSpaceService {
 	 * @param teacherId
 	 * @return 0：失败，其他：新增的用户空间ID
 	 */
-	public int addUserSpace(int userId,String msgContent,int noteType,int encType,String encAddr,String encImg) throws Exception;
+	public int addUserSpace(int userId,String msgContent,int noteType,int encType,String encAddr,String encImg,String encIntro) throws Exception;
 	/**
 	 * 新增某用户某用户空间评论
 	 * @param userId

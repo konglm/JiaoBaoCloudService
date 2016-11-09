@@ -192,6 +192,7 @@ public class UserSpaceController {
 				jsonobj.put("EncType", userSpace.getEnctype());
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
+				jsonobj.put("EncIntro", userSpace.getEncintro());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -677,6 +678,7 @@ public class UserSpaceController {
 				jsonobj.put("EncType", userSpace.getEnctype());
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
+				jsonobj.put("EncIntro", userSpace.getEncintro());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -739,6 +741,7 @@ public class UserSpaceController {
 			jsonData.put("EncType", userSpace.getEnctype());
 			jsonData.put("EncAddr", userSpace.getEncaddr());
 			jsonData.put("EncImgAddr", userSpace.getEncimgaddr());
+			jsonData.put("EncIntro", userSpace.getEncintro());
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
@@ -771,7 +774,8 @@ public class UserSpaceController {
 						
 		if (!jsonInput.has("userId") || !jsonInput.has("msgContent")
 				|| !jsonInput.has("noteType") || !jsonInput.has("encType")
-				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")) {
+				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")
+				|| !jsonInput.has("encIntro")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
@@ -780,6 +784,7 @@ public class UserSpaceController {
 			int encType = 0;
 			String encAddr = "";
 			String encImg = "";
+			String encIntro = "";
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				msgContent = jsonInput.getString("msgContent");
@@ -787,6 +792,7 @@ public class UserSpaceController {
 				encType = Integer.parseInt(jsonInput.getString("encType"));
 				encAddr = jsonInput.getString("encAddr");
 				encImg = jsonInput.getString("encImg");
+				encIntro = jsonInput.getString("encIntro");
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -794,7 +800,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpace(userId, msgContent, noteType,encType,encAddr,encImg);
+				success = userSpaceService.addUserSpace(userId, msgContent, noteType,encType,encAddr,encImg,encIntro);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
