@@ -1730,16 +1730,16 @@ public class UserSpaceController {
 			return;
 		}
 						
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgStr")
+		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgContent")
 				|| !jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userSpaceId = 0;
-			String msgStr = "";
+			String msgContent = "";
 			int userId = 0;
 			try {
 				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-				msgStr = jsonInput.getString("msgStr");
+				msgContent = jsonInput.getString("msgContent");
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
@@ -1748,7 +1748,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceMsg(userId, userSpaceId, msgStr);
+				success = userSpaceService.addUserSpaceMsg(userId, userSpaceId, msgContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -1789,19 +1789,19 @@ public class UserSpaceController {
 			return;
 		}
 						
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgStr")
+		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgContent")
 				|| !jsonInput.has("userId") || !jsonInput.has("replyUserId")
 				|| !jsonInput.has("upperId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userSpaceId = 0;
-			String msgStr = "";
+			String msgContent = "";
 			int userId = 0;
 			int replyUserId = 0;
 			int upperId = 0;
 			try {
 				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-				msgStr = jsonInput.getString("msgStr");
+				msgContent = jsonInput.getString("msgStr");
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				replyUserId = Integer.parseInt(jsonInput.getString("replyUserId"));
 				upperId = Integer.parseInt(jsonInput.getString("upperId"));
@@ -1812,7 +1812,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgStr, upperId);
+				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgContent, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

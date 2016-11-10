@@ -216,7 +216,7 @@ public interface UserSpaceService {
 	 * @param msgStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceMsg(int userId,int userSpaceId,String msgStr) throws Exception;
+	public int addUserSpaceMsg(int userId,int userSpaceId,String msgContent) throws Exception;
 	/**
 	 * 新增某用户某用户空间留言回复
 	 * @param userId
@@ -225,7 +225,7 @@ public interface UserSpaceService {
 	 * @param msgStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgStr,int upperId) throws Exception;
+	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgContent,int upperId) throws Exception;
 	/**
 	 * 修改某用户空间留言回复查看状态
 	 * @param userSpaceMsgId
