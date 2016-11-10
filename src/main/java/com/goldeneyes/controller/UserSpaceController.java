@@ -1559,6 +1559,8 @@ public class UserSpaceController {
 			int totalPage = 0;
 			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
 			try {
+				totalCnt = userSpaceService.getUserSpaceMsgsCntById(userSpaceId);
+				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
 				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userSpaceId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
