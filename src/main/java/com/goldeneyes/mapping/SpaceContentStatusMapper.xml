@@ -171,7 +171,7 @@
   <!-- 删除某班级空间的阅读状态 -->
   <delete id="deleteByClassSpaceId" parameterType="java.lang.Integer" >
     delete from SpaceContentStatus
-    where SpaceType = 1
+    where SpaceType = 2
     and SpaceId = #{ClassSpaceId,jdbcType=INTEGER}
   </delete>
   
@@ -196,7 +196,7 @@
   <!-- 删除某用户空间的阅读状态 -->
   <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
     delete from SpaceContentStatus
-    where SpaceType = 1
+    where SpaceType = 3
     and SpaceId = #{noteId,jdbcType=INTEGER}
   </delete>
 </mapper>
