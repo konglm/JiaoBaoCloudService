@@ -31,11 +31,11 @@
 		where TabId = #{tabid,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.goldeneyes.pojo.UserSpace">
-		insert into UserSpace (TabId, UserId, MsgContent,
+		insert into UserSpace (UserId, MsgContent,
 		EncType, EncAddr, EncImgAddr,
 		EncIntro, PublisherId, PublishDate,
 		NoteType, Status)
-		values (#{tabid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER},
+		values (#{userid,jdbcType=INTEGER},
 		#{msgcontent,jdbcType=VARCHAR},
 		#{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR},
 		#{encintro,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER},
