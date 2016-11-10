@@ -509,6 +509,7 @@ public class NoteController {
 				jsonobj.put("ReplyId", noteComment.getReplyid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("CommentDate", formater.format(noteComment.getCommentdate()));
+				jsonobj.put("UpperId", noteComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -687,6 +688,7 @@ public class NoteController {
 				jsonobj.put("UserId", noteComment.getUserid());
 				jsonobj.put("CommentContent", noteComment.getCommentcontent());
 				jsonobj.put("NoteId", noteComment.getNoteid());
+				jsonobj.put("UpperId", noteComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);

@@ -158,12 +158,12 @@
   </select>
   <!-- 获取点到记事所有评论 -->
   <select id="getNoteCommentsById" resultType="com.goldeneyes.pojo.NoteComment">
-  	select top(#{2}) nc.TabId,nc.UserId,nc.CommentContent,nc.ReplyId,nc.CommentDate 
+  	select top(#{2}) nc.TabId,nc.UserId,nc.CommentContent,nc.ReplyId,nc.CommentDate,nc.UpperId 
   	from NoteComment nc 
   	where nc.Status = 1 and nc.NoteId = #{0}
   	and nc.TabId not in (select top((#{1}-1) * #{2}) nc.TabId from NoteComment nc 
-  	where nc.Status = 1 and nc.NoteId = #{0} order by nc.CommentDate desc)
-  	order by nc.CommentDate desc
+  	where nc.Status = 1 and nc.NoteId = #{0} order by nc.CommentDate asc)
+  	order by nc.CommentDate asc
   </select>
   <!-- 获取用户点到记事所有未读评论回复条数 -->
   <select id="getNoteCommentReplysCntByUser" resultType="java.lang.Integer">
@@ -173,13 +173,13 @@
   </select>
   <!-- 获取用户点到记事所有未读评论回复列表 -->
   <select id="getNoteCommentReplysByUser" resultType="com.goldeneyes.pojo.NoteComment">
-  	select top(#{2}) nc.TabId,nc.UserId,nc.NoteId,nc.CommentContent
+  	select top(#{2}) nc.TabId,nc.UserId,nc.NoteId,nc.CommentContent,nc.UpperId
   	from NoteComment nc 
   	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.ReplyId = #{0}
   	and nc.TabId not in (select top((#{1}-1) * #{2}) nc.TabId from NoteComment nc 
   	where nc.Status = 1 and nc.ReplyStatus = 0 and nc.ReplyId = #{0}
-  	order by nc.CommentDate desc)
-	order by nc.CommentDate desc
+  	order by nc.CommentDate asc)
+	order by nc.CommentDate asc
   </select>
   <!-- 修改某用户某点到记事评论回复查看状态 -->
   <update id="setNoteCommentReplyById" parameterType="com.goldeneyes.pojo.NoteComment" >

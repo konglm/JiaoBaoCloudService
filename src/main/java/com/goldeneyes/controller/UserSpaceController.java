@@ -505,6 +505,7 @@ public class UserSpaceController {
 				jsonobj.put("ReplyId", userSpaceComment.getReplyid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("CommentDate", formater.format(userSpaceComment.getCommentdate()));
+				jsonobj.put("UpperId", userSpaceComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -684,6 +685,7 @@ public class UserSpaceController {
 				jsonobj.put("UserId", userSpaceComment.getUserid());
 				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
 				jsonobj.put("UserSpaceId", userSpaceComment.getUserspaceid());
+				jsonobj.put("UpperId", userSpaceComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -1572,6 +1574,7 @@ public class UserSpaceController {
 				jsonobj.put("ReplyId", userSpaceMsg.getReplyid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("MsgDate", formater.format(userSpaceMsg.getMsgdate()));
+				jsonobj.put("UpperId", userSpaceMsg.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -1695,6 +1698,7 @@ public class UserSpaceController {
 				jsonobj.put("UserId", userSpaceMsg.getUserid());
 				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
 				jsonobj.put("UserSpaceId", userSpaceMsg.getUserspaceid());
+				jsonobj.put("UpperId", userSpaceMsg.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);

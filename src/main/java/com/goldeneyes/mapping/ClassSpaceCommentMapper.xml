@@ -158,13 +158,13 @@
   </select>
   <!-- 获取班级空间所有评论 -->
   <select id="getClassSpaceCommentsById" resultType="com.goldeneyes.pojo.ClassSpaceComment">
-  	select top(#{2}) cc.TabId,cc.UserId,cc.CommentContent,cc.ReplyId,cc.CommentDate 
+  	select top(#{2}) cc.TabId,cc.UserId,cc.CommentContent,cc.ReplyId,cc.CommentDate,cc.UpperId
   	from ClassSpaceComment cc 
   	where cc.Status = 1 and cc.ClassSpaceId = #{0}
   	and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from ClassSpaceComment cc 
   	where cc.Status = 1 and cc.ClassSpaceId = #{0}
-  	order by cc.CommentDate desc)
-  	order by cc.CommentDate desc
+  	order by cc.CommentDate asc)
+  	order by cc.CommentDate asc
   </select>
   <!-- 获取用户班级空间所有未读评论回复条数 -->
   <select id="getClassSpaceCommentReplysCntByUser" resultType="java.lang.Integer">
@@ -174,13 +174,13 @@
   </select>
   <!-- 获取用户班级空间所有未读评论回复列表 -->
   <select id="getClassSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.ClassSpaceComment">
-  	select top(#{2})  cc.TabId,cc.UserId,cc.ClassSpaceId,cc.CommentContent
+  	select top(#{2})  cc.TabId,cc.UserId,cc.ClassSpaceId,cc.CommentContent,cc.UpperId
   	from ClassSpaceComment cc 
   	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
   	and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from ClassSpaceComment cc
   	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
-	order by cc.CommentDate desc)
-	order by cc.CommentDate desc
+	order by cc.CommentDate asc)
+	order by cc.CommentDate asc
   </select>
   <!-- 修改某用户某班级空间评论回复查看状态 -->
   <update id="setClassSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >

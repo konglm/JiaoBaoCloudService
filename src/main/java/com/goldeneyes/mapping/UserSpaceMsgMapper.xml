@@ -158,7 +158,7 @@
   </select>
   <!-- 获取用户空间所有留言 -->
   <select id="getUserSpaceMsgsById" resultType="com.goldeneyes.pojo.UserSpaceMsg">
-  	select top(#{2}) um.TabId,um.UserId,um.MsgContent,um.ReplyId,um.MsgDate 
+  	select top(#{2}) um.TabId,um.UserId,um.MsgContent,um.ReplyId,um.MsgDate,um.UpperId
   	from UserSpaceMsg um 
   	where um.Status = 1 and um.UserSpaceId = #{0}
   	and um.TabId not in (select top((#{1}-1) * #{2}) um.TabId
@@ -175,7 +175,7 @@
   </select>
   <!-- 获取用户用户空间所有未读留言回复列表 -->
   <select id="getUserSpaceMsgReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceMsg">
-  	select top(#{2}) um.TabId,um.UserId,um.UserSpaceId,um.MsgContent
+  	select top(#{2}) um.TabId,um.UserId,um.UserSpaceId,um.MsgContent,um.UpperId
   	from UserSpaceMsg um 
   	where um.Status = 1 and um.ReplyStatus = 0 and um.ReplyId = #{0}
   	and um.TabId not in (select top((#{1}-1) * #{2}) um.TabId 

@@ -501,6 +501,7 @@ public class ClassSpaceController {
 				jsonobj.put("ReplyId", classSpaceComment.getReplyid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("CommentDate", formater.format(classSpaceComment.getCommentdate()));
+				jsonobj.put("UpperId", classSpaceComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -679,6 +680,7 @@ public class ClassSpaceController {
 				jsonobj.put("UserId", classSpaceComment.getUserid());
 				jsonobj.put("CommentContent", classSpaceComment.getCommentcontent());
 				jsonobj.put("ClassSpaceId", classSpaceComment.getClassspaceid());
+				jsonobj.put("UpperId", classSpaceComment.getUpperid());
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
