@@ -1801,7 +1801,7 @@ public class UserSpaceController {
 			int upperId = 0;
 			try {
 				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-				msgContent = jsonInput.getString("msgStr");
+				msgContent = jsonInput.getString("msgContent");
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				replyUserId = Integer.parseInt(jsonInput.getString("replyUserId"));
 				upperId = Integer.parseInt(jsonInput.getString("upperId"));
