@@ -81,12 +81,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoReadNotesCntByUser")
 	public void getNoReadNotesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -96,8 +96,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-				
+
 		if (!jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -131,12 +130,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoReadNotesByUser")
 	public void getNoReadNotesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -146,10 +145,8 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-				
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
-				|| !jsonInput.has("pageSize")) {
+
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -203,7 +200,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
-	
+
 	/**
 	 * 获取用户未读某学生点到记事条数
 	 * 
@@ -212,13 +209,14 @@ public class NoteController {
 	 * @param model
 	 */
 	@RequestMapping("/getNoReadNotesCntByUserForStudent")
-	public void getNoReadNotesCntByUserForStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+	public void getNoReadNotesCntByUserForStudent(HttpServletRequest request, HttpServletResponse response,
+			Model model) {
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -228,8 +226,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-				
+
 		if (!jsonInput.has("userId") || !jsonInput.has("studentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -265,12 +262,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoReadNotesByUserForStudent")
 	public void getNoReadNotesByUserForStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -280,10 +277,9 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-				
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
-				|| !jsonInput.has("pageSize") || !jsonInput.has("studentId")) {
+
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")
+				|| !jsonInput.has("studentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -349,12 +345,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getIsLikeNoteByUser")
 	public void getIsLikeNoteByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -364,8 +360,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-				
+
 		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -402,12 +397,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentsCntById")
 	public void getNoteCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -417,7 +412,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -452,12 +447,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentsById")
 	public void getNoteCommentsByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -467,9 +462,8 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
-		if (!jsonInput.has("noteId") || !jsonInput.has("pageIndex")
-				|| !jsonInput.has("pageSize")) {
+
+		if (!jsonInput.has("noteId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -529,12 +523,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getIsLikeUsersById")
 	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -544,7 +538,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -584,12 +578,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentReplysCntByUser")
 	public void getNoteCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -599,7 +593,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -633,12 +627,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteCommentReplysByUser")
 	public void getNoteCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -648,9 +642,8 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex")
-				|| !jsonInput.has("pageSize")) {
+
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -708,12 +701,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNotesCntByStudent")
 	public void getNotesCntByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -723,7 +716,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("studentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -758,12 +751,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNotesByStudent")
 	public void getNotesByStudent(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -773,9 +766,8 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-		
-		if (!jsonInput.has("studentId") || !jsonInput.has("pageIndex")
-				|| !jsonInput.has("pageSize")) {
+
+		if (!jsonInput.has("studentId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -793,7 +785,7 @@ public class NoteController {
 			if ((pageIndex <= 0) || (pageSize <= 0)) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
 				return;
-			} 
+			}
 			int totalCnt = 0;
 			int totalPage = 0;
 			List<Note> notes = new ArrayList<Note>();
@@ -839,12 +831,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/getNoteById")
 	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -854,7 +846,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -873,16 +865,18 @@ public class NoteController {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
 				return;
 			}
-			jsonData.put("StudentId", note.getStudentid());
-			jsonData.put("MsgContent", note.getMsgcontent());
-			jsonData.put("PublisherId", note.getPublisherid());
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			jsonData.put("PublishDate", formater.format(note.getPublishdate()));
-			jsonData.put("NoteType", note.getNotetype());
-			jsonData.put("CheckType", note.getChecktype());
-			jsonData.put("EncType", note.getEnctype());
-			jsonData.put("EncAddr", note.getEncaddr());
-			jsonData.put("EncImgAddr", note.getEncimgaddr());
+			if (note != null) {
+				jsonData.put("StudentId", note.getStudentid());
+				jsonData.put("MsgContent", note.getMsgcontent());
+				jsonData.put("PublisherId", note.getPublisherid());
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				jsonData.put("PublishDate", formater.format(note.getPublishdate()));
+				jsonData.put("NoteType", note.getNotetype());
+				jsonData.put("CheckType", note.getChecktype());
+				jsonData.put("EncType", note.getEnctype());
+				jsonData.put("EncAddr", note.getEncaddr());
+				jsonData.put("EncImgAddr", note.getEncimgaddr());
+			}
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
@@ -897,12 +891,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNote")
 	public void addNote(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -912,10 +906,9 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
-		if (!jsonInput.has("studentId") || !jsonInput.has("msgContent")
-				|| !jsonInput.has("teacherId") || !jsonInput.has("noteType")
-				|| !jsonInput.has("checkType") || !jsonInput.has("encType")
+
+		if (!jsonInput.has("studentId") || !jsonInput.has("msgContent") || !jsonInput.has("teacherId")
+				|| !jsonInput.has("noteType") || !jsonInput.has("checkType") || !jsonInput.has("encType")
 				|| !jsonInput.has("encAddr") || !jsonInput.has("encImg")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -943,7 +936,8 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType,encType,encAddr,encImg);
+				success = noteService.addNote(studentId, msgContent, teacherId, noteType, checkType, encType, encAddr,
+						encImg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -968,12 +962,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteComment")
 	public void addNoteComment(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -983,9 +977,8 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
-		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent")
-				|| !jsonInput.has("userId")) {
+
+		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent") || !jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
@@ -1027,12 +1020,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteCommentReply")
 	public void addNoteCommentReply(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1042,10 +1035,9 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
-		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent")
-				|| !jsonInput.has("userId") || !jsonInput.has("replyUserId")
-				|| !jsonInput.has("upperId")) {
+
+		if (!jsonInput.has("noteId") || !jsonInput.has("commentContent") || !jsonInput.has("userId")
+				|| !jsonInput.has("replyUserId") || !jsonInput.has("upperId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int noteId = 0;
@@ -1091,12 +1083,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/addNoteForUser")
 	public void addNoteForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1106,7 +1098,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1147,12 +1139,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteReadByUser")
 	public void setNoteReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1162,7 +1154,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1203,12 +1195,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteLikeByUser")
 	public void setNoteLikeByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1218,7 +1210,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1259,12 +1251,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/setNoteCommentReplyById")
 	public void setNoteCommentReplyById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1274,7 +1266,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteCommentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1313,12 +1305,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/setOffNoteById")
 	public void setOffNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1328,7 +1320,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1367,12 +1359,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/delNoteById")
 	public void delNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1382,7 +1374,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
@@ -1421,12 +1413,12 @@ public class NoteController {
 	 */
 	@RequestMapping("/delNoteCommentById")
 	public void delNoteCommentById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		//返回参数用
+		// 返回参数用
 		JSONObject jsonData = new JSONObject();
-		//接收参数用
-		JSONObject jsonInput =  new JSONObject();
-		
-		//接收APP端发来的json请求
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
 			requestStr = (String) request.getAttribute("requestStr");
@@ -1436,7 +1428,7 @@ public class NoteController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		}
-				
+
 		if (!jsonInput.has("noteCommentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
