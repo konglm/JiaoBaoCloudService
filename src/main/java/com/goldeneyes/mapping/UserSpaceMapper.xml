@@ -180,7 +180,7 @@
 	<select id="getNoReadUserSpacesCntByUser" resultType="java.lang.Integer">
 		select COUNT(u.TabId)
 		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=#{1} and ss.SpaceType=3
+		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=#{1}
 		and ss.UserId = #{0}
 	</select>
 	<!-- 获取用户未读用户空间列表 -->
@@ -203,7 +203,7 @@
 		resultType="java.lang.Integer">
 		select COUNT(u.TabId)
 		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=#{1} and ss.SpaceType=3
+		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=#{1}
 		and ss.UserId = #{0}
 		and u.PublisherId = #{2}
 	</select>
