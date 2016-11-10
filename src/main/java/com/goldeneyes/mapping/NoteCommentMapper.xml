@@ -28,11 +28,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.NoteComment" >
-    insert into NoteComment (TabId, NoteId, UpperId, 
+    insert into NoteComment (NoteId, UpperId, 
       UserId, CommentContent, ReplyId, 
       CommentDate, ReplyStatus, ReplyDate, 
       Status)
-    values (#{tabid,jdbcType=INTEGER}, #{noteid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
+    values (#{noteid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
       #{userid,jdbcType=INTEGER}, #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, 
       #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT})
