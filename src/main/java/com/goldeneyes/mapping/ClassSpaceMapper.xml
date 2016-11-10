@@ -155,7 +155,7 @@
   <select id="getNoReadClassSpacesCntByUser" resultType="java.lang.Integer">
   	select COUNT(c.TabId) 
   	from SpaceContentStatus ss,ClassSpace c 
-  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=2 and ss.UserId = #{0}
+  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
   </select>
   <!-- 获取用户未读班级空间列表 -->
   <select id="getNoReadClassSpacesByUser" resultType="com.goldeneyes.pojo.ClassSpace">
@@ -172,8 +172,8 @@
   <select id="getNoReadClassSpacesCntByUserForClass" resultType="java.lang.Integer">
   	select COUNT(c.TabId) 
   	from SpaceContentStatus ss,ClassSpace c 
-  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=2 and ss.UserId = #{0}
-  	and c.ClassId =#{1}
+  	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
+  	and c.ClassId =#{2}
   </select>
   <!-- 获取用户未读某班级空间列表 -->
   <select id="getNoReadClassSpacesByUserForClass" resultType="com.goldeneyes.pojo.ClassSpace">
@@ -184,6 +184,7 @@
   	and c.ClassId =#{4}
   	and c.TabId not in (select top((#{2}-1) * #{3}) c.TabId from SpaceContentStatus ss,ClassSpace c 
   	where ss.SpaceId=c.TabId and ss.IsRead=0 and c.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
+  	and c.ClassId =#{4}
   	order by c.PublishDate desc)
   	order by c.PublishDate desc
   </select>

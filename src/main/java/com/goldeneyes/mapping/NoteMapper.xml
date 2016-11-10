@@ -176,7 +176,7 @@
   <select id="getNoReadNotesCntByUser" resultType="java.lang.Integer">
   	select COUNT(n.TabId) 
   	from SpaceContentStatus ss,Note n 
-  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
+  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
   </select>
   <!-- 获取用户未读点到记事列表 -->
   <select id="getNoReadNotesByUser" resultType="com.goldeneyes.pojo.Note">
@@ -195,8 +195,8 @@
   <select id="getNoReadNotesCntByUserForStudent" resultType="java.lang.Integer">
   	select COUNT(n.TabId) 
   	from SpaceContentStatus ss,Note n 
-  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=1 and ss.UserId = #{0}
-  	and n.StudentId = #{1}
+  	where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
+  	and n.StudentId = #{2}
   </select>
   <!-- 获取用户未读某学生点到记事列表 -->
   <select id="getNoReadNotesByUserForStudent" resultType="com.goldeneyes.pojo.Note">
@@ -209,6 +209,7 @@
           (select top((#{2}-1) * #{3}) n.TabId
          from SpaceContentStatus ss,Note n 
   		 where ss.SpaceId=n.TabId and ss.IsRead=0 and n.Status=1 and ss.SpaceType=#{1} and ss.UserId = #{0}
+  		 and n.StudentId = #{4}
          order by n.PublishDate desc))
   	order by n.PublishDate desc
   </select>
