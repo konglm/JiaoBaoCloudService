@@ -221,6 +221,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		classSpaceComment.setReplyid(0);
 		classSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		classSpaceComment.setStatus(CommonTool.int2byte(1));
+		classSpaceComment.setUpperid(0);
 		try {
 			classSpaceCommentMapper.insert(classSpaceComment);
 		} catch (Exception e) {

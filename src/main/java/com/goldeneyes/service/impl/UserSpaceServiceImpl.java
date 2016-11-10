@@ -227,6 +227,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceComment.setReplyid(0);
 		userSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		userSpaceComment.setStatus(CommonTool.int2byte(1));
+		userSpaceComment.setUpperid(0);
 		try {
 			userSpaceCommentMapper.insert(userSpaceComment);
 		} catch (Exception e) {
@@ -435,6 +436,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceMsg.setReplyid(0);
 		userSpaceMsg.setReplystatus(CommonTool.int2byte(0));
 		userSpaceMsg.setStatus(CommonTool.int2byte(1));
+		userSpaceMsg.setUpperid(0);
 		try {
 			userSpaceMsgMapper.insert(userSpaceMsg);
 		} catch (Exception e) {

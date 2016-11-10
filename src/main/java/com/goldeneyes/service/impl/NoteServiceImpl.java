@@ -223,6 +223,7 @@ public class NoteServiceImpl implements NoteService {
 		noteComment.setReplyid(0);
 		noteComment.setReplystatus(CommonTool.int2byte(0));
 		noteComment.setStatus(CommonTool.int2byte(1));
+		noteComment.setUpperid(0);
 		try {
 			noteCommentMapper.insert(noteComment);
 		} catch (Exception e) {
