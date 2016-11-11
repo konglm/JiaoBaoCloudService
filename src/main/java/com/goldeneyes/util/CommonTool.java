@@ -41,6 +41,12 @@ public class CommonTool {
 		System.out.println(getTotalPage(8, 2));
 	}
 
+	/**
+	 * 计算总页数
+	 * @param totalCnt
+	 * @param pageSize
+	 * @return
+	 */
 	public static int getTotalPage(int totalCnt, int pageSize) {
 		if (totalCnt % pageSize == 0) {
 			return totalCnt / pageSize;
@@ -160,11 +166,6 @@ public class CommonTool {
 
 	/**
 	 * 描述:获取 post 请求的 byte[] 数组
-	 * 
-	 * <pre>
-	 * 举例：
-	 * </pre>
-	 * 
 	 * @param request
 	 * @return
 	 * @throws IOException
