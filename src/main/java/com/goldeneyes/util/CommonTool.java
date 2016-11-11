@@ -20,8 +20,17 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.json.JsonArray;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import com.goldeneyes.util.CommonTool;
 
@@ -38,7 +47,14 @@ public class CommonTool {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(getTotalPage(8, 2));
+		TreeMap<String, Object> treeMap1 = new TreeMap<String, Object>();    
+        treeMap1.put("uuid", "70C72521-2CD6-45DD-AF6E-375654EB734A");    
+        treeMap1.put("token", "C72521");    
+        treeMap1.put("appid", "HBuilder");    
+        treeMap1.put("sign", "n+PGnccBIytr/fBcXQq3KaagP8Q="); 
+        treeMap1.put("userId", 1);    
+        treeMap1.put("publisherId", 1);    
+        System.out.println("treeMap1="+treeMap1);   
 	}
 
 	/**
@@ -274,5 +290,34 @@ public class CommonTool {
 		}
 		return returnJson;
 	}
+	
+	/**
+	 * 将jsonArray解析为List
+	 * @param jArray
+	 * @return
+	 */
+	public static List<Integer> getListFromJsonArray(JSONArray jArray){
+		List<Integer> jsonStr = new ArrayList<Integer>();
+		for(int i = 0; i < jArray.length(); i++){
+			jsonStr.add(jArray.getInt(i));
+		}
+		return jsonStr;
+	}
+	
+	/**
+	 * Json排序
+	 * @param obj
+	 * @return
+	 */
+	public static TreeMap sortJsonObject(JSONObject obj) {  
+		TreeMap  map = new TreeMap();  
+        Iterator<String> it = obj.keys();  
+        while (it.hasNext()) {  
+            String key = it.next();  
+            Object value = obj.get(key);  
+            map.put(key, value);  
+        }  
+        return map;  
+    }  
 
 }

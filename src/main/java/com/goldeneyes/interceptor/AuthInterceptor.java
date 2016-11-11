@@ -15,6 +15,9 @@
 package com.goldeneyes.interceptor;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 		// TODO Auto-generated method stub
 		JSONObject jsonData = new JSONObject();
-		JSONObject jsonInput = new JSONObject();
+		JSONObject jsonInput = new JSONObject(true);
 		// 接收APP端发来的json请求
 		String requestStr = "";
 		try {
@@ -59,15 +62,32 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return false;
 		}
 
+		// 排序参数
+		String encryptText = "";
+		try {
+			TreeMap treeMap = CommonTool.sortJsonObject(jsonInput);
+
+			Iterator it = treeMap.keySet().iterator();
+			while (it.hasNext()) {  
+	            String keyt = it.next().toString();  
+	            String valuet = treeMap.get(keyt).toString();
+				if (!keyt.equals("sign")) {
+					encryptText = encryptText + keyt + "=" + valuet + "&";
+				}
+			}
+			encryptText = encryptText.substring(0, encryptText.length() - 1);
+		} catch (Exception e) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1011").toString());
+			return false;
+		}
 		// 验证url是否被篡改
-		String sign = EncryptUtil.hmacSHA1Encrypt("uuid=" + jsonInput.getString("uuid") + "&appid="
-				+ jsonInput.getString("appid") + "&token=" + jsonInput.getString("token"), "jsy309");
-		if(!sign.equals(jsonInput.getString("sign"))){
+		String sign = EncryptUtil.hmacSHA1Encrypt(encryptText, "jsy309");
+		if (!sign.equals(jsonInput.getString("sign"))) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1008").toString());
 			return false;
 		}
 		// 验证Token时间是否超期
-		
+
 		request.setAttribute("requestStr", requestStr);
 		return true;
 	}

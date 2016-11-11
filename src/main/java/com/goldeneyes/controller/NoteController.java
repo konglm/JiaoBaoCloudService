@@ -1129,6 +1129,61 @@ public class NoteController {
 			}
 		}
 	}
+	
+	/**
+	 * 推送记事给多user
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/addNoteForMutiUsers")
+	public void addNoteForMutiUsers(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// 返回参数用
+		JSONObject jsonData = new JSONObject();
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+
+		if (!jsonInput.has("userIds") || !jsonInput.has("noteId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else {
+			List<Integer> userIds = new ArrayList<Integer>();
+			int noteId = 0;
+			try {
+				userIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("userIds"));
+				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				//success = noteService.addNoteForMutiUsers(userIds, 1, noteId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+			} else {
+				jsonData.put("Result", success);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+			}
+		}
+	}
 
 	/**
 	 * 修改某用户某点到记事阅读状态为已读
