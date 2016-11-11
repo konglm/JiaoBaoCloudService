@@ -279,6 +279,30 @@ public class NoteServiceImpl implements NoteService {
 		
 		return 1;
 	}
+	
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int addNoteForMutiUsers(List<Integer> userIds, int spaceType, int noteId) throws Exception {
+		
+		for(Integer userId:userIds){
+			SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+			spaceContentStatus.setUserid(userId);
+			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+			spaceContentStatus.setSpaceid(noteId);
+			spaceContentStatus.setIsread(CommonTool.int2byte(0));
+			spaceContentStatus.setIslike(CommonTool.int2byte(0));		
+	
+			try {
+				spaceContentStatusMapper.insert(spaceContentStatus);
+			} catch (Exception e) {
+				return 0;
+			}
+		}
+		
+		return 1;
+	}
 
 	/**
 	 *  @author konglm

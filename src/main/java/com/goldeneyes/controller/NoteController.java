@@ -1169,7 +1169,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				//success = noteService.addNoteForMutiUsers(userIds, 1, noteId);
+				success = noteService.addNoteForMutiUsers(userIds, 1, noteId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

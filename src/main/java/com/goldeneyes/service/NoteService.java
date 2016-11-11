@@ -145,6 +145,15 @@ public interface NoteService {
 	 */
 	public int addNoteForUser(int userId,int spaceType,int noteId) throws Exception;
 	/**
+	 * 推送给多位用户的某点到记事
+	 * @param userId
+	 * @param spaceType
+	 * @param noteId
+	 * @return
+	 * @throws Exception
+	 */
+	public int addNoteForMutiUsers(List<Integer> userIds,int spaceType,int noteId) throws Exception;
+	/**
 	 * 修改某用户某点到记事阅读状态为已读
 	 * @param userId
 	 * @param spaceType
