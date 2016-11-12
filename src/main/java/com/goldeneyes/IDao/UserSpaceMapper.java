@@ -59,7 +59,7 @@ public interface UserSpaceMapper {
 	 * @param userSpaceId
 	 * @return
 	 */
-	int getIsLikeUserSpaceByUser(int userId,int spaceType,int userSpaceId);
+	int getIsLikeUserSpaceByUser(int userId,int userSpaceId);
 	/**
 	 * 获取用户空间所有点赞用户
 	 * @param userSpaceId

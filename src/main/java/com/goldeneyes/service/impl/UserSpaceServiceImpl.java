@@ -102,9 +102,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getIsLikeUserSpaceByUser(int userId, int spaceType, int userSpaceId) throws Exception {
+	public int getIsLikeUserSpaceByUser(int userId, int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		int isLike = userSpaceMapper.getIsLikeUserSpaceByUser(userId, spaceType, userSpaceId);
+		int isLike = userSpaceMapper.getIsLikeUserSpaceByUser(userId, userSpaceId);
 		return isLike;
 	}
 	
@@ -228,6 +228,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		userSpaceComment.setStatus(CommonTool.int2byte(1));
 		userSpaceComment.setUpperid(0);
+		userSpaceComment.setCommenttype(CommonTool.int2byte(2));
 		try {
 			userSpaceCommentMapper.insert(userSpaceComment);
 		} catch (Exception e) {
@@ -271,7 +272,6 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
 		spaceContentStatus.setSpaceid(userSpaceId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
-		spaceContentStatus.setIslike(CommonTool.int2byte(0));
 
 		try {
 			spaceContentStatusMapper.insert(spaceContentStatus);
@@ -306,12 +306,18 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	@Override
 	public int setUserSpaceLikeByUser(int userId, int spaceType, int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
-		spaceContentStatus.setUserid(userId);
-		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
-		spaceContentStatus.setSpaceid(userSpaceId);
+		UserSpaceComment userSpaceComment = new UserSpaceComment();
+		userSpaceComment.setUserid(userId);
+		userSpaceComment.setUserspaceid(userSpaceId);
+		userSpaceComment.setCommentcontent("");
+		userSpaceComment.setCommentdate(new Date());
+		userSpaceComment.setReplyid(0);
+		userSpaceComment.setReplystatus(CommonTool.int2byte(0));
+		userSpaceComment.setStatus(CommonTool.int2byte(1));
+		userSpaceComment.setUpperid(0);
+		userSpaceComment.setCommenttype(CommonTool.int2byte(1));
 		try{
-			spaceContentStatusMapper.setUserSpaceLikeByUser(spaceContentStatus);
+			userSpaceCommentMapper.insert(userSpaceComment);
 		}catch(Exception e){
 			return 0;
 		}

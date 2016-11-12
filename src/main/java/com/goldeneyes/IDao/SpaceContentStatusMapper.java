@@ -57,12 +57,6 @@ public interface SpaceContentStatusMapper {
      */
     int setUserSpaceReadByUser(SpaceContentStatus record);
     /**
-     * 修改某用户某用户空间点赞状态为点赞
-     * @param record
-     * @return
-     */
-    int setUserSpaceLikeByUser(SpaceContentStatus record);
-    /**
      * 删除某用户空间的阅读状态
      * @param userSpaceId
      * @return

@@ -63,7 +63,7 @@ public interface UserSpaceService {
 	 * @param userSpaceId
 	 * @return
 	 */
-	public int getIsLikeUserSpaceByUser(int userId,int spaceType,int userSpaceId) throws Exception;
+	public int getIsLikeUserSpaceByUser(int userId,int userSpaceId) throws Exception;
 	/**
 	 * 获取用户空间所有评论条数
 	 * @param userSpaceId

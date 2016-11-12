@@ -15,7 +15,8 @@
 		<result column="Status" property="status" jdbcType="TINYINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		TabId, UserId, MsgContent, EncType, EncAddr, EncImgAddr, EncIntro,
+		TabId, UserId, MsgContent, EncType, EncAddr, EncImgAddr,
+		EncIntro,
 		PublisherId, PublishDate,
 		NoteType, Status
 	</sql>
@@ -27,20 +28,25 @@
 		where TabId = #{tabid,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from UserSpace
+		delete from
+		UserSpace
 		where TabId = #{tabid,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.goldeneyes.pojo.UserSpace">
-		insert into UserSpace (UserId, MsgContent,
+		insert into UserSpace (UserId,
+		MsgContent,
 		EncType, EncAddr, EncImgAddr,
-		EncIntro, PublisherId, PublishDate,
+		EncIntro, PublisherId,
+		PublishDate,
 		NoteType, Status)
 		values (#{userid,jdbcType=INTEGER},
 		#{msgcontent,jdbcType=VARCHAR},
-		#{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR},
+		#{enctype,jdbcType=TINYINT},
+		#{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR},
 		#{encintro,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER},
 		#{publishdate,jdbcType=TIMESTAMP},
-		#{notetype,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+		#{notetype,jdbcType=TINYINT},
+		#{status,jdbcType=TINYINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.goldeneyes.pojo.UserSpace">
 		insert into UserSpace
@@ -154,44 +160,61 @@
 	<update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.UserSpace">
 		update UserSpace
 		set UserId = #{userid,jdbcType=INTEGER},
-		MsgContent = #{msgcontent,jdbcType=VARCHAR},
+		MsgContent =
+		#{msgcontent,jdbcType=VARCHAR},
 		EncType = #{enctype,jdbcType=TINYINT},
 		EncAddr = #{encaddr,jdbcType=VARCHAR},
-		EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
-		EncIntro = #{encintro,jdbcType=VARCHAR},
-		PublisherId = #{publisherid,jdbcType=INTEGER},
-		PublishDate = #{publishdate,jdbcType=TIMESTAMP},
-		NoteType = #{notetype,jdbcType=TINYINT},
+		EncImgAddr =
+		#{encimgaddr,jdbcType=VARCHAR},
+		EncIntro =
+		#{encintro,jdbcType=VARCHAR},
+		PublisherId =
+		#{publisherid,jdbcType=INTEGER},
+		PublishDate =
+		#{publishdate,jdbcType=TIMESTAMP},
+		NoteType =
+		#{notetype,jdbcType=TINYINT},
 		Status = #{status,jdbcType=TINYINT}
-		where TabId = #{tabid,jdbcType=INTEGER}
+		where
+		TabId = #{tabid,jdbcType=INTEGER}
 	</update>
 	<!-- 获取所有用户空间的信息 -->
 	<select id="getAllUserSpace" resultType="com.goldeneyes.pojo.UserSpace">
-		select TabId, UserId, MsgContent, PublisherId, PublishDate
-		from UserSpace where Status = 1 order by PublishDate desc
+		select TabId, UserId,
+		MsgContent, PublisherId, PublishDate
+		from UserSpace where Status = 1
+		order by PublishDate desc
 	</select>
 
 	<!-- 取用户空间表的最大ID+1 -->
 	<select id="getMaxId" resultType="java.lang.Integer">
-		select isnull(MAX(u.TabId) + 1,1) from UserSpace u
+		select isnull(MAX(u.TabId) +
+		1,1) from UserSpace u
 	</select>
 
 	<!-- 获取用户未读用户空间条数 -->
 	<select id="getNoReadUserSpacesCntByUser" resultType="java.lang.Integer">
-		select COUNT(u.TabId)
+		select
+		COUNT(u.TabId)
 		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=#{1}
+		where
+		ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
+		ss.SpaceType=#{1}
 		and ss.UserId = #{0}
 	</select>
 	<!-- 获取用户未读用户空间列表 -->
 	<select id="getNoReadUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
-		select top(#{3})
+		select
+		top(#{3})
 		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
-		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
+		from SpaceContentStatus
+		ss,UserSpace u
+		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1
+		and
 		ss.SpaceType=#{1} and ss.UserId = #{0}
-		and u.TabId not in (select top((#{2}-1) * #{3}) u.TabId
+		and u.TabId not in (select
+		top((#{2}-1) * #{3}) u.TabId
 		from SpaceContentStatus ss,UserSpace u
 		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
 		ss.SpaceType=#{1} and ss.UserId = #{0}
@@ -203,7 +226,8 @@
 		resultType="java.lang.Integer">
 		select COUNT(u.TabId)
 		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and ss.SpaceType=#{1}
+		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
+		ss.SpaceType=#{1}
 		and ss.UserId = #{0}
 		and u.PublisherId = #{2}
 	</select>
@@ -212,55 +236,70 @@
 		select top(#{3})
 		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
-		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
+		from SpaceContentStatus
+		ss,UserSpace u
+		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1
+		and
 		ss.SpaceType=#{1} and ss.UserId = #{0}
 		and u.PublisherId = #{4}
-		and u.TabId not in (select top((#{2}-1) * #{3}) u.TabId
-		from SpaceContentStatus ss,UserSpace u
-		where ss.SpaceId=u.TabId and ss.IsRead=0 and u.Status=1 and
+		and
+		u.TabId not in (select top((#{2}-1) * #{3}) u.TabId
+		from
+		SpaceContentStatus ss,UserSpace u
+		where ss.SpaceId=u.TabId and
+		ss.IsRead=0 and u.Status=1 and
 		ss.SpaceType=#{1} and ss.UserId = #{0}
 		and u.PublisherId = #{4}
 		order by u.PublishDate desc)
-		order by u.PublishDate desc
+		order by
+		u.PublishDate desc
 	</select>
 	<!-- 获取用户某条用户空间是否点赞 -->
 	<select id="getIsLikeUserSpaceByUser" resultType="java.lang.Integer">
-		select count(ss.IsLike) likeCnt
-		from SpaceContentStatus ss
-		where ss.SpaceType=#{1} and ss.SpaceId = #{2} and ss.UserId = #{0} and
-		ss.IsLike = 1
+		select
+		count(uc.TabId) likeCnt
+		from UserSpaceComment uc
+		where uc.Status = 1 and uc.CommentType = 1 and uc.UserId = #{0}
+		and uc.UserSpaceId = #{1}
 	</select>
 	<!-- 获取用户空间所有点赞用户 -->
 	<select id="getIsLikeUsersById" resultType="java.lang.Integer">
-		select ss.UserId
-		from SpaceContentStatus ss
-		where ss.SpaceType = 3 and ss.IsLike = 1 and ss.SpaceId = #{0}
+		select uc.UserId
+		from UserSpaceComment uc
+		where uc.Status = 1 and uc.CommentType = 1
+		and uc.UserSpaceId = #{0}
 	</select>
 	<!-- 获取某学生用户空间条数 -->
 	<select id="getUserSpacesCntByUser" resultType="java.lang.Integer">
-		select count(u.TabId)
+		select
+		count(u.TabId)
 		from UserSpace u
 		where u.Status = 1 and u.UserId = #{0}
 	</select>
 	<!-- 获取某学生用户空间列表 -->
 	<select id="getUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
-		select top(#{2}) u.TabId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
+		select top(#{2})
+		u.TabId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from UserSpace u
-		where u.Status = 1 and u.UserId = #{0}
-		and u.TabId not in (select top((#{1}-1) * #{2}) u.TabId
+		where
+		u.Status = 1 and u.UserId = #{0}
+		and u.TabId not in (select
+		top((#{1}-1) * #{2}) u.TabId
 		from UserSpace u
-		where u.Status = 1 and u.UserId = #{0}
+		where u.Status = 1 and
+		u.UserId = #{0}
 		order by u.PublishDate desc)
 		order by u.PublishDate desc
 	</select>
 	<!-- 获取某条用户空间信息 -->
 	<select id="getUserSpaceById" resultType="com.goldeneyes.pojo.UserSpace">
-		select u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
+		select
+		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from UserSpace u
-		where u.Status = 1 and u.TabId = #{0}
+		where
+		u.Status = 1 and u.TabId = #{0}
 	</select>
 	<!-- 屏蔽某学生某用户空间信息 -->
 	<update id="setOffUserSpaceById" parameterType="com.goldeneyes.pojo.UserSpace">
@@ -274,65 +313,93 @@
 		select COUNT(*) from
 		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId = #{0}
+		where u.TabId = uc.UserSpaceId and u.UserId =
+		#{0}
 		union
-		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate from UserSpace
+		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate from
+		UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and uc.ReplyId = #{0}
+		where u.TabId = uc.UserSpaceId and
+		uc.ReplyId = #{0}
 		union
-		select 3 MsgType,ss.UserId,ss.LikeDate MsgDate from UserSpace
+		select 3 MsgType,ss.UserId,ss.LikeDate MsgDate
+		from UserSpace
 		u,SpaceContentStatus ss
-		where u.TabId = ss.SpaceId and ss.SpaceType = 3 and u.UserId = #{0} and
+		where u.TabId = ss.SpaceId and
+		ss.SpaceType = 3 and u.UserId = #{0} and
 		ss.IsLike = 1
 		union
-		select 4 MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and u.UserId = #{0}
+		select 4
+		MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
+		where
+		u.TabId = um.UserSpaceId and u.UserId = #{0}
 		union
-		select 5 MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0}) AboutMe
+		select 5
+		MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
+		where
+		u.TabId = um.UserSpaceId and um.ReplyId = #{0}) AboutMe
 	</select>
 	<!-- 获取与我相关 -->
 	<select id="getAboutMe" resultType="com.goldeneyes.vo.AboutMe">
 		select top(#{2})
 		MsgType,UserId,MsgDate,TabId from
-		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
+		(select 1
+		MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId = #{0}
+		where u.TabId = uc.UserSpaceId and u.UserId =
+		#{0}
 		union
-		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
+		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId
+		from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and uc.ReplyId = #{0}
+		where u.TabId = uc.UserSpaceId and
+		uc.ReplyId = #{0}
 		union
-		select 3 MsgType,ss.UserId,ss.LikeDate MsgDate,ss.TabId from UserSpace
+		select 3 MsgType,ss.UserId,ss.LikeDate
+		MsgDate,ss.TabId from UserSpace
 		u,SpaceContentStatus ss
-		where u.TabId = ss.SpaceId and ss.SpaceType = 3 and u.UserId = #{0} and
+		where u.TabId =
+		ss.SpaceId and ss.SpaceType = 3 and u.UserId = #{0} and
 		ss.IsLike = 1
 		union
-		select 4 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
+		select 4 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
+		u,UserSpaceMsg um
 		where u.TabId = um.UserSpaceId and u.UserId = #{0}
 		union
-		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0}) AboutMe
-		where cast(MsgType as varchar(10)) + '-' + cast(TabId as varchar(10)) not in (select top((#{1}-1) * #{2}) 
+		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
+		u,UserSpaceMsg um
+		where u.TabId = um.UserSpaceId and um.ReplyId = #{0})
+		AboutMe
+		where cast(MsgType as varchar(10)) + '-' + cast(TabId as
+		varchar(10)) not in (select top((#{1}-1) * #{2})
 		cast(MsgType as varchar(10)) + '-' + cast(TabId as varchar(10)) from
-		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
+		(select 1
+		MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId = #{0}
+		where u.TabId = uc.UserSpaceId and u.UserId =
+		#{0}
 		union
-		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
+		select 2 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId
+		from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and uc.ReplyId = #{0}
+		where u.TabId = uc.UserSpaceId and
+		uc.ReplyId = #{0}
 		union
-		select 3 MsgType,ss.UserId,ss.LikeDate MsgDate,ss.TabId from UserSpace
+		select 3 MsgType,ss.UserId,ss.LikeDate
+		MsgDate,ss.TabId from UserSpace
 		u,SpaceContentStatus ss
-		where u.TabId = ss.SpaceId and ss.SpaceType = 3 and u.UserId = #{0} and
+		where u.TabId =
+		ss.SpaceId and ss.SpaceType = 3 and u.UserId = #{0} and
 		ss.IsLike = 1
 		union
-		select 4 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
+		select 4 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
+		u,UserSpaceMsg um
 		where u.TabId = um.UserSpaceId and u.UserId = #{0}
 		union
-		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0}) AboutMe
+		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
+		u,UserSpaceMsg um
+		where u.TabId = um.UserSpaceId and um.ReplyId = #{0})
+		AboutMe
 		order by MsgDate desc)
 		order by MsgDate desc
 	</select>

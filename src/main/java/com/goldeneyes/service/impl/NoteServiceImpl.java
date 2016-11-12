@@ -267,7 +267,6 @@ public class NoteServiceImpl implements NoteService {
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
 		spaceContentStatus.setSpaceid(noteId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
-		spaceContentStatus.setIslike(CommonTool.int2byte(0));
 		
 		
 
@@ -291,8 +290,7 @@ public class NoteServiceImpl implements NoteService {
 			spaceContentStatus.setUserid(userId);
 			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
 			spaceContentStatus.setSpaceid(noteId);
-			spaceContentStatus.setIsread(CommonTool.int2byte(0));
-			spaceContentStatus.setIslike(CommonTool.int2byte(0));		
+			spaceContentStatus.setIsread(CommonTool.int2byte(0));	
 	
 			try {
 				spaceContentStatusMapper.insert(spaceContentStatus);

@@ -15,10 +15,6 @@ public class SpaceContentStatus {
 
     private Date readdate;
 
-    private Byte islike;
-
-    private Date likedate;
-
     public Integer getTabid() {
         return tabid;
     }
@@ -65,21 +61,5 @@ public class SpaceContentStatus {
 
     public void setReaddate(Date readdate) {
         this.readdate = readdate;
-    }
-
-    public Byte getIslike() {
-        return islike;
-    }
-
-    public void setIslike(Byte islike) {
-        this.islike = islike;
-    }
-
-    public Date getLikedate() {
-        return likedate;
-    }
-
-    public void setLikedate(Date likedate) {
-        this.likedate = likedate;
     }
 }

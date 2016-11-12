@@ -8,11 +8,9 @@
     <result column="SpaceId" property="spaceid" jdbcType="INTEGER" />
     <result column="IsRead" property="isread" jdbcType="TINYINT" />
     <result column="ReadDate" property="readdate" jdbcType="TIMESTAMP" />
-    <result column="IsLike" property="islike" jdbcType="TINYINT" />
-    <result column="LikeDate" property="likedate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, UserId, SpaceType, SpaceId, IsRead, ReadDate, IsLike, LikeDate
+    TabId, UserId, SpaceType, SpaceId, IsRead, ReadDate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,11 +24,11 @@
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
     insert into SpaceContentStatus (UserId, SpaceType, 
-      SpaceId, IsRead, ReadDate, 
-      IsLike, LikeDate)
+      SpaceId, IsRead, ReadDate
+      )
     values (#{userid,jdbcType=INTEGER}, #{spacetype,jdbcType=TINYINT}, 
-      #{spaceid,jdbcType=INTEGER}, #{isread,jdbcType=TINYINT}, #{readdate,jdbcType=TIMESTAMP}, 
-      #{islike,jdbcType=TINYINT}, #{likedate,jdbcType=TIMESTAMP})
+      #{spaceid,jdbcType=INTEGER}, #{isread,jdbcType=TINYINT}, #{readdate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SpaceContentStatus" >
     insert into SpaceContentStatus
@@ -53,12 +51,6 @@
       <if test="readdate != null" >
         ReadDate,
       </if>
-      <if test="islike != null" >
-        IsLike,
-      </if>
-      <if test="likedate != null" >
-        LikeDate,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tabid != null" >
@@ -78,12 +70,6 @@
       </if>
       <if test="readdate != null" >
         #{readdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="islike != null" >
-        #{islike,jdbcType=TINYINT},
-      </if>
-      <if test="likedate != null" >
-        #{likedate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -105,12 +91,6 @@
       <if test="readdate != null" >
         ReadDate = #{readdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="islike != null" >
-        IsLike = #{islike,jdbcType=TINYINT},
-      </if>
-      <if test="likedate != null" >
-        LikeDate = #{likedate,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
@@ -120,9 +100,7 @@
       SpaceType = #{spacetype,jdbcType=TINYINT},
       SpaceId = #{spaceid,jdbcType=INTEGER},
       IsRead = #{isread,jdbcType=TINYINT},
-      ReadDate = #{readdate,jdbcType=TIMESTAMP},
-      IsLike = #{islike,jdbcType=TINYINT},
-      LikeDate = #{likedate,jdbcType=TIMESTAMP}
+      ReadDate = #{readdate,jdbcType=TIMESTAMP}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
   <!-- 修改某用户某点到记事阅读状态为已读 -->

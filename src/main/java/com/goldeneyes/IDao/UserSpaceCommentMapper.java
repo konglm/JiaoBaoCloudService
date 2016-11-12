@@ -2,6 +2,7 @@ package com.goldeneyes.IDao;
 
 import java.util.List;
 
+import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.pojo.UserSpaceComment;
 
 public interface UserSpaceCommentMapper {

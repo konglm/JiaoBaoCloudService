@@ -380,7 +380,7 @@ public class UserSpaceController {
 
 			int isLike = 0;
 			try {
-				isLike = userSpaceService.getIsLikeUserSpaceByUser(userId, 3, userSpaceId);
+				isLike = userSpaceService.getIsLikeUserSpaceByUser(userId, userSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -562,9 +562,7 @@ public class UserSpaceController {
 			}
 			JSONArray jsonArray = new JSONArray();
 			for (Integer userId : userIds) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("UserId", userId);
-				jsonArray.put(jsonobj);
+				jsonArray.put(userId);
 			}
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了

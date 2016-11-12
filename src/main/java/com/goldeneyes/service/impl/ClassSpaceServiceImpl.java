@@ -265,7 +265,6 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
 		spaceContentStatus.setSpaceid(classSpaceId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
-		spaceContentStatus.setIslike(CommonTool.int2byte(0));
 
 		try {
 			spaceContentStatusMapper.insert(spaceContentStatus);
