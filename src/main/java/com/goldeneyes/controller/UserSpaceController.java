@@ -46,225 +46,229 @@ public class UserSpaceController {
 	@Resource
 	UserSpaceService userSpaceService;
 
-	@RequestMapping("/getAllUserSpaces")
-	public void getAllUserSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
-		JSONObject jsonData = new JSONObject();
-		List<UserSpace> userSpaces = new ArrayList<UserSpace>();
-		try {
-			userSpaces = userSpaceService.getAllUserSpace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-			return;
-		}
-		JSONArray jsonArray = new JSONArray();
-		for (UserSpace userSpace : userSpaces) {
-			JSONObject jsonobj = new JSONObject();
-			jsonobj.put("TabId", userSpace.getTabid());
-			jsonobj.put("UserId", userSpace.getUserid());
-			jsonobj.put("MsgContent", userSpace.getMsgcontent());
-			jsonobj.put("PublisherId", userSpace.getPublisherid());
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
-			jsonArray.put(jsonobj);
-		}
-		jsonData.put("Data", jsonArray);
-		// 在这里输出，手机端就拿到web返回的值了
-		CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-	}
+//	@RequestMapping("/getAllUserSpaces")
+//	public void getAllUserSpace(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		JSONObject jsonData = new JSONObject();
+//		List<UserSpace> userSpaces = new ArrayList<UserSpace>();
+//		try {
+//			userSpaces = userSpaceService.getAllUserSpace();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//			return;
+//		}
+//		JSONArray jsonArray = new JSONArray();
+//		for (UserSpace userSpace : userSpaces) {
+//			JSONObject jsonobj = new JSONObject();
+//			jsonobj.put("TabId", userSpace.getTabid());
+//			jsonobj.put("UserId", userSpace.getUserid());
+//			jsonobj.put("MsgContent", userSpace.getMsgcontent());
+//			jsonobj.put("PublisherId", userSpace.getPublisherid());
+//			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+//			jsonArray.put(jsonobj);
+//		}
+//		jsonData.put("Data", jsonArray);
+//		// 在这里输出，手机端就拿到web返回的值了
+//		CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//	}
 
 	/**
-	 * 获取用户未读用户空间条数
+	 * 获取用户未读用户空间（云笔记）条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesCntByUser")
-	public void getNoReadUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getNoReadUserSpacesCntByUser")
+//	public void getNoReadUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("noteType")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			int noteType = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3,noteType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取用户未读用户空间列表
+	 * 获取用户未读用户空间（云笔记）列表
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesByUser")
-	public void getNoReadUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} else {
-			int userId = 0;
-			int pageIndex = 0;
-			int pageSize = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			if ((pageIndex <= 0) || (pageSize <= 0)) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
-				return;
-			}
-			int totalCnt = 0;
-			int totalPage = 0;
-			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
-			try {
-				totalCnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3);
-				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaces = userSpaceService.getNoReadUserSpacesByUser(userId, 3, pageIndex, pageSize);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpace userSpace : userSpaces) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("TabId", userSpace.getTabid());
-				jsonobj.put("UserId", userSpace.getUserid());
-				jsonobj.put("MsgContent", userSpace.getMsgcontent());
-				jsonobj.put("PublisherId", userSpace.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
-				jsonobj.put("NoteType", userSpace.getNotetype());
-				jsonobj.put("EncType", userSpace.getEnctype());
-				jsonobj.put("EncAddr", userSpace.getEncaddr());
-				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
-				jsonobj.put("EncIntro", userSpace.getEncintro());
-				jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("TotalCnt", totalCnt);
-			jsonData.put("TotalPage", totalPage);
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getNoReadUserSpacesByUser")
+//	public void getNoReadUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		} else {
+//			int userId = 0;
+//			int pageIndex = 0;
+//			int pageSize = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+//				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			if ((pageIndex <= 0) || (pageSize <= 0)) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+//				return;
+//			}
+//			int totalCnt = 0;
+//			int totalPage = 0;
+//			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
+//			try {
+//				totalCnt = userSpaceService.getNoReadUserSpacesCntByUser(userId, 3, 2);
+//				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+//				userSpaces = userSpaceService.getNoReadUserSpacesByUser(userId, 3, pageIndex, pageSize, 2);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (UserSpace userSpace : userSpaces) {
+//				JSONObject jsonobj = new JSONObject();
+//				jsonobj.put("TabId", userSpace.getTabid());
+//				jsonobj.put("UserId", userSpace.getUserid());
+//				jsonobj.put("MsgContent", userSpace.getMsgcontent());
+//				jsonobj.put("PublisherId", userSpace.getPublisherid());
+//				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+//				jsonobj.put("NoteType", userSpace.getNotetype());
+//				jsonobj.put("EncType", userSpace.getEnctype());
+//				jsonobj.put("EncAddr", userSpace.getEncaddr());
+//				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
+//				jsonobj.put("EncIntro", userSpace.getEncintro());
+//				jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
+//				jsonArray.put(jsonobj);
+//			}
+//			jsonData.put("TotalCnt", totalCnt);
+//			jsonData.put("TotalPage", totalPage);
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取用户未读用户空间条数
+	 * 获取用户未读用户空间（云笔记）条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesCntByUserForPublisher")
-	public void getNoReadUserSpacesCntByUserForPublisher(HttpServletRequest request, HttpServletResponse response,
-			Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("publisherId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			int publisherId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				publisherId = Integer.parseInt(jsonInput.getString("publisherId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getNoReadUserSpacesCntByUserForPublisher")
+//	public void getNoReadUserSpacesCntByUserForPublisher(HttpServletRequest request, HttpServletResponse response,
+//			Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("publisherId") || !jsonInput.has("noteType")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			int publisherId = 0;
+//			int noteType = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				publisherId = Integer.parseInt(jsonInput.getString("publisherId"));
+//				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId, noteType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取用户的某用户空间列表
+	 * 获取用户的某用户空间（云笔记）列表
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
 	@RequestMapping("/getUserSpacesByUserForPublisher")
-	public void getNoReadUserSpacesByUserForPublisher(HttpServletRequest request, HttpServletResponse response,
+	public void getUserSpacesByUserForPublisher(HttpServletRequest request, HttpServletResponse response,
 			Model model) {
 		// 返回参数用
 		JSONObject jsonData = new JSONObject();
@@ -283,7 +287,7 @@ public class UserSpaceController {
 		}
 
 		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")
-				|| !jsonInput.has("publisherId")) {
+				|| !jsonInput.has("publisherId") || !jsonInput.has("noteType")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
@@ -291,11 +295,13 @@ public class UserSpaceController {
 			int pageIndex = 0;
 			int pageSize = 0;
 			int publisherId = 0;
+			int noteType = 0;
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
 				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 				publisherId = Integer.parseInt(jsonInput.getString("publisherId"));
+				noteType = Integer.parseInt(jsonInput.getString("noteType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -309,10 +315,10 @@ public class UserSpaceController {
 			int noReadCnt = 0;
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
-				totalCnt = userSpaceService.getUserSpacesCntByUser(publisherId);
+				totalCnt = userSpaceService.getUserSpacesCntByUser(publisherId, noteType);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaces = userSpaceService.getUserSpacesByUser(publisherId, pageIndex, pageSize);
-				noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
+				userSpaces = userSpaceService.getUserSpacesByUser(publisherId, pageIndex, pageSize, noteType);
+				noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId, noteType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -332,7 +338,16 @@ public class UserSpaceController {
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonobj.put("EncIntro", userSpace.getEncintro());
-				jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
+				try {
+					jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
+					jsonobj.put("LikeUsers", userSpaceService.getIsLikeUsersById(userSpace.getTabid()));
+					int commentCnt = userSpaceService.getUserSpaceCommentsCntById(userSpace.getTabid());
+					jsonobj.put("Comments", userSpaceService.getUserSpaceCommentsById(userSpace.getTabid(), commentCnt, commentCnt));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+					return;
+				}
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -403,47 +418,47 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentsCntById")
-	public void getUserSpaceCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userSpaceId = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getUserSpaceCommentsCntById(userSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceCommentsCntById")
+//	public void getUserSpaceCommentsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userSpaceId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userSpaceId = 0;
+//			try {
+//				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getUserSpaceCommentsCntById(userSpaceId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户空间所有评论
@@ -452,74 +467,74 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentsById")
-	public void getUserSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} else {
-			int userSpaceId = 0;
-			int pageIndex = 0;
-			int pageSize = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			if ((pageIndex <= 0) || (pageSize <= 0)) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
-				return;
-			}
-			int totalCnt = 0;
-			int totalPage = 0;
-			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
-			try {
-				totalCnt = userSpaceService.getUserSpaceCommentsCntById(userSpaceId);
-				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaceComments = userSpaceService.getUserSpaceCommentsById(userSpaceId, pageIndex, pageSize);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpaceComment userSpaceComment : userSpaceComments) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("TabId", userSpaceComment.getTabid());
-				jsonobj.put("UserId", userSpaceComment.getUserid());
-				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
-				jsonobj.put("ReplyId", userSpaceComment.getReplyid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("CommentDate", formater.format(userSpaceComment.getCommentdate()));
-				jsonobj.put("UpperId", userSpaceComment.getUpperid());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("TotalCnt", totalCnt);
-			jsonData.put("TotalPage", totalPage);
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceCommentsById")
+//	public void getUserSpaceCommentsById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userSpaceId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		} else {
+//			int userSpaceId = 0;
+//			int pageIndex = 0;
+//			int pageSize = 0;
+//			try {
+//				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+//				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+//				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			if ((pageIndex <= 0) || (pageSize <= 0)) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+//				return;
+//			}
+//			int totalCnt = 0;
+//			int totalPage = 0;
+//			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
+//			try {
+//				totalCnt = userSpaceService.getUserSpaceCommentsCntById(userSpaceId);
+//				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+//				userSpaceComments = userSpaceService.getUserSpaceCommentsById(userSpaceId, pageIndex, pageSize);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (UserSpaceComment userSpaceComment : userSpaceComments) {
+//				JSONObject jsonobj = new JSONObject();
+//				jsonobj.put("TabId", userSpaceComment.getTabid());
+//				jsonobj.put("UserId", userSpaceComment.getUserid());
+//				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
+//				jsonobj.put("ReplyId", userSpaceComment.getReplyid());
+//				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				jsonobj.put("CommentDate", formater.format(userSpaceComment.getCommentdate()));
+//				jsonobj.put("UpperId", userSpaceComment.getUpperid());
+//				jsonArray.put(jsonobj);
+//			}
+//			jsonData.put("TotalCnt", totalCnt);
+//			jsonData.put("TotalPage", totalPage);
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户空间所有点赞用户
@@ -528,51 +543,51 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getIsLikeUsersById")
-	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userSpaceId = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			List<Integer> userIds = new ArrayList<Integer>();
-			try {
-				userIds = userSpaceService.getIsLikeUsersById(userSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (Integer userId : userIds) {
-				jsonArray.put(userId);
-			}
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getIsLikeUsersById")
+//	public void getIsLikeUsersById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userSpaceId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userSpaceId = 0;
+//			try {
+//				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			List<Integer> userIds = new ArrayList<Integer>();
+//			try {
+//				userIds = userSpaceService.getIsLikeUsersById(userSpaceId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (Integer userId : userIds) {
+//				jsonArray.put(userId);
+//			}
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户用户空间所有未读评论回复条数
@@ -581,48 +596,48 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentReplysCntByUser")
-	public void getUserSpaceCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response,
-			Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getUserSpaceCommentReplysCntByUser(userId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceCommentReplysCntByUser")
+//	public void getUserSpaceCommentReplysCntByUser(HttpServletRequest request, HttpServletResponse response,
+//			Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getUserSpaceCommentReplysCntByUser(userId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户用户空间所有未读评论回复列表
@@ -631,204 +646,209 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceCommentReplysByUser")
-	public void getUserSpaceCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} else {
-			int userId = 0;
-			int pageIndex = 0;
-			int pageSize = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			if ((pageIndex <= 0) || (pageSize <= 0)) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
-				return;
-			}
-			int totalCnt = 0;
-			int totalPage = 0;
-			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
-			try {
-				totalCnt = userSpaceService.getUserSpaceCommentReplysCntByUser(userId);
-				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaceComments = userSpaceService.getUserSpaceCommentReplysByUser(userId, pageIndex, pageSize);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpaceComment userSpaceComment : userSpaceComments) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("TabId", userSpaceComment.getTabid());
-				jsonobj.put("UserId", userSpaceComment.getUserid());
-				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
-				jsonobj.put("UserSpaceId", userSpaceComment.getUserspaceid());
-				jsonobj.put("UpperId", userSpaceComment.getUpperid());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("TotalCnt", totalCnt);
-			jsonData.put("TotalPage", totalPage);
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceCommentReplysByUser")
+//	public void getUserSpaceCommentReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		} else {
+//			int userId = 0;
+//			int pageIndex = 0;
+//			int pageSize = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+//				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			if ((pageIndex <= 0) || (pageSize <= 0)) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+//				return;
+//			}
+//			int totalCnt = 0;
+//			int totalPage = 0;
+//			List<UserSpaceComment> userSpaceComments = new ArrayList<UserSpaceComment>();
+//			try {
+//				totalCnt = userSpaceService.getUserSpaceCommentReplysCntByUser(userId);
+//				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+//				userSpaceComments = userSpaceService.getUserSpaceCommentReplysByUser(userId, pageIndex, pageSize);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (UserSpaceComment userSpaceComment : userSpaceComments) {
+//				JSONObject jsonobj = new JSONObject();
+//				jsonobj.put("TabId", userSpaceComment.getTabid());
+//				jsonobj.put("UserId", userSpaceComment.getUserid());
+//				jsonobj.put("CommentContent", userSpaceComment.getCommentcontent());
+//				jsonobj.put("UserSpaceId", userSpaceComment.getUserspaceid());
+//				jsonobj.put("UpperId", userSpaceComment.getUpperid());
+//				jsonArray.put(jsonobj);
+//			}
+//			jsonData.put("TotalCnt", totalCnt);
+//			jsonData.put("TotalPage", totalPage);
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取用户空间条数
+	 * 获取用户空间（云笔记）条数
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpacesCntByUser")
-	public void getUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getUserSpacesCntByUser(userId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpacesCntByUser")
+//	public void getUserSpacesCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("noteType")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			int noteType = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getUserSpacesCntByUser(userId, noteType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取某用户空间列表
+	 * 获取某用户空间（云笔记）列表
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpacesByUser")
-	public void getUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} else {
-			int userId = 0;
-			int pageIndex = 0;
-			int pageSize = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			if ((pageIndex <= 0) || (pageSize <= 0)) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
-				return;
-			}
-			int totalCnt = 0;
-			int totalPage = 0;
-			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
-			try {
-				totalCnt = userSpaceService.getUserSpacesCntByUser(userId);
-				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaces = userSpaceService.getUserSpacesByUser(userId, pageIndex, pageSize);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpace userSpace : userSpaces) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("TabId", userSpace.getTabid());
-				jsonobj.put("UserId", userSpace.getUserid());
-				jsonobj.put("MsgContent", userSpace.getMsgcontent());
-				jsonobj.put("PublisherId", userSpace.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
-				jsonobj.put("NoteType", userSpace.getNotetype());
-				jsonobj.put("EncType", userSpace.getEnctype());
-				jsonobj.put("EncAddr", userSpace.getEncaddr());
-				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
-				jsonobj.put("EncIntro", userSpace.getEncintro());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("TotalCnt", totalCnt);
-			jsonData.put("TotalPage", totalPage);
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpacesByUser")
+//	public void getUserSpacesByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")
+//				 || !jsonInput.has("noteType")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		} else {
+//			int userId = 0;
+//			int pageIndex = 0;
+//			int pageSize = 0;
+//			int noteType = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+//				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+//				noteType = Integer.parseInt(jsonInput.getString("noteType"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			if ((pageIndex <= 0) || (pageSize <= 0)) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+//				return;
+//			}
+//			int totalCnt = 0;
+//			int totalPage = 0;
+//			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
+//			try {
+//				totalCnt = userSpaceService.getUserSpacesCntByUser(userId, noteType);
+//				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+//				userSpaces = userSpaceService.getUserSpacesByUser(userId, pageIndex, pageSize, noteType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (UserSpace userSpace : userSpaces) {
+//				JSONObject jsonobj = new JSONObject();
+//				jsonobj.put("TabId", userSpace.getTabid());
+//				jsonobj.put("UserId", userSpace.getUserid());
+//				jsonobj.put("MsgContent", userSpace.getMsgcontent());
+//				jsonobj.put("PublisherId", userSpace.getPublisherid());
+//				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				jsonobj.put("PublishDate", formater.format(userSpace.getPublishdate()));
+//				jsonobj.put("NoteType", userSpace.getNotetype());
+//				jsonobj.put("EncType", userSpace.getEnctype());
+//				jsonobj.put("EncAddr", userSpace.getEncaddr());
+//				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
+//				jsonobj.put("EncIntro", userSpace.getEncintro());
+//				jsonArray.put(jsonobj);
+//			}
+//			jsonData.put("TotalCnt", totalCnt);
+//			jsonData.put("TotalPage", totalPage);
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
-	 * 获取某条用户空间信息
+	 * 获取某条用户空间（云笔记）信息
 	 * 
 	 * @param request
 	 * @param response
@@ -852,19 +872,21 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userSpaceId")) {
+		if (!jsonInput.has("userSpaceId") || !jsonInput.has("noteType")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userSpaceId = 0;
+			int noteType = 0;
 			try {
 				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+				noteType = Integer.parseInt(jsonInput.getString("noteType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
 			UserSpace userSpace = new UserSpace();
 			try {
-				userSpace = userSpaceService.getUserSpaceById(userSpaceId);
+				userSpace = userSpaceService.getUserSpaceById(userSpaceId, noteType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -1085,55 +1107,55 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/addUserSpaceForUser")
-	public void addUserSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
+//	@RequestMapping("/addUserSpaceForUser")
+//	public void addUserSpaceForUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("userSpaceId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			int userSpaceId = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//
+//			int success = 0;
+//			try {
+//				success = userSpaceService.addUserSpaceForUser(userId, 3, userSpaceId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			if (success == 0) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+//			} else {
+//				jsonData.put("Result", success);
+//				// 在这里输出，手机端就拿到web返回的值了
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//			}
+//		}
+//	}
 
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("userSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			int userSpaceId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-
-			int success = 0;
-			try {
-				success = userSpaceService.addUserSpaceForUser(userId, 3, userSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
-			} else {
-				jsonData.put("Result", success);
-				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-			}
-		}
-	}
-	
 	/**
 	 * 推送给多用户的某用户空间
 	 * 
@@ -1191,7 +1213,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 修改某用户某用户空间阅读状态为已读
+	 * 修改某用户多用户空间阅读状态为已读
 	 * 
 	 * @param request
 	 * @param response
@@ -1526,48 +1548,48 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgsCntById")
-	public void getUserSpaceMsgsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userSpaceId = 0;
-			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getUserSpaceMsgsCntById(userSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceMsgsCntById")
+//	public void getUserSpaceMsgsCntById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userSpaceId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userSpaceId = 0;
+//			try {
+//				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getUserSpaceMsgsCntById(userSpaceId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户空间所有留言
@@ -1652,47 +1674,47 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgReplysCntByUser")
-	public void getUserSpaceMsgReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			int cnt = 0;
-			try {
-				cnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			jsonData.put("Result", cnt);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceMsgReplysCntByUser")
+//	public void getUserSpaceMsgReplysCntByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			int cnt = 0;
+//			try {
+//				cnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			jsonData.put("Result", cnt);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 获取用户用户空间所有未读留言回复列表
@@ -1701,72 +1723,72 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getUserSpaceMsgReplysByUser")
-	public void getUserSpaceMsgReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		} else {
-			int userId = 0;
-			int pageIndex = 0;
-			int pageSize = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
-				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			if ((pageIndex <= 0) || (pageSize <= 0)) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
-				return;
-			}
-			int totalCnt = 0;
-			int totalPage = 0;
-			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
-			try {
-				totalCnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
-				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaceMsgs = userSpaceService.getUserSpaceMsgReplysByUser(userId, pageIndex, pageSize);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			JSONArray jsonArray = new JSONArray();
-			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
-				JSONObject jsonobj = new JSONObject();
-				jsonobj.put("TabId", userSpaceMsg.getTabid());
-				jsonobj.put("UserId", userSpaceMsg.getUserid());
-				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
-				jsonobj.put("UserSpaceId", userSpaceMsg.getUserspaceid());
-				jsonobj.put("UpperId", userSpaceMsg.getUpperid());
-				jsonArray.put(jsonobj);
-			}
-			jsonData.put("TotalCnt", totalCnt);
-			jsonData.put("TotalPage", totalPage);
-			jsonData.put("Data", jsonArray);
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getUserSpaceMsgReplysByUser")
+//	public void getUserSpaceMsgReplysByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		} else {
+//			int userId = 0;
+//			int pageIndex = 0;
+//			int pageSize = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
+//				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			if ((pageIndex <= 0) || (pageSize <= 0)) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1006").toString());
+//				return;
+//			}
+//			int totalCnt = 0;
+//			int totalPage = 0;
+//			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
+//			try {
+//				totalCnt = userSpaceService.getUserSpaceMsgReplysCntByUser(userId);
+//				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
+//				userSpaceMsgs = userSpaceService.getUserSpaceMsgReplysByUser(userId, pageIndex, pageSize);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			JSONArray jsonArray = new JSONArray();
+//			for (UserSpaceMsg userSpaceMsg : userSpaceMsgs) {
+//				JSONObject jsonobj = new JSONObject();
+//				jsonobj.put("TabId", userSpaceMsg.getTabid());
+//				jsonobj.put("UserId", userSpaceMsg.getUserid());
+//				jsonobj.put("MsgContent", userSpaceMsg.getMsgcontent());
+//				jsonobj.put("UserSpaceId", userSpaceMsg.getUserspaceid());
+//				jsonobj.put("UpperId", userSpaceMsg.getUpperid());
+//				jsonArray.put(jsonobj);
+//			}
+//			jsonData.put("TotalCnt", totalCnt);
+//			jsonData.put("TotalPage", totalPage);
+//			jsonData.put("Data", jsonArray);
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 新增某用户某用户空间留言
@@ -1999,7 +2021,7 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 获取用户未读用户空间列表
+	 * 获取与我相关
 	 * 
 	 * @param request
 	 * @param response

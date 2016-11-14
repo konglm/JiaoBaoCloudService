@@ -30,28 +30,28 @@ public interface UserSpaceMapper {
 	 * @param spaceType
 	 * @return
 	 */
-	int getNoReadUserSpacesCntByUser(int userId,int spaceType);
+	int getNoReadUserSpacesCntByUser(int userId,int spaceType,int noteType);
 	/**
 	 * 获取用户未读用户空间列表
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize);
+	List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize,int noteType);
 	/**
 	 * 获取用户未读某用户空间条数
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId);
+	int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId,int noteType);
 	/**
 	 * 获取用户未读某用户空间列表
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId);
+	List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId,int noteType);
 	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
@@ -71,19 +71,19 @@ public interface UserSpaceMapper {
 	 * @param userId
 	 * @return
 	 */
-	int getUserSpacesCntByUser(int userId);
+	int getUserSpacesCntByUser(int userId,int noteType);
 	/**
 	 * 获取某用户空间列表
 	 * @param userId
 	 * @return
 	 */
-	List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize);
+	List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize,int noteType);
 	/**
 	 * 获取某条用户空间信息
 	 * @param userSpaceId
 	 * @return
 	 */
-	UserSpace getUserSpaceById(int userSpaceId);
+	UserSpace getUserSpaceById(int userSpaceId,int noteType);
 	/**
 	 * 屏蔽某学生某用户空间信息
 	 * @param record

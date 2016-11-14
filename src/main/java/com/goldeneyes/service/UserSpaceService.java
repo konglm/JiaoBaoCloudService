@@ -34,28 +34,28 @@ public interface UserSpaceService {
 	 * @param spaceType
 	 * @return
 	 */
-	public int getNoReadUserSpacesCntByUser(int userId,int spaceType) throws Exception;
+	public int getNoReadUserSpacesCntByUser(int userId,int spaceType,int noteType) throws Exception;
 	/**
 	 * 获取用户未读用户空间列表
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	public List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize) throws Exception;
+	public List<UserSpace> getNoReadUserSpacesByUser(int userId,int spaceType,int pageIndex,int pageSize,int noteType) throws Exception;
 	/**
 	 * 获取用户未读某用户空间条数
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	public int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId) throws Exception;
+	public int getNoReadUserSpacesCntByUserForPublisher(int userId,int spaceType,int publisherId,int noteType) throws Exception;
 	/**
 	 * 获取用户未读某用户空间列表
 	 * @param userId
 	 * @param spaceType
 	 * @return
 	 */
-	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId) throws Exception;
+	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId,int spaceType,int pageIndex,int pageSize,int publisherId,int noteType) throws Exception;
 	/**
 	 * 获取用户某条用户空间是否点赞
 	 * @param userId
@@ -99,19 +99,19 @@ public interface UserSpaceService {
 	 * @param userId
 	 * @return
 	 */
-	public int getUserSpacesCntByUser(int userId) throws Exception;
+	public int getUserSpacesCntByUser(int userId,int noteType) throws Exception;
 	/**
 	 * 获取某用户空间列表
 	 * @param userId
 	 * @return
 	 */
-	public List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize) throws Exception;
+	public List<UserSpace> getUserSpacesByUser(int userId,int pageIndex,int pageSize,int noteType) throws Exception;
 	/**
 	 * 获取某条用户空间信息
 	 * @param userSpaceId
 	 * @return
 	 */
-	public UserSpace getUserSpaceById(int userSpaceId) throws Exception;
+	public UserSpace getUserSpaceById(int userSpaceId,int noteType) throws Exception;
 	/**
 	 * 新增某用户空间信息
 	 * @param userId

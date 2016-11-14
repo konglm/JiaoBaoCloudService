@@ -62,9 +62,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoReadUserSpacesCntByUser(int userId, int spaceType) throws Exception {
+	public int getNoReadUserSpacesCntByUser(int userId, int spaceType,int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUser(userId, spaceType);
+		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUser(userId, spaceType,noteType);
 		return cnt;
 	}
 
@@ -72,10 +72,10 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType, int pageIndex, int pageSize)
+	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType, int pageIndex, int pageSize,int noteType)
 			throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType, pageIndex, pageSize);
+		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType, pageIndex, pageSize,noteType);
 		return userSpaces;
 	}
 
@@ -83,9 +83,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoReadUserSpacesCntByUserForPublisher(int userId, int spaceType, int publisherId) throws Exception {
+	public int getNoReadUserSpacesCntByUserForPublisher(int userId, int spaceType, int publisherId,int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUserForPublisher(userId, spaceType, publisherId);
+		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUserForPublisher(userId, spaceType, publisherId,noteType);
 		return cnt;
 	}
 
@@ -94,10 +94,10 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 */
 	@Override
 	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId, int spaceType, int pageIndex, int pageSize,
-			int publisherId) throws Exception {
+			int publisherId,int noteType) throws Exception {
 		// TODO Auto-generated method stub
 		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUserForPublisher(userId, spaceType, pageIndex,
-				pageSize, publisherId);
+				pageSize, publisherId,noteType);
 		return userSpaces;
 	}
 
@@ -169,9 +169,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getUserSpacesCntByUser(int userId) throws Exception {
+	public int getUserSpacesCntByUser(int userId,int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getUserSpacesCntByUser(userId);
+		int cnt = userSpaceMapper.getUserSpacesCntByUser(userId,noteType);
 		return cnt;
 	}
 
@@ -179,9 +179,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getUserSpacesByUser(int userId, int pageIndex, int pageSize) throws Exception {
+	public List<UserSpace> getUserSpacesByUser(int userId, int pageIndex, int pageSize,int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId, pageIndex, pageSize);
+		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId, pageIndex, pageSize,noteType);
 		return userSpaces;
 	}
 
@@ -189,9 +189,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public UserSpace getUserSpaceById(int userSpaceId) throws Exception {
+	public UserSpace getUserSpaceById(int userSpaceId,int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		UserSpace userSpace = userSpaceMapper.getUserSpaceById(userSpaceId);
+		UserSpace userSpace = userSpaceMapper.getUserSpaceById(userSpaceId,noteType);
 		return userSpace;
 	}
 
