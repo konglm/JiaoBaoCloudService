@@ -303,10 +303,12 @@ public class NoteController {
 			int totalCnt = 0;
 			int totalPage = 0;
 			List<Note> notes = new ArrayList<Note>();
+			int noReadCnt = 0;
 			try {
-				totalCnt = noteService.getNoReadNotesCntByUserForStudent(userId, 1, studentId);
+				noReadCnt = noteService.getNoReadNotesCntByUserForStudent(userId, 1, studentId);
+				totalCnt = noteService.getNotesCntByStudent(studentId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				notes = noteService.getNoReadNotesByUserForStudent(userId, 1, pageIndex, pageSize, studentId);
+				notes = noteService.getNotesByStudent(studentId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -330,6 +332,7 @@ public class NoteController {
 			}
 			jsonData.put("TotalCnt", totalCnt);
 			jsonData.put("TotalPage", totalPage);
+			jsonData.put("NoReadCnt", noReadCnt);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
