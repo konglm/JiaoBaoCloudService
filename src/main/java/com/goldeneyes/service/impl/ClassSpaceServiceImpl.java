@@ -222,7 +222,6 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		classSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		classSpaceComment.setStatus(CommonTool.int2byte(1));
 		classSpaceComment.setUpperid(0);
-		classSpaceComment.setCommenttype(CommonTool.int2byte(2));
 		try {
 			classSpaceCommentMapper.insert(classSpaceComment);
 		} catch (Exception e) {
@@ -300,21 +299,16 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	@Override
 	public int setClassSpaceLikeByUser(int userId, int spaceType, int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
-		classSpaceComment.setUserid(userId);
-		classSpaceComment.setClassspaceid(classSpaceId);
-		classSpaceComment.setCommentcontent("");
-		classSpaceComment.setCommentdate(new Date());
-		classSpaceComment.setReplyid(0);
-		classSpaceComment.setReplystatus(CommonTool.int2byte(0));
-		classSpaceComment.setStatus(CommonTool.int2byte(1));
-		classSpaceComment.setUpperid(0);
-		classSpaceComment.setCommenttype(CommonTool.int2byte(1));
-		try {
-			classSpaceCommentMapper.insert(classSpaceComment);
-		} catch (Exception e) {
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+		spaceContentStatus.setSpaceid(classSpaceId);
+		try{
+			spaceContentStatusMapper.setClassSpaceLikeByUser(spaceContentStatus);
+		}catch(Exception e){
 			return 0;
 		}
+		
 		return 1;
 	}
 
