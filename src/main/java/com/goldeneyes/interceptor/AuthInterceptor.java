@@ -81,11 +81,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		// 验证url是否被篡改
-		String sign = EncryptUtil.hmacSHA1Encrypt(encryptText, "jsy309");
-		if (!sign.equals(jsonInput.getString("sign"))) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1008").toString());
-			return false;
-		}
+//		String sign = EncryptUtil.hmacSHA1Encrypt(encryptText, "jsy309");
+//		if (!sign.equals(jsonInput.getString("sign"))) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1008").toString());
+//			return false;
+//		}
 		// 验证Token时间是否超期
 
 		request.setAttribute("requestStr", requestStr);

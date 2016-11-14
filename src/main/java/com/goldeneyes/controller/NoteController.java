@@ -1210,14 +1210,14 @@ public class NoteController {
 			return;
 		}
 
-		if (!jsonInput.has("userId") || !jsonInput.has("noteId")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("noteIds")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
-			int noteId = 0;
+			List<Integer> noteIds = new ArrayList<Integer>();
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
-				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+				noteIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("noteIds"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1225,7 +1225,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.setNoteReadByUser(userId, 1, noteId);
+				success = noteService.setNoteReadByUser(userId, 1, noteIds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

@@ -306,16 +306,18 @@ public class NoteServiceImpl implements NoteService {
 	 *  @author konglm
 	 */
 	@Override
-	public int setNoteReadByUser(int userId, int spaceType, int noteId) throws Exception {
+	public int setNoteReadByUser(int userId, int spaceType,List<Integer> noteIds) throws Exception {
 		// TODO Auto-generated method stub
-		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
-		spaceContentStatus.setUserid(userId);
-		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
-		spaceContentStatus.setSpaceid(noteId);
-		try{
-			spaceContentStatusMapper.setNoteReadByUser(spaceContentStatus);
-		}catch(Exception e){
-			return 0;
+		for(Integer noteId: noteIds){
+			SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+			spaceContentStatus.setUserid(userId);
+			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+			spaceContentStatus.setSpaceid(noteId);
+			try{
+				spaceContentStatusMapper.setNoteReadByUser(spaceContentStatus);
+			}catch(Exception e){
+				return 0;
+			}
 		}
 		
 		return 1;

@@ -160,7 +160,7 @@ public interface NoteService {
 	 * @param noteId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setNoteReadByUser(int userId,int spaceType,int noteId) throws Exception;
+	public int setNoteReadByUser(int userId,int spaceType,List<Integer> noteIds) throws Exception;
 	/**
 	 * 修改某用户某点到记事点赞状态为点赞
 	 * @param userId
