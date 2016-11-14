@@ -52,4 +52,10 @@ public interface ClassSpaceCommentMapper {
 	 * @return
 	 */
 	int deleteByClassSpaceId(int classSpaceId);
+	/**
+	 * 获取班级空间点赞数量
+	 * @param classSpaceId
+	 * @return
+	 */
+	int getLikeCntBySpaceId(int classSpaceId);
 }

@@ -62,4 +62,11 @@ public interface SpaceContentStatusMapper {
      * @return
      */
     int deleteByUserSpaceId(int userSpaceId);
+    /**
+     * 获取某空间的已读数量
+     * @param spaceType
+     * @param spaceId
+     * @return
+     */
+    int getReadCntBySpaceId(int spaceType,int spaceId);
 }

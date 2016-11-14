@@ -193,6 +193,7 @@ public class UserSpaceController {
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonobj.put("EncIntro", userSpace.getEncintro());
+				jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -330,6 +331,7 @@ public class UserSpaceController {
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonobj.put("EncIntro", userSpace.getEncintro());
+				jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);

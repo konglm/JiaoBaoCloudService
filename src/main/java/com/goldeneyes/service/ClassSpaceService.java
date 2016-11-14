@@ -183,4 +183,17 @@ public interface ClassSpaceService {
 	 * @return 是否删除成功 0失败1成功
 	 */
 	public int delClassSpaceCommentById(int classSpaceCommentId) throws Exception;
+	/**
+	 * 获取某班级空间的已读数量
+	 * @param spaceType
+	 * @param spaceId
+	 * @return
+	 */
+	public int getReadCntBySpaceId(int spaceId);
+	/**
+	 * 获取某班级空间的点赞数量
+	 * @param classSpaceId
+	 * @return
+	 */
+	public int getLikeCntBySpaceId(int classSpaceId);
 }

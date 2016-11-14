@@ -250,4 +250,11 @@ public interface UserSpaceService {
 	 * @return
 	 */
 	public List<AboutMe> getAboutMe(int userId,int pageIndex,int pageSize);
+	/**
+	 * 获取某用户空间的已读数量
+	 * @param spaceType
+	 * @param spaceId
+	 * @return
+	 */
+	public int getReadCntBySpaceId(int spaceId);
 }

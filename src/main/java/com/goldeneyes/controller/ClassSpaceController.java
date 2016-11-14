@@ -189,6 +189,8 @@ public class ClassSpaceController {
 				jsonobj.put("EncType", classSpace.getEnctype());
 				jsonobj.put("EncAddr", classSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", classSpace.getEncimgaddr());
+				jsonobj.put("ReadCnt", classSpaceService.getReadCntBySpaceId(classSpace.getTabid()));
+				jsonobj.put("LikeCnt", classSpaceService.getLikeCntBySpaceId(classSpace.getTabid()));
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -324,6 +326,8 @@ public class ClassSpaceController {
 				jsonobj.put("EncType", classSpace.getEnctype());
 				jsonobj.put("EncAddr", classSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", classSpace.getEncimgaddr());
+				jsonobj.put("ReadCnt", classSpaceService.getReadCntBySpaceId(classSpace.getTabid()));
+				jsonobj.put("LikeCnt", classSpaceService.getLikeCntBySpaceId(classSpace.getTabid()));
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -808,6 +812,8 @@ public class ClassSpaceController {
 				jsonobj.put("EncType", classSpace.getEnctype());
 				jsonobj.put("EncAddr", classSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", classSpace.getEncimgaddr());
+				jsonobj.put("ReadCnt", classSpaceService.getReadCntBySpaceId(classSpace.getTabid()));
+				jsonobj.put("LikeCnt", classSpaceService.getLikeCntBySpaceId(classSpace.getTabid()));
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);

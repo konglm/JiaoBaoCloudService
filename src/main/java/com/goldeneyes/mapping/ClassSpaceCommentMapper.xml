@@ -1,209 +1,222 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.goldeneyes.IDao.ClassSpaceCommentMapper" >
-  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.ClassSpaceComment" >
-    <id column="TabId" property="tabid" jdbcType="INTEGER" />
-    <result column="ClassSpaceId" property="classspaceid" jdbcType="INTEGER" />
-    <result column="UpperId" property="upperid" jdbcType="INTEGER" />
-    <result column="UserId" property="userid" jdbcType="INTEGER" />
-    <result column="CommentType" property="commenttype" jdbcType="TINYINT" />
-    <result column="CommentContent" property="commentcontent" jdbcType="VARCHAR" />
-    <result column="ReplyId" property="replyid" jdbcType="INTEGER" />
-    <result column="CommentDate" property="commentdate" jdbcType="TIMESTAMP" />
-    <result column="ReplyStatus" property="replystatus" jdbcType="TINYINT" />
-    <result column="ReplyDate" property="replydate" jdbcType="TIMESTAMP" />
-    <result column="Status" property="status" jdbcType="TINYINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    TabId, ClassSpaceId, UpperId, UserId, CommentType, CommentContent, ReplyId, CommentDate, 
-    ReplyStatus, ReplyDate, Status
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from ClassSpaceComment
-    where TabId = #{tabid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ClassSpaceComment
-    where TabId = #{tabid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    insert into ClassSpaceComment (ClassSpaceId, UpperId, 
-      UserId, CommentType, CommentContent, 
-      ReplyId, CommentDate, ReplyStatus, 
-      ReplyDate, Status)
-    values (#{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{commenttype,jdbcType=TINYINT}, #{commentcontent,jdbcType=VARCHAR}, 
-      #{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, 
-      #{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    insert into ClassSpaceComment
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tabid != null" >
-        TabId,
-      </if>
-      <if test="classspaceid != null" >
-        ClassSpaceId,
-      </if>
-      <if test="upperid != null" >
-        UpperId,
-      </if>
-      <if test="userid != null" >
-        UserId,
-      </if>
-      <if test="commenttype != null" >
-        CommentType,
-      </if>
-      <if test="commentcontent != null" >
-        CommentContent,
-      </if>
-      <if test="replyid != null" >
-        ReplyId,
-      </if>
-      <if test="commentdate != null" >
-        CommentDate,
-      </if>
-      <if test="replystatus != null" >
-        ReplyStatus,
-      </if>
-      <if test="replydate != null" >
-        ReplyDate,
-      </if>
-      <if test="status != null" >
-        Status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tabid != null" >
-        #{tabid,jdbcType=INTEGER},
-      </if>
-      <if test="classspaceid != null" >
-        #{classspaceid,jdbcType=INTEGER},
-      </if>
-      <if test="upperid != null" >
-        #{upperid,jdbcType=INTEGER},
-      </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="commenttype != null" >
-        #{commenttype,jdbcType=TINYINT},
-      </if>
-      <if test="commentcontent != null" >
-        #{commentcontent,jdbcType=VARCHAR},
-      </if>
-      <if test="replyid != null" >
-        #{replyid,jdbcType=INTEGER},
-      </if>
-      <if test="commentdate != null" >
-        #{commentdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="replystatus != null" >
-        #{replystatus,jdbcType=TINYINT},
-      </if>
-      <if test="replydate != null" >
-        #{replydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    update ClassSpaceComment
-    <set >
-      <if test="classspaceid != null" >
-        ClassSpaceId = #{classspaceid,jdbcType=INTEGER},
-      </if>
-      <if test="upperid != null" >
-        UpperId = #{upperid,jdbcType=INTEGER},
-      </if>
-      <if test="userid != null" >
-        UserId = #{userid,jdbcType=INTEGER},
-      </if>
-      <if test="commenttype != null" >
-        CommentType = #{commenttype,jdbcType=TINYINT},
-      </if>
-      <if test="commentcontent != null" >
-        CommentContent = #{commentcontent,jdbcType=VARCHAR},
-      </if>
-      <if test="replyid != null" >
-        ReplyId = #{replyid,jdbcType=INTEGER},
-      </if>
-      <if test="commentdate != null" >
-        CommentDate = #{commentdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="replystatus != null" >
-        ReplyStatus = #{replystatus,jdbcType=TINYINT},
-      </if>
-      <if test="replydate != null" >
-        ReplyDate = #{replydate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        Status = #{status,jdbcType=TINYINT},
-      </if>
-    </set>
-    where TabId = #{tabid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    update ClassSpaceComment
-    set ClassSpaceId = #{classspaceid,jdbcType=INTEGER},
-      UpperId = #{upperid,jdbcType=INTEGER},
-      UserId = #{userid,jdbcType=INTEGER},
-      CommentType = #{commenttype,jdbcType=TINYINT},
-      CommentContent = #{commentcontent,jdbcType=VARCHAR},
-      ReplyId = #{replyid,jdbcType=INTEGER},
-      CommentDate = #{commentdate,jdbcType=TIMESTAMP},
-      ReplyStatus = #{replystatus,jdbcType=TINYINT},
-      ReplyDate = #{replydate,jdbcType=TIMESTAMP},
-      Status = #{status,jdbcType=TINYINT}
-    where TabId = #{tabid,jdbcType=INTEGER}
-  </update>
-  <!-- 获取班级空间所有评论条数 -->
-  <select id="getClassSpaceCommentsCntById" resultType="java.lang.Integer">
-  	select count(cc.TabId) 
-  	from ClassSpaceComment cc 
-  	where cc.Status = 1 and cc.ClassSpaceId = #{0}
-  </select>
-  <!-- 获取班级空间所有评论 -->
-  <select id="getClassSpaceCommentsById" resultType="com.goldeneyes.pojo.ClassSpaceComment">
-  	select top(#{2}) cc.TabId,cc.UserId,cc.CommentContent,cc.ReplyId,cc.CommentDate,cc.UpperId
-  	from ClassSpaceComment cc 
-  	where cc.Status = 1 and cc.ClassSpaceId = #{0}
-  	and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from ClassSpaceComment cc 
-  	where cc.Status = 1 and cc.ClassSpaceId = #{0}
-  	order by cc.CommentDate asc)
-  	order by cc.CommentDate asc
-  </select>
-  <!-- 获取用户班级空间所有未读评论回复条数 -->
-  <select id="getClassSpaceCommentReplysCntByUser" resultType="java.lang.Integer">
-  	select COUNT(cc.TabId) 
-  	from ClassSpaceComment cc 
-  	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
-  </select>
-  <!-- 获取用户班级空间所有未读评论回复列表 -->
-  <select id="getClassSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.ClassSpaceComment">
-  	select top(#{2})  cc.TabId,cc.UserId,cc.ClassSpaceId,cc.CommentContent,cc.UpperId
-  	from ClassSpaceComment cc 
-  	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
-  	and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from ClassSpaceComment cc
-  	where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
-	order by cc.CommentDate asc)
-	order by cc.CommentDate asc
-  </select>
-  <!-- 修改某用户某班级空间评论回复查看状态 -->
-  <update id="setClassSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
-    update ClassSpaceComment
-    set 
-      ReplyStatus = 1,
-      ReplyDate = getdate()
-    where TabId = #{tabid,jdbcType=INTEGER} 
-  </update>
-  <!-- 删除某班级空间的评论 -->
-  <delete id="deleteByClassSpaceId" parameterType="java.lang.Integer" >
-    delete from ClassSpaceComment
-    where ClassSpaceId = #{ClassSpaceId,jdbcType=INTEGER}
-  </delete>
+<mapper namespace="com.goldeneyes.IDao.ClassSpaceCommentMapper">
+	<resultMap id="BaseResultMap" type="com.goldeneyes.pojo.ClassSpaceComment">
+		<id column="TabId" property="tabid" jdbcType="INTEGER" />
+		<result column="ClassSpaceId" property="classspaceid" jdbcType="INTEGER" />
+		<result column="UpperId" property="upperid" jdbcType="INTEGER" />
+		<result column="UserId" property="userid" jdbcType="INTEGER" />
+		<result column="CommentType" property="commenttype" jdbcType="TINYINT" />
+		<result column="CommentContent" property="commentcontent"
+			jdbcType="VARCHAR" />
+		<result column="ReplyId" property="replyid" jdbcType="INTEGER" />
+		<result column="CommentDate" property="commentdate" jdbcType="TIMESTAMP" />
+		<result column="ReplyStatus" property="replystatus" jdbcType="TINYINT" />
+		<result column="ReplyDate" property="replydate" jdbcType="TIMESTAMP" />
+		<result column="Status" property="status" jdbcType="TINYINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TabId, ClassSpaceId, UpperId, UserId, CommentType, CommentContent, ReplyId,
+		CommentDate,
+		ReplyStatus, ReplyDate, Status
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from ClassSpaceComment
+		where TabId = #{tabid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ClassSpaceComment
+		where TabId = #{tabid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
+		insert into ClassSpaceComment (ClassSpaceId, UpperId,
+		UserId, CommentType, CommentContent,
+		ReplyId, CommentDate, ReplyStatus,
+		ReplyDate, Status)
+		values (#{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER}, #{commenttype,jdbcType=TINYINT},
+		#{commentcontent,jdbcType=VARCHAR},
+		#{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT},
+		#{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
+		insert into ClassSpaceComment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tabid != null">
+				TabId,
+			</if>
+			<if test="classspaceid != null">
+				ClassSpaceId,
+			</if>
+			<if test="upperid != null">
+				UpperId,
+			</if>
+			<if test="userid != null">
+				UserId,
+			</if>
+			<if test="commenttype != null">
+				CommentType,
+			</if>
+			<if test="commentcontent != null">
+				CommentContent,
+			</if>
+			<if test="replyid != null">
+				ReplyId,
+			</if>
+			<if test="commentdate != null">
+				CommentDate,
+			</if>
+			<if test="replystatus != null">
+				ReplyStatus,
+			</if>
+			<if test="replydate != null">
+				ReplyDate,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tabid != null">
+				#{tabid,jdbcType=INTEGER},
+			</if>
+			<if test="classspaceid != null">
+				#{classspaceid,jdbcType=INTEGER},
+			</if>
+			<if test="upperid != null">
+				#{upperid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="commenttype != null">
+				#{commenttype,jdbcType=TINYINT},
+			</if>
+			<if test="commentcontent != null">
+				#{commentcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="replyid != null">
+				#{replyid,jdbcType=INTEGER},
+			</if>
+			<if test="commentdate != null">
+				#{commentdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="replystatus != null">
+				#{replystatus,jdbcType=TINYINT},
+			</if>
+			<if test="replydate != null">
+				#{replydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
+		update ClassSpaceComment
+		<set>
+			<if test="classspaceid != null">
+				ClassSpaceId = #{classspaceid,jdbcType=INTEGER},
+			</if>
+			<if test="upperid != null">
+				UpperId = #{upperid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				UserId = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="commenttype != null">
+				CommentType = #{commenttype,jdbcType=TINYINT},
+			</if>
+			<if test="commentcontent != null">
+				CommentContent = #{commentcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="replyid != null">
+				ReplyId = #{replyid,jdbcType=INTEGER},
+			</if>
+			<if test="commentdate != null">
+				CommentDate = #{commentdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="replystatus != null">
+				ReplyStatus = #{replystatus,jdbcType=TINYINT},
+			</if>
+			<if test="replydate != null">
+				ReplyDate = #{replydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=TINYINT},
+			</if>
+		</set>
+		where TabId = #{tabid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
+		update ClassSpaceComment
+		set ClassSpaceId = #{classspaceid,jdbcType=INTEGER},
+		UpperId = #{upperid,jdbcType=INTEGER},
+		UserId = #{userid,jdbcType=INTEGER},
+		CommentType = #{commenttype,jdbcType=TINYINT},
+		CommentContent = #{commentcontent,jdbcType=VARCHAR},
+		ReplyId = #{replyid,jdbcType=INTEGER},
+		CommentDate = #{commentdate,jdbcType=TIMESTAMP},
+		ReplyStatus = #{replystatus,jdbcType=TINYINT},
+		ReplyDate = #{replydate,jdbcType=TIMESTAMP},
+		Status = #{status,jdbcType=TINYINT}
+		where TabId = #{tabid,jdbcType=INTEGER}
+	</update>
+	<!-- 获取班级空间所有评论条数 -->
+	<select id="getClassSpaceCommentsCntById" resultType="java.lang.Integer">
+		select count(cc.TabId)
+		from ClassSpaceComment cc
+		where cc.Status = 1 and cc.ClassSpaceId = #{0}
+	</select>
+	<!-- 获取班级空间所有评论 -->
+	<select id="getClassSpaceCommentsById" resultType="com.goldeneyes.pojo.ClassSpaceComment">
+		select top(#{2})
+		cc.TabId,cc.UserId,cc.CommentContent,cc.ReplyId,cc.CommentDate,cc.UpperId
+		from ClassSpaceComment cc
+		where cc.Status = 1 and cc.ClassSpaceId = #{0}
+		and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from
+		ClassSpaceComment cc
+		where cc.Status = 1 and cc.ClassSpaceId = #{0}
+		order by cc.CommentDate asc)
+		order by cc.CommentDate asc
+	</select>
+	<!-- 获取用户班级空间所有未读评论回复条数 -->
+	<select id="getClassSpaceCommentReplysCntByUser" resultType="java.lang.Integer">
+		select COUNT(cc.TabId)
+		from ClassSpaceComment cc
+		where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
+	</select>
+	<!-- 获取用户班级空间所有未读评论回复列表 -->
+	<select id="getClassSpaceCommentReplysByUser" resultType="com.goldeneyes.pojo.ClassSpaceComment">
+		select top(#{2})
+		cc.TabId,cc.UserId,cc.ClassSpaceId,cc.CommentContent,cc.UpperId
+		from ClassSpaceComment cc
+		where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
+		and cc.TabId not in (select top((#{1}-1) * #{2}) cc.TabId from
+		ClassSpaceComment cc
+		where cc.Status = 1 and cc.ReplyStatus = 0 and cc.ReplyId = #{0}
+		order by cc.CommentDate asc)
+		order by cc.CommentDate asc
+	</select>
+	<!-- 修改某用户某班级空间评论回复查看状态 -->
+	<update id="setClassSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
+		update ClassSpaceComment
+		set
+		ReplyStatus = 1,
+		ReplyDate = getdate()
+		where TabId = #{tabid,jdbcType=INTEGER}
+	</update>
+	<!-- 删除某班级空间的评论 -->
+	<delete id="deleteByClassSpaceId" parameterType="java.lang.Integer">
+		delete from ClassSpaceComment
+		where ClassSpaceId = #{ClassSpaceId,jdbcType=INTEGER}
+	</delete>
+	<!-- 获取班级空间点赞数量 -->
+	<select id="getLikeCntBySpaceId" resultType="java.lang.Integer">
+		select COUNT(tabid) from ClassSpaceComment where Status = 1 and CommentType
+		= 1 and ClassSpaceId = #{0}
+	</select>
 </mapper>

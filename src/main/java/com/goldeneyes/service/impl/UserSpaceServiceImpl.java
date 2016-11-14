@@ -523,4 +523,14 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		List<AboutMe> aboutMes = userSpaceMapper.getAboutMe(userId,pageIndex,pageSize);
 		return aboutMes;
 	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getReadCntBySpaceId(int spaceId) {
+		// TODO Auto-generated method stub
+		int cnt = spaceContentStatusMapper.getReadCntBySpaceId(3,spaceId);
+		return cnt;
+	}
 }

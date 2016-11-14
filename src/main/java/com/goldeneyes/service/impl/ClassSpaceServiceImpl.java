@@ -379,4 +379,24 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		}
 		return 1;
 	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getReadCntBySpaceId(int spaceId) {
+		// TODO Auto-generated method stub
+		int cnt = spaceContentStatusMapper.getReadCntBySpaceId(2,spaceId);
+		return cnt;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getLikeCntBySpaceId(int classSpaceId) {
+		// TODO Auto-generated method stub
+		int cnt = classSpaceCommentMapper.getLikeCntBySpaceId(classSpaceId);
+		return cnt;
+	}
 }
