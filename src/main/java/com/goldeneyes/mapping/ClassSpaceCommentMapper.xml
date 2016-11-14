@@ -6,6 +6,7 @@
     <result column="ClassSpaceId" property="classspaceid" jdbcType="INTEGER" />
     <result column="UpperId" property="upperid" jdbcType="INTEGER" />
     <result column="UserId" property="userid" jdbcType="INTEGER" />
+    <result column="CommentType" property="commenttype" jdbcType="TINYINT" />
     <result column="CommentContent" property="commentcontent" jdbcType="VARCHAR" />
     <result column="ReplyId" property="replyid" jdbcType="INTEGER" />
     <result column="CommentDate" property="commentdate" jdbcType="TIMESTAMP" />
@@ -14,8 +15,8 @@
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, ClassSpaceId, UpperId, UserId, CommentContent, ReplyId, CommentDate, ReplyStatus, 
-    ReplyDate, Status
+    TabId, ClassSpaceId, UpperId, UserId, CommentType, CommentContent, ReplyId, CommentDate, 
+    ReplyStatus, ReplyDate, Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,13 +30,13 @@
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
     insert into ClassSpaceComment (ClassSpaceId, UpperId, 
-      UserId, CommentContent, ReplyId, 
-      CommentDate, ReplyStatus, ReplyDate, 
-      Status)
+      UserId, CommentType, CommentContent, 
+      ReplyId, CommentDate, ReplyStatus, 
+      ReplyDate, Status)
     values (#{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, 
-      #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT})
+      #{userid,jdbcType=INTEGER}, #{commenttype,jdbcType=TINYINT}, #{commentcontent,jdbcType=VARCHAR}, 
+      #{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, 
+      #{replydate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.goldeneyes.pojo.ClassSpaceComment" >
     insert into ClassSpaceComment
@@ -51,6 +52,9 @@
       </if>
       <if test="userid != null" >
         UserId,
+      </if>
+      <if test="commenttype != null" >
+        CommentType,
       </if>
       <if test="commentcontent != null" >
         CommentContent,
@@ -84,6 +88,9 @@
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
+      <if test="commenttype != null" >
+        #{commenttype,jdbcType=TINYINT},
+      </if>
       <if test="commentcontent != null" >
         #{commentcontent,jdbcType=VARCHAR},
       </if>
@@ -116,6 +123,9 @@
       <if test="userid != null" >
         UserId = #{userid,jdbcType=INTEGER},
       </if>
+      <if test="commenttype != null" >
+        CommentType = #{commenttype,jdbcType=TINYINT},
+      </if>
       <if test="commentcontent != null" >
         CommentContent = #{commentcontent,jdbcType=VARCHAR},
       </if>
@@ -142,6 +152,7 @@
     set ClassSpaceId = #{classspaceid,jdbcType=INTEGER},
       UpperId = #{upperid,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
+      CommentType = #{commenttype,jdbcType=TINYINT},
       CommentContent = #{commentcontent,jdbcType=VARCHAR},
       ReplyId = #{replyid,jdbcType=INTEGER},
       CommentDate = #{commentdate,jdbcType=TIMESTAMP},

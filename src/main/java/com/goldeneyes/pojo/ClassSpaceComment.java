@@ -11,6 +11,8 @@ public class ClassSpaceComment {
 
     private Integer userid;
 
+    private Byte commenttype;
+
     private String commentcontent;
 
     private Integer replyid;
@@ -53,6 +55,14 @@ public class ClassSpaceComment {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+
+    public Byte getCommenttype() {
+        return commenttype;
+    }
+
+    public void setCommenttype(Byte commenttype) {
+        this.commenttype = commenttype;
     }
 
     public String getCommentcontent() {
