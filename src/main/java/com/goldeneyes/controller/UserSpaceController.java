@@ -257,13 +257,13 @@ public class UserSpaceController {
 	}
 
 	/**
-	 * 获取用户未读用户空间列表
+	 * 获取用户的某用户空间列表
 	 * 
 	 * @param request
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoReadUserSpacesByUserForPublisher")
+	@RequestMapping("/getUserSpacesByUserForPublisher")
 	public void getNoReadUserSpacesByUserForPublisher(HttpServletRequest request, HttpServletResponse response,
 			Model model) {
 		// 返回参数用
@@ -306,12 +306,13 @@ public class UserSpaceController {
 			}
 			int totalCnt = 0;
 			int totalPage = 0;
+			int noReadCnt = 0;
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
-				totalCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
+				totalCnt = userSpaceService.getUserSpacesCntByUser(publisherId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaces = userSpaceService.getNoReadUserSpacesByUserForPublisher(userId, 3, pageIndex, pageSize,
-						publisherId);
+				userSpaces = userSpaceService.getUserSpacesByUser(publisherId, pageIndex, pageSize);
+				noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3, publisherId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -336,6 +337,7 @@ public class UserSpaceController {
 			}
 			jsonData.put("TotalCnt", totalCnt);
 			jsonData.put("TotalPage", totalPage);
+			jsonData.put("NoReadCnt", noReadCnt);
 			jsonData.put("Data", jsonArray);
 			// 在这里输出，手机端就拿到web返回的值了
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
@@ -1131,6 +1133,62 @@ public class UserSpaceController {
 			}
 		}
 	}
+	
+	/**
+	 * 推送给多用户的某用户空间
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/addUserSpaceForMutiUsers")
+	public void addUserSpaceForMutiUsers(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// 返回参数用
+		JSONObject jsonData = new JSONObject();
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+
+		if (!jsonInput.has("userIds") || !jsonInput.has("userSpaceId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else {
+			List<Integer> userIds = new ArrayList<Integer>();
+			int userSpaceId = 0;
+			try {
+				userIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("userIds"));
+				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.addUserSpaceForMutiUsers(userIds, 3, userSpaceId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+			} else {
+				jsonData.put("Result", success);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+			}
+		}
+	}
 
 	/**
 	 * 修改某用户某用户空间阅读状态为已读
@@ -1157,14 +1215,14 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userId") || !jsonInput.has("userSpaceId")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("userSpaceIds")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
-			int userSpaceId = 0;
+			List<Integer> userSpaceIds = new ArrayList<Integer>();
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+				userSpaceIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("userSpaceIds"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1172,7 +1230,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.setUserSpaceReadByUser(userId, 3, userSpaceId);
+				success = userSpaceService.setUserSpaceReadByUser(userId, 3, userSpaceIds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

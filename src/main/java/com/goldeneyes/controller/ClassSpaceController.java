@@ -1132,9 +1132,67 @@ public class ClassSpaceController {
 			}
 		}
 	}
+	
+	/**
+	 * 推送给某用户的某班级空间
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/addClassSpaceForMutiUsers")
+	public void addClassSpaceForMutiUsers(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// 返回参数用
+		JSONObject jsonData = new JSONObject();
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+
+		if (!jsonInput.has("userIds") || !jsonInput.has("classSpaceId")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+		} else {
+			List<Integer> userIds = new ArrayList<Integer>();
+			int classSpaceId = 0;
+			try {
+				userIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("userIds"));
+				classSpaceId = Integer.parseInt(jsonInput.getString("classSpaceId"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = classSpaceService.addClassSpaceForMutiUsers(userIds, 2, classSpaceId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+			} else {
+
+				jsonData.put("Result", success);
+
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+			}
+		}
+	}
 
 	/**
-	 * 修改某用户某班级空间阅读状态为已读
+	 * 修改某用户多班级空间阅读状态为已读
 	 * 
 	 * @param request
 	 * @param response
@@ -1158,14 +1216,14 @@ public class ClassSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userId") || !jsonInput.has("classSpaceId")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("classSpaceIds")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
-			int classSpaceId = 0;
+			List<Integer> classSpaceIds = new ArrayList<Integer>();
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
-				classSpaceId = Integer.parseInt(jsonInput.getString("classSpaceId"));
+				classSpaceIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("classSpaceIds"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1173,7 +1231,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.setClassSpaceReadByUser(userId, 2, classSpaceId);
+				success = classSpaceService.setClassSpaceReadByUser(userId, 2, classSpaceIds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

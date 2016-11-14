@@ -144,13 +144,22 @@ public interface ClassSpaceService {
 	 */
 	public int addClassSpaceForUser(int userId,int spaceType,int classSpaceId) throws Exception;
 	/**
+	 * 推送给多用户的某班级空间
+	 * @param userIds
+	 * @param spaceType
+	 * @param classSpaceId
+	 * @return
+	 * @throws Exception
+	 */
+	public int addClassSpaceForMutiUsers(List<Integer> userIds,int spaceType,int classSpaceId) throws Exception;
+	/**
 	 * 修改某用户某班级空间阅读状态为已读
 	 * @param userId
 	 * @param spaceType
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceReadByUser(int userId,int spaceType,int classSpaceId) throws Exception;
+	public int setClassSpaceReadByUser(int userId,int spaceType,List<Integer> classSpaceIds) throws Exception;
 	/**
 	 * 修改某用户某班级空间点赞状态为点赞
 	 * @param userId

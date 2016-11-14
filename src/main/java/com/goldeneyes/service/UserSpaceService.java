@@ -146,13 +146,21 @@ public interface UserSpaceService {
 	 */
 	public int addUserSpaceForUser(int userId,int spaceType,int userSpaceId) throws Exception;
 	/**
+	 * 推送给多用户的用户空间
+	 * @param userId
+	 * @param spaceType
+	 * @param userSpaceId
+	 * @return 是否删除成功 0失败1成功
+	 */
+	public int addUserSpaceForMutiUsers(List<Integer> userIds,int spaceType,int userSpaceId) throws Exception;
+	/**
 	 * 修改某用户某用户空间阅读状态为已读
 	 * @param userId
 	 * @param spaceType
 	 * @param userSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setUserSpaceReadByUser(int userId,int spaceType,int userSpaceId) throws Exception;
+	public int setUserSpaceReadByUser(int userId,int spaceType,List<Integer> userSpaceIds) throws Exception;
 	/**
 	 * 修改某用户某用户空间点赞状态为点赞
 	 * @param userId

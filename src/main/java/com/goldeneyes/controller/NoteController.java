@@ -1186,7 +1186,7 @@ public class NoteController {
 	}
 
 	/**
-	 * 修改某用户某点到记事阅读状态为已读
+	 * 修改某用户多点到记事阅读状态为已读
 	 * 
 	 * @param request
 	 * @param response
