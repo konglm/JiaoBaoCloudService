@@ -368,8 +368,20 @@ public class UserSpaceController {
 					jsonobj.put("ReadCnt", userSpaceService.getReadCntBySpaceId(userSpace.getTabid()));
 					jsonobj.put("LikeUsers", userSpaceService.getIsLikeUsersById(userSpace.getTabid()));
 					int commentCnt = userSpaceService.getUserSpaceCommentsCntById(userSpace.getTabid());
-					jsonobj.put("Comments",
-							userSpaceService.getUserSpaceCommentsById(userSpace.getTabid(), commentCnt, commentCnt));
+					List<UserSpaceComment> userSpaceComments = userSpaceService
+							.getUserSpaceCommentsById(userSpace.getTabid(), 1, commentCnt);
+					JSONArray jsonItemArray = new JSONArray();
+					for (UserSpaceComment userSpaceComment : userSpaceComments) {
+						JSONObject jsonItem = new JSONObject();
+						jsonItem.put("TabId", userSpaceComment.getTabid());
+						jsonItem.put("UserId", userSpaceComment.getUserid());
+						jsonItem.put("CommentContent", userSpaceComment.getCommentcontent());
+						jsonItem.put("ReplyId", userSpaceComment.getReplyid());
+						jsonItem.put("CommentDate", formater.format(userSpaceComment.getCommentdate()));
+						jsonItem.put("UpperId", userSpaceComment.getUpperid());
+						jsonItemArray.put(jsonItem);
+					}
+					jsonobj.put("Comments", jsonItemArray);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -2204,6 +2216,35 @@ public class UserSpaceController {
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				jsonobj.put("MsgDate", formater.format(aboutMe.getMsgDate()));
 				jsonobj.put("TabId", aboutMe.getTabId());
+				JSONArray jsonItemArray = new JSONArray();
+				switch (aboutMe.getMsgType()) {
+					case 1:
+					case 2:
+					case 3: {
+						List<UserSpaceComment> userSpaceComments = userSpaceService.getCommentsById(aboutMe.getTabId());
+						for(UserSpaceComment userSpaceComment: userSpaceComments){
+							JSONObject jsonItem = new JSONObject();
+							jsonItem.put("MsgFrom", userSpaceComment.getUserid());
+							jsonItem.put("MsgTo", userSpaceComment.getReplyid());
+							jsonItem.put("MsgContent", userSpaceComment.getCommentcontent());
+							jsonItemArray.put(jsonItem);
+						}
+						break;
+					}
+					case 4:
+					case 5: {
+						List<UserSpaceMsg> userSpaceMsgs = userSpaceService.getMsgsById(aboutMe.getTabId());
+						for(UserSpaceMsg userSpaceMsg: userSpaceMsgs){
+							JSONObject jsonItem = new JSONObject();
+							jsonItem.put("MsgFrom", userSpaceMsg.getUserid());
+							jsonItem.put("MsgTo", userSpaceMsg.getReplyid());
+							jsonItem.put("MsgContent", userSpaceMsg.getMsgcontent());
+							jsonItemArray.put(jsonItem);
+						}
+						break;
+					}
+				}
+				jsonobj.put("MsgArray", jsonItemArray);
 				jsonArray.put(jsonobj);
 			}
 			jsonData.put("TotalCnt", totalCnt);
@@ -2277,8 +2318,8 @@ public class UserSpaceController {
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonobj.put("EncIntro", userSpace.getEncintro());
 				try {
-					noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userSpace.getUserid(), 3, userSpace.getPublisherid(),
-							2);
+					noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userSpace.getUserid(), 3,
+							userSpace.getPublisherid(), 2);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

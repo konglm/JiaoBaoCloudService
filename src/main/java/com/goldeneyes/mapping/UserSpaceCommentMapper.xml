@@ -224,4 +224,8 @@
 		ReplyDate = getdate()
 		where UserId = #{userid,jdbcType=INTEGER} and uc.CommentType = 1 and uc.ReplyStatus = 0
 	</update>
+	<!-- 获取某评论ID评论列表 -->
+	<select id="getCommentsById" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpaceComment">
+       {call GetCommentsById(#{0})} 
+     </select>
 </mapper>

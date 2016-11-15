@@ -599,4 +599,24 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByIds(userIdStr);
 		return userSpaces;
 	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpaceMsg> getMsgsById(int userSpaceMsgId) {
+		// TODO Auto-generated method stub
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getMsgsById(userSpaceMsgId);
+		return userSpaceMsgs;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpaceComment> getCommentsById(int userSpaceCommentId) {
+		// TODO Auto-generated method stub
+		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getCommentsById(userSpaceCommentId);
+		return userSpaceComments;
+	}
 }

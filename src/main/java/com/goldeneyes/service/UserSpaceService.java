@@ -277,4 +277,16 @@ public interface UserSpaceService {
 	 * @return
 	 */
 	public List<UserSpace> getUserSpacesByIds(List<Integer> userIds);
+	/**
+	 * 获取某回复ID回复列表
+	 * @param userSpaceMsgId
+	 * @return
+	 */
+	public List<UserSpaceMsg> getMsgsById(int userSpaceMsgId);
+	/**
+	 * 获取某评论ID评论列表
+	 * @param userSpaceCommentId
+	 * @return
+	 */
+	public List<UserSpaceComment> getCommentsById(int userSpaceCommentId);
 }

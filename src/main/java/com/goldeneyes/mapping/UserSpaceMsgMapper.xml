@@ -205,4 +205,8 @@
       ReplyDate = getdate()
     where ReplyId = #{userid,jdbcType=INTEGER} and ReplyStatus = 0
   </update>
+  <!-- 获取某回复ID回复列表 -->
+  <select id="getMsgsById" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpaceMsg">
+      {call GetMsgsById(#{0})} 
+   </select>
 </mapper>

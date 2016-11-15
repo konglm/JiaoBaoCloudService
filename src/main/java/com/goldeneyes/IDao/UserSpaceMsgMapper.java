@@ -58,4 +58,10 @@ public interface UserSpaceMsgMapper {
    	 * @return
    	 */
    	int setUserSpaceMsgReplyById(UserSpaceMsg record);
+   	/**
+   	 * 获取某回复ID回复列表
+   	 * @param userSpaceMsgId
+   	 * @return
+   	 */
+   	List<UserSpaceMsg> getMsgsById(int userSpaceMsgId);
 }

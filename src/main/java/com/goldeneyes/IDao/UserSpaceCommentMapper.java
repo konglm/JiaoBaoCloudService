@@ -65,4 +65,10 @@ public interface UserSpaceCommentMapper {
 	 * @return
 	 */
 	int setUserSpaceLikeById(UserSpaceComment record);
+	/**
+	 * 获取某评论ID评论列表
+	 * @param userSpaceCommentId
+	 * @return
+	 */
+	List<UserSpaceComment> getCommentsById(int userSpaceCommentId);
 }
