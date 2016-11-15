@@ -585,4 +585,18 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		int cnt = userSpaceMapper.getNoReadAboutMe(userId);
 		return cnt;
 	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpace> getUserSpacesByIds(List<Integer> userIds) {
+		// TODO Auto-generated method stub
+		String userIdStr = "";
+		for(Integer userId: userIds){
+			userIdStr = userIdStr + userId + ",";
+		}
+		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByIds(userIdStr);
+		return userSpaces;
+	}
 }

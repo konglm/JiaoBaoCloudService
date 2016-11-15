@@ -108,4 +108,10 @@ public interface UserSpaceMapper {
 	 * @return
 	 */
 	int getNoReadAboutMe(int userId);
+	/**
+	 * 获取多用户空间的最后一条数据
+	 * @param userIds
+	 * @return
+	 */
+	List<UserSpace> getUserSpacesByIds(String userIds);
 }

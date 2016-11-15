@@ -471,4 +471,8 @@
 		and um.ReplyStatus = 0)
 		AboutMe
 	</select>
+	<!-- 获取多用户空间的最后一条数据 -->
+	<select id="getUserSpacesByIds" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpace">
+       {call GetUserSpacesByIds(#{0})} 
+     </select>
 </mapper>
