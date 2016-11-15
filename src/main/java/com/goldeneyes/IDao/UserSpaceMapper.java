@@ -102,4 +102,10 @@ public interface UserSpaceMapper {
 	 * @return
 	 */
 	List<AboutMe> getAboutMe(int userId,int pageIndex,int pageSize);
+	/**
+	 * 获取未读的与我相关的数量
+	 * @param userId
+	 * @return
+	 */
+	int getNoReadAboutMe(int userId);
 }

@@ -261,6 +261,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceComment.setReplystatus(CommonTool.int2byte(0));
 		userSpaceComment.setStatus(CommonTool.int2byte(1));
 		userSpaceComment.setUpperid(upperId);
+		userSpaceComment.setCommenttype(CommonTool.int2byte(2));
 		try {
 			userSpaceCommentMapper.insert(userSpaceComment);
 		} catch (Exception e) {
@@ -362,12 +363,19 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setUserSpaceCommentReplyById(int userSpaceCommentId) throws Exception {
+	public int setUserSpaceStatusById(int userId) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
-		userSpaceComment.setTabid(userSpaceCommentId);
+		userSpaceComment.setUserid(userId);
+		
+		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setUserid(userId);
 		try {
+			userSpaceCommentMapper.setUserSpaceCommentById(userSpaceComment);
 			userSpaceCommentMapper.setUserSpaceCommentReplyById(userSpaceComment);
+			userSpaceCommentMapper.setUserSpaceLikeById(userSpaceComment);
+			userSpaceMsgMapper.setUserSpaceMsgById(userSpaceMsg);
+			userSpaceMsgMapper.setUserSpaceMsgReplyById(userSpaceMsg);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -565,6 +573,16 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	public int getReadCntBySpaceId(int spaceId) {
 		// TODO Auto-generated method stub
 		int cnt = spaceContentStatusMapper.getReadCntBySpaceId(3, spaceId);
+		return cnt;
+	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public int getNoReadAboutMe(int userId) {
+		// TODO Auto-generated method stub
+		int cnt = userSpaceMapper.getNoReadAboutMe(userId);
 		return cnt;
 	}
 }

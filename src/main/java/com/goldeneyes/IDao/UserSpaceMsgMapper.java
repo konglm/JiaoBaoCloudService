@@ -41,15 +41,21 @@ public interface UserSpaceMsgMapper {
    	 */
    	List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId,int pageIndex,int pageSize);
    	/**
-   	 * 修改某用户某用户空间留言回复查看状态
-   	 * @param record
-   	 * @return
-   	 */
-   	int setUserSpaceMsgReplyById(UserSpaceMsg record);
-   	/**
    	 * 删除某用户空间的留言
    	 * @param userSpaceId
    	 * @return
    	 */
    	int deleteByUserSpaceId(int userSpaceId);
+	/**
+   	 * 修改某用户空间留言查看状态
+   	 * @param record
+   	 * @return
+   	 */
+   	int setUserSpaceMsgById(UserSpaceMsg record);
+	/**
+   	 * 修改某用户空间留言回复查看状态
+   	 * @param record
+   	 * @return
+   	 */
+   	int setUserSpaceMsgReplyById(UserSpaceMsg record);
 }

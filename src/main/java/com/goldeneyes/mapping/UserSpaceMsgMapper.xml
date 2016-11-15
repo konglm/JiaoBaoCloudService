@@ -184,17 +184,25 @@
   	order by um.MsgDate desc)
 	order by um.MsgDate desc
   </select>
+  <!-- 删除某用户空间的留言 -->
+  <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
+    delete from UserSpaceMsg
+    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
+  </delete>
+  <!-- 修改某用户空间留言查看状态 -->
+  <update id="setUserSpaceMsgById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+    update UserSpaceMsg
+    set 
+      ReplyStatus = 1,
+      ReplyDate = getdate()
+    where UserId =  #{userid,jdbcType=INTEGER} and ReplyStatus = 0
+  </update>
   <!-- 修改某用户空间留言回复查看状态 -->
   <update id="setUserSpaceMsgReplyById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
     set 
       ReplyStatus = 1,
       ReplyDate = getdate()
-    where TabId = #{tabid,jdbcType=INTEGER}
+    where ReplyId = #{userid,jdbcType=INTEGER} and ReplyStatus = 0
   </update>
-  <!-- 删除某用户空间的留言 -->
-  <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
-    delete from UserSpaceMsg
-    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
-  </delete>
 </mapper>

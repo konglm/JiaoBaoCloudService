@@ -194,17 +194,34 @@
   	order by uc.CommentDate asc)
 	order by uc.CommentDate asc
   </select>
-  <!-- 修改某用户空间评论回复查看状态 -->
-  <update id="setUserSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.UserSpaceComment" >
-    update UserSpaceComment
-    set 
-      ReplyStatus = 1,
-      ReplyDate = getdate()
-    where TabId = #{tabid,jdbcType=INTEGER}
-  </update>
   <!-- 删除某用户空间的评论 -->
   <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
     delete from UserSpaceComment
     where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
   </delete>
+  <!-- 修改某用户空间评论查看状态 -->
+	<update id="setUserSpaceCommentById" parameterType="com.goldeneyes.pojo.UserSpaceComment">
+		update UserSpaceComment
+		set
+		ReplyStatus = 1,
+		ReplyDate = getdate()
+		where  UserId =
+		#{userid,jdbcType=INTEGER} and CommentType = 2 and ReplyStatus = 0
+	</update>
+	<!-- 修改某用户空间回复查看状态 -->
+	<update id="setUserSpaceCommentReplyById" parameterType="com.goldeneyes.pojo.UserSpaceComment">
+		update UserSpaceComment
+		set
+		ReplyStatus = 1,
+		ReplyDate = getdate()
+		where ReplyId = #{userid,jdbcType=INTEGER} and CommentType = 2 and ReplyStatus = 0
+	</update>
+	<!-- 修改某用户空间点赞查看状态 -->
+	<update id="setUserSpaceLikeById" parameterType="com.goldeneyes.pojo.UserSpaceComment">
+		update UserSpaceComment
+		set
+		ReplyStatus = 1,
+		ReplyDate = getdate()
+		where UserId = #{userid,jdbcType=INTEGER} and uc.CommentType = 1 and uc.ReplyStatus = 0
+	</update>
 </mapper>

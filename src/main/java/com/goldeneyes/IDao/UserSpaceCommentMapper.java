@@ -42,15 +42,27 @@ public interface UserSpaceCommentMapper {
 	 */
 	List<UserSpaceComment> getUserSpaceCommentReplysByUser(int userId,int pageIndex,int pageSize);
 	/**
-	 * 修改某用户某用户空间评论回复查看状态
-	 * @param record
-	 * @return
-	 */
-	int setUserSpaceCommentReplyById(UserSpaceComment record);
-	/**
 	 * 删除某用户空间的评论
 	 * @param userSpaceId
 	 * @return
 	 */
 	int deleteByUserSpaceId(int userSpaceId);
+	/**
+	 * 修改某用户空间评论查看状态
+	 * @param record
+	 * @return
+	 */
+	int setUserSpaceCommentById(UserSpaceComment record);
+	/**
+	 * 修改某用户空间回复查看状态
+	 * @param record
+	 * @return
+	 */
+	int setUserSpaceCommentReplyById(UserSpaceComment record);
+	/**
+	 * 修改某用户空间点赞查看状态
+	 * @param record
+	 * @return
+	 */
+	int setUserSpaceLikeById(UserSpaceComment record);
 }

@@ -174,7 +174,7 @@ public interface UserSpaceService {
 	 * @param userSpaceCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setUserSpaceCommentReplyById(int userSpaceCommentId) throws Exception;
+	public int setUserSpaceStatusById(int userId) throws Exception;
 	/**
 	 * 屏蔽某用户空间信息
 	 * @param userSpaceId
@@ -265,4 +265,10 @@ public interface UserSpaceService {
 	 * @return
 	 */
 	public int getReadCntBySpaceId(int spaceId);
+	/**
+	 * 获取未读的与我相关的数量
+	 * @param userId
+	 * @return
+	 */	
+	public int getNoReadAboutMe(int userId);
 }
