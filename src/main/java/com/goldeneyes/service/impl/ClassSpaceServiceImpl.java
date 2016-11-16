@@ -26,6 +26,7 @@ import com.goldeneyes.IDao.ClassSpaceMapper;
 import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.pojo.ClassSpace;
 import com.goldeneyes.pojo.ClassSpaceComment;
+import com.goldeneyes.pojo.Note;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.service.ClassSpaceService;
 import com.goldeneyes.util.CommonTool;
@@ -316,13 +317,15 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setClassSpaceReadByUser(int userId, int spaceType, List<Integer> classSpaceIds) throws Exception {
+	public int setClassSpaceReadByUser(int userId, int spaceType, int classId) throws Exception {
 		// TODO Auto-generated method stub
-		for (Integer classSpaceId : classSpaceIds) {
+		int cnt = classSpaceMapper.getClassSpacesCntByClass(classId);
+		List<ClassSpace> classSpaces = classSpaceMapper.getClassSpacesByClass(classId, 1, cnt);
+		for (ClassSpace classSpace : classSpaces) {
 			SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 			spaceContentStatus.setUserid(userId);
 			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
-			spaceContentStatus.setSpaceid(classSpaceId);
+			spaceContentStatus.setSpaceid(classSpace.getTabid());
 			try {
 				spaceContentStatusMapper.setClassSpaceReadByUser(spaceContentStatus);
 			} catch (Exception e) {

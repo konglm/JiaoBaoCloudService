@@ -25,6 +25,7 @@ import com.goldeneyes.IDao.SpaceContentStatusMapper;
 import com.goldeneyes.IDao.UserSpaceCommentMapper;
 import com.goldeneyes.IDao.UserSpaceMapper;
 import com.goldeneyes.IDao.UserSpaceMsgMapper;
+import com.goldeneyes.pojo.ClassSpace;
 import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
@@ -350,13 +351,15 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setUserSpaceReadByUser(int userId, int spaceType, List<Integer> userSpaceIds) throws Exception {
+	public int setUserSpaceReadByUser(int userId, int spaceType, int publisherId) throws Exception {
 		// TODO Auto-generated method stub
-		for (Integer userSpaceId : userSpaceIds) {
+		int cnt = userSpaceMapper.getUserSpacesCntByUser(publisherId, 2);
+		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(publisherId, 1, cnt, 2);
+		for (UserSpace userSpace : userSpaces) {
 			SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 			spaceContentStatus.setUserid(userId);
 			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
-			spaceContentStatus.setSpaceid(userSpaceId);
+			spaceContentStatus.setSpaceid(userSpace.getTabid());
 			try {
 				spaceContentStatusMapper.setUserSpaceReadByUser(spaceContentStatus);
 			} catch (Exception e) {

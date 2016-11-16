@@ -161,7 +161,7 @@ public interface UserSpaceService {
 	 * @param userSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setUserSpaceReadByUser(int userId,int spaceType,List<Integer> userSpaceIds) throws Exception;
+	public int setUserSpaceReadByUser(int userId,int spaceType,int publisherId) throws Exception;
 	/**
 	 * 修改某用户某用户空间点赞状态为点赞
 	 * @param userId

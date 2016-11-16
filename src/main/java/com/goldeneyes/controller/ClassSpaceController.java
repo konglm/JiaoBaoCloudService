@@ -1218,14 +1218,14 @@ public class ClassSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userId") || !jsonInput.has("classSpaceIds")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("classId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
-			List<Integer> classSpaceIds = new ArrayList<Integer>();
+			int classId = 0;
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
-				classSpaceIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("classSpaceIds"));
+				classId = Integer.parseInt(jsonInput.getString("classId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1233,7 +1233,7 @@ public class ClassSpaceController {
 
 			int success = 0;
 			try {
-				success = classSpaceService.setClassSpaceReadByUser(userId, 2, classSpaceIds);
+				success = classSpaceService.setClassSpaceReadByUser(userId, 2, classId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

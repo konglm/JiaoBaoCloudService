@@ -312,13 +312,15 @@ public class NoteServiceImpl implements NoteService {
 	 *  @author konglm
 	 */
 	@Override
-	public int setNoteReadByUser(int userId, int spaceType,List<Integer> noteIds) throws Exception {
+	public int setNoteReadByUser(int userId, int spaceType,int studentId) throws Exception {
 		// TODO Auto-generated method stub
-		for(Integer noteId: noteIds){
+		int cnt = noteMapper.getNotesCntByStudent(studentId);
+		List<Note> notes = noteMapper.getNotesByStudent(studentId, 1, cnt);
+		for(Note note: notes){
 			SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 			spaceContentStatus.setUserid(userId);
 			spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
-			spaceContentStatus.setSpaceid(noteId);
+			spaceContentStatus.setSpaceid(note.getTabid());
 			try{
 				spaceContentStatusMapper.setNoteReadByUser(spaceContentStatus);
 			}catch(Exception e){

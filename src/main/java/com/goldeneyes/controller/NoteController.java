@@ -1189,7 +1189,7 @@ public class NoteController {
 	}
 
 	/**
-	 * 修改某用户多点到记事阅读状态为已读
+	 * 修改某用户针对某学生所有点到记事阅读状态为已读
 	 * 
 	 * @param request
 	 * @param response
@@ -1213,14 +1213,14 @@ public class NoteController {
 			return;
 		}
 
-		if (!jsonInput.has("userId") || !jsonInput.has("noteIds")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("studentId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
-			List<Integer> noteIds = new ArrayList<Integer>();
+			int studentId = 0;
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
-				noteIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("noteIds"));
+				studentId = Integer.parseInt(jsonInput.getString("studentId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1228,7 +1228,7 @@ public class NoteController {
 
 			int success = 0;
 			try {
-				success = noteService.setNoteReadByUser(userId, 1, noteIds);
+				success = noteService.setNoteReadByUser(userId, 1, studentId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

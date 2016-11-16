@@ -159,7 +159,7 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setClassSpaceReadByUser(int userId,int spaceType,List<Integer> classSpaceIds) throws Exception;
+	public int setClassSpaceReadByUser(int userId,int spaceType,int classId) throws Exception;
 	/**
 	 * 修改某用户某班级空间点赞状态为点赞
 	 * @param userId
