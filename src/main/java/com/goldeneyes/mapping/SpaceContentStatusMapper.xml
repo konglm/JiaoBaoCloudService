@@ -114,15 +114,6 @@
 		and SpaceType = #{spacetype,jdbcType=TINYINT}
 		and SpaceId = #{spaceid,jdbcType=INTEGER}
 	</update>
-	<!-- 修改某用户某点到记事点赞状态为点赞 -->
-	<update id="setNoteLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus">
-		update SpaceContentStatus
-		set IsLike = 1,
-		LikeDate = getdate()
-		where UserId = #{userid,jdbcType=INTEGER}
-		and SpaceType = #{spacetype,jdbcType=TINYINT}
-		and SpaceId = #{spaceid,jdbcType=INTEGER}
-	</update>
 	<!-- 删除某点到记事的阅读状态 -->
 	<delete id="deleteByNoteId" parameterType="java.lang.Integer">
 		delete from SpaceContentStatus
@@ -139,15 +130,6 @@
 		and SpaceType = #{spacetype,jdbcType=TINYINT}
 		and SpaceId = #{spaceid,jdbcType=INTEGER}
 	</update>
-	<!-- 修改某用户某班级空间点赞状态为点赞 -->
-	<update id="setClassSpaceLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus">
-		update SpaceContentStatus
-		set IsLike = 1,
-		LikeDate = getdate()
-		where UserId = #{userid,jdbcType=INTEGER}
-		and SpaceType = #{spacetype,jdbcType=TINYINT}
-		and SpaceId = #{spaceid,jdbcType=INTEGER}
-	</update>
 	<!-- 删除某班级空间的阅读状态 -->
 	<delete id="deleteByClassSpaceId" parameterType="java.lang.Integer">
 		delete from SpaceContentStatus
@@ -160,15 +142,6 @@
 		update SpaceContentStatus
 		set IsRead = 1,
 		ReadDate = getdate()
-		where UserId = #{userid,jdbcType=INTEGER}
-		and SpaceType = #{spacetype,jdbcType=TINYINT}
-		and SpaceId = #{spaceid,jdbcType=INTEGER}
-	</update>
-	<!-- 修改某用户某用户空间点赞状态为点赞 -->
-	<update id="setUserSpaceLikeByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus">
-		update SpaceContentStatus
-		set IsLike = 1,
-		LikeDate = getdate()
 		where UserId = #{userid,jdbcType=INTEGER}
 		and SpaceType = #{spacetype,jdbcType=TINYINT}
 		and SpaceId = #{spaceid,jdbcType=INTEGER}

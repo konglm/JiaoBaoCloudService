@@ -215,15 +215,21 @@
   </select>
   <!-- 获取用户某条点到记事是否点赞 -->
   <select id="getIsLikeNoteByUser" resultType="java.lang.Integer">
-  	select count(ss.IsLike) likeCnt 
-  	from SpaceContentStatus ss 
-	where ss.SpaceType=#{1} and ss.SpaceId = #{2} and ss.UserId = #{0} and ss.IsLike = 1
+  	select
+		count(nc.TabId) likeCnt
+		from NoteComment nc
+		where nc.Status = 1 and
+		nc.CommentType = 1 and nc.UserId = #{0}
+		and nc.UserSpaceId = #{1}
   </select>
   <!-- 获取点到记事所有点赞用户 -->
   <select id="getIsLikeUsersById" resultType="java.lang.Integer">
-  	select ss.UserId 
-  	from SpaceContentStatus ss 
-  	where ss.SpaceType = 1 and ss.IsLike = 1 and ss.SpaceId = #{0}
+  	select nc.UserId
+		from
+		NoteComment nc
+		where nc.Status = 1 and nc.CommentType = 1
+		and
+		nc.UserSpaceId = #{0}
   </select>
   <!-- 获取某学生点到记事条数 -->
   <select id="getNotesCntByStudent" resultType="java.lang.Integer">

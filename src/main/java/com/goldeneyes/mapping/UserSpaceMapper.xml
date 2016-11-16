@@ -327,13 +327,13 @@
 	<!-- 获取与我相关的数量 -->
 	<select id="getAboutMeCnt" resultType="java.lang.Integer">
 		select COUNT(*) from
-		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate from UserSpace
+		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
 		where u.TabId = uc.UserSpaceId and u.UserId =
 		#{0} and u.NoteType = 2
 		union
 		select 2 MsgType,uc.UserId,uc.CommentDate
-		MsgDate from
+		MsgDate,uc.TabId from
 		UserSpace
 		u,UserSpaceComment uc
 		where u.TabId =
@@ -341,21 +341,21 @@
 		uc.ReplyId = #{0} and u.NoteType = 2
 		union
 		select 3
-		MsgType,ss.UserId,ss.LikeDate MsgDate
-		from UserSpace
-		u,SpaceContentStatus ss
-		where u.TabId = ss.SpaceId and
-		ss.SpaceType = 3
-		and u.UserId = #{0} and u.NoteType = 2 and
-		ss.IsLike = 1
+		MsgType,uc.UserId,uc.CommentDate
+		MsgDate,uc.TabId from UserSpace
+		u,UserSpaceComment uc
+		where u.TabId =
+		uc.UserSpaceId and u.UserId = #{0}
+		and u.NoteType = 2 and
+		uc.CommentType = 1
 		union
 		select 4
-		MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
 		where
 		u.TabId = um.UserSpaceId and u.UserId = #{0} and u.NoteType = 2
 		union
 		select 5
-		MsgType,um.UserId,um.MsgDate from UserSpace u,UserSpaceMsg um
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
 		where
 		u.TabId = um.UserSpaceId and um.ReplyId = #{0} and u.NoteType =
 		2) AboutMe

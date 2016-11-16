@@ -190,15 +190,21 @@
   </select>
   <!-- 获取用户某条班级空间是否点赞 -->
   <select id="getIsLikeClassSpaceByUser" resultType="java.lang.Integer">
-  	select count(ss.IsLike) likeCnt 
-  	from SpaceContentStatus ss 
-	where ss.SpaceType=#{1} and ss.SpaceId = #{2} and ss.UserId = #{0} and ss.IsLike = 1
+  	select
+		count(cc.TabId) likeCnt
+		from ClassSpaceComment cc
+		where cc.Status = 1 and
+		cc.CommentType = 1 and cc.UserId = #{0}
+		and cc.UserSpaceId = #{1}
   </select>
   <!-- 获取班级空间所有点赞用户 -->
   <select id="getIsLikeUsersById" resultType="java.lang.Integer">
-  	select ss.UserId 
-  	from SpaceContentStatus ss 
-  	where ss.SpaceType = 2 and ss.IsLike = 1 and ss.SpaceId = #{0}
+  		select cc.UserId
+		from
+		ClassSpaceComment cc
+		where cc.Status = 1 and cc.CommentType = 1
+		and
+		cc.UserSpaceId = #{0}
   </select>
   <!-- 获取某班级空间条数 -->
   <select id="getClassSpacesCntByClass" resultType="java.lang.Integer">
