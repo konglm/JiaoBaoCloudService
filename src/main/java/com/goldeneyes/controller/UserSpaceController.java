@@ -2335,4 +2335,61 @@ public class UserSpaceController {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
 		}
 	}
+	
+	/**
+	 * 获取多用户空间（云笔记）列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping("/setCommentMsgReadByUser")
+	public void setCommentMsgReadByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// 返回参数用
+		JSONObject jsonData = new JSONObject();
+		// 接收参数用
+		JSONObject jsonInput = new JSONObject();
+
+		// 接收APP端发来的json请求
+		String requestStr = "";
+		try {
+			requestStr = (String) request.getAttribute("requestStr");
+			jsonInput = JSONObject.fromObject(requestStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		}
+
+		if (!jsonInput.has("userId") || !jsonInput.has("spaceType")) {
+			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+			return;
+		} else {
+			int userId = 0;
+			int spaceType = 0;
+			try {
+				userId = Integer.parseInt(jsonInput.getString("userId"));
+				spaceType = Integer.parseInt(jsonInput.getString("spaceType"));
+			} catch (Exception e) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+				return;
+			}
+
+			int success = 0;
+			try {
+				success = userSpaceService.setCommentMsgReadByUser(spaceType, userId);
+			}  catch (Exception e) {
+				// TODO Auto-generated catch block
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+				return;
+			}
+			if (success == 0) {
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+			} else {
+				jsonData.put("Result", success);
+				// 在这里输出，手机端就拿到web返回的值了
+				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+			}
+		}
+	}
 }
