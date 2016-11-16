@@ -16,6 +16,7 @@ package com.goldeneyes.service;
 
 import java.util.List;
 
+import com.goldeneyes.pojo.SpaceContentStatus;
 import com.goldeneyes.pojo.UserSpace;
 import com.goldeneyes.pojo.UserSpaceComment;
 import com.goldeneyes.pojo.UserSpaceMsg;
@@ -289,4 +290,11 @@ public interface UserSpaceService {
 	 * @return
 	 */
 	public List<UserSpaceComment> getCommentsById(int userSpaceCommentId);
+	/**
+	 * 修改某用户评论、回复、留言状态为已读
+	 * @param spaceType
+	 * @param userId
+	 * @return
+	 */
+	public int setCommentMsgReadByUser(int spaceType,int userId);
 }

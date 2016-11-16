@@ -69,4 +69,10 @@ public interface SpaceContentStatusMapper {
      * @return
      */
     int getReadCntBySpaceId(int spaceType,int spaceId);
+    /**
+     * 修改某用户评论、回复、留言状态为已读
+     * @param record
+     * @return
+     */
+    int setCommentMsgReadByUser(SpaceContentStatus record);
 }

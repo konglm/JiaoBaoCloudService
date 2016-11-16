@@ -157,4 +157,12 @@
 		select COUNT(TabId) from SpaceContentStatus where IsRead = 1 
 		and SpaceType = #{0} and SpaceId = #{1}
 	</select>
+	<!-- 修改某用户评论、回复、留言状态为已读 -->
+	<update id="setCommentMsgReadByUser" parameterType="com.goldeneyes.pojo.SpaceContentStatus">
+		update SpaceContentStatus
+		set IsRead = 1,
+		ReadDate = getdate()
+		where UserId = #{userid,jdbcType=INTEGER}
+		and SpaceType = #{spacetype,jdbcType=TINYINT}
+	</update>
 </mapper>

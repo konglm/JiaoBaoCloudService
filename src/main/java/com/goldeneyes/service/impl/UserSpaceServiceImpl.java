@@ -248,7 +248,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		//添加评论未读
+		// 添加评论未读
 		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userSpace.getUserid());
@@ -288,7 +288,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		//添加评论回复未读
+		// 添加评论回复未读
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(replyUserId);
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(5)));
@@ -390,7 +390,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		//添加点赞未读
+		// 添加点赞未读
 		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userSpace.getUserid());
@@ -542,8 +542,8 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 			userSpaceMsgMapper.insert(userSpaceMsg);
 		} catch (Exception e) {
 			return 0;
-		}	
-		//添加留言未读
+		}
+		// 添加留言未读
 		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(userSpace.getUserid());
@@ -556,7 +556,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-				
+
 		return 1;
 	}
 
@@ -583,8 +583,8 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		
-		//添加留言回复未读
+
+		// 添加留言回复未读
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
 		spaceContentStatus.setUserid(replyUserId);
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(8)));
@@ -596,7 +596,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		
+
 		return 1;
 	}
 
@@ -647,6 +647,12 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	public List<AboutMe> getAboutMe(int userId, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
 		List<AboutMe> aboutMes = userSpaceMapper.getAboutMe(userId, pageIndex, pageSize);
+		//获取与我相关后，将所有未读置为已读
+		this.setCommentMsgReadByUser(4,userId);
+		this.setCommentMsgReadByUser(5,userId);
+		this.setCommentMsgReadByUser(6,userId);
+		this.setCommentMsgReadByUser(7,userId);
+		this.setCommentMsgReadByUser(8,userId);
 		return aboutMes;
 	}
 
@@ -702,5 +708,23 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		// TODO Auto-generated method stub
 		List<UserSpaceComment> userSpaceComments = userSpaceCommentMapper.getCommentsById(userSpaceCommentId);
 		return userSpaceComments;
+	}
+
+	/**
+	 * @author konglm
+	 */
+	@Override
+	public int setCommentMsgReadByUser(int spaceType, int userId) {
+		// TODO Auto-generated method stub
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
+		try {
+			spaceContentStatusMapper.setUserSpaceReadByUser(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
+		}
+
+		return 1;
 	}
 }

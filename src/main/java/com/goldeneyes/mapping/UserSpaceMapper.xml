@@ -442,34 +442,8 @@
 	</select>
 	<!-- 获取未读的与我相关的数量 -->
 	<select id="getNoReadAboutMe" resultType="java.lang.Integer">
-		select sum(cnt) from
-		(select COUNT(*) cnt from UserSpace
-		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId =
-		#{0} and u.NoteType = 2 and uc.CommentType = 2 and uc.ReplyStatus = 0
-		union
-		select COUNT(*) cnt
-		from UserSpace
-		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and
-		uc.ReplyId = #{0} and u.NoteType = 2 and uc.CommentType = 2 and uc.ReplyStatus = 0
-		union
-		select COUNT(*) cnt from UserSpace
-		u,UserSpaceComment uc
-		where u.TabId =
-		uc.UserSpaceId and u.UserId = #{0} and u.NoteType = 2 and
-		uc.CommentType = 1 and uc.ReplyStatus = 0
-		union
-		select COUNT(*) cnt from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and u.UserId = #{0} and u.NoteType = 2
-		and um.ReplyStatus = 0
-		union
-		select COUNT(*) cnt from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0} and u.NoteType = 2
-		and um.ReplyStatus = 0)
-		AboutMe
+		select COUNT(*) cnt from SpaceContentStatus
+		where SpaceType in (4,5,6,7,8) and IsRead = 0 and UserId = #{0} 
 	</select>
 	<!-- 获取多用户空间的最后一条数据 -->
 	<select id="getUserSpacesByIds" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpace">
