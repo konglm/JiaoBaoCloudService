@@ -226,7 +226,7 @@
 		order by u.PublishDate
 		desc
 	</select>
-	<!-- 获取用户未读某用户空间条数 -->
+	<!-- 获取用户未读某用户的空间条数 -->
 	<select id="getNoReadUserSpacesCntByUserForPublisher"
 		resultType="java.lang.Integer">
 		select COUNT(u.TabId)
@@ -449,4 +449,11 @@
 	<select id="getUserSpacesByIds" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpace">
        {call GetUserSpacesByIds(#{0})} 
      </select>
+     <!-- 获取用户所有空间的信息 -->
+		<select id="getAllUserSpaceByUser" resultType="com.goldeneyes.pojo.UserSpace">
+			select TabId, UserId,
+			MsgContent, PublisherId, PublishDate
+			from UserSpace where Status = 1 and UserId = #{0}
+			order by PublishDate desc
+		</select>
 </mapper>

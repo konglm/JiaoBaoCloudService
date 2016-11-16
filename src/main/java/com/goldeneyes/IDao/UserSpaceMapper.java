@@ -114,4 +114,10 @@ public interface UserSpaceMapper {
 	 * @return
 	 */
 	List<UserSpace> getUserSpacesByIds(String userIds);
+	/**
+	 * 获取用户所有空间的信息
+	 * @param userId
+	 * @return
+	 */
+	List<UserSpace> getAllUserSpaceByUser(int userId);
 }

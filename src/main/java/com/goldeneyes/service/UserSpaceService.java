@@ -297,4 +297,10 @@ public interface UserSpaceService {
 	 * @return
 	 */
 	public int setCommentMsgReadByUser(int spaceType,int userId);
+	/**
+	 * 获取用户所有空间的信息
+	 * @param userId
+	 * @return
+	 */
+	public List<UserSpace> getAllUserSpaceByUser(int userId);
 }

@@ -727,4 +727,14 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 
 		return 1;
 	}
+
+	/**
+	 *  @author konglm
+	 */
+	@Override
+	public List<UserSpace> getAllUserSpaceByUser(int userId) {
+		// TODO Auto-generated method stub
+		List<UserSpace> userSpaces = userSpaceMapper.getAllUserSpaceByUser(userId);
+		return userSpaces;
+	}
 }

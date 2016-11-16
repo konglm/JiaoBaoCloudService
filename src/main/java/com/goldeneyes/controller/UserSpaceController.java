@@ -2283,23 +2283,23 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userIds")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("publisherIds")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
-			List<Integer> userIds = new ArrayList<Integer>();
+			List<Integer> publisherIds = new ArrayList<Integer>();
+			int userId = 0;
 			try {
-				userIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("userIds"));
+				publisherIds = CommonTool.getListFromJsonArray(jsonInput.getJSONArray("publisherIds"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
 			}
-
-			int noReadCnt = 0;
+			
 			List<UserSpace> userSpaces = new ArrayList<UserSpace>();
 			try {
-				userSpaces = userSpaceService.getUserSpacesByIds(userIds);
-
+				userSpaces = userSpaceService.getUserSpacesByIds(publisherIds);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -2319,9 +2319,10 @@ public class UserSpaceController {
 				jsonobj.put("EncAddr", userSpace.getEncaddr());
 				jsonobj.put("EncImgAddr", userSpace.getEncimgaddr());
 				jsonobj.put("EncIntro", userSpace.getEncintro());
+				int noReadCnt = 0;
 				try {
-					noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userSpace.getUserid(), 3,
-							userSpace.getPublisherid(), 2);
+						noReadCnt = userSpaceService.getNoReadUserSpacesCntByUserForPublisher(userId, 3,
+								userSpace.getPublisherid(), 2);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
