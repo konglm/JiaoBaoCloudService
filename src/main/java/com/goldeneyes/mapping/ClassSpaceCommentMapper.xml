@@ -32,11 +32,11 @@
 		where TabId = #{tabid,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpaceComment">
-		insert into ClassSpaceComment (ClassSpaceId, UpperId,
+		insert into ClassSpaceComment (TabId, ClassSpaceId, UpperId,
 		UserId, CommentType, CommentContent,
 		ReplyId, CommentDate, ReplyStatus,
 		ReplyDate, Status)
-		values (#{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER},
+		values (#{tabid,jdbcType=INTEGER}, #{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER},
 		#{userid,jdbcType=INTEGER}, #{commenttype,jdbcType=TINYINT},
 		#{commentcontent,jdbcType=VARCHAR},
 		#{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT},
@@ -165,6 +165,11 @@
 		Status = #{status,jdbcType=TINYINT}
 		where TabId = #{tabid,jdbcType=INTEGER}
 	</update>
+	<!-- 取班级空间评论表的最大ID+1 -->
+	<select id="getMaxId" resultType="java.lang.Integer">
+		select isnull(MAX(TabId) +
+		1,1) from ClassSpaceComment
+	</select>
 	<!-- 获取班级空间所有评论条数 -->
 	<select id="getClassSpaceCommentsCntById" resultType="java.lang.Integer">
 		select count(cc.TabId)

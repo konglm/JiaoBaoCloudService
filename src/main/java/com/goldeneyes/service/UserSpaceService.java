@@ -174,7 +174,7 @@ public interface UserSpaceService {
 	 * @param userSpaceCommentId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int setUserSpaceStatusById(int userId) throws Exception;
+	public int setUserSpaceStatusById(int userId,int msgType) throws Exception;
 	/**
 	 * 屏蔽某用户空间信息
 	 * @param userSpaceId

@@ -17,6 +17,11 @@ public interface UserSpaceMsgMapper {
 
     int updateByPrimaryKey(UserSpaceMsg record);
     /**
+     * 获取最大ID
+     * @return
+     */
+    int getMaxId();
+    /**
    	 * 获取用户空间所有留言条数
    	 * @param userSpaceId
    	 * @return

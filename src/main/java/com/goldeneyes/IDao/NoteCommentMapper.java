@@ -17,6 +17,11 @@ public interface NoteCommentMapper {
 
     int updateByPrimaryKey(NoteComment record);
     /**
+     * 获取最大ID
+     * @return
+     */
+    int getMaxId();
+    /**
    	 * 获取点到记事所有评论条数
    	 * @param noteId
    	 * @return

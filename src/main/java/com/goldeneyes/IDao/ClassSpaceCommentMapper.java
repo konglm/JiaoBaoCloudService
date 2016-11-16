@@ -17,6 +17,11 @@ public interface ClassSpaceCommentMapper {
 
     int updateByPrimaryKey(ClassSpaceComment record);
     /**
+     * 获取最大ID
+     * @return
+     */
+    int getMaxId();
+    /**
 	 * 获取班级空间所有评论条数
 	 * @param classSpaceId
 	 * @return

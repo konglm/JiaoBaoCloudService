@@ -18,6 +18,11 @@ public interface UserSpaceCommentMapper {
 
     int updateByPrimaryKey(UserSpaceComment record);
     /**
+     * 获取最大ID
+     * @return
+     */
+    int getMaxId();
+    /**
    	 * 获取用户空间所有评论条数
    	 * @param userSpaceId
    	 * @return

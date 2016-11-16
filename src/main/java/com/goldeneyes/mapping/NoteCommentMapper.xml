@@ -28,11 +28,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.NoteComment" >
-    insert into NoteComment (NoteId, UpperId, 
+    insert into NoteComment (TabId, NoteId, UpperId, 
       UserId, CommentContent, ReplyId, 
       CommentDate, ReplyStatus, ReplyDate, 
       Status)
-    values (#{noteid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
+    values (#{tabid,jdbcType=INTEGER}, #{noteid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
       #{userid,jdbcType=INTEGER}, #{commentcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, 
       #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT})
@@ -150,6 +150,11 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  <!-- 取点到记事评论表的最大ID+1 -->
+	<select id="getMaxId" resultType="java.lang.Integer">
+		select isnull(MAX(TabId) +
+		1,1) from NoteComment
+	</select>
   <!-- 获取点到记事所有评论条数 -->
   <select id="getNoteCommentsCntById" resultType="java.lang.Integer">
   	select COUNT(nc.TabId)

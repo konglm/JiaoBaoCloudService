@@ -62,9 +62,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoReadUserSpacesCntByUser(int userId, int spaceType,int noteType) throws Exception {
+	public int getNoReadUserSpacesCntByUser(int userId, int spaceType, int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUser(userId, spaceType,noteType);
+		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUser(userId, spaceType, noteType);
 		return cnt;
 	}
 
@@ -72,10 +72,11 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType, int pageIndex, int pageSize,int noteType)
-			throws Exception {
+	public List<UserSpace> getNoReadUserSpacesByUser(int userId, int spaceType, int pageIndex, int pageSize,
+			int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType, pageIndex, pageSize,noteType);
+		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUser(userId, spaceType, pageIndex, pageSize,
+				noteType);
 		return userSpaces;
 	}
 
@@ -83,9 +84,10 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getNoReadUserSpacesCntByUserForPublisher(int userId, int spaceType, int publisherId,int noteType) throws Exception {
+	public int getNoReadUserSpacesCntByUserForPublisher(int userId, int spaceType, int publisherId, int noteType)
+			throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUserForPublisher(userId, spaceType, publisherId,noteType);
+		int cnt = userSpaceMapper.getNoReadUserSpacesCntByUserForPublisher(userId, spaceType, publisherId, noteType);
 		return cnt;
 	}
 
@@ -94,10 +96,10 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 */
 	@Override
 	public List<UserSpace> getNoReadUserSpacesByUserForPublisher(int userId, int spaceType, int pageIndex, int pageSize,
-			int publisherId,int noteType) throws Exception {
+			int publisherId, int noteType) throws Exception {
 		// TODO Auto-generated method stub
 		List<UserSpace> userSpaces = userSpaceMapper.getNoReadUserSpacesByUserForPublisher(userId, spaceType, pageIndex,
-				pageSize, publisherId,noteType);
+				pageSize, publisherId, noteType);
 		return userSpaces;
 	}
 
@@ -169,9 +171,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getUserSpacesCntByUser(int userId,int noteType) throws Exception {
+	public int getUserSpacesCntByUser(int userId, int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMapper.getUserSpacesCntByUser(userId,noteType);
+		int cnt = userSpaceMapper.getUserSpacesCntByUser(userId, noteType);
 		return cnt;
 	}
 
@@ -179,9 +181,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpace> getUserSpacesByUser(int userId, int pageIndex, int pageSize,int noteType) throws Exception {
+	public List<UserSpace> getUserSpacesByUser(int userId, int pageIndex, int pageSize, int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId, pageIndex, pageSize,noteType);
+		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByUser(userId, pageIndex, pageSize, noteType);
 		return userSpaces;
 	}
 
@@ -189,9 +191,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public UserSpace getUserSpaceById(int userSpaceId,int noteType) throws Exception {
+	public UserSpace getUserSpaceById(int userSpaceId, int noteType) throws Exception {
 		// TODO Auto-generated method stub
-		UserSpace userSpace = userSpaceMapper.getUserSpaceById(userSpaceId,noteType);
+		UserSpace userSpace = userSpaceMapper.getUserSpaceById(userSpaceId, noteType);
 		return userSpace;
 	}
 
@@ -202,7 +204,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	public int addUserSpace(int userId, String msgContent, int noteType, int encType, String encAddr, String encImg,
 			String encIntro) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceMapper.getMaxId();
 		UserSpace userSpace = new UserSpace();
+		userSpace.setTabid(maxId);
 		userSpace.setUserid(userId);
 		userSpace.setMsgcontent(msgContent);
 		userSpace.setPublisherid(userId);
@@ -218,7 +222,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
-		return 1;
+		return maxId;
 	}
 
 	/**
@@ -227,7 +231,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	@Override
 	public int addUserSpaceComment(int userId, int userSpaceId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceCommentMapper.getMaxId();
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
+		userSpaceComment.setTabid(maxId);
 		userSpaceComment.setUserid(userId);
 		userSpaceComment.setUserspaceid(userSpaceId);
 		userSpaceComment.setCommentcontent(commentContent);
@@ -242,6 +248,19 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
+		//添加评论未读
+		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(4)));
+		spaceContentStatus.setSpaceid(maxId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
+		}
 		return 1;
 	}
 
@@ -252,7 +271,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	public int addUserSpaceCommentReply(int userId, int replyUserId, int userSpaceId, String commentContent,
 			int upperId) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceCommentMapper.getMaxId();
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
+		userSpaceComment.setTabid(maxId);
 		userSpaceComment.setUserid(userId);
 		userSpaceComment.setUserspaceid(userSpaceId);
 		userSpaceComment.setCommentcontent(commentContent);
@@ -264,6 +285,18 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		userSpaceComment.setCommenttype(CommonTool.int2byte(2));
 		try {
 			userSpaceCommentMapper.insert(userSpaceComment);
+		} catch (Exception e) {
+			return 0;
+		}
+		//添加评论回复未读
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(replyUserId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(5)));
+		spaceContentStatus.setSpaceid(maxId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -340,7 +373,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	@Override
 	public int setUserSpaceLikeByUser(int userId, int spaceType, int userSpaceId) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceCommentMapper.getMaxId();
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
+		userSpaceComment.setTabid(maxId);
 		userSpaceComment.setUserid(userId);
 		userSpaceComment.setUserspaceid(userSpaceId);
 		userSpaceComment.setCommentcontent("");
@@ -355,6 +390,19 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
+		//添加点赞未读
+		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(6)));
+		spaceContentStatus.setSpaceid(maxId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
+		}
 
 		return 1;
 	}
@@ -363,19 +411,23 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int setUserSpaceStatusById(int userId) throws Exception {
+	public int setUserSpaceStatusById(int userId, int msgType) throws Exception {
 		// TODO Auto-generated method stub
 		UserSpaceComment userSpaceComment = new UserSpaceComment();
 		userSpaceComment.setUserid(userId);
-		
+
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setUserid(userId);
 		try {
-			userSpaceCommentMapper.setUserSpaceCommentById(userSpaceComment);
-			userSpaceCommentMapper.setUserSpaceCommentReplyById(userSpaceComment);
-			userSpaceCommentMapper.setUserSpaceLikeById(userSpaceComment);
-			userSpaceMsgMapper.setUserSpaceMsgById(userSpaceMsg);
-			userSpaceMsgMapper.setUserSpaceMsgReplyById(userSpaceMsg);
+			if (msgType == 1) {
+				userSpaceCommentMapper.setUserSpaceCommentById(userSpaceComment);
+				userSpaceCommentMapper.setUserSpaceCommentReplyById(userSpaceComment);
+				userSpaceCommentMapper.setUserSpaceLikeById(userSpaceComment);
+			}
+			if (msgType == 2) {
+				userSpaceMsgMapper.setUserSpaceMsgById(userSpaceMsg);
+				userSpaceMsgMapper.setUserSpaceMsgReplyById(userSpaceMsg);
+			}
 		} catch (Exception e) {
 			return 0;
 		}
@@ -475,7 +527,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	@Override
 	public int addUserSpaceMsg(int userId, int userSpaceId, String msgStr) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceMsgMapper.getMaxId();
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
 		userSpaceMsg.setUserspaceid(userSpaceId);
 		userSpaceMsg.setMsgcontent(msgStr);
@@ -488,7 +542,21 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 			userSpaceMsgMapper.insert(userSpaceMsg);
 		} catch (Exception e) {
 			return 0;
+		}	
+		//添加留言未读
+		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(7)));
+		spaceContentStatus.setSpaceid(maxId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
 		}
+				
 		return 1;
 	}
 
@@ -499,7 +567,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	public int addUserSpaceMsgReply(int userId, int replyUserId, int userSpaceId, String msgStr, int upperId)
 			throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = userSpaceMsgMapper.getMaxId();
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
+		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
 		userSpaceMsg.setUserspaceid(userSpaceId);
 		userSpaceMsg.setMsgcontent(msgStr);
@@ -513,6 +583,20 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		} catch (Exception e) {
 			return 0;
 		}
+		
+		//添加留言回复未读
+		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
+		spaceContentStatus.setUserid(replyUserId);
+		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(8)));
+		spaceContentStatus.setSpaceid(maxId);
+		spaceContentStatus.setIsread(CommonTool.int2byte(0));
+
+		try {
+			spaceContentStatusMapper.insert(spaceContentStatus);
+		} catch (Exception e) {
+			return 0;
+		}
+		
 		return 1;
 	}
 
@@ -577,7 +661,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	}
 
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public int getNoReadAboutMe(int userId) {
@@ -587,13 +671,13 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	}
 
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<UserSpace> getUserSpacesByIds(List<Integer> userIds) {
 		// TODO Auto-generated method stub
 		String userIdStr = "";
-		for(Integer userId: userIds){
+		for (Integer userId : userIds) {
 			userIdStr = userIdStr + userId + ",";
 		}
 		List<UserSpace> userSpaces = userSpaceMapper.getUserSpacesByIds(userIdStr);
@@ -601,7 +685,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	}
 
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<UserSpaceMsg> getMsgsById(int userSpaceMsgId) {
@@ -611,7 +695,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	}
 
 	/**
-	 *  @author konglm
+	 * @author konglm
 	 */
 	@Override
 	public List<UserSpaceComment> getCommentsById(int userSpaceCommentId) {

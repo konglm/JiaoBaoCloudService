@@ -27,11 +27,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpace" >
-    insert into ClassSpace (ClassId, MsgContent, 
+    insert into ClassSpace (TabId, ClassId, MsgContent, 
       EncType, EncAddr, EncImgAddr, 
       PublisherId, PublishDate, Status
       )
-    values (#{classid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+    values (#{tabid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
       #{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, 
       #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
       )
@@ -139,7 +139,7 @@
       Status = #{status,jdbcType=TINYINT}
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
-  
+	
   <!-- 获取所有班级空间的信息 -->
   <select id="getAllClassSpace" resultType="com.goldeneyes.pojo.ClassSpace">
   	select TabId, ClassId, MsgContent, PublisherId, PublishDate 

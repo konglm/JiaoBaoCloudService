@@ -1451,12 +1451,14 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userId")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("msgType")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
 			int userId = 0;
+			int msgType = 0;
 			try {
 				userId = Integer.parseInt(jsonInput.getString("userId"));
+				msgType = Integer.parseInt(jsonInput.getString("msgType"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -1464,7 +1466,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.setUserSpaceStatusById(userId);
+				success = userSpaceService.setUserSpaceStatusById(userId,msgType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());

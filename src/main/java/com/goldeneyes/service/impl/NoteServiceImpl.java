@@ -190,7 +190,9 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int addNote(int studentId, String msgContent, int teacherId,int noteType,int checkType,int encType,String encAddr,String encImg) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = noteMapper.getMaxId();
 		Note note = new Note();
+		note.setTabid(maxId);
 		note.setStudentid(studentId);
 		note.setMsgcontent(msgContent);
 		note.setPublisherid(teacherId);
@@ -206,7 +208,7 @@ public class NoteServiceImpl implements NoteService {
 		} catch (Exception e) {
 			return 0;
 		}
-		return 1;
+		return maxId;
 	}
 
 	/**
@@ -215,7 +217,9 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int addNoteComment(int userId, int noteId, String commentContent) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = noteCommentMapper.getMaxId();
 		NoteComment noteComment = new NoteComment();
+		noteComment.setTabid(maxId);
 		noteComment.setUserid(userId);
 		noteComment.setNoteid(noteId);
 		noteComment.setCommentcontent(commentContent);
@@ -238,7 +242,9 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int addNoteCommentReply(int userId, int replyUserId, int noteId, String commentContent,int upperId) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = noteCommentMapper.getMaxId();
 		NoteComment noteComment = new NoteComment();
+		noteComment.setTabid(maxId);
 		noteComment.setUserid(userId);
 		noteComment.setNoteid(noteId);
 		noteComment.setCommentcontent(commentContent);
