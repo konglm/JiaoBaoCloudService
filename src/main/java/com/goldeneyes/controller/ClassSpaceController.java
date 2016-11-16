@@ -833,56 +833,56 @@ public class ClassSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getClassSpaceById")
-	public void getClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("classSpaceId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int classSpaceId = 0;
-			try {
-				classSpaceId = Integer.parseInt(jsonInput.getString("classSpaceId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			ClassSpace classSpace = new ClassSpace();
-			try {
-				classSpace = classSpaceService.getClassSpaceById(classSpaceId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (classSpace != null) {
-				jsonData.put("ClassId", classSpace.getClassid());
-				jsonData.put("MsgContent", classSpace.getMsgcontent());
-				jsonData.put("PublisherId", classSpace.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonData.put("PublishDate", formater.format(classSpace.getPublishdate()));
-				jsonData.put("EncType", classSpace.getEnctype());
-				jsonData.put("EncAddr", classSpace.getEncaddr());
-				jsonData.put("EncImgAddr", classSpace.getEncimgaddr());
-			}
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getClassSpaceById")
+//	public void getClassSpaceById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("classSpaceId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int classSpaceId = 0;
+//			try {
+//				classSpaceId = Integer.parseInt(jsonInput.getString("classSpaceId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			ClassSpace classSpace = new ClassSpace();
+//			try {
+//				classSpace = classSpaceService.getClassSpaceById(classSpaceId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			if (classSpace != null) {
+//				jsonData.put("ClassId", classSpace.getClassid());
+//				jsonData.put("MsgContent", classSpace.getMsgcontent());
+//				jsonData.put("PublisherId", classSpace.getPublisherid());
+//				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				jsonData.put("PublishDate", formater.format(classSpace.getPublishdate()));
+//				jsonData.put("EncType", classSpace.getEnctype());
+//				jsonData.put("EncAddr", classSpace.getEncaddr());
+//				jsonData.put("EncImgAddr", classSpace.getEncimgaddr());
+//			}
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 新增某班级空间信息

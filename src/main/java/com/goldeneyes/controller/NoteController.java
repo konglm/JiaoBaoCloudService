@@ -832,58 +832,58 @@ public class NoteController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/getNoteById")
-	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("noteId")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int noteId = 0;
-			try {
-				noteId = Integer.parseInt(jsonInput.getString("noteId"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-			Note note = new Note();
-			try {
-				note = noteService.getNoteById(noteId);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (note != null) {
-				jsonData.put("StudentId", note.getStudentid());
-				jsonData.put("MsgContent", note.getMsgcontent());
-				jsonData.put("PublisherId", note.getPublisherid());
-				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				jsonData.put("PublishDate", formater.format(note.getPublishdate()));
-				jsonData.put("NoteType", note.getNotetype());
-				jsonData.put("CheckType", note.getChecktype());
-				jsonData.put("EncType", note.getEnctype());
-				jsonData.put("EncAddr", note.getEncaddr());
-				jsonData.put("EncImgAddr", note.getEncimgaddr());
-			}
-			// 在这里输出，手机端就拿到web返回的值了
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-		}
-	}
+//	@RequestMapping("/getNoteById")
+//	public void getNoteById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("noteId")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int noteId = 0;
+//			try {
+//				noteId = Integer.parseInt(jsonInput.getString("noteId"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//			Note note = new Note();
+//			try {
+//				note = noteService.getNoteById(noteId);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			if (note != null) {
+//				jsonData.put("StudentId", note.getStudentid());
+//				jsonData.put("MsgContent", note.getMsgcontent());
+//				jsonData.put("PublisherId", note.getPublisherid());
+//				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				jsonData.put("PublishDate", formater.format(note.getPublishdate()));
+//				jsonData.put("NoteType", note.getNotetype());
+//				jsonData.put("CheckType", note.getChecktype());
+//				jsonData.put("EncType", note.getEnctype());
+//				jsonData.put("EncAddr", note.getEncaddr());
+//				jsonData.put("EncImgAddr", note.getEncimgaddr());
+//			}
+//			// 在这里输出，手机端就拿到web返回的值了
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//		}
+//	}
 
 	/**
 	 * 新增某学生点到记事信息
