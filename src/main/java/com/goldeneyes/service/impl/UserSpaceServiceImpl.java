@@ -720,7 +720,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		spaceContentStatus.setUserid(userId);
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(spaceType)));
 		try {
-			spaceContentStatusMapper.setUserSpaceReadByUser(spaceContentStatus);
+			spaceContentStatusMapper.setCommentMsgReadByUser(spaceContentStatus);
 		} catch (Exception e) {
 			return 0;
 		}
