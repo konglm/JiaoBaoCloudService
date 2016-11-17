@@ -102,9 +102,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getIsLikeClassSpaceByUser(int userId, int spaceType, int classSpaceId) throws Exception {
+	public int getIsLikeClassSpaceByUser(int userId, int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
-		int isLike = classSpaceMapper.getIsLikeClassSpaceByUser(userId, spaceType, classSpaceId);
+		int isLike = classSpaceMapper.getIsLikeClassSpaceByUser(userId, classSpaceId);
 		return isLike;
 	}
 
@@ -342,7 +342,9 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 	@Override
 	public int setClassSpaceLikeByUser(int userId, int spaceType, int classSpaceId) throws Exception {
 		// TODO Auto-generated method stub
+		int maxId = classSpaceCommentMapper.getMaxId();
 		ClassSpaceComment classSpaceComment = new ClassSpaceComment();
+		classSpaceComment.setTabid(maxId);
 		classSpaceComment.setUserid(userId);
 		classSpaceComment.setClassspaceid(classSpaceId);
 		classSpaceComment.setCommentcontent("");

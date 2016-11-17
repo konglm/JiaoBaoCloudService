@@ -58,7 +58,7 @@ public interface ClassSpaceMapper {
 	 * @param classSpaceId
 	 * @return
 	 */
-	int getIsLikeClassSpaceByUser(int userId,int spaceType,int classSpaceId);
+	int getIsLikeClassSpaceByUser(int userId,int classSpaceId);
 	/**
 	 * 获取班级空间所有点赞用户
 	 * @param classSpaceId

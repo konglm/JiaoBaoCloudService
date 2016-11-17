@@ -61,7 +61,7 @@ public interface ClassSpaceService {
 	 * @param classSpaceId
 	 * @return
 	 */
-	public int getIsLikeClassSpaceByUser(int userId,int spaceType,int classSpaceId) throws Exception;
+	public int getIsLikeClassSpaceByUser(int userId,int classSpaceId) throws Exception;
 	/**
 	 * 获取班级空间所有评论条数
 	 * @param classSpaceId

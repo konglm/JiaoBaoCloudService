@@ -195,7 +195,7 @@
 		from ClassSpaceComment cc
 		where cc.Status = 1 and
 		cc.CommentType = 1 and cc.UserId = #{0}
-		and cc.UserSpaceId = #{1}
+		and cc.ClassSpaceId = #{1}
   </select>
   <!-- 获取班级空间所有点赞用户 -->
   <select id="getIsLikeUsersById" resultType="java.lang.Integer">
@@ -204,7 +204,7 @@
 		ClassSpaceComment cc
 		where cc.Status = 1 and cc.CommentType = 1
 		and
-		cc.UserSpaceId = #{0}
+		cc.ClassSpaceId = #{0}
   </select>
   <!-- 获取某班级空间条数 -->
   <select id="getClassSpacesCntByClass" resultType="java.lang.Integer">

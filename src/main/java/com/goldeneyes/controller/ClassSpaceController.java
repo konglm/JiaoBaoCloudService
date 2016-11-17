@@ -380,7 +380,7 @@ public class ClassSpaceController {
 
 			int isLike = 0;
 			try {
-				isLike = classSpaceService.getIsLikeClassSpaceByUser(userId, 2, classSpaceId);
+				isLike = classSpaceService.getIsLikeClassSpaceByUser(userId, classSpaceId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
