@@ -3,7 +3,7 @@
 <mapper namespace="com.goldeneyes.IDao.UserSpaceMsgMapper" >
   <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.UserSpaceMsg" >
     <id column="TabId" property="tabid" jdbcType="INTEGER" />
-    <result column="UserSpaceId" property="userspaceid" jdbcType="INTEGER" />
+    <result column="UserOwnerId" property="userownerid" jdbcType="INTEGER" />
     <result column="UpperId" property="upperid" jdbcType="INTEGER" />
     <result column="UserId" property="userid" jdbcType="INTEGER" />
     <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, UserSpaceId, UpperId, UserId, MsgContent, ReplyId, MsgDate, ReplyStatus, ReplyDate, 
+    TabId, UserOwnerId, UpperId, UserId, MsgContent, ReplyId, MsgDate, ReplyStatus, ReplyDate, 
     Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,11 +28,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
-    insert into UserSpaceMsg (TabId, UserSpaceId, UpperId, 
+    insert into UserSpaceMsg (TabId, UserOwnerId, UpperId, 
       UserId, MsgContent, ReplyId, 
       MsgDate, ReplyStatus, ReplyDate, 
       Status)
-    values (#{tabid,jdbcType=INTEGER}, #{userspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
+    values (#{tabid,jdbcType=INTEGER}, #{userownerid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER}, 
       #{userid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, #{replyid,jdbcType=INTEGER}, 
       #{msgdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT}, #{replydate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT})
@@ -43,8 +43,8 @@
       <if test="tabid != null" >
         TabId,
       </if>
-      <if test="userspaceid != null" >
-        UserSpaceId,
+      <if test="userownerid != null" >
+        UserOwnerId,
       </if>
       <if test="upperid != null" >
         UpperId,
@@ -75,8 +75,8 @@
       <if test="tabid != null" >
         #{tabid,jdbcType=INTEGER},
       </if>
-      <if test="userspaceid != null" >
-        #{userspaceid,jdbcType=INTEGER},
+      <if test="userownerid != null" >
+        #{userownerid,jdbcType=INTEGER},
       </if>
       <if test="upperid != null" >
         #{upperid,jdbcType=INTEGER},
@@ -107,8 +107,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
     <set >
-      <if test="userspaceid != null" >
-        UserSpaceId = #{userspaceid,jdbcType=INTEGER},
+      <if test="userownerid != null" >
+        UserOwnerId = #{userownerid,jdbcType=INTEGER},
       </if>
       <if test="upperid != null" >
         UpperId = #{upperid,jdbcType=INTEGER},
@@ -139,7 +139,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
-    set UserSpaceId = #{userspaceid,jdbcType=INTEGER},
+    set UserOwnerId = #{userownerid,jdbcType=INTEGER},
       UpperId = #{upperid,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
       MsgContent = #{msgcontent,jdbcType=VARCHAR},
@@ -159,28 +159,28 @@
   <select id="getUserSpaceMsgsCntById" resultType="java.lang.Integer">
   	select count(um.TabId)
   	from UserSpaceMsg um 
-  	where um.Status = 1 and um.UserSpaceId = #{0}
+  	where um.Status = 1 and um.UserOwnerId = #{0}
   </select>
   <!-- 获取用户空间所有留言 -->
   <select id="getUserSpaceMsgsById" resultType="com.goldeneyes.pojo.UserSpaceMsg">
   	select top(#{2}) um.TabId,um.UserId,um.MsgContent,um.ReplyId,um.MsgDate,um.UpperId
   	from UserSpaceMsg um 
-  	where um.Status = 1 and um.UserSpaceId = #{0}
+  	where um.Status = 1 and um.UserOwnerId = #{0}
   	and um.TabId not in (select top((#{1}-1) * #{2}) um.TabId
   	from UserSpaceMsg um 
-  	where um.Status = 1 and um.UserSpaceId = #{0}
+  	where um.Status = 1 and um.UserOwnerId = #{0}
   	order by um.MsgDate desc)
   	order by um.MsgDate desc
   </select>
-  <!-- 获取用户用户空间所有未读留言回复条数 -->
+  <!-- 获取用户用户所有未读留言回复条数 -->
   <select id="getUserSpaceMsgReplysCntByUser" resultType="java.lang.Integer">
   	select COUNT(um.TabId) 
   	from UserSpaceMsg um 
   	where um.Status = 1 and um.ReplyStatus = 0 and um.ReplyId = #{0}
   </select>
-  <!-- 获取用户用户空间所有未读留言回复列表 -->
+  <!-- 获取用户用户所有未读留言回复列表 -->
   <select id="getUserSpaceMsgReplysByUser" resultType="com.goldeneyes.pojo.UserSpaceMsg">
-  	select top(#{2}) um.TabId,um.UserId,um.UserSpaceId,um.MsgContent,um.UpperId
+  	select top(#{2}) um.TabId,um.UserId,um.UserOwnerId,um.MsgContent,um.UpperId
   	from UserSpaceMsg um 
   	where um.Status = 1 and um.ReplyStatus = 0 and um.ReplyId = #{0}
   	and um.TabId not in (select top((#{1}-1) * #{2}) um.TabId 
@@ -189,21 +189,16 @@
   	order by um.MsgDate desc)
 	order by um.MsgDate desc
   </select>
-  <!-- 删除某用户空间的留言 -->
-  <delete id="deleteByUserSpaceId" parameterType="java.lang.Integer" >
-    delete from UserSpaceMsg
-    where UserSpaceId = #{userspaceid,jdbcType=INTEGER}
-  </delete>
-  <!-- 修改某用户空间留言查看状态 -->
-  <update id="setUserSpaceMsgById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+  <!-- 修改某用户留言查看状态 -->
+  <update id="setUserMsgById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
     set 
       ReplyStatus = 1,
       ReplyDate = getdate()
     where UserId =  #{userid,jdbcType=INTEGER} and ReplyStatus = 0
   </update>
-  <!-- 修改某用户空间留言回复查看状态 -->
-  <update id="setUserSpaceMsgReplyById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
+  <!-- 修改某用户留言回复查看状态 -->
+  <update id="setUserMsgReplyById" parameterType="com.goldeneyes.pojo.UserSpaceMsg" >
     update UserSpaceMsg
     set 
       ReplyStatus = 1,

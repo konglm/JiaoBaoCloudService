@@ -462,7 +462,6 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		try {
 			userSpaceMapper.deleteByPrimaryKey(userSpaceId);
 			userSpaceCommentMapper.deleteByUserSpaceId(userSpaceId);
-			userSpaceMsgMapper.deleteByUserSpaceId(userSpaceId);
 			spaceContentStatusMapper.deleteByUserSpaceId(userSpaceId);
 		} catch (Exception e) {
 			return 0;
@@ -488,9 +487,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int getUserSpaceMsgsCntById(int userSpaceId) throws Exception {
+	public int getUserSpaceMsgsCntById(int userId) throws Exception {
 		// TODO Auto-generated method stub
-		int cnt = userSpaceMsgMapper.getUserSpaceMsgsCntById(userSpaceId);
+		int cnt = userSpaceMsgMapper.getUserSpaceMsgsCntById(userId);
 		return cnt;
 	}
 
@@ -498,9 +497,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId, int pageIndex, int pageSize) throws Exception {
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userId, int pageIndex, int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgsById(userSpaceId, pageIndex, pageSize);
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getUserSpaceMsgsById(userId, pageIndex, pageSize);
 		return userSpaceMsgs;
 	}
 
@@ -528,13 +527,13 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpaceMsg(int userId, int userSpaceId, String msgStr) throws Exception {
+	public int addUserSpaceMsg(int userId, int userOwnerId, String msgStr) throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = userSpaceMsgMapper.getMaxId();
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
-		userSpaceMsg.setUserspaceid(userSpaceId);
+		userSpaceMsg.setUserownerid(userOwnerId);
 		userSpaceMsg.setMsgcontent(msgStr);
 		userSpaceMsg.setMsgdate(new Date());
 		userSpaceMsg.setReplyid(0);
@@ -547,9 +546,8 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 			return 0;
 		}
 		// 添加留言未读
-		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
-		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setUserid(userOwnerId);
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(7)));
 		spaceContentStatus.setSpaceid(maxId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
@@ -567,14 +565,14 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int addUserSpaceMsgReply(int userId, int replyUserId, int userSpaceId, String msgStr, int upperId)
+	public int addUserSpaceMsgReply(int userId, int replyUserId, int userOwnerId, String msgStr, int upperId)
 			throws Exception {
 		// TODO Auto-generated method stub
 		int maxId = userSpaceMsgMapper.getMaxId();
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
-		userSpaceMsg.setUserspaceid(userSpaceId);
+		userSpaceMsg.setUserownerid(userOwnerId);
 		userSpaceMsg.setMsgcontent(msgStr);
 		userSpaceMsg.setMsgdate(new Date());
 		userSpaceMsg.setReplyid(replyUserId);
@@ -623,10 +621,10 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public int delUserSpaceMsgById(int userSpaceMsgId) throws Exception {
+	public int delUserMsgById(int userMsgId) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			userSpaceMsgMapper.deleteByPrimaryKey(userSpaceMsgId);
+			userSpaceMsgMapper.deleteByPrimaryKey(userMsgId);
 		} catch (Exception e) {
 			return 0;
 		}
@@ -697,9 +695,9 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 	 * @author konglm
 	 */
 	@Override
-	public List<UserSpaceMsg> getMsgsById(int userSpaceMsgId) {
+	public List<UserSpaceMsg> getMsgsById(int userMsgId) {
 		// TODO Auto-generated method stub
-		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getMsgsById(userSpaceMsgId);
+		List<UserSpaceMsg> userSpaceMsgs = userSpaceMsgMapper.getMsgsById(userMsgId);
 		return userSpaceMsgs;
 	}
 

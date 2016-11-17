@@ -199,13 +199,13 @@ public interface UserSpaceService {
 	 * @param userSpaceId
 	 * @return
 	 */
-	public int getUserSpaceMsgsCntById(int userSpaceId) throws Exception;
+	public int getUserSpaceMsgsCntById(int userId) throws Exception;
 	/**
 	 * 获取用户空间所有留言
 	 * @param userSpaceId
 	 * @return
 	 */
-	public List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId,int pageIndex,int pageSize) throws Exception;
+	public List<UserSpaceMsg> getUserSpaceMsgsById(int userId,int pageIndex,int pageSize) throws Exception;
 	/**
 	 * 获取用户用户空间所有未读留言回复条数
 	 * @param userId
@@ -225,7 +225,7 @@ public interface UserSpaceService {
 	 * @param msgStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceMsg(int userId,int userSpaceId,String msgContent) throws Exception;
+	public int addUserSpaceMsg(int userId,int userOwnerId,String msgContent) throws Exception;
 	/**
 	 * 新增某用户某用户空间留言回复
 	 * @param userId
@@ -234,7 +234,7 @@ public interface UserSpaceService {
 	 * @param msgStr
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int addUserSpaceMsgReply(int userId,int replyUserId,int userSpaceId,String msgContent,int upperId) throws Exception;
+	public int addUserSpaceMsgReply(int userId,int replyUserId,int userOwnerId,String msgContent,int upperId) throws Exception;
 	/**
 	 * 修改某用户空间留言回复查看状态
 	 * @param userSpaceMsgId
@@ -246,7 +246,7 @@ public interface UserSpaceService {
 	 * @param userSpaceMsgId
 	 * @return 是否删除成功 0失败1成功
 	 */
-	public int delUserSpaceMsgById(int userSpaceMsgId) throws Exception;
+	public int delUserMsgById(int userMsgId) throws Exception;
 	/**
 	 * 获取与我相关的数量
 	 * @param userId
@@ -283,7 +283,7 @@ public interface UserSpaceService {
 	 * @param userSpaceMsgId
 	 * @return
 	 */
-	public List<UserSpaceMsg> getMsgsById(int userSpaceMsgId);
+	public List<UserSpaceMsg> getMsgsById(int userMsgId);
 	/**
 	 * 获取某评论ID评论列表
 	 * @param userSpaceCommentId

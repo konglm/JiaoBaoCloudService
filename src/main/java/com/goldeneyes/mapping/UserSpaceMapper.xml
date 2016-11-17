@@ -350,15 +350,13 @@
 		uc.CommentType = 1
 		union
 		select 4
-		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
-		where
-		u.TabId = um.UserSpaceId and u.UserId = #{0} and u.NoteType = 2
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpaceMsg um
+		where um.UserId = #{0}
 		union
 		select 5
-		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace u,UserSpaceMsg um
-		where
-		u.TabId = um.UserSpaceId and um.ReplyId = #{0} and u.NoteType =
-		2) AboutMe
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpaceMsg um
+		where um.ReplyId = #{0}
+		) AboutMe
 	</select>
 	<!-- 获取与我相关的评论、评论回复、点赞、留言、留言回复 -->
 	<select id="getAboutMe" resultType="com.goldeneyes.vo.AboutMe">
@@ -388,15 +386,12 @@
 		uc.CommentType = 1
 		union
 		select 4
-		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and u.UserId = #{0} and u.NoteType = 2
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpaceMsg um
+		where um.UserId = #{0}
 		union
-		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0}
-		and u.NoteType = 2)
-		AboutMe
+		select 5 MsgType,um.UserId,um.MsgDate,um.TabId from UserSpaceMsg um
+		where um.ReplyId = #{0}
+		) AboutMe
 		where cast(MsgType as varchar(10)) + '-' +
 		cast(TabId as
 		varchar(10)) not in (select top((#{1}-1) * #{2})
@@ -426,17 +421,13 @@
 		uc.CommentType = 1
 		union
 		select 4 MsgType,um.UserId,um.MsgDate,um.TabId
-		from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and
-		u.UserId = #{0} and u.NoteType = 2
+		from UserSpaceMsg um
+		where um.UserId = #{0}
 		union
 		select 5
-		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpace
-		u,UserSpaceMsg um
-		where u.TabId = um.UserSpaceId and um.ReplyId = #{0} and u.NoteType =
-		2)
-		AboutMe
+		MsgType,um.UserId,um.MsgDate,um.TabId from UserSpaceMsg um
+		where um.ReplyId = #{0}
+		) AboutMe
 		order by MsgDate desc)
 		order by MsgDate desc
 	</select>

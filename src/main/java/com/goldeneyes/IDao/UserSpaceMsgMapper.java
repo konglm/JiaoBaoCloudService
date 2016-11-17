@@ -26,13 +26,13 @@ public interface UserSpaceMsgMapper {
    	 * @param userSpaceId
    	 * @return
    	 */
-    int getUserSpaceMsgsCntById(int userSpaceId);
+    int getUserSpaceMsgsCntById(int userId);
     /**
    	 * 获取用户空间所有留言
    	 * @param userSpaceId
    	 * @return
    	 */
-   	List<UserSpaceMsg> getUserSpaceMsgsById(int userSpaceId,int pageIndex,int pageSize);
+   	List<UserSpaceMsg> getUserSpaceMsgsById(int userId,int pageIndex,int pageSize);
    	/**
    	 * 获取用户用户空间所有未读留言回复条数
    	 * @param userId
@@ -45,12 +45,6 @@ public interface UserSpaceMsgMapper {
    	 * @return
    	 */
    	List<UserSpaceMsg> getUserSpaceMsgReplysByUser(int userId,int pageIndex,int pageSize);
-   	/**
-   	 * 删除某用户空间的留言
-   	 * @param userSpaceId
-   	 * @return
-   	 */
-   	int deleteByUserSpaceId(int userSpaceId);
 	/**
    	 * 修改某用户空间留言查看状态
    	 * @param record
@@ -68,5 +62,5 @@ public interface UserSpaceMsgMapper {
    	 * @param userSpaceMsgId
    	 * @return
    	 */
-   	List<UserSpaceMsg> getMsgsById(int userSpaceMsgId);
+   	List<UserSpaceMsg> getMsgsById(int userMsgId);
 }

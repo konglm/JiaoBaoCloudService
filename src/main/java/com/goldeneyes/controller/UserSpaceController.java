@@ -1726,15 +1726,15 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
+		if (!jsonInput.has("userId") || !jsonInput.has("pageIndex") || !jsonInput.has("pageSize")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 			return;
 		} else {
-			int userSpaceId = 0;
+			int userId = 0;
 			int pageIndex = 0;
 			int pageSize = 0;
 			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+				userId = Integer.parseInt(jsonInput.getString("userId"));
 				pageIndex = Integer.parseInt(jsonInput.getString("pageIndex"));
 				pageSize = Integer.parseInt(jsonInput.getString("pageSize"));
 			} catch (Exception e) {
@@ -1749,9 +1749,9 @@ public class UserSpaceController {
 			int totalPage = 0;
 			List<UserSpaceMsg> userSpaceMsgs = new ArrayList<UserSpaceMsg>();
 			try {
-				totalCnt = userSpaceService.getUserSpaceMsgsCntById(userSpaceId);
+				totalCnt = userSpaceService.getUserSpaceMsgsCntById(userId);
 				totalPage = CommonTool.getTotalPage(totalCnt, pageSize);
-				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userSpaceId, pageIndex, pageSize);
+				userSpaceMsgs = userSpaceService.getUserSpaceMsgsById(userId, pageIndex, pageSize);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -1940,14 +1940,14 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgContent") || !jsonInput.has("userId")) {
+		if (!jsonInput.has("userOwnerId") || !jsonInput.has("msgContent") || !jsonInput.has("userId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
-			int userSpaceId = 0;
+			int userOwnerId = 0;
 			String msgContent = "";
 			int userId = 0;
 			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+				userOwnerId = Integer.parseInt(jsonInput.getString("userOwnerId"));
 				msgContent = jsonInput.getString("msgContent");
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 			} catch (Exception e) {
@@ -1957,7 +1957,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceMsg(userId, userSpaceId, msgContent);
+				success = userSpaceService.addUserSpaceMsg(userId, userOwnerId, msgContent);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -1998,17 +1998,17 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userSpaceId") || !jsonInput.has("msgContent") || !jsonInput.has("userId")
+		if (!jsonInput.has("userOwnerId") || !jsonInput.has("msgContent") || !jsonInput.has("userId")
 				|| !jsonInput.has("replyUserId") || !jsonInput.has("upperId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
-			int userSpaceId = 0;
+			int userOwnerId = 0;
 			String msgContent = "";
 			int userId = 0;
 			int replyUserId = 0;
 			int upperId = 0;
 			try {
-				userSpaceId = Integer.parseInt(jsonInput.getString("userSpaceId"));
+				userOwnerId = Integer.parseInt(jsonInput.getString("userOwnerId"));
 				msgContent = jsonInput.getString("msgContent");
 				userId = Integer.parseInt(jsonInput.getString("userId"));
 				replyUserId = Integer.parseInt(jsonInput.getString("replyUserId"));
@@ -2020,7 +2020,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userSpaceId, msgContent, upperId);
+				success = userSpaceService.addUserSpaceMsgReply(userId, replyUserId, userOwnerId, msgContent, upperId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
@@ -2104,8 +2104,8 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/delUserSpaceMsgById")
-	public void delUserSpaceMsgById(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@RequestMapping("/delUserMsgById")
+	public void delUserMsgById(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// 返回参数用
 		JSONObject jsonData = new JSONObject();
 		// 接收参数用
@@ -2122,12 +2122,12 @@ public class UserSpaceController {
 			return;
 		}
 
-		if (!jsonInput.has("userSpaceMsgId")) {
+		if (!jsonInput.has("userMsgId")) {
 			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
 		} else {
-			int userSpaceMsgId = 0;
+			int userMsgId = 0;
 			try {
-				userSpaceMsgId = Integer.parseInt(jsonInput.getString("userSpaceMsgId"));
+				userMsgId = Integer.parseInt(jsonInput.getString("userMsgId"));
 			} catch (Exception e) {
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
 				return;
@@ -2135,7 +2135,7 @@ public class UserSpaceController {
 
 			int success = 0;
 			try {
-				success = userSpaceService.delUserSpaceMsgById(userSpaceMsgId);
+				success = userSpaceService.delUserMsgById(userMsgId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
