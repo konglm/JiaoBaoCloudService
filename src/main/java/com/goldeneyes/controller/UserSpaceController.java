@@ -1433,54 +1433,54 @@ public class UserSpaceController {
 	 * @param response
 	 * @param model
 	 */
-	@RequestMapping("/setUserSpaceStatusById")
-	public void setUserSpaceStatusById(HttpServletRequest request, HttpServletResponse response, Model model) {
-		// 返回参数用
-		JSONObject jsonData = new JSONObject();
-		// 接收参数用
-		JSONObject jsonInput = new JSONObject();
-
-		// 接收APP端发来的json请求
-		String requestStr = "";
-		try {
-			requestStr = (String) request.getAttribute("requestStr");
-			jsonInput = JSONObject.fromObject(requestStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-			return;
-		}
-
-		if (!jsonInput.has("userId") || !jsonInput.has("msgType")) {
-			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
-		} else {
-			int userId = 0;
-			int msgType = 0;
-			try {
-				userId = Integer.parseInt(jsonInput.getString("userId"));
-				msgType = Integer.parseInt(jsonInput.getString("msgType"));
-			} catch (Exception e) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
-				return;
-			}
-
-			int success = 0;
-			try {
-				success = userSpaceService.setUserSpaceStatusById(userId,msgType);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
-				return;
-			}
-			if (success == 0) {
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
-			} else {
-				jsonData.put("Result", success);
-				// 在这里输出，手机端就拿到web返回的值了
-				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
-			}
-		}
-	}
+//	@RequestMapping("/setUserSpaceStatusById")
+//	public void setUserSpaceStatusById(HttpServletRequest request, HttpServletResponse response, Model model) {
+//		// 返回参数用
+//		JSONObject jsonData = new JSONObject();
+//		// 接收参数用
+//		JSONObject jsonInput = new JSONObject();
+//
+//		// 接收APP端发来的json请求
+//		String requestStr = "";
+//		try {
+//			requestStr = (String) request.getAttribute("requestStr");
+//			jsonInput = JSONObject.fromObject(requestStr);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//			return;
+//		}
+//
+//		if (!jsonInput.has("userId") || !jsonInput.has("msgType")) {
+//			CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1004").toString());
+//		} else {
+//			int userId = 0;
+//			int msgType = 0;
+//			try {
+//				userId = Integer.parseInt(jsonInput.getString("userId"));
+//				msgType = Integer.parseInt(jsonInput.getString("msgType"));
+//			} catch (Exception e) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1003").toString());
+//				return;
+//			}
+//
+//			int success = 0;
+//			try {
+//				success = userSpaceService.setUserSpaceStatusById(userId,msgType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1001").toString());
+//				return;
+//			}
+//			if (success == 0) {
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "1002").toString());
+//			} else {
+//				jsonData.put("Result", success);
+//				// 在这里输出，手机端就拿到web返回的值了
+//				CommonTool.outJsonString(response, CommonTool.outJson(jsonData, "0000").toString());
+//			}
+//		}
+//	}
 
 	/**
 	 * 屏蔽某用户空间信息
