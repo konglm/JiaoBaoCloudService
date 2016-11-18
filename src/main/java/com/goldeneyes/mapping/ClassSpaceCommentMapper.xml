@@ -36,7 +36,7 @@
 		UserId, CommentType, CommentContent,
 		ReplyId, CommentDate, ReplyStatus,
 		ReplyDate, Status)
-		values (#{tabid,jdbcType=INTEGER}, #{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER},
+		values (#{classspaceid,jdbcType=INTEGER}, #{upperid,jdbcType=INTEGER},
 		#{userid,jdbcType=INTEGER}, #{commenttype,jdbcType=TINYINT},
 		#{commentcontent,jdbcType=VARCHAR},
 		#{replyid,jdbcType=INTEGER}, #{commentdate,jdbcType=TIMESTAMP}, #{replystatus,jdbcType=TINYINT},
