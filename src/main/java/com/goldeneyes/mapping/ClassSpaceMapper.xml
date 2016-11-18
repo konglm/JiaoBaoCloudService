@@ -3,7 +3,7 @@
 <mapper namespace="com.goldeneyes.IDao.ClassSpaceMapper" >
   <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.ClassSpace" >
     <id column="TabId" property="tabid" jdbcType="INTEGER" />
-    <result column="ClassId" property="classid" jdbcType="INTEGER" />
+    <result column="ClassSpaceInfoId" property="classspaceinfoid" jdbcType="INTEGER" />
     <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
     <result column="EncType" property="enctype" jdbcType="TINYINT" />
     <result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
@@ -13,7 +13,7 @@
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, ClassId, MsgContent, EncType, EncAddr, EncImgAddr, PublisherId, PublishDate, 
+    TabId, ClassSpaceInfoId, MsgContent, EncType, EncAddr, EncImgAddr, PublisherId, PublishDate, 
     Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -27,11 +27,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.ClassSpace" >
-    insert into ClassSpace (TabId, ClassId, MsgContent, 
+    insert into ClassSpace (TabId, ClassSpaceInfoId, MsgContent, 
       EncType, EncAddr, EncImgAddr, 
       PublisherId, PublishDate, Status
       )
-    values (#{tabid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+    values (#{tabid,jdbcType=INTEGER}, #{classspaceinfoid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
       #{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, 
       #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
       )
@@ -42,8 +42,8 @@
       <if test="tabid != null" >
         TabId,
       </if>
-      <if test="classid != null" >
-        ClassId,
+      <if test="classspaceinfoid != null" >
+        ClassSpaceInfoId,
       </if>
       <if test="msgcontent != null" >
         MsgContent,
@@ -71,8 +71,8 @@
       <if test="tabid != null" >
         #{tabid,jdbcType=INTEGER},
       </if>
-      <if test="classid != null" >
-        #{classid,jdbcType=INTEGER},
+      <if test="classspaceinfoid != null" >
+        #{classspaceinfoid,jdbcType=INTEGER},
       </if>
       <if test="msgcontent != null" >
         #{msgcontent,jdbcType=VARCHAR},
@@ -100,8 +100,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.ClassSpace" >
     update ClassSpace
     <set >
-      <if test="classid != null" >
-        ClassId = #{classid,jdbcType=INTEGER},
+      <if test="classspaceinfoid != null" >
+        ClassSpaceInfoId = #{classspaceinfoid,jdbcType=INTEGER},
       </if>
       <if test="msgcontent != null" >
         MsgContent = #{msgcontent,jdbcType=VARCHAR},
@@ -129,7 +129,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.ClassSpace" >
     update ClassSpace
-    set ClassId = #{classid,jdbcType=INTEGER},
+    set ClassSpaceInfoId = #{classspaceinfoid,jdbcType=INTEGER},
       MsgContent = #{msgcontent,jdbcType=VARCHAR},
       EncType = #{enctype,jdbcType=TINYINT},
       EncAddr = #{encaddr,jdbcType=VARCHAR},

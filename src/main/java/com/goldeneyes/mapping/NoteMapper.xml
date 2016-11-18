@@ -3,7 +3,7 @@
 <mapper namespace="com.goldeneyes.IDao.NoteMapper" >
   <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.Note" >
     <id column="TabId" property="tabid" jdbcType="INTEGER" />
-    <result column="StudentId" property="studentid" jdbcType="INTEGER" />
+    <result column="NoteInfoId" property="noteinfoid" jdbcType="INTEGER" />
     <result column="NoteType" property="notetype" jdbcType="TINYINT" />
     <result column="CheckType" property="checktype" jdbcType="TINYINT" />
     <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
     <result column="Status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    TabId, StudentId, NoteType, CheckType, MsgContent, EncType, EncAddr, EncImgAddr, 
+    TabId, NoteInfoId, NoteType, CheckType, MsgContent, EncType, EncAddr, EncImgAddr, 
     PublisherId, PublishDate, Status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -29,11 +29,11 @@
     where TabId = #{tabid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.goldeneyes.pojo.Note" >
-    insert into Note (TabId, StudentId, NoteType, 
+    insert into Note (TabId, NoteInfoId, NoteType, 
       CheckType, MsgContent, EncType, 
       EncAddr, EncImgAddr, PublisherId, 
       PublishDate, Status)
-    values (#{tabid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{notetype,jdbcType=TINYINT}, 
+    values (#{tabid,jdbcType=INTEGER}, #{noteinfoid,jdbcType=INTEGER}, #{notetype,jdbcType=TINYINT}, 
       #{checktype,jdbcType=TINYINT}, #{msgcontent,jdbcType=VARCHAR}, #{enctype,jdbcType=TINYINT}, 
       #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER}, 
       #{publishdate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
@@ -44,8 +44,8 @@
       <if test="tabid != null" >
         TabId,
       </if>
-      <if test="studentid != null" >
-        StudentId,
+      <if test="noteinfoid != null" >
+        NoteInfoId,
       </if>
       <if test="notetype != null" >
         NoteType,
@@ -79,8 +79,8 @@
       <if test="tabid != null" >
         #{tabid,jdbcType=INTEGER},
       </if>
-      <if test="studentid != null" >
-        #{studentid,jdbcType=INTEGER},
+      <if test="noteinfoid != null" >
+        #{noteinfoid,jdbcType=INTEGER},
       </if>
       <if test="notetype != null" >
         #{notetype,jdbcType=TINYINT},
@@ -114,8 +114,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.Note" >
     update Note
     <set >
-      <if test="studentid != null" >
-        StudentId = #{studentid,jdbcType=INTEGER},
+      <if test="noteinfoid != null" >
+        NoteInfoId = #{noteinfoid,jdbcType=INTEGER},
       </if>
       <if test="notetype != null" >
         NoteType = #{notetype,jdbcType=TINYINT},
@@ -149,7 +149,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.Note" >
     update Note
-    set StudentId = #{studentid,jdbcType=INTEGER},
+    set NoteInfoId = #{noteinfoid,jdbcType=INTEGER},
       NoteType = #{notetype,jdbcType=TINYINT},
       CheckType = #{checktype,jdbcType=TINYINT},
       MsgContent = #{msgcontent,jdbcType=VARCHAR},

@@ -208,7 +208,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		int maxId = userSpaceMapper.getMaxId();
 		UserSpace userSpace = new UserSpace();
 		userSpace.setTabid(maxId);
-		userSpace.setUserid(userId);
+		userSpace.setUserspaceinfoid(userId);
 		userSpace.setMsgcontent(msgContent);
 		userSpace.setPublisherid(userId);
 		userSpace.setPublishdate(new Date());
@@ -252,7 +252,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		// 添加评论未读
 		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
-		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setUserid(userSpace.getPublisherid());
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(4)));
 		spaceContentStatus.setSpaceid(maxId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
@@ -396,7 +396,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		// 添加点赞未读
 		UserSpace userSpace = userSpaceMapper.selectByPrimaryKey(userSpaceId);
 		SpaceContentStatus spaceContentStatus = new SpaceContentStatus();
-		spaceContentStatus.setUserid(userSpace.getUserid());
+		spaceContentStatus.setUserid(userSpace.getPublisherid());
 		spaceContentStatus.setSpacetype(Byte.valueOf(CommonTool.int2byte(6)));
 		spaceContentStatus.setSpaceid(maxId);
 		spaceContentStatus.setIsread(CommonTool.int2byte(0));
@@ -533,7 +533,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
-		userSpaceMsg.setUserownerid(userOwnerId);
+		userSpaceMsg.setUsermsginfoid(userOwnerId);
 		userSpaceMsg.setMsgcontent(msgStr);
 		userSpaceMsg.setMsgdate(new Date());
 		userSpaceMsg.setReplyid(0);
@@ -572,7 +572,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
-		userSpaceMsg.setUserownerid(userOwnerId);
+		userSpaceMsg.setUsermsginfoid(userOwnerId);
 		userSpaceMsg.setMsgcontent(msgStr);
 		userSpaceMsg.setMsgdate(new Date());
 		userSpaceMsg.setReplyid(replyUserId);

@@ -193,7 +193,7 @@ public class NoteServiceImpl implements NoteService {
 		int maxId = noteMapper.getMaxId();
 		Note note = new Note();
 		note.setTabid(maxId);
-		note.setStudentid(studentId);
+		note.setNoteinfoid(studentId);
 		note.setMsgcontent(msgContent);
 		note.setPublisherid(teacherId);
 		note.setPublishdate(new Date());

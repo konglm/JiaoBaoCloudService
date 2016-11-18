@@ -1,190 +1,166 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.goldeneyes.IDao.UserSpaceMapper">
-	<resultMap id="BaseResultMap" type="com.goldeneyes.pojo.UserSpace">
-		<id column="TabId" property="tabid" jdbcType="INTEGER" />
-		<result column="UserId" property="userid" jdbcType="INTEGER" />
-		<result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
-		<result column="EncType" property="enctype" jdbcType="TINYINT" />
-		<result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
-		<result column="EncImgAddr" property="encimgaddr" jdbcType="VARCHAR" />
-		<result column="EncIntro" property="encintro" jdbcType="VARCHAR" />
-		<result column="PublisherId" property="publisherid" jdbcType="INTEGER" />
-		<result column="PublishDate" property="publishdate" jdbcType="TIMESTAMP" />
-		<result column="NoteType" property="notetype" jdbcType="TINYINT" />
-		<result column="Status" property="status" jdbcType="TINYINT" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		TabId, UserId, MsgContent, EncType, EncAddr, EncImgAddr,
-		EncIntro,
-		PublisherId, PublishDate,
-		NoteType, Status
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from UserSpace
-		where TabId = #{tabid,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		UserSpace
-		where TabId = #{tabid,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="com.goldeneyes.pojo.UserSpace">
-		insert into UserSpace (TabId, UserId,
-		MsgContent,
-		EncType, EncAddr, EncImgAddr,
-		EncIntro, PublisherId,
-		PublishDate,
-		NoteType, Status)
-		values (#{tabid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER},
-		#{msgcontent,jdbcType=VARCHAR},
-		#{enctype,jdbcType=TINYINT},
-		#{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR},
-		#{encintro,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER},
-		#{publishdate,jdbcType=TIMESTAMP},
-		#{notetype,jdbcType=TINYINT},
-		#{status,jdbcType=TINYINT})
-	</insert>
-	<insert id="insertSelective" parameterType="com.goldeneyes.pojo.UserSpace">
-		insert into UserSpace
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="tabid != null">
-				TabId,
-			</if>
-			<if test="userid != null">
-				UserId,
-			</if>
-			<if test="msgcontent != null">
-				MsgContent,
-			</if>
-			<if test="enctype != null">
-				EncType,
-			</if>
-			<if test="encaddr != null">
-				EncAddr,
-			</if>
-			<if test="encimgaddr != null">
-				EncImgAddr,
-			</if>
-			<if test="encintro != null">
-				EncIntro,
-			</if>
-			<if test="publisherid != null">
-				PublisherId,
-			</if>
-			<if test="publishdate != null">
-				PublishDate,
-			</if>
-			<if test="notetype != null">
-				NoteType,
-			</if>
-			<if test="status != null">
-				Status,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="tabid != null">
-				#{tabid,jdbcType=INTEGER},
-			</if>
-			<if test="userid != null">
-				#{userid,jdbcType=INTEGER},
-			</if>
-			<if test="msgcontent != null">
-				#{msgcontent,jdbcType=VARCHAR},
-			</if>
-			<if test="enctype != null">
-				#{enctype,jdbcType=TINYINT},
-			</if>
-			<if test="encaddr != null">
-				#{encaddr,jdbcType=VARCHAR},
-			</if>
-			<if test="encimgaddr != null">
-				#{encimgaddr,jdbcType=VARCHAR},
-			</if>
-			<if test="encintro != null">
-				#{encintro,jdbcType=VARCHAR},
-			</if>
-			<if test="publisherid != null">
-				#{publisherid,jdbcType=INTEGER},
-			</if>
-			<if test="publishdate != null">
-				#{publishdate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="notetype != null">
-				#{notetype,jdbcType=TINYINT},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=TINYINT},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.UserSpace">
-		update UserSpace
-		<set>
-			<if test="userid != null">
-				UserId = #{userid,jdbcType=INTEGER},
-			</if>
-			<if test="msgcontent != null">
-				MsgContent = #{msgcontent,jdbcType=VARCHAR},
-			</if>
-			<if test="enctype != null">
-				EncType = #{enctype,jdbcType=TINYINT},
-			</if>
-			<if test="encaddr != null">
-				EncAddr = #{encaddr,jdbcType=VARCHAR},
-			</if>
-			<if test="encimgaddr != null">
-				EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
-			</if>
-			<if test="encintro != null">
-				EncIntro = #{encintro,jdbcType=VARCHAR},
-			</if>
-			<if test="publisherid != null">
-				PublisherId = #{publisherid,jdbcType=INTEGER},
-			</if>
-			<if test="publishdate != null">
-				PublishDate = #{publishdate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="notetype != null">
-				NoteType = #{notetype,jdbcType=TINYINT},
-			</if>
-			<if test="status != null">
-				Status = #{status,jdbcType=TINYINT},
-			</if>
-		</set>
-		where TabId = #{tabid,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.UserSpace">
-		update UserSpace
-		set UserId = #{userid,jdbcType=INTEGER},
-		MsgContent =
-		#{msgcontent,jdbcType=VARCHAR},
-		EncType = #{enctype,jdbcType=TINYINT},
-		EncAddr = #{encaddr,jdbcType=VARCHAR},
-		EncImgAddr =
-		#{encimgaddr,jdbcType=VARCHAR},
-		EncIntro =
-		#{encintro,jdbcType=VARCHAR},
-		PublisherId =
-		#{publisherid,jdbcType=INTEGER},
-		PublishDate =
-		#{publishdate,jdbcType=TIMESTAMP},
-		NoteType =
-		#{notetype,jdbcType=TINYINT},
-		Status = #{status,jdbcType=TINYINT}
-		where
-		TabId = #{tabid,jdbcType=INTEGER}
-	</update>
-	<!-- 获取所有用户空间的信息 -->
-	<select id="getAllUserSpace" resultType="com.goldeneyes.pojo.UserSpace">
-		select TabId, UserId,
-		MsgContent, PublisherId, PublishDate
-		from UserSpace where Status = 1
-		order by PublishDate desc
-	</select>
+	<resultMap id="BaseResultMap" type="com.goldeneyes.pojo.UserSpace" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="UserSpaceInfoId" property="userspaceinfoid" jdbcType="INTEGER" />
+    <result column="MsgContent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="EncType" property="enctype" jdbcType="TINYINT" />
+    <result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
+    <result column="EncImgAddr" property="encimgaddr" jdbcType="VARCHAR" />
+    <result column="EncIntro" property="encintro" jdbcType="VARCHAR" />
+    <result column="PublisherId" property="publisherid" jdbcType="INTEGER" />
+    <result column="PublishDate" property="publishdate" jdbcType="TIMESTAMP" />
+    <result column="NoteType" property="notetype" jdbcType="TINYINT" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, UserSpaceInfoId, MsgContent, EncType, EncAddr, EncImgAddr, EncIntro, PublisherId, 
+    PublishDate, NoteType, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserSpace
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from UserSpace
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.UserSpace" >
+    insert into UserSpace (TabId, UserSpaceInfoId, MsgContent, 
+      EncType, EncAddr, EncImgAddr, 
+      EncIntro, PublisherId, PublishDate, 
+      NoteType, Status)
+    values (#{tabid,jdbcType=INTEGER}, #{userspaceinfoid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, 
+      #{enctype,jdbcType=TINYINT}, #{encaddr,jdbcType=VARCHAR}, #{encimgaddr,jdbcType=VARCHAR}, 
+      #{encintro,jdbcType=VARCHAR}, #{publisherid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, 
+      #{notetype,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.UserSpace" >
+    insert into UserSpace
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="userspaceinfoid != null" >
+        UserSpaceInfoId,
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent,
+      </if>
+      <if test="enctype != null" >
+        EncType,
+      </if>
+      <if test="encaddr != null" >
+        EncAddr,
+      </if>
+      <if test="encimgaddr != null" >
+        EncImgAddr,
+      </if>
+      <if test="encintro != null" >
+        EncIntro,
+      </if>
+      <if test="publisherid != null" >
+        PublisherId,
+      </if>
+      <if test="publishdate != null" >
+        PublishDate,
+      </if>
+      <if test="notetype != null" >
+        NoteType,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="userspaceinfoid != null" >
+        #{userspaceinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="enctype != null" >
+        #{enctype,jdbcType=TINYINT},
+      </if>
+      <if test="encaddr != null" >
+        #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encimgaddr != null" >
+        #{encimgaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encintro != null" >
+        #{encintro,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherid != null" >
+        #{publisherid,jdbcType=INTEGER},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notetype != null" >
+        #{notetype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.UserSpace" >
+    update UserSpace
+    <set >
+      <if test="userspaceinfoid != null" >
+        UserSpaceInfoId = #{userspaceinfoid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="enctype != null" >
+        EncType = #{enctype,jdbcType=TINYINT},
+      </if>
+      <if test="encaddr != null" >
+        EncAddr = #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encimgaddr != null" >
+        EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="encintro != null" >
+        EncIntro = #{encintro,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherid != null" >
+        PublisherId = #{publisherid,jdbcType=INTEGER},
+      </if>
+      <if test="publishdate != null" >
+        PublishDate = #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notetype != null" >
+        NoteType = #{notetype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.UserSpace" >
+    update UserSpace
+    set UserSpaceInfoId = #{userspaceinfoid,jdbcType=INTEGER},
+      MsgContent = #{msgcontent,jdbcType=VARCHAR},
+      EncType = #{enctype,jdbcType=TINYINT},
+      EncAddr = #{encaddr,jdbcType=VARCHAR},
+      EncImgAddr = #{encimgaddr,jdbcType=VARCHAR},
+      EncIntro = #{encintro,jdbcType=VARCHAR},
+      PublisherId = #{publisherid,jdbcType=INTEGER},
+      PublishDate = #{publishdate,jdbcType=TIMESTAMP},
+      NoteType = #{notetype,jdbcType=TINYINT},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
 
 	<!-- 取用户空间表的最大ID+1 -->
 	<select id="getMaxId" resultType="java.lang.Integer">
@@ -447,4 +423,5 @@
 			from UserSpace where Status = 1 and UserId = #{0}
 			order by PublishDate desc
 		</select>
+	<!-- 通过用户空间动态ID获取所属用户 -->
 </mapper>

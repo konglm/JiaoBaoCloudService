@@ -318,7 +318,6 @@ public class NoteController {
 			for (Note note : notes) {
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("TabId", note.getTabid());
-				jsonobj.put("StudentId", note.getStudentid());
 				jsonobj.put("MsgContent", note.getMsgcontent());
 				jsonobj.put("PublisherId", note.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

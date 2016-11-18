@@ -319,7 +319,6 @@ public class ClassSpaceController {
 			for (ClassSpace classSpace : classSpaces) {
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("TabId", classSpace.getTabid());
-				jsonobj.put("ClassId", classSpace.getClassid());
 				jsonobj.put("MsgContent", classSpace.getMsgcontent());
 				jsonobj.put("PublisherId", classSpace.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Note {
     private Integer tabid;
 
-    private Integer studentid;
+    private Integer noteinfoid;
 
     private Byte notetype;
 
@@ -33,12 +33,12 @@ public class Note {
         this.tabid = tabid;
     }
 
-    public Integer getStudentid() {
-        return studentid;
+    public Integer getNoteinfoid() {
+        return noteinfoid;
     }
 
-    public void setStudentid(Integer studentid) {
-        this.studentid = studentid;
+    public void setNoteinfoid(Integer noteinfoid) {
+        this.noteinfoid = noteinfoid;
     }
 
     public Byte getNotetype() {

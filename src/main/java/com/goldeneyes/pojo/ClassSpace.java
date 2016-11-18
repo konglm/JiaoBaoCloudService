@@ -5,7 +5,7 @@ import java.util.Date;
 public class ClassSpace {
     private Integer tabid;
 
-    private Integer classid;
+    private Integer classspaceinfoid;
 
     private String msgcontent;
 
@@ -29,12 +29,12 @@ public class ClassSpace {
         this.tabid = tabid;
     }
 
-    public Integer getClassid() {
-        return classid;
+    public Integer getClassspaceinfoid() {
+        return classspaceinfoid;
     }
 
-    public void setClassid(Integer classid) {
-        this.classid = classid;
+    public void setClassspaceinfoid(Integer classspaceinfoid) {
+        this.classspaceinfoid = classspaceinfoid;
     }
 
     public String getMsgcontent() {

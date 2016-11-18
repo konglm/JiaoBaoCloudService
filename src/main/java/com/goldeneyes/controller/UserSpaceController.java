@@ -354,7 +354,6 @@ public class UserSpaceController {
 			for (UserSpace userSpace : userSpaces) {
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("TabId", userSpace.getTabid());
-				jsonobj.put("UserId", userSpace.getUserid());
 				jsonobj.put("MsgContent", userSpace.getMsgcontent());
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -2309,7 +2308,6 @@ public class UserSpaceController {
 			for (UserSpace userSpace : userSpaces) {
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("TabId", userSpace.getTabid());
-				jsonobj.put("UserId", userSpace.getUserid());
 				jsonobj.put("MsgContent", userSpace.getMsgcontent());
 				jsonobj.put("PublisherId", userSpace.getPublisherid());
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
