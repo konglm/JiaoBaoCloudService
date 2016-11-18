@@ -63,4 +63,10 @@ public interface UserSpaceMsgMapper {
    	 * @return
    	 */
    	List<UserSpaceMsg> getMsgsById(int userMsgId);
+   	/**
+   	 * 通过用户ID获取留言板info的ID
+   	 * @param userId
+   	 * @return
+   	 */
+   	int getUserMsgInfoIdByUser(int userId);
 }

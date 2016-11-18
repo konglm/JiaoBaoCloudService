@@ -89,4 +89,10 @@ public interface NoteMapper {
 	 * @return
 	 */
 	int setOffNoteById(Note record);
+	/**
+	 *  通过学生ID获取点到记事info的ID
+	 * @param studentId
+	 * @return
+	 */
+	int getNoteInfoIdByStudent(int studentId);
 }

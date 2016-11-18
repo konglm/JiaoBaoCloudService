@@ -120,4 +120,10 @@ public interface UserSpaceMapper {
 	 * @return
 	 */
 	List<UserSpace> getAllUserSpaceByUser(int userId);
+	/**
+	 * 通过用户ID获取用户空间info的ID
+	 * @param userId
+	 * @return
+	 */
+	int getUserSpaceInfoIdByUser(int userId);
 }

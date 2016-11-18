@@ -241,4 +241,10 @@
       Status = 0
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  <!-- 通过班级ID获取班级空间info的ID -->
+  <select id="getClassSpaceInfoIdByClass" resultType="java.lang.Integer">
+  	select  ci.TabId
+	from ClassSpaceInfo ci
+	where ci.ClassId = #{0}
+  </select>
 </mapper>

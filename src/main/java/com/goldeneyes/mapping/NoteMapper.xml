@@ -264,4 +264,10 @@
       Status = 0
     where TabId = #{tabid,jdbcType=INTEGER}
   </update>
+  <!-- 通过学生ID获取点到记事info的ID -->
+	<select id="getNoteInfoIdByStudent" resultType="java.lang.Integer">
+		select  ni.TabId
+		from NoteInfo ni
+		where ni.StudentId = #{0}
+	</select>
 </mapper>

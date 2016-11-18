@@ -202,7 +202,7 @@ public class ClassSpaceServiceImpl implements ClassSpaceService {
 		int maxId = classSpaceMapper.getMaxId();
 		ClassSpace classSpace = new ClassSpace();
 		classSpace.setTabid(maxId);
-		classSpace.setClassspaceinfoid(classId);
+		classSpace.setClassspaceinfoid(classSpaceMapper.getClassSpaceInfoIdByClass(classId));
 		classSpace.setMsgcontent(msgContent);
 		classSpace.setPublisherid(teacherId);
 		classSpace.setPublishdate(new Date());

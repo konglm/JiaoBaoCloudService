@@ -208,7 +208,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		int maxId = userSpaceMapper.getMaxId();
 		UserSpace userSpace = new UserSpace();
 		userSpace.setTabid(maxId);
-		userSpace.setUserspaceinfoid(userId);
+		userSpace.setUserspaceinfoid(userSpaceMapper.getUserSpaceInfoIdByUser(userId));
 		userSpace.setMsgcontent(msgContent);
 		userSpace.setPublisherid(userId);
 		userSpace.setPublishdate(new Date());
@@ -533,7 +533,7 @@ public class UserSpaceServiceImpl implements UserSpaceService {
 		UserSpaceMsg userSpaceMsg = new UserSpaceMsg();
 		userSpaceMsg.setTabid(maxId);
 		userSpaceMsg.setUserid(userId);
-		userSpaceMsg.setUsermsginfoid(userOwnerId);
+		userSpaceMsg.setUsermsginfoid(userSpaceMsgMapper.getUserMsgInfoIdByUser(userId));
 		userSpaceMsg.setMsgcontent(msgStr);
 		userSpaceMsg.setMsgdate(new Date());
 		userSpaceMsg.setReplyid(0);

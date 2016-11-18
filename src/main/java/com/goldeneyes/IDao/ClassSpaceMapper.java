@@ -89,4 +89,10 @@ public interface ClassSpaceMapper {
 	 * @return
 	 */
 	int setOffClassSpaceById(ClassSpace record);
+	/**
+	 * 通过班级ID获取班级空间info的ID
+	 * @param classId
+	 * @return
+	 */
+	int getClassSpaceInfoIdByClass(int classId);
 }

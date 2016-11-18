@@ -423,5 +423,10 @@
 			from UserSpace where Status = 1 and UserId = #{0}
 			order by PublishDate desc
 		</select>
-	<!-- 通过用户空间动态ID获取所属用户 -->
+	<!-- 通过用户ID获取用户空间info的ID -->
+	<select id="getUserSpaceInfoIdByUser" resultType="java.lang.Integer">
+		select  ui.TabId
+		from UserSpaceInfo ui
+		where ui.UserId = #{0}
+	</select>
 </mapper>

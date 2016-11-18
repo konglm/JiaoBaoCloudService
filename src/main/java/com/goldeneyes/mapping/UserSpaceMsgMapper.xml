@@ -209,4 +209,10 @@
   <select id="getMsgsById" statementType="CALLABLE" resultType="com.goldeneyes.pojo.UserSpaceMsg">
       {call GetMsgsById(#{0})} 
    </select>
+   <!-- 通过用户ID获取留言板info的ID -->
+	<select id="getUserMsgInfoIdByUser" resultType="java.lang.Integer">
+		select  umi.TabId
+		from UserMsgInfo umi
+		where umi.UserId = #{0}
+	</select>
 </mapper>
