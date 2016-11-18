@@ -182,7 +182,7 @@
 	<select id="getNoReadUserSpacesByUser" resultType="com.goldeneyes.pojo.UserSpace">
 		select
 		top(#{3})
-		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
+		u.TabId,u.PublisherId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from SpaceContentStatus
 		ss,UserSpace u
@@ -216,7 +216,7 @@
 	<!-- 获取用户未读某用户空间列表 -->
 	<select id="getNoReadUserSpacesByUserForPublisher" resultType="com.goldeneyes.pojo.UserSpace">
 		select top(#{3})
-		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
+		u.TabId,u.PublisherId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from SpaceContentStatus
 		ss,UserSpace u
@@ -263,7 +263,7 @@
 		select
 		count(u.TabId)
 		from UserSpace u
-		where u.Status = 1 and u.UserId = #{0}
+		where u.Status = 1 and u.PublisherId = #{0}
 		and u.NoteType = #{1}
 	</select>
 	<!-- 获取某用户空间列表 -->
@@ -273,21 +273,21 @@
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from UserSpace u
 		where
-		u.Status = 1 and u.UserId = #{0} and u.NoteType = #{3}
+		u.Status = 1 and u.PublisherId = #{0} and u.NoteType = #{3}
 		and u.TabId not
 		in (select
 		top((#{1}-1) * #{2}) u.TabId
 		from UserSpace u
 		where u.Status =
 		1 and
-		u.UserId = #{0} and u.NoteType = #{3}
+		u.PublisherId = #{0} and u.NoteType = #{3}
 		order by u.PublishDate desc)
 		order by u.PublishDate desc
 	</select>
 	<!-- 获取某条用户空间信息 -->
 	<select id="getUserSpaceById" resultType="com.goldeneyes.pojo.UserSpace">
 		select
-		u.TabId,u.UserId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
+		u.TabId,u.PublisherId,u.MsgContent,u.PublisherId,u.PublishDate,u.NoteType
 		,u.EncType,u.EncAddr,u.EncImgAddr,u.EncIntro
 		from UserSpace u
 		where
@@ -305,7 +305,7 @@
 		select COUNT(*) from
 		(select 1 MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId =
+		where u.TabId = uc.UserSpaceId and u.PublisherId =
 		#{0} and u.NoteType = 2
 		union
 		select 2 MsgType,uc.UserId,uc.CommentDate
@@ -321,7 +321,7 @@
 		MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
 		where u.TabId =
-		uc.UserSpaceId and u.UserId = #{0}
+		uc.UserSpaceId and u.PublisherId = #{0}
 		and u.NoteType = 2 and
 		uc.CommentType = 1
 		union
@@ -341,7 +341,7 @@
 		(select 1
 		MsgType,uc.UserId,uc.CommentDate MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
-		where u.TabId = uc.UserSpaceId and u.UserId =
+		where u.TabId = uc.UserSpaceId and u.PublisherId =
 		#{0} and uc.CommentType = 2 and u.NoteType = 2
 		union
 		select 2 MsgType,uc.UserId,uc.CommentDate
@@ -357,7 +357,7 @@
 		MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
 		where u.TabId =
-		uc.UserSpaceId and u.UserId = #{0}
+		uc.UserSpaceId and u.PublisherId = #{0}
 		and u.NoteType = 2 and
 		uc.CommentType = 1
 		union
@@ -378,7 +378,7 @@
 		UserSpace
 		u,UserSpaceComment uc
 		where u.TabId = uc.UserSpaceId and
-		u.UserId =
+		u.PublisherId =
 		#{0} and uc.CommentType = 2 and u.NoteType = 2
 		union
 		select 2
@@ -393,7 +393,7 @@
 		MsgDate,uc.TabId from UserSpace
 		u,UserSpaceComment uc
 		where u.TabId =
-		uc.UserSpaceId and u.UserId = #{0} and u.NoteType = 2 and
+		uc.UserSpaceId and u.PublisherId = #{0} and u.NoteType = 2 and
 		uc.CommentType = 1
 		union
 		select 4 MsgType,um.UserId,um.MsgDate,um.TabId
